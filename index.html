@@ -9,22 +9,36 @@
 </head>
 
 <body>
-  <h1>Esto es un título de primer nivel.</h1>
+  <h1>Filthy Feathers</h1>
   <div>
-    <h2 class=clase>Este es de 2º y hay más</h2>
-
-    <p class=clase id="magico"> Esto es un párrafo. Y abajo aparece una imagen con un link a la UCM</p>
-    <a href="https://www.ucm.es/" target="_blank">
-      <img src="https://www.ucm.es/themes/ucm16/media/img/logo.png" alt="Si la imagen no se carga, se ve esto"><!--Modifica el atributo src y verás como se muestra el mensaje, pero el link (etiqueta <a>) seguirá funcionando al ser un hijo -->
-    </a>
-  </div>
-  <div>
-    <button onclick="alert(devuelveTextoDeAlerta())">Soy un botón de Alerta</button>
-  </div>
-  <div>
-    <button onclick="document.getElementById('magico').style.visibility='hidden'"> Desaparece!!! </button>
-    <button onclick="desaparece('magico')"> Desaparece!!! (pero usando una función) </button>
-  </div>
+    <div id="CasaDeLasRatas">
+      <h2 id="CasaDeLasRatasTitulo">La Casa de las Ratas</h2>
+      <a href="https://static.nationalgeographicla.com/files/styles/image_3200/public/01-rat-friends-nationalgeographic_1162144.webp?w=1600&h=900" target="_blank">
+        <img src="imágenes/CasaDeLasRatasLogoSmall.png" alt="LogoCasaDeLasRatas">
+      </a>
+    </div>
+    <div class="RowList">
+    <button id="Redes" onclick="window.open('https://x.com/CasaDeLasRatas', '_blank')">
+      <h3>Síguenos en redes</h3>
+      <img id="XLogo" src="imágenes/X.png" alt="LogoTwitterPeroMal">
+    </button>
+    <button id="GitHub" onclick="window.open('https://github.com/Triktor1/La-Casa-de-las-Ratas-PVLI', '_blank')">
+      <h3>GitHub</h3>
+      <img id="GitHubRepo" src="imágenes/github.png" alt="GitHubLogo">
+    </button>
+    </div>
+    <p>Filthy Feathers es un juego de tower defense en el que el jugador, como el rey de las ratas, deberá detener la invasión de los loros piratas.
+Tendrás que poner torres (inmóviles) y tropas terrestres (móviles) para detener el avance enemigo, y mejorarlos para mantenerse al acelerado ritmo de la invasión. El juego consistirá de varios niveles, cada uno con mayor dificultad que el anterior, para desterrar definitivamente a los loros y mantener control de tus tierras.
+</p>
+<div id="equipo">
+  <h63>Equipo de desarrollo:
+    <ul>
+      <li>Víctor Castro Álvarez</li>
+      <li>Óscar Daniel Fernández Cabana</li>
+      <li>Víctor Álvarez Peral</li>
+      <li>Óscar Silva Urbina</li>
+    </ul>
+  </h3>
+</div>
 </body>
-<!--2023-2024-->
 </html>
