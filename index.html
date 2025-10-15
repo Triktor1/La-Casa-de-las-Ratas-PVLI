@@ -2,7 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <title>HTML</title>
+  <title>Filthy Feathers</title>
+  <link rel="icon" type="image/x-icon" href="../assets/CasaDeLasRatasLogoSmall.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="estilo.css"> <!-- Esto cargaria un archivo de estilo, pero no es necesario en Fiddle porque lo hace automáticamente -->
   <script src="./libs/phaser.js"></script>
@@ -14,17 +15,17 @@
     <div id="CasaDeLasRatas">
       <h2 id="CasaDeLasRatasTitulo">La Casa de las Ratas</h2>
       <a href="https://static.nationalgeographicla.com/files/styles/image_3200/public/01-rat-friends-nationalgeographic_1162144.webp?w=1600&h=900" target="_blank">
-        <img src="imágenes/CasaDeLasRatasLogoSmall.png" alt="LogoCasaDeLasRatas">
+        <img src="./assets/CasaDeLasRatasLogoSmall.png" alt="LogoCasaDeLasRatas">
       </a>
     </div>
     <div class="RowList">
-    <button id="Redes" onclick="window.open('https://x.com/CasaDeLasRatas', '_blank')">
+    <button id="Redes" onclick="window.open('https:/x.com/CasaDeLasRatas', '_blank')">
       <h3>Síguenos en redes</h3>
-      <img id="XLogo" src="imágenes/X.png" alt="LogoTwitterPeroMal">
+      <img id="XLogo" src="./assets/X.png" alt="LogoTwitterPeroMal">
     </button>
-    <button id="GitHub" onclick="window.open('https://github.com/Triktor1/La-Casa-de-las-Ratas-PVLI', '_blank')">
+    <button id="GitHub" onclick="window.open('https:/github.com/Triktor1/La-Casa-de-las-Ratas-PVLI', '_blank')">
       <h3>GitHub</h3>
-      <img id="GitHubRepo" src="imágenes/github.png" alt="GitHubLogo">
+      <img id="GitHubRepo" src="./assets/github.png" alt="GitHubLogo">
     </button>
     </div>
     <p id="sinopsis">Filthy Feathers es un juego de tower defense en el que el jugador, como el rey de las ratas, deberá detener la invasión de los loros piratas.
@@ -34,7 +35,7 @@ Tendrás que poner torres (inmóviles) y tropas terrestres (móviles) para deten
   <canvas id='gameCanvas'></canvas>
 </div>
 
-<script src="./script.js"></script> <!--Aquí podriamos cargar los scripts, también se puede en el <body>, y pasa lo mismo que con el css de antes, en verdad aquí no estamos cargando nada-->
+<script  src="./src/game.js" type="module"></script> <!--Aquí podriamos cargar los scripts, también se puede en el <body>, y pasa lo mismo que con el css de antes, en verdad aquí no estamos cargando nada-->
 <div id="equipo">
   <h63>Equipo de desarrollo:
     <ul>
