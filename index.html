@@ -5,9 +5,8 @@
   <title>HTML</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="estilo.css"> <!-- Esto cargaria un archivo de estilo, pero no es necesario en Fiddle porque lo hace automáticamente -->
-  <script src="script.js"></script> <!--Aquí podriamos cargar los scripts, también se puede en el <body>, y pasa lo mismo que con el css de antes, en verdad aquí no estamos cargando nada-->
-  <script src="libs/phaser.js"></script>
-    </head>
+  <script src="./libs/phaser.js"></script>
+</head>
 
 <body>
   <h1>Filthy Feathers</h1>
@@ -28,9 +27,14 @@
       <img id="GitHubRepo" src="imágenes/github.png" alt="GitHubLogo">
     </button>
     </div>
-    <p>Filthy Feathers es un juego de tower defense en el que el jugador, como el rey de las ratas, deberá detener la invasión de los loros piratas.
+    <p id="sinopsis">Filthy Feathers es un juego de tower defense en el que el jugador, como el rey de las ratas, deberá detener la invasión de los loros piratas.
 Tendrás que poner torres (inmóviles) y tropas terrestres (móviles) para detener el avance enemigo, y mejorarlos para mantenerse al acelerado ritmo de la invasión. El juego consistirá de varios niveles, cada uno con mayor dificultad que el anterior, para desterrar definitivamente a los loros y mantener control de tus tierras.
 </p>
+<div style="text-align: center;">
+  <canvas id='gameCanvas'></canvas>
+</div>
+
+<script src="./script.js"></script> <!--Aquí podriamos cargar los scripts, también se puede en el <body>, y pasa lo mismo que con el css de antes, en verdad aquí no estamos cargando nada-->
 <div id="equipo">
   <h63>Equipo de desarrollo:
     <ul>
