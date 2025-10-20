@@ -1,6 +1,7 @@
 import MainMenu from './scenes/MainMenu.js';
 import Level1 from './scenes/Level1.js';
 import Shop from './scenes/Shop.js';
+import SelecctScene from './scenes/SelectScene.js';
 
 let config = {
   type: Phaser.CANVAS,
@@ -11,7 +12,7 @@ let config = {
   scale: {
     autoCenter: Phaser.Scale.CENTER_HORIZONTALLY
   },
-  scene: [MainMenu, Level1, Shop]
+  scene: [MainMenu, Level1, Shop, SelectScene]
 };
 
   new Phaser.Game(config);
