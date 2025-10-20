@@ -1,7 +1,7 @@
 import MainMenu from './scenes/MainMenu.js';
 import Level1 from './scenes/Level1.js';
 import Shop from './scenes/Shop.js';
-import SelecctScene from './scenes/SelectScene.js';
+import SelectScene from './scenes/SelectScene.js';
 
 let config = {
   type: Phaser.CANVAS,
