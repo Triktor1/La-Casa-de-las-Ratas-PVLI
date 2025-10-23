@@ -1,5 +1,8 @@
 import MainMenu from './scenes/MainMenu.js';
+import TutorialLevel from './scenes/TutorialLevel.js';
 import Level1 from './scenes/Level1.js';
+import Level2 from './scenes/Level2.js';
+import Level3 from './scenes/Level3.js';
 import Shop from './scenes/Shop.js';
 import SelectScene from './scenes/SelectScene.js';
 
@@ -23,7 +26,7 @@ let config = {
     },
     zoom: 1
   },
-  scene: [MainMenu, Level1, Shop, SelectScene],
+  scene: [MainMenu, Level1, Shop, SelectScene, TutorialLevel],
 
       physics: {  
         default: 'arcade', 

@@ -1,9 +1,9 @@
-export default class Level1 extends Phaser.Scene {
+export default class Level2 extends Phaser.Scene {
     constructor(){
-        super({key:"Level1"});
+        super({key:"Level2");
     }
     shopMoney;
-    levelNum = 1;
+    levelNum = 2;
 
     init(data){
         this.shopMoney = data.shopMoney || 0;
