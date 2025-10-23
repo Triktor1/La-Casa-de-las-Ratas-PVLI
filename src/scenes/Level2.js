@@ -1,6 +1,6 @@
 export default class Level2 extends Phaser.Scene {
     constructor(){
-        super({key:"Level2");
+        super(key("Level2"));
     }
     shopMoney;
     levelNum = 2;
