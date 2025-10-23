@@ -9,10 +9,34 @@ let config = {
   width: 1280,
   height: 720,
   pixelArt: false,
+  backgroundColor: "#201726",
   scale: {
-    autoCenter: Phaser.Scale.CENTER_HORIZONTALLY
+    autoCenter: Phaser.Scale.CENTER_HORIZONTALLY,
+    mode: Phaser.Scale.FIT,
+    min: {
+        width: 328,
+        height: 188
   },
-  scene: [MainMenu, Level1, Shop, SelectScene]
+    max: {
+        width: 1312,
+        height: 752
+    },
+    zoom: 1
+  },
+  scene: [MainMenu, Level1, Shop, SelectScene],
+
+      physics: {  
+        default: 'arcade', 
+        arcade: { 
+            debug: true 
+        },
+        checkCollision: {
+            up: true,
+            down: true,
+            left: true,
+            right: true
+        }
+    },
 };
 
   new Phaser.Game(config);

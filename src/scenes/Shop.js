@@ -1,10 +1,11 @@
 export default class Shop extends Phaser.Scene {
+    shopMoney;
     constructor(){
         super({key:"Shop"});
     }
 
-    init(){
-
+    init(data){
+        this.shopMoney = data.shopMoney || 0;
     }
     
     preload(){
@@ -17,5 +18,9 @@ export default class Shop extends Phaser.Scene {
 
     create(){
         this.add.text(20,20,"Main Menu");
+    }
+
+    endShop(){
+        this.scene.start('Level1', {shopMoney: this.shopMoney});
     }
 }
