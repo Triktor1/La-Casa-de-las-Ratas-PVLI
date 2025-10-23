@@ -1,4 +1,4 @@
-import Loro from "../enemies/loro";
+import Loro from "../enemies/loro.js";
 
 export default class Level1 extends Phaser.Scene {
     constructor(){
