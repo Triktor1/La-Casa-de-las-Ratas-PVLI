@@ -10,7 +10,7 @@ export default class TutorialLevel extends Phaser.Scene {
     }
     
     preload(){
-
+        this.load.image('btnShop', 'assets/btnShop.png');
     }
 
     preUpdate(t, dt){
@@ -18,7 +18,16 @@ export default class TutorialLevel extends Phaser.Scene {
     }
 
     create(){
-        this.add.text(20,20,"Main Menu");
+        this.add.text(20,20,"Tutorial");
+        const btnShop = this.add.image(this.scale.width / 2, 520, 'btnShop').setInteractive({ useHandCursor: true });
+
+        btnShop.on('pointerdown', () => {
+            this.scene.start('Shop');
+        });
+
+        //efectos
+        btnShop.on('pointerover', () => btnShop.setScale(1.1));
+        btnShop.on('pointerout', () => btnShop.setScale(1.0));
     }
 
     endLevel(){
