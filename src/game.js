@@ -5,6 +5,7 @@ import Level2 from './scenes/Level2.js';
 import Level3 from './scenes/Level3.js';
 import Shop from './scenes/Shop.js';
 import SelectScene from './scenes/SelectScene.js';
+import TestEnemyScene from './scenes/TestEnemyScene.js';
 
 let config = {
   type: Phaser.CANVAS,
