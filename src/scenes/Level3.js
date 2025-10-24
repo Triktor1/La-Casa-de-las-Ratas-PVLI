@@ -10,7 +10,8 @@ export default class Level3 extends Phaser.Scene {
     }
     
     preload(){
-
+        this.load.image('selectButton', 'assets/selectBt.png'); 
+        this.load.image('shopButton', 'assets/shopBt.png')
     }
 
     preUpdate(t, dt){
@@ -19,6 +20,22 @@ export default class Level3 extends Phaser.Scene {
 
     create(){
         this.add.text(20,20,"Main Menu");
+
+        //BOTONES
+        //Seleccion de niveles
+        const selectBtn = this.add.sprite(this.sys.game.canvas.width * 0.5, this.sys.game.canvas.height * 0.7, 'selectButton').setInteractive({ useHandCursor: true });
+        selectBtn.on('pointerdown', () => {
+            this.scene.start('TutorialLevel');
+        });
+        selectBtn.on('pointerover', () => selectBtn.setScale(1.1));
+        selectBtn.on('pointerout', () => selectBtn.setScale(1.0));
+        //Tienda
+        const shopBtn = this.add.sprite(this.sys.game.canvas.width * 0.5, this.sys.game.canvas.height * 0.7, 'shopButton').setInteractive({ useHandCursor: true });
+        shopBtn.on('pointerdown', () => {
+            this.scene.start('Shop');
+        });
+        shopBtn.on('pointerover', () => shopBtn.setScale(1.1));
+        shopBtn.on('pointerout', () => shopBtn.setScale(1.0));
     }
 
     endLevel(){

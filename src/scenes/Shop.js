@@ -7,7 +7,7 @@ export default class Shop extends Phaser.Scene {
 
     init(data){
         this.shopMoney = data.shopMoney || 0;
-        this.levelNum = data.levelNum || 0;
+        this.levelNum = data.levelNum || 1;
     }
     
     preload(){
@@ -24,7 +24,7 @@ export default class Shop extends Phaser.Scene {
         const btnBack = this.add.image(this.scale.width / 2, 220, 'botonVolver').setInteractive({ useHandCursor: true });
 
         btnBack.on('pointerdown', () => {
-            this.scene.start('SelectScene');
+            this.endShop();
         });
 
         //efectos
