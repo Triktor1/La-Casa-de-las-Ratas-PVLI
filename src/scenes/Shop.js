@@ -11,7 +11,7 @@ export default class Shop extends Phaser.Scene {
     }
     
     preload(){
-        this.load.image('botonVolver', 'assets/botonVolver.png');
+        this.load.image('botonVolver', 'assets/backbutton.png');
     }
 
     preUpdate(t, dt){
@@ -21,7 +21,7 @@ export default class Shop extends Phaser.Scene {
     create(){
         this.add.text(20,20,"Shop");
 
-        const btnBack = this.add.image(this.scale.width / 2, 220, 'botonVolver').setInteractive({ useHandCursor: true });
+        const btnBack = this.add.sprite(this.scale.width / 2, 220, 'botonVolver').setInteractive({ useHandCursor: true });
 
         btnBack.on('pointerdown', () => {
             this.endShop();

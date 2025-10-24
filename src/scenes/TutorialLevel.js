@@ -19,7 +19,7 @@ export default class TutorialLevel extends Phaser.Scene {
 
     create(){
         this.add.text(20,20,"Tutorial");
-        const btnShop = this.add.image(this.scale.width / 2, 520, 'btnShop').setInteractive({ useHandCursor: true });
+        const btnShop = this.add.sprite(this.scale.width / 2, 520, 'btnShop').setInteractive({ useHandCursor: true });
 
         btnShop.on('pointerdown', () => {
             this.scene.start('Shop');
