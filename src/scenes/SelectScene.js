@@ -22,10 +22,6 @@ export default class MainMenu extends Phaser.Scene {
 
     create(){
         this.add.text(20, 20, "Select Level");
-
-        const btn1 = this.add.sprite(this.scale.width / 2, 220, 'btn1').setInteractive({ useHandCursor: true });
-        const btn2 = this.add.sprite(this.scale.width / 2, 320, 'btn2').setInteractive({ useHandCursor: true });
-        const btn3 = this.add.sprite(this.scale.width / 2, 420, 'btn3').setInteractive({ useHandCursor: true });
       
 
         const btn1 = this.add.sprite(this.scale.width / 2, 220, 'botonlvl1').setInteractive({ useHandCursor: true });
