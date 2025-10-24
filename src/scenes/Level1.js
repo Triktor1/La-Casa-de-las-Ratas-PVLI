@@ -14,7 +14,7 @@ export default class Level1 extends Phaser.Scene {
     preload(){
         this.load.image('loro' , 'assets/ParrotPlaceholder.png')
         this.load.image('selectButton', 'assets/selectBt.png'); 
-        this.load.image('shopButton', 'assets/shopBt.png'); 
+        this.load.image('shopButton', 'assets/shop.png'); 
 
     }
 
