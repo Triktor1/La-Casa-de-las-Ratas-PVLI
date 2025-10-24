@@ -9,9 +9,12 @@ export default class MainMenu extends Phaser.Scene {
     }
     
     preload(){
-        this.load.image('botonlvl1', 'assets/boton1.png')
-        this.load.image('botonlvl2', 'assets/boton2.png')
-        this.load.image('botonlvl3', 'assets/boton3.png')
+        this.load.image('btn1', 'assets/boton1.png')
+        this.load.image('btn2', 'assets/boton2.png')
+        this.load.image('btn3', 'assets/boton3.png')
+        this.load.image('shop', 'assets/shop.png')
+        this.load.image('tutorial', 'assets/tutorial.png')
+
 
 
     }
@@ -23,11 +26,11 @@ export default class MainMenu extends Phaser.Scene {
     create(){
         this.add.text(20, 20, "Select Level");
 
-        const btn1 = this.add.sprite(this.scale.width / 2, 220, 'btnLevel1').setInteractive({ useHandCursor: true });
-        const btn2 = this.add.sprite(this.scale.width / 2, 320, 'btnLevel2').setInteractive({ useHandCursor: true });
-        const btn3 = this.add.sprite(this.scale.width / 2, 420, 'btnLevel3').setInteractive({ useHandCursor: true });
-        const btnShop = this.add.sprite(this.scale.width / 2, 520, 'btnShop').setInteractive({ useHandCursor: true });
-        const btnTut = this.add.sprite(this.scale.width / 2, 620, 'btnTutorial').setInteractive({ useHandCursor: true });
+        const btn1 = this.add.sprite(this.scale.width / 2, 220, 'btn1').setInteractive({ useHandCursor: true });
+        const btn2 = this.add.sprite(this.scale.width / 2, 320, 'btn2').setInteractive({ useHandCursor: true });
+        const btn3 = this.add.sprite(this.scale.width / 2, 420, 'btn3').setInteractive({ useHandCursor: true });
+        const btnShop = this.add.sprite(this.scale.width / 2, 520, 'shop').setInteractive({ useHandCursor: true });
+        const btnTut = this.add.sprite(this.scale.width / 2, 620, 'tutorial').setInteractive({ useHandCursor: true });
 
         btn1.on('pointerdown', () => {
             this.scene.start('Level1');
