@@ -21,9 +21,12 @@ export default class MainMenu extends Phaser.Scene {
     create(){
         this.add.text(20, 20, "Select Level");
 
-        const btn1 = this.add.image(this.scale.width / 2, 220, 'btnLevel1').setInteractive({ useHandCursor: true });
-        const btn2 = this.add.image(this.scale.width / 2, 320, 'btnLevel2').setInteractive({ useHandCursor: true });
-        const btn3 = this.add.image(this.scale.width / 2, 420, 'btnLevel3').setInteractive({ useHandCursor: true });
+
+        const btn1 = this.add.sprite(this.scale.width / 2, 220, 'btnLevel1').setInteractive({ useHandCursor: true });
+        const btn2 = this.add.sprite(this.scale.width / 2, 320, 'btnLevel2').setInteractive({ useHandCursor: true });
+        const btn3 = this.add.sprite(this.scale.width / 2, 420, 'btnLevel3').setInteractive({ useHandCursor: true });
+        const btnShop = this.add.sprite(this.scale.width / 2, 520, 'btnShop').setInteractive({ useHandCursor: true });
+        const btnTut = this.add.sprite(this.scale.width / 2, 620, 'btnTutorial').setInteractive({ useHandCursor: true });
 
         btn1.on('pointerdown', () => {
             this.scene.start('Level1');
