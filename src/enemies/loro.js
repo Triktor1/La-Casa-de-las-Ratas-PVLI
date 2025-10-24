@@ -13,4 +13,7 @@ export default class Loro extends Phaser.GameObjects.Image{
     }
 
 
+
+
+
 }

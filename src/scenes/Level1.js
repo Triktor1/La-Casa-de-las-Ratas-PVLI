@@ -1,4 +1,5 @@
 import Loro from "../enemies/loro.js";
+import Torre from "../torres/TorreBase.js";
 
 export default class Level1 extends Phaser.Scene {
     constructor(){
@@ -15,6 +16,7 @@ export default class Level1 extends Phaser.Scene {
         this.load.image('loro' , 'assets/ParrotPlaceholder.png')
         this.load.image('selectButton', 'assets/lvlselectboton.png'); 
         this.load.image('shopButton', 'assets/shop.png'); 
+        this.load.image('torre', 'assets/torre.png');
 
     }
 
@@ -26,9 +28,9 @@ export default class Level1 extends Phaser.Scene {
         this.add.text(20,20,"Level1");
 
 
-        this.basicLoro  = new Loro(this , 200 , 200 , 15 , 10 , "basicLoro" , 'loro')
-
-
+        this.basicLoro = new Loro(this, 200, 200, 15, 10, "basicLoro", 'loro');
+        this.Torre = new Torre(this, 500, 200, 0, 10, "basictorre", "torre"); 
+        
         //BOTONES
         //Seleccion de niveles
         const selectBtn = this.add.sprite(this.sys.game.canvas.width * 0.25, this.sys.game.canvas.height * 0.7, 'selectButton').setInteractive({ useHandCursor: true });
@@ -38,7 +40,7 @@ export default class Level1 extends Phaser.Scene {
         selectBtn.on('pointerover', () => selectBtn.setScale(1.1));
         selectBtn.on('pointerout', () => selectBtn.setScale(1.0));
         //Tienda
-        const shopBtn = this.add.sprite(this.sys.game.canvas.width * 0.5, this.sys.game.canvas.height * 0.7, 'shopButton').setInteractive({ useHandCursor: true });
+        const shopBtn = this.add.sprite(this.sys.game.canvas.width * 0.8, this.sys.game.canvas.height * 0.7, 'shopButton').setInteractive({ useHandCursor: true });
         shopBtn.on('pointerdown', () => {
             this.scene.start('Shop');
         });
