@@ -11,7 +11,7 @@ export default class Shop extends Phaser.Scene {
     }
     
     preload(){
-
+        this.load.image('botonVolver', 'assets/botonVolver.png');
     }
 
     preUpdate(t, dt){
@@ -19,8 +19,18 @@ export default class Shop extends Phaser.Scene {
     }
 
     create(){
-        this.add.text(20,20,"Main Menu");
-    }
+        this.add.text(20,20,"Shop");
+
+        const btnBack = this.add.image(this.scale.width / 2, 220, 'botonVolver').setInteractive({ useHandCursor: true });
+
+        btnBack.on('pointerdown', () => {
+            this.scene.start('SelectScene');
+        });
+
+        //efectos
+        btnBack.on('pointerover', () => btnBack.setScale(1.1));
+        btnBack.on('pointerout', () => btnBack.setScale(1.0));
+        }
 
     endShop(){
         let levelID = 'Level' + this.levelNum;
