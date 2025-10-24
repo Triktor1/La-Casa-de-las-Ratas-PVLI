@@ -26,6 +26,7 @@ export default class MainMenu extends Phaser.Scene {
         const btn1 = this.add.image(this.scale.width / 2, 220, 'btnLevel1').setInteractive({ useHandCursor: true });
         const btn2 = this.add.image(this.scale.width / 2, 320, 'btnLevel2').setInteractive({ useHandCursor: true });
         const btn3 = this.add.image(this.scale.width / 2, 420, 'btnLevel3').setInteractive({ useHandCursor: true });
+        const btnShop = this.add.image(this.scale.width / 2, 520, 'btnShop').setInteractive({ useHandCursor: true });
 
         btn1.on('pointerdown', () => {
             this.scene.start('Level1');
@@ -38,14 +39,19 @@ export default class MainMenu extends Phaser.Scene {
         btn3.on('pointerdown', () => {
             this.scene.start('Level3');
         });
+        btnShop.on('pointerdown', () => {
+            this.scene.start('Shop');
+        });
 
         //efectos
-        btn1.on('pointerover', () => startBtn.setScale(1.1));
-        btn1.on('pointerout', () => startBtn.setScale(1.0));
-        btn2.on('pointerover', () => startBtn.setScale(1.1));
-        btn2.on('pointerout', () => startBtn.setScale(1.0));
-        btn3.on('pointerover', () => startBtn.setScale(1.1));
-        btn3.on('pointerout', () => startBtn.setScale(1.0));
+        btn1.on('pointerover', () => btn1.setScale(1.1));
+        btn1.on('pointerout', () => btn1.setScale(1.0));
+        btn2.on('pointerover', () => btn2.setScale(1.1));
+        btn2.on('pointerout', () => btn2.setScale(1.0));
+        btn3.on('pointerover', () => btn3.setScale(1.1));
+        btn3.on('pointerout', () => btn3.setScale(1.0));
+        btnShop.on('pointerover', () => btnShop.setScale(1.1));
+        btnShop.on('pointerout', () => btnShop.setScale(1.0));
 
     }
 }
