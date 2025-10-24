@@ -10,7 +10,7 @@ export default class TutorialLevel extends Phaser.Scene {
     }
     
     preload(){
-        this.load.image('btnShop', 'assets/btnShop.png');
+        this.load.image('btnShop', 'assets/shop.png');
     }
 
     preUpdate(t, dt){

@@ -8,10 +8,9 @@ export default class Level2 extends Phaser.Scene {
     init(data){
         this.shopMoney = data.shopMoney || 0;
     }
-    
     preload(){
         this.load.image('selectButton', 'assets/selectBt.png'); 
-        this.load.image('shopButton', 'assets/shopBt.png')
+        this.load.image('shopButton', 'assets/shop.png')
     }
 
     preUpdate(t, dt){
