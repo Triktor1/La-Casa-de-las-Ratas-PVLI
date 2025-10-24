@@ -7,7 +7,7 @@ export default class Torre extends Phaser.GameObjects.Image{
         this.scene.add.existing(this);
 
         this.vida = 100;
-        this.nombre = torre;
+        this.nombre = torrename;
         this.damage = damage;
     }
 }
