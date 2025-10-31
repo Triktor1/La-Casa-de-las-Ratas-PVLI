@@ -27,7 +27,7 @@ let config = {
     },
     zoom: 1
   },
-  scene: [MainMenu, Level1, Shop, SelectScene, TutorialLevel],
+  scene: [MainMenu, Level1, Level2, Level3, Shop, SelectScene, TutorialLevel],
 
       physics: {  
         default: 'arcade', 

@@ -1,8 +1,8 @@
-export default class Loro extends Phaser.GameObjects.Image{
+export default class Loro extends Phaser.GameObjects.PathFollower{
 
     constructor(scene, x=0, y=0 , speed, damage , loroname , texture , frame = 0)
     {
-        super(scene , x , y ,texture, frame) //cosntructora sprite
+        super(scene , x , y ,texture, frame) //cosntructora  sprite
 
         this.scene.add.existing(this);
 

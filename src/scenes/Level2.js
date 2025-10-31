@@ -1,6 +1,6 @@
 export default class Level2 extends Phaser.Scene {
     constructor(){
-        super(key("Level2"));
+        super({key:"Level2"});
     }
     shopMoney;
     levelNum = 2;
@@ -8,6 +8,7 @@ export default class Level2 extends Phaser.Scene {
     init(data){
         this.shopMoney = data.shopMoney || 0;
     }
+    
     preload(){
         this.load.image('selectButton', 'assets/selectBt.png'); 
         this.load.image('shopButton', 'assets/shop.png')
@@ -18,18 +19,18 @@ export default class Level2 extends Phaser.Scene {
     }
 
     create(){
-        this.add.text(20,20,"Main Menu");
+        this.add.text(20,20,"Level2");
 
         //BOTONES
         //Seleccion de niveles
-        const selectBtn = this.add.sprite(this.sys.game.canvas.width * 0.5, this.sys.game.canvas.height * 0.7, 'selectButton').setInteractive({ useHandCursor: true });
+        const selectBtn = this.add.sprite(this.sys.game.canvas.width * 0.25, this.sys.game.canvas.height * 0.7, 'selectButton').setInteractive({ useHandCursor: true });
         selectBtn.on('pointerdown', () => {
-            this.scene.start('TutorialLevel');
+            this.scene.start('SelectScene');
         });
         selectBtn.on('pointerover', () => selectBtn.setScale(1.1));
         selectBtn.on('pointerout', () => selectBtn.setScale(1.0));
         //Tienda
-        const shopBtn = this.add.sprite(this.sys.game.canvas.width * 0.5, this.sys.game.canvas.height * 0.7, 'shopButton').setInteractive({ useHandCursor: true });
+        const shopBtn = this.add.sprite(this.sys.game.canvas.width * 0.8, this.sys.game.canvas.height * 0.7, 'shopButton').setInteractive({ useHandCursor: true });
         shopBtn.on('pointerdown', () => {
             this.scene.start('Shop');
         });
