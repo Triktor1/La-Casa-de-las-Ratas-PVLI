@@ -43,4 +43,4 @@ let config = {
     },
 };
 
-  new Phaser.Game(config);
+new Phaser.Game(config);

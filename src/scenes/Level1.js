@@ -17,18 +17,36 @@ export default class Level1 extends Phaser.Scene {
         this.load.image('selectButton', 'assets/lvlselectboton.png'); 
         this.load.image('shopButton', 'assets/shop.png'); 
         this.load.image('torre', 'assets/torre.png');
+        this.load.image('background', 'assets/bg.png');
 
     }
-
+    
     preUpdate(t, dt){
         super.preUpdate(t, dt);
     }
-
+    
     create(){
         this.add.text(20,20,"Level1");
+        const bg = this.add.image(0, 0, 'background').setOrigin(0, 0).setScale(2);
+        bg.displayHeight = this.scale.height;
+        bg.displayWidth = this.scale.width;
+        
+        //CAMINO DE LOS LOROS
+        this.path = new Phaser.Curves.Path(100, 100);
+        this.path.lineTo(400, 100);
+        this.path.lineTo(400, 300);
+        this.path.lineTo(100, 300);
+        this.path.closePath();
 
+        this.graphics = this.add.graphics();
+        this.graphics.lineStyle(2, 0xffffff, 1);
+        this.path.draw(this.graphics);
 
-        this.basicLoro = new Loro(this, 200, 200, 15, 10, "basicLoro", 'loro');
+        let enemies = this.add.group();
+        const loro = new Loro(this, this.path, 100, 100, 15, 10, 100, 'basicLoro', 'loro', 0);
+        enemies.add(loro);
+        loro.startFollowing();
+        
         this.Torre = new Torre(this, 500, 200, 0, 10, "basictorre", "torre"); 
         
         //BOTONES
@@ -48,6 +66,9 @@ export default class Level1 extends Phaser.Scene {
         shopBtn.on('pointerout', () => shopBtn.setScale(1.0));
     }
 
+    enemyConfig(enemies){
+        enemies.counter = 0;
+    }
     endLevel(){
         this.scene.start('Shop', {shopMoney: this.shopMoney});
     }
