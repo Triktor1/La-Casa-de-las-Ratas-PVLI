@@ -12,6 +12,29 @@ export default class Loro extends Phaser.GameObjects.PathFollower{
         this.vida = vida
     }
 
+    create(){
+
+        if (!this.hasToggleEvent) { 
+        this.hasToggleEvent = true;
+        this.toggle = true;
+
+        this.scene.time.addEvent({
+            delay: 500, 
+            loop: true,
+            callback: () => {
+                if (this.toggle) {
+                    this.pauseFollow();
+                    console.log("Paused");
+                } else {
+                    this.resumeFollow();
+                    console.log("Resumed");
+                }
+                this.toggle = !this.toggle;
+            }
+        });
+        }
+    }
+
     getDamaged(damage){
         this.vida -= damage;
     }
@@ -26,7 +49,21 @@ startFollowing() {
     this.startFollow({
         duration: 40000 / this.speed,
         repeat: 0,
-        rotateToPath: true,
+        rotateToPath: false,
+        onComplete: () => {
+            this.checkAlive(false);
+            console.log(`${this.nombre} ha llegado al final del path!`);
+        }
+    });
+}
+
+startFollowingReversed() {
+    this.startFollow({
+        from: 1,
+        to: 0,
+        duration: 40000 / this.speed,
+        repeat: 0,
+        rotateToPath: false,
         onComplete: () => {
             this.checkAlive(false);
             console.log(`${this.nombre} ha llegado al final del path!`);

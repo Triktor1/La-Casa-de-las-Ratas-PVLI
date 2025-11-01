@@ -33,20 +33,22 @@ export default class Level1 extends Phaser.Scene {
         
         //CAMINO DE LOS LOROS
         this.path = new Phaser.Curves.Path(100, 100);
-        this.path.lineTo(400, 100);
+        this.path.lineTo(400, 200);
         this.path.lineTo(400, 300);
-        this.path.lineTo(100, 300);
-        this.path.closePath();
+        this.path.lineTo(900, 100);
 
         this.graphics = this.add.graphics();
         this.graphics.lineStyle(2, 0xffffff, 1);
         this.path.draw(this.graphics);
 
-        let enemies = this.add.group();
-        const loro = new Loro(this, this.path, 100, 100, 15, 10, 100, 'basicLoro', 'loro', 0);
+        let enemies = this.physics.add.group();
+        let loro = new Loro(this, this.path, 100, 100, 15, 10, 100, 'basicLoro', 'loro', 0);
         enemies.add(loro);
         loro.startFollowing();
-        
+        loro = new Loro(this, this.path, 100, 100, 15, 10, 100, 'basicLoro', 'loro', 0);
+        enemies.add(loro);
+        loro.startFollowingReversed();
+       
         this.Torre = new Torre(this, 500, 200, 0, 10, "basictorre", "torre"); 
         
         //BOTONES
