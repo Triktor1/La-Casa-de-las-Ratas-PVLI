@@ -2,7 +2,7 @@ export default class Loro extends Phaser.GameObjects.PathFollower{
 
     constructor(scene, x=0, y=0 , speed, damage , loroname , texture , frame = 0)
     {
-        super(scene , x , y ,texture, frame) //cosntructora  sprite
+        super(scene , x , y ,texture, frame) //constructora  sprite
 
         this.scene.add.existing(this);
 
@@ -12,8 +12,11 @@ export default class Loro extends Phaser.GameObjects.PathFollower{
         this.damage = damage
     }
 
-
-
-
+    getDamaged(damage){
+        this.vida -= damage;
+        if(this.vida <= 0){
+            
+        }
+    }
 
 }
