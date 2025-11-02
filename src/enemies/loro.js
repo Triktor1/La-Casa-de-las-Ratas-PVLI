@@ -37,6 +37,7 @@ export default class Loro extends Phaser.GameObjects.PathFollower{
 
     getDamaged(damage){
         this.vida -= damage;
+        this.checkAlive();
     }
 
     checkAlive(isAlive = true){

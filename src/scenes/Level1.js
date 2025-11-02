@@ -1,5 +1,6 @@
 import Loro from "../enemies/loro.js";
 import Torre from "../torres/TorreBase.js";
+import Bullet from "../bullets/bullet.js";
 
 export default class Level1 extends Phaser.Scene {
     constructor(){
@@ -18,6 +19,7 @@ export default class Level1 extends Phaser.Scene {
         this.load.image('shopButton', 'assets/shop.png'); 
         this.load.image('torre', 'assets/torre.png');
         this.load.image('background', 'assets/bg.png');
+        this.load.image('bullet', 'assets/bullet.png');
 
     }
     
@@ -41,16 +43,30 @@ export default class Level1 extends Phaser.Scene {
         this.graphics.lineStyle(2, 0xffffff, 1);
         this.path.draw(this.graphics);
 
-        let enemies = this.physics.add.group();
+        this.enemies = this.physics.add.group();
         let loro = new Loro(this, this.path, 100, 100, 15, 10, 100, 'basicLoro', 'loro', 0);
-        enemies.add(loro);
+        this.enemies.add(loro);
         loro.startFollowing();
         loro = new Loro(this, this.path, 100, 100, 15, 10, 100, 'basicLoro', 'loro', 0);
-        enemies.add(loro);
+        this.enemies.add(loro);
         loro.startFollowingReversed();
        
         this.Torre = new Torre(this, 500, 200, 0, 10, "basictorre", "torre"); 
+
+        this.bullets = this.physics.add.group();
         
+        const dir = new Phaser.Math.Vector2(1, 0); //Derecha
+        const bullet = new Bullet(this, 500, 200, 'bullet', 700, 2500000, dir, 750, false, true, 0, 0.1);
+        this.bullets.add(bullet);
+
+
+        this.physics.add.overlap(this.bullets, this.enemies, (bullet, enemy) => {
+            if (bullet.teamRat && enemy instanceof Loro) {
+                enemy.getDamaged(bullet.damage);
+                if (!bullet.piercing) bullet.destroy(); //comprobar si es perforante
+            }
+        });
+
         //BOTONES
         //Seleccion de niveles
         const selectBtn = this.add.sprite(this.sys.game.canvas.width * 0.25, this.sys.game.canvas.height * 0.7, 'selectButton').setInteractive({ useHandCursor: true });
@@ -73,5 +89,10 @@ export default class Level1 extends Phaser.Scene {
     }
     endLevel(){
         this.scene.start('Shop', {shopMoney: this.shopMoney});
+    }
+    update(time, delta){
+        this.bullets.children.iterate(bullet => {
+            if(bullet) bullet.update(time, delta);
+        });
     }
 }
