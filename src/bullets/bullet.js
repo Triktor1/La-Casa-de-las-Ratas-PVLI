@@ -1,5 +1,5 @@
 export default class Bullet extends Phaser.GameObjects.Image {
-    constructor(scene, x = 0, y = 0, texture, speed, damage, direction, timeToLive, piercing, teamRat, healValue, scale = 1, frame = 0) 
+    constructor(scene, x = 0, y = 0, texture, speed, damage, direction, timeToLive, piercing, teamRat, healValue, type, scale = 1, frame = 0) 
     {
         super(scene, x, y, texture, frame); // constructora
         scene.add.existing(this);
@@ -13,6 +13,7 @@ export default class Bullet extends Phaser.GameObjects.Image {
         this.teamRat = teamRat;                         //BOOLEANA, USADA PARA SABER SI ES DEL EQUIPO DE RATAS O DE LOROS
         this.healValue = healValue;                     //VALOR DE CURACION DE LA BALA, 0 EN CASO DE NO CURAR
         this.scaleFactor = scale;                       //ESCALA DE LA BALA
+        this.type = type;                               //TIPO (PIEDRA PAPEL TIJERA)
         //escala y rotacion
         this.setScale(this.scaleFactor);
         this.rotation = this.direction.angle() + Math.PI / 2;
