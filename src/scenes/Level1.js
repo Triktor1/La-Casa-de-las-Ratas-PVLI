@@ -6,6 +6,7 @@ export default class Level1 extends Phaser.Scene {
     constructor() {
         super({ key: "Level1" });
         this.shopMoney;
+        this.levelMoney = 0;
         this.levelNum = 1;
         this.playerHealth = 100;
     }
@@ -45,10 +46,10 @@ export default class Level1 extends Phaser.Scene {
         this.path.draw(this.graphics);
 
         this.enemies = this.physics.add.group();
-        let loro = new Loro(this, this.path, 100, 100, 15, 10, 100, 'basicLoro', 'loro', 0);
+        let loro = new Loro(this, this.path, 100, 100, 15, 10, 100, 10, 'basicLoro', 'loro', 0);
         this.enemies.add(loro);
         loro.startFollowing();
-        loro = new Loro(this, this.path, 100, 100, 10, 10, 100, 'basicLoro', 'loro', 0);
+        loro = new Loro(this, this.path, 100, 100, 10, 10, 100, 10, 'basicLoro', 'loro', 0);
         this.enemies.add(loro);
         loro.startFollowingReversed();
 
@@ -101,5 +102,13 @@ export default class Level1 extends Phaser.Scene {
 
     changePlayerHealth(amount) {
         this.playerHealth += amount;
+    }
+
+    changeLevelMoney(amount) {
+        this.levelMoney += amount;
+    }
+
+    writeLevelMoney() {
+        console.log("Dinero del nivel: " + this.levelMoney);
     }
 }
