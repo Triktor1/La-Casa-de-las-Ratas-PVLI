@@ -3,37 +3,38 @@ import Torre from "../torres/TorreBase.js";
 import Bullet from "../bullets/bullet.js";
 
 export default class Level1 extends Phaser.Scene {
-    constructor(){
-        super({key:"Level1"});
+    constructor() {
+        super({ key: "Level1" });
+        this.shopMoney;
+        this.levelNum = 1;
+        this.playerHealth = 100;
     }
-    shopMoney;
-    levelNum = 1;
 
-    init(data){
+    init(data) {
         this.shopMoney = data.shopMoney || 0;
     }
-    
-    preload(){
-        this.load.image('loro' , 'assets/ParrotPlaceholder.png')
-        this.load.image('selectButton', 'assets/lvlselectboton.png'); 
-        this.load.image('shopButton', 'assets/shop.png'); 
+
+    preload() {
+        this.load.image('loro', 'assets/ParrotPlaceholder.png')
+        this.load.image('selectButton', 'assets/lvlselectboton.png');
+        this.load.image('shopButton', 'assets/shop.png');
         this.load.image('torre', 'assets/torre.png');
         this.load.image('background', 'assets/bg.png');
         this.load.image('bullet', 'assets/bullet.png');
 
     }
-    
-    preUpdate(t, dt){
+
+    preUpdate(t, dt) {
         super.preUpdate(t, dt);
     }
-    
-    create(){
-        this.add.text(20,20,"Level1");
+
+    create() {
+        this.add.text(20, 20, "Level1");
         const bg = this.add.image(0, 0, 'background').setOrigin(0, 0).setScale(2);
         bg.displayHeight = this.scale.height;
         bg.displayWidth = this.scale.width;
-        
-        //CAMINO DE LOS LOROS
+
+        //CAMINO
         this.path = new Phaser.Curves.Path(100, 100);
         this.path.lineTo(400, 200);
         this.path.lineTo(400, 300);
@@ -47,14 +48,14 @@ export default class Level1 extends Phaser.Scene {
         let loro = new Loro(this, this.path, 100, 100, 15, 10, 100, 'basicLoro', 'loro', 0);
         this.enemies.add(loro);
         loro.startFollowing();
-        loro = new Loro(this, this.path, 100, 100, 15, 10, 100, 'basicLoro', 'loro', 0);
+        loro = new Loro(this, this.path, 100, 100, 10, 10, 100, 'basicLoro', 'loro', 0);
         this.enemies.add(loro);
         loro.startFollowingReversed();
-       
-        this.Torre = new Torre(this, 500, 200, 0, 10, "basictorre", "torre"); 
+
+        this.Torre = new Torre(this, 500, 200, 0, 10, "basictorre", "torre");
 
         this.bullets = this.physics.add.group();
-        
+
         const dir = new Phaser.Math.Vector2(1, 0); //Derecha
         const bullet = new Bullet(this, 500, 200, 'bullet', 700, 2500000, dir, 750, false, true, 0, 0.1);
         this.bullets.add(bullet);
@@ -84,15 +85,21 @@ export default class Level1 extends Phaser.Scene {
         shopBtn.on('pointerout', () => shopBtn.setScale(1.0));
     }
 
-    enemyConfig(enemies){
-        enemies.counter = 0;
+
+    endLevel() {
+        this.scene.start('Shop', { shopMoney: this.shopMoney });
     }
-    endLevel(){
-        this.scene.start('Shop', {shopMoney: this.shopMoney});
-    }
-    update(time, delta){
+
+    update(time, delta) {
         this.bullets.children.iterate(bullet => {
-            if(bullet) bullet.update(time, delta);
+            if (bullet) bullet.update(time, delta);
         });
+        if (this.playerHealth <= 0) {
+            this.scene.start('GameOverScene');
+        }
+    }
+
+    changePlayerHealth(amount) {
+        this.playerHealth += amount;
     }
 }

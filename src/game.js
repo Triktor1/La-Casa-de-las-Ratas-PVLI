@@ -5,6 +5,7 @@ import Level2 from './scenes/Level2.js';
 import Level3 from './scenes/Level3.js';
 import Shop from './scenes/Shop.js';
 import SelectScene from './scenes/SelectScene.js';
+import GameOverScene from './scenes/GameOverScene.js';
 import TestEnemyScene from './scenes/TestEnemyScene.js';
 
 let config = {
@@ -27,7 +28,7 @@ let config = {
     },
     zoom: 1
   },
-  scene: [MainMenu, Level1, Level2, Level3, Shop, SelectScene, TutorialLevel],
+  scene: [MainMenu, Level1, Level2, Level3, Shop, SelectScene, TutorialLevel, GameOverScene],
 
       physics: {  
         default: 'arcade', 
