@@ -8,12 +8,17 @@ export default class Level extends Phaser.Scene
     constructor(levelkey)
     {
         super({key:levelkey});
+
+        this.levelMoney = 0;
+        this.playerHealth = 0;
+        this.levelNum;
         
     }
     init(data)
     {
         this.add.text(20,20, data.sceneName);  
         this.playerInfoCopy = data.playerInfo;
+        this.levelNum = data.nextLevel;
     }
     preload()
     {
