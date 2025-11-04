@@ -138,6 +138,7 @@ export default class Level1 extends Phaser.Scene {
     spawnEnemy()
     {
         this.newLoro = new Loro(this, this.path, 100, 100, 10, 10, 100, 10, 'basicLoro', 'loro', 0)
+        this.enemies.add(this.newLoro);
         this.newLoro.startFollowing();
     }
 }
