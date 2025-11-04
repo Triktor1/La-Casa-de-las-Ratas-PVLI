@@ -11,6 +11,7 @@ export default class Level1 extends Phaser.Scene {
         this.levelMoney = 100;
         this.levelNum = 1;
         this.playerHealth = 100;
+        this.enemySpawnNum = 5;
     }
 
     init(data) {
@@ -32,6 +33,8 @@ export default class Level1 extends Phaser.Scene {
     }
 
     create() {
+
+
         this.add.text(20, 20, "Level1");
         const bg = this.add.image(0, 0, 'background').setOrigin(0, 0).setScale(2);
         bg.displayHeight = this.scale.height;
@@ -94,6 +97,15 @@ export default class Level1 extends Phaser.Scene {
         });
         shopBtn.on('pointerover', () => shopBtn.setScale(1.1));
         shopBtn.on('pointerout', () => shopBtn.setScale(1.0));
+
+        this.text = this.add.text(30,30)
+        this.timedEvent = this.time.addEvent({
+
+            delay: 5000,
+            loop: true,
+            callback: this.spawnEnemy,
+            callbackScope: this
+        })
     }
 
 
@@ -108,6 +120,7 @@ export default class Level1 extends Phaser.Scene {
         if (this.playerHealth <= 0) {
             this.scene.start('GameOverScene');
         }
+        this.text.setText(`Event.progress: ${this.timedEvent.getProgress().toString().substr(0, 4)}`);
     }
 
     changePlayerHealth(amount) {
@@ -120,5 +133,11 @@ export default class Level1 extends Phaser.Scene {
 
     writeLevelMoney() {
         console.log("Dinero del nivel: " + this.levelMoney);
+    }
+
+    spawnEnemy()
+    {
+        this.newLoro = new Loro(this, this.path, 100, 100, 10, 10, 100, 10, 'basicLoro', 'loro', 0)
+        this.newLoro.startFollowing();
     }
 }
