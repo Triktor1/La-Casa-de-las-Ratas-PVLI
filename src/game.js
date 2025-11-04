@@ -16,6 +16,7 @@ let config = {
   pixelArt: false,
   backgroundColor: "#201726",
   scale: {
+    parent: 'site-content',
     autoCenter: Phaser.Scale.CENTER_HORIZONTALLY,
     mode: Phaser.Scale.FIT,
     min: {

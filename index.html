@@ -1,50 +1,55 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
   <title>Filthy Feathers</title>
   <link rel="icon" type="image/x-icon" href="../assets/CasaDeLasRatasLogoSmall.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="estilo.css"> <!-- Esto cargaria un archivo de estilo, pero no es necesario en Fiddle porque lo hace automáticamente -->
+  <link rel="stylesheet" href="estilo.css">
+  <!-- Esto cargaria un archivo de estilo, pero no es necesario en Fiddle porque lo hace automáticamente -->
   <script src="./libs/phaser.js"></script>
 </head>
 
 <body>
-  <h1>Filthy Feathers</h1>
-  <div>
+  <header class="webHeader">
+    <div>
+      <h1>Filthy Feathers</h1>
+    </div>
+    <a class="headerEquipo" href="conoceAlEquipo.html">Conoce al equipo</a>
+  </header>
+
+  <div class="webEntera">
     <div id="CasaDeLasRatas">
       <h2 id="CasaDeLasRatasTitulo">La Casa de las Ratas</h2>
-      <a href="https://static.nationalgeographicla.com/files/styles/image_3200/public/01-rat-friends-nationalgeographic_1162144.webp?w=1600&h=900" target="_blank">
+      <a href="https://static.nationalgeographicla.com/files/styles/image_3200/public/01-rat-friends-nationalgeographic_1162144.webp?w=1600&h=900"
+        target="_blank">
         <img src="./assets/CasaDeLasRatasLogoSmall.png" alt="LogoCasaDeLasRatas">
       </a>
     </div>
     <div class="RowList">
-    <button id="Redes" onclick="window.open('https:/x.com/CasaDeLasRatas', '_blank')">
-      <h3>Síguenos en redes</h3>
-      <img id="XLogo" src="./assets/X.png" alt="LogoTwitterPeroMal">
-    </button>
-    <button id="GitHub" onclick="window.open('https:/github.com/Triktor1/La-Casa-de-las-Ratas-PVLI', '_blank')">
-      <h3>GitHub</h3>
-      <img id="GitHubRepo" src="./assets/github.png" alt="GitHubLogo">
-    </button>
+      <button id="Redes" onclick="window.open('https:/x.com/CasaDeLasRatas', '_blank')">
+        <h4>Síguenos en redes</h4>
+        <img id="XLogo" src="./assets/X.png" alt="LogoTwitterPeroMal">
+      </button>
+      <button id="GitHub" onclick="window.open('https:/github.com/Triktor1/La-Casa-de-las-Ratas-PVLI', '_blank')">
+        <h4>GitHub</h4>
+        <img id="GitHubRepo" src="./assets/github.png" alt="GitHubLogo">
+      </button>
     </div>
-    <p id="sinopsis">Filthy Feathers es un juego de tower defense en el que el jugador, como el rey de las ratas, deberá detener la invasión de los loros piratas.
-Tendrás que poner torres (inmóviles) y tropas terrestres (móviles) para detener el avance enemigo, y mejorarlos para mantenerse al acelerado ritmo de la invasión. El juego consistirá de varios niveles, cada uno con mayor dificultad que el anterior, para desterrar definitivamente a los loros y mantener control de tus tierras.
-</p>
-<div style="text-align: center;">
-  <canvas id='gameCanvas'></canvas>
-</div>
+    <h2>Descripción</h1>
+      <p id="sinopsis">Filthy Feathers es un juego de tower defense en el que el jugador, como el rey de las ratas,
+        deberá detener la invasión de los loros piratas.
+        Tendrás que poner torres (inmóviles) y tropas terrestres (móviles) para detener el avance enemigo, y mejorarlos
+        para mantenerse al acelerado ritmo de la invasión. El juego consistirá de varios niveles, cada uno con mayor
+        dificultad que el anterior, para desterrar definitivamente a los loros y mantener control de tus tierras.
+      </p>
+      <div style="text-align: center;">
+        <canvas id='gameCanvas'></canvas>
+      </div>
 
-<script  src="./src/game.js" type="module"></script> <!--Aquí podriamos cargar los scripts, también se puede en el <body>, y pasa lo mismo que con el css de antes, en verdad aquí no estamos cargando nada-->
-<div id="equipo">
-  <h63>Equipo de desarrollo:
-    <ul>
-      <li>Víctor Castro Álvarez</li>
-      <li>Óscar Daniel Fernández Cabana</li>
-      <li>Víctor Álvarez Peral</li>
-      <li>Óscar Silva Urbina</li>
-    </ul>
-  </h3>
-</div>
+      <script src="./src/game.js" type="module"></script>
+      <!--Aquí podriamos cargar los scripts, también se puede en el <body>, y pasa lo mismo que con el css de antes, en verdad aquí no estamos cargando nada-->
 </body>
+
 </html>
