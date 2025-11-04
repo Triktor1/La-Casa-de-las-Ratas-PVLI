@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Filthy Feathers</title>
+    <link rel="icon" type="image/x-icon" href="../assets/CasaDeLasRatasLogoSmall.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="cardFlip.css">
+
+    <!-- Esto cargaria un archivo de estilo, pero no es necesario en Fiddle porque lo hace automáticamente -->
+    <script src="./libs/phaser.js"></script>
+</head>
+
+<body>
+    <header class="webHeader">
+        <div>
+            <h1>Filthy Feathers</h1>
+        </div>
+        <a class="headerEquipo" href="index.html">Juego</a>
+    </header>
+
+    <div class="webEntera">
+        <div id="CasaDeLasRatas">
+            <h2 id="CasaDeLasRatasTitulo">La Casa de las Ratas</h2>
+            <a href="https://static.nationalgeographicla.com/files/styles/image_3200/public/01-rat-friends-nationalgeographic_1162144.webp?w=1600&h=900"
+                target="_blank">
+                <img src="./assets/CasaDeLasRatasLogoSmall.png" alt="LogoCasaDeLasRatas">
+            </a>
+        </div>
+        <h2>Conoce al equipo</h2>
+        <ul class="personitas">
+            <li>
+                <div class="flip-card">
+                    <div class="flip-card-inner" onclick="this.classList.toggle('flipped');">
+                        <div class="flip-card-front">
+                            <img src="assets/VictorProfile.jpeg" alt="VictorFoto" style="width:300px;height:300px;">
+                        </div>
+                        <div id="victor" class="flip-card-back">
+                            <h2 class="flip-card-text">Víctor Castro Álvarez</h2>
+                            <p>ayuda</p>
+                            <img src="assets/aseprite.jpg">
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="flip-card">
+                    <div class="flip-card-inner" onclick="this.classList.toggle('flipped');">
+                        <div class="flip-card-front">
+                            <img src="assets/OscarProfile.jpeg" alt="ÓscarFoto" style="width:300px;height:300px;">
+                        </div>
+                        <div id="oscar" class="flip-card-back">
+                            <h2 class="flip-card-text">Óscar Daniel Fernández Cabana</h2>
+                            <p>POR FAVOR NO LE DEJES ABRIR BLENDER EN SERIO</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="flip-card">
+                    <div class="flip-card-inner" onclick="this.classList.toggle('flipped');">
+                        <div class="flip-card-front">
+                            <img src="assets/RibirProfile.jpeg" alt="´RibirFoto" style="width:300px;height:300px;">
+                        </div>
+                        <div id="ribir" class="flip-card-back">
+                            <h2 class="flip-card-text">Víctor Álvarez Peral</h2>
+                            <p>sas</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="flip-card">
+                    <div class="flip-card-inner" onclick="this.classList.toggle('flipped');">
+                        <div class="flip-card-front">
+                            <img src="assets/SilvaProfile.jpeg" alt="SilvaFoto" style="width:300px;height:300px;">
+                        </div>
+                        <div id="silva" class="flip-card-back">
+                            <h2 class="flip-card-text">Óscar Silva Urbina</h2>
+                            <p>*whistle sounds*</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div>
+
+        </div>
+    </div>
+</body>
+
+</html>

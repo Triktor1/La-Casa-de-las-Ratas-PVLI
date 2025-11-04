@@ -1,18 +1,78 @@
-body{
-  background-color: #d9bdc8
-;
+.webHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+  top: 0;
+  width: 100%;
+  height: 70px;
+  background-color: #a6859f;
+  margin: 0;
+  padding: 0;
+}
+
+.headerEquipo {
+  text-align: right;
+  position: absolute;
+  right: 20px;
+}
+
+body {
+  margin: 0px auto;
+  background-color: #d9bdc8;
+  line-height: 1.4;
+  padding: 0;
+}
+
+.webEntera {
+  max-width: 1300px;
+  margin: 40px auto;
+}
+
+body::-webkit-scrollbar,
+body::-webkit-scrollbar-button {
+  display: none;
+}
+
+
+canvas {
+  display: block;
+  padding-bottom: 50px;
+
 }
 
 h1 {
   color: #4a3052;
   justify-self: center;
-  font-size: 55px;
+  font-size: 45px;
   font-family: 'Arial Black', sans-serif;
 }
 
+h2 {
+  color: #4a3052;
+  justify-self: left;
+  font-size: 35px;
+  font-family: 'Arial Black', sans-serif;
+}
 
-.RowList{
-  display:flex;
+h3 {
+  color: #4a3052;
+  justify-self: left;
+  font-size: 30px;
+  font-family: 'Arial Black', sans-serif;
+}
+
+h4 {
+  color: #4a3052;
+  justify-self: left;
+  font-size: 25px;
+  font-family: 'Arial Black', sans-serif;
+}
+
+.RowList {
+  display: flex;
   flex-direction: row;
   justify-content: center;
   gap: 20px;
@@ -20,18 +80,19 @@ h1 {
   margin-bottom: 40px;
 }
 
-#GitHub{
-    display: flex;
+#GitHub {
+  display: flex;
   flex-direction: row;
   align-items: center;
   justify-self: center;
   border-color: #0d2b45;
   border-radius: 10px;
+  border-width: medium;
   border-style: solid;
   gap: 5px;
-  margin-top:10px;
-  padding-left: 10px;
-  padding-right: 10px;
+  margin-top: 10px;
+  padding: 5px 10px;
+  height: 60px;
   background-color: #ea6262;
   font-weight: bold;
   color: #4a3052;
@@ -43,70 +104,80 @@ h1 {
   color: #390947;
 }
 
-#CasaDeLasRatasTitulo{
+#CasaDeLasRatasTitulo {
   font-size: 40px;
   font-family: 'Arial Black', sans-serif;
 }
-#CasaDeLasRatas{
+
+#CasaDeLasRatas {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-self: center;
   border-color: #0d2b45;
   border-radius: 10px;
+  border-width: medium;
   border-style: solid;
   gap: 20px;
   padding-left: 10px;
   padding-right: 10px;
-  background-color:#a6555f;
+  background-color: #a6555f;
   font-weight: bold;
   color: #390947;
 }
 
-#Redes{
+#Redes {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-self: center;
   border-color: #0d2b45;
   border-radius: 10px;
+  border-width: medium;
   border-style: solid;
   gap: 5px;
-  margin-top:10px;
-  padding-left: 10px;
-  padding-right: 10px;
+  margin-top: 10px;
+  padding: 5px 10px;
+  height: 60px;
   background-color: #8db7ff;
   font-weight: bold;
   color: #4a3052;
   cursor: pointer;
 }
+
 #Redes:hover {
-  background-color:#6d80fa;
+  background-color: #6d80fa;
   color: #390947;
 }
-#XLogo{
-  height: 50px;
-  width: 50px;
+
+#XLogo {
+  height: 60px;
+  width: 60px;
 }
-#GitHubRepo{
+
+#GitHubRepo {
   height: 40px;
   width: 40px;
 }
-p{
+
+p,
+a {
   font-size: 20px;
   font-family: 'Arial', sans-serif;
   font-weight: bold;
   text-justify: auto;
-  color: #4a3052
+  color: #4a3052;
+  text-decoration: none;
+  display: block;
 }
 
-#equipo{
+#equipo {
   margin-top: 50px;
+  padding-bottom: 50px;
   font-size: 15px;
   font-family: 'Arial', sans-serif;
   font-weight: bold;
   text-justify: auto;
-  text-align:left;
+  text-align: left;
   color: #4a3052
-  
 }
