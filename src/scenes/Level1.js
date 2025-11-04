@@ -1,12 +1,14 @@
 import Loro from "../enemies/loro.js";
 import Torre from "../torres/TorreBase.js";
 import Bullet from "../bullets/bullet.js";
+import HuecoTorre from "../torres/HuecoTorre.js";
+import TorreUI from "../torres/TorreUI.js";
 
 export default class Level1 extends Phaser.Scene {
     constructor() {
         super({ key: "Level1" });
         this.shopMoney;
-        this.levelMoney = 0;
+        this.levelMoney = 100;
         this.levelNum = 1;
         this.playerHealth = 100;
     }
@@ -61,6 +63,14 @@ export default class Level1 extends Phaser.Scene {
         const bullet = new Bullet(this, 500, 200, 'bullet', 700, 2500000, dir, 750, false, true, 0, 0.1);
         this.bullets.add(bullet);
 
+
+        this.huecosTorre = [
+            new HuecoTorre(this, 300, 250, 'torre'),
+            new HuecoTorre(this, 450, 250, 'torre'),
+        ];
+
+        //Habría que hacer un bucle con todas las disponibles y que se vayan colocando: (UI TORREs)
+        //new TorreUI(this, 80, 100, 'torre', 50, TorreClase);
 
         this.physics.add.overlap(this.bullets, this.enemies, (bullet, enemy) => {
             if (bullet.teamRat && enemy instanceof Loro) {
