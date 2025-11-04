@@ -13,6 +13,10 @@ export default class LevelClassTest extends Level
     create()
     {
         this.a = this.add.image(200 , 200 , 'loro');
+        console.log()
+        this.playerInfoCopy.setFeathers(1)
+        this.add.text(20,500,this.playerInfoCopy.getFeathers());  
+        
     }
 
     update()
