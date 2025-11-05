@@ -30,7 +30,7 @@ export default class Level1 extends Phaser.Scene {
         this.load.image('torre', 'assets/torre.png');
         this.load.image('background', 'assets/bg.png');
         this.load.image('bullet', 'assets/bullet.png');
-        //this.load.image('loroGrum' , 'assets/LoroTipo1Placeholder.png');
+        this.load.image('loroGrum' , 'assets/GrumetePH.png');
 
     }
 
@@ -39,8 +39,6 @@ export default class Level1 extends Phaser.Scene {
     }
 
     create() {
-
-
         this.add.text(20, 20, "Level1");
         const bg = this.add.image(0, 0, 'background').setOrigin(0, 0).setScale(2);
         bg.displayHeight = this.scale.height;
@@ -62,7 +60,7 @@ export default class Level1 extends Phaser.Scene {
         this.enemies.add(loro);
         loro.startFollowing();
         */
-        let lorogrum = new loroGrumete(this , this.path , 'loro');
+        let lorogrum = new loroGrumete(this , this.path , 'loroGrum');
         this.enemies.add(lorogrum);
         lorogrum.startFollowing();
 
