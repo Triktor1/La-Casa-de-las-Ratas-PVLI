@@ -12,6 +12,8 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
         this.vida = vida;
         this.moneyDrop = moneyDrop;
 
+        this.isBeingTargeted = false; 
+
     }
 
     create() {

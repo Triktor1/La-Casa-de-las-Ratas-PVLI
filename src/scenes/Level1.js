@@ -47,6 +47,7 @@ export default class Level1 extends Phaser.Scene {
         this.graphics.lineStyle(2, 0xffffff, 1);
         this.path.draw(this.graphics);
 
+        //ENEMIGOS
         this.enemies = this.physics.add.group();
         let loro = new Loro(this, this.path, 100, 100, 15, 10, 100, 10, 'basicLoro', 'loro', 0);
         this.enemies.add(loro);
@@ -55,13 +56,28 @@ export default class Level1 extends Phaser.Scene {
         this.enemies.add(loro);
         loro.startFollowingReversed();
 
+        //TORRE
         this.Torre = new Torre(this, 500, 200, 0, 10, "basictorre", "torre");
 
+        //Grupo balsas accesible
         this.bullets = this.physics.add.group();
+        this.Bullet = Bullet;
 
         const dir = new Phaser.Math.Vector2(1, 0); //Derecha
         const bullet = new Bullet(this, 500, 200, 'bullet', 700, 2500000, dir, 750, false, true, 0, 0.1);
         this.bullets.add(bullet);
+
+
+        //Torre detecta loros en rango (OVERLAP)
+        this.physics.add.overlap(this.Torre, this.enemies, (range, enemy)=>{
+            if(!enemy.isBeingTarget){
+                enemy.isBeingTarget= true; 
+                Torre.shoot(enemy);
+                console.log('{enemy.nombre} esta siendo atacado');
+            }
+        })
+        
+
 
 
         this.huecosTorre = [
@@ -105,6 +121,8 @@ export default class Level1 extends Phaser.Scene {
         this.bullets.children.iterate(bullet => {
             if (bullet) bullet.update(time, delta);
         });
+        //añado el update de torre
+        this.Torre.update(); 
         if (this.playerHealth <= 0) {
             this.scene.start('GameOverScene');
         }
