@@ -31,6 +31,8 @@ export default class Level1 extends Phaser.Scene {
         this.load.image('background', 'assets/bg.png');
         this.load.image('bullet', 'assets/bullet.png');
         this.load.image('loroGrum' , 'assets/GrumetePH.png');
+        this.load.image('loroCan' , 'assets/CanonPH.png');
+        this.load.image('loroBarr' , 'assets/BarrilPH.png');
 
     }
 
@@ -64,8 +66,8 @@ export default class Level1 extends Phaser.Scene {
         this.enemies.add(lorogrum);
         lorogrum.startFollowing();
 
-        let lorocan = new loroCanonero(this , this.path , 'loro');
-        let lorobarr = new loroBarril(this , this.path , 'loro'); 
+        let lorocan = new loroCanonero(this , this.path , 'loroCan');
+        let lorobarr = new loroBarril(this , this.path , 'loroBarr'); 
 
         this.enemies.add(lorobarr);
         this.enemies.add(lorocan);
