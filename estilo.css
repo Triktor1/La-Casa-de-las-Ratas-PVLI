@@ -21,7 +21,7 @@
   gap: 0px;
 }
 
-.headerLogo{
+.headerLogo {
   height: 60px;
   width: 60px;
 }
@@ -52,8 +52,13 @@ body::-webkit-scrollbar-button {
 
 canvas {
   display: block;
-  padding-bottom: 50px;
+  margin: 0 auto;
+}
 
+#canvasContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
 }
 
 h1 {
