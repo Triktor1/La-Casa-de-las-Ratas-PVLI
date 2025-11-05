@@ -3,6 +3,7 @@ import Torre from "../torres/TorreBase.js";
 import Bullet from "../bullets/bullet.js";
 import HuecoTorre from "../torres/HuecoTorre.js";
 import TorreUI from "../torres/TorreUI.js";
+import loroGrumete from "../enemies/loroGrumete.js";
 
 export default class Level1 extends Phaser.Scene {
     constructor() {
@@ -25,6 +26,7 @@ export default class Level1 extends Phaser.Scene {
         this.load.image('torre', 'assets/torre.png');
         this.load.image('background', 'assets/bg.png');
         this.load.image('bullet', 'assets/bullet.png');
+        //this.load.image('loroGrum' , 'assets/LoroTipo1Placeholder.png');
 
     }
 
@@ -51,13 +53,19 @@ export default class Level1 extends Phaser.Scene {
         this.path.draw(this.graphics);
 
         this.enemies = this.physics.add.group();
+        /*
         let loro = new Loro(this, this.path, 100, 100, 15, 10, 100, 10, 'basicLoro', 'loro', 0);
         this.enemies.add(loro);
         loro.startFollowing();
-        loro = new Loro(this, this.path, 100, 100, 10, 10, 100, 10, 'basicLoro', 'loro', 0);
+        */
+        let lorogrum = new loroGrumete(this , this.path , 'loro');
+        this.enemies.add(lorogrum);
+        lorogrum.startFollowing();
+        /*
+        let loro = new Loro(this, this.path, 100, 100, 10, 10, 100, 10, 'basicLoro', 'loro', 0);
         this.enemies.add(loro);
         loro.startFollowingReversed();
-
+        */
         this.Torre = new Torre(this, 500, 200, 0, 10, "basictorre", "torre");
 
         this.bullets = this.physics.add.group();
