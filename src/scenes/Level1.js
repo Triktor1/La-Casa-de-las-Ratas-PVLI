@@ -4,6 +4,10 @@ import Bullet from "../bullets/bullet.js";
 import HuecoTorre from "../torres/HuecoTorre.js";
 import TorreUI from "../torres/TorreUI.js";
 import loroGrumete from "../enemies/loroGrumete.js";
+import loroBarril from "../enemies/loroBarril.js";
+import loroCanonero from "../enemies/loroCanonero.js";
+
+
 
 export default class Level1 extends Phaser.Scene {
     constructor() {
@@ -61,6 +65,15 @@ export default class Level1 extends Phaser.Scene {
         let lorogrum = new loroGrumete(this , this.path , 'loro');
         this.enemies.add(lorogrum);
         lorogrum.startFollowing();
+
+        let lorocan = new loroCanonero(this , this.path , 'loro');
+        let lorobarr = new loroBarril(this , this.path , 'loro'); 
+
+        this.enemies.add(lorobarr);
+        this.enemies.add(lorocan);
+
+        lorocan.startFollowing();
+        lorobarr.startFollowing();
         /*
         let loro = new Loro(this, this.path, 100, 100, 10, 10, 100, 10, 'basicLoro', 'loro', 0);
         this.enemies.add(loro);

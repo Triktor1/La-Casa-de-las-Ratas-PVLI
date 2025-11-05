@@ -1,5 +1,5 @@
 import Loro from "../enemies/loro.js";
-export default class loroGrumete extends Loro
+export default class LoroGrumete extends Loro
 {
     constructor(scene , path , texture = 'loro')
     {
