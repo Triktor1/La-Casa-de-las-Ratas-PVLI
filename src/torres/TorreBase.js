@@ -1,6 +1,6 @@
 export default class Torre extends Phaser.GameObjects.Image{
 
-    constructor(scene, x=20, y=0 , speed, damage , torrename , texture , frame = 0)
+    constructor(scene, x=20, y=0 , cadencia, damage , torrename , texture , frame = 0)
     {
         super(scene, x, y, texture, frame);
 
