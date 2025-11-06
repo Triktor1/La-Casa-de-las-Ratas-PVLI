@@ -1,14 +1,14 @@
 # Filthy Feathers
 
 Este juego es un trabajo universitario de alumnos de la Universidad Complutense de Madrid. Los miembros del grupo son:
-Víctor Castro Álvarez
-Óscar Daniel Fernández Cabana
-Víctor Álvarez Peral
-Óscar Silva Urbina
+- Víctor Castro Álvarez
+- Óscar Daniel Fernández Cabana
+- Víctor Álvarez Peral
+- Óscar Silva Urbina
 
 ## Redes sociales disponibles:
-Twitter/X: https://x.com/CasaDeLasRatas
-Github: https://github.com/Triktor1/La-Casa-de-las-Ratas-PVLI
+- Twitter/X: https://x.com/CasaDeLasRatas
+- Github: https://github.com/Triktor1/La-Casa-de-las-Ratas-PVLI
 
 
 ## Sobre este proyecto
