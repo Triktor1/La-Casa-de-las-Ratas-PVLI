@@ -112,7 +112,6 @@ export default class Level1 extends Phaser.Scene {
             if (!enemy.isBeingTarget) {
                 enemy.isBeingTarget = true;
                 const bullet = torre.shoot(enemy); // ahora sí existe la variable
-                bullet.setScale(0.2,0.3);
                 //enemy.getDamaged(bullet.damage);
                 //enemy.checkAlive();
                 console.log(`${enemy.nombre} esta siendo atacado`);
