@@ -11,7 +11,7 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
         this.speed = speed;
         this.vida = vida;
         this.moneyDrop = moneyDrop;
-
+        this.setScale(0.5);
     }
 
     create() {

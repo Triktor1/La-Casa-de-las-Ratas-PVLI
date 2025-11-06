@@ -1,4 +1,4 @@
-import Bullet from "../bullets/bullet.js"; 
+import Bullet from "../bullets/bullet.js";
 
 export default class Torre extends Phaser.GameObjects.Image {
     constructor(scene, x = 20, y = 0, speed = 1000, damage = 10, torrename = "torreBase", texture = "torre", frame = 0) {
@@ -10,11 +10,13 @@ export default class Torre extends Phaser.GameObjects.Image {
         // Atributos base
         this.nombre = torrename;
         this.damage = damage;
-        this.rangeValue = 150; // radio de alcance
+        this.rangeValue = 300; // radio de alcance
         this.fireRate = speed; // milisegundos entre disparos
         this.lastShotTime = 0;
         this.currentTarget = null; // enemigo actual en rango
-
+        
+        this.setScale(0.5);
+       
         // Collider circular invisible (rango)
         this.rangeCircle = this.scene.add.circle(this.x, this.y, this.rangeValue, 0x00ff00, 0.15);
         this.scene.physics.add.existing(this.rangeCircle);
@@ -102,8 +104,8 @@ export default class Torre extends Phaser.GameObjects.Image {
     shoot(enemy) {
         const dir = new Phaser.Math.Vector2(enemy.x - this.x, enemy.y - this.y).normalize();
         const bullet = new Bullet(this.scene, this.x, this.y, 'bullet', 700, 50, dir, 750, false, true, 0, 0.1);
-        bullet.setScale(0.2,0.3);
+        bullet.setScale(0.2, 0.3);
         this.scene.bullets.add(bullet);
-        return bullet; 
+        return bullet;
     }
 }
