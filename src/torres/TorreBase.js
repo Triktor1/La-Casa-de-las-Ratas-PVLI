@@ -14,9 +14,7 @@ export default class Torre extends Phaser.GameObjects.Image {
         this.fireRate = speed; // milisegundos entre disparos
         this.lastShotTime = 0;
         this.currentTarget = null; // enemigo actual en rango
-        
-        this.setScale(0.5);
-       
+               
         // Collider circular invisible (rango)
         this.rangeCircle = this.scene.add.circle(this.x, this.y, this.rangeValue, 0x00ff00, 0.15);
         this.scene.physics.add.existing(this.rangeCircle);
