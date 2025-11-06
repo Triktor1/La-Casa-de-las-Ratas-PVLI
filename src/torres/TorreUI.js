@@ -4,7 +4,8 @@ export default class TorreUI extends Phaser.GameObjects.Image {
         scene.add.existing(this);
 
         this.scene = scene;
-        this.cost = cost; //Precio
+        this.cost = cost;            //Precio
+        this.increase = 10;          //lo que sube el precio por cada compra
         this.TorreClase = TorreClase;//Clase que se va a colocar, se tendrá que importar con el js
 
         this.setInteractive({ draggable: true });
@@ -24,7 +25,8 @@ export default class TorreUI extends Phaser.GameObjects.Image {
                     new this.TorreClase(this.scene, hueco.x, hueco.y);
                     hueco.ocupar();
                     this.scene.levelMoney -= this.cost;
-                    console.log("Torre colocada en", hueco.x, hueco.y);
+                    console.log("Dinero actual", this.scene.levelMoney);
+                    this.cost += this.increase;
                 }
             }
             this.resetPosition();
