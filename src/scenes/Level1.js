@@ -36,6 +36,7 @@ export default class Level1 extends Phaser.Scene {
         this.crearEnemigos();
         this.crearTorres();
         this.crearHuecos();
+        new TorreUI(this, 80, 100, 'torre', 50, Torre);
         this.crearBotones();
         this.checkColisions();
     }
@@ -73,8 +74,8 @@ export default class Level1 extends Phaser.Scene {
 
     crearTorres(){
     this.torres = this.physics.add.group();
-    let torreBase = new Torre(this, 500, 200, 0, 10, "basictorre", "torre");
-    this.torres.add(torreBase);
+    //let torreBase = new Torre(this, 500, 200, 0, 10, "basictorre", "torre");
+    //this.torres.add(torreBase);
 
         this.bullets = this.physics.add.group();
         this.BUllet = Bullet; 
