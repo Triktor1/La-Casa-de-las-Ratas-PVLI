@@ -51,8 +51,8 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
         }
         else if (this.vida <= 0) {
             console.log(`${this.nombre} ha muerto`);
-            //this.scene.changeLevelMoney(this.moneyDrop); //esto da problemas por ahora
-            //this.scene.writeLevelMoney();
+            this.scene.changeLevelMoney(this.moneyDrop); //esto da problemas por ahora
+            this.scene.writeLevelMoney();
             this.destroy();
             this.stopFollow();
         }
