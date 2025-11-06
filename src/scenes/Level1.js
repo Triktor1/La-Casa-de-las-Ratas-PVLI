@@ -31,12 +31,24 @@ export default class Level1 extends Phaser.Scene {
     }
 
     create() {
+        this.crearFondo();
+        this.crearCamino();
+        this.crearEnemigos();
+        this.crearTorre();
+        this.crearHuecos();
+        this.crearBotones();
+        this.checkColisions();
+    }
+
+    crearFondo(){
         this.add.text(20, 20, "Level1");
         const bg = this.add.image(0, 0, 'background').setOrigin(0, 0).setScale(2);
         bg.displayHeight = this.scale.height;
         bg.displayWidth = this.scale.width;
 
-        // CAMINO
+    }
+
+    crearCamino(){
         this.path = new Phaser.Curves.Path(100, 100);
         this.path.lineTo(400, 200);
         this.path.lineTo(400, 300);
@@ -45,8 +57,9 @@ export default class Level1 extends Phaser.Scene {
         this.graphics = this.add.graphics();
         this.graphics.lineStyle(2, 0xffffff, 1);
         this.path.draw(this.graphics);
+    }
 
-        // ENEMIGOS
+    crearEnemigos(){
         this.enemies = this.physics.add.group();
         let loro = new Loro(this, this.path, 100, 100, 15, 10, 100, 10, 'basicLoro', 'loro', 0);
         this.enemies.add(loro);
@@ -54,42 +67,24 @@ export default class Level1 extends Phaser.Scene {
 
         loro = new Loro(this, this.path, 100, 100, 10, 10, 100, 10, 'basicLoro', 'loro', 0);
         this.enemies.add(loro);
+
         loro.startFollowingReversed();
+    }
 
-        // TORRE
-        this.Torre = new Torre(this, 500, 200, 0, 10, "basictorre", "torre");
+    crearTorre(){
+    this.Torre = new Torre(this, 500, 200, 0, 10, "basictorre", "torre");
+    this.bullets = this.physics.add.group();
+    this.Bullet = Bullet; 
+    }
 
-        // Grupo balas accesible
-        this.bullets = this.physics.add.group();
-        this.Bullet = Bullet;
+    crearHuecos(){
+    this.huecosTorre = [
+        new HuecoTorre(this, 300, 250, 'torre'),
+        new HuecoTorre(this, 450, 250, 'torre'),
+    ];
+    }
 
-        // Torre detecta loros en rango (OVERLAP)
-        this.physics.add.overlap(this.Torre, this.enemies, (range, enemy) => {
-            if (!enemy.isBeingTarget) {
-                enemy.isBeingTarget = true;
-                const bullet = this.Torre.shoot(enemy); // ahora sí existe la variable
-                enemy.getDamaged(bullet.damage);
-                enemy.checkAlive();
-                console.log(`${enemy.nombre} esta siendo atacado`);
-            }
-        });
-
-        this.huecosTorre = [
-            new HuecoTorre(this, 300, 250, 'torre'),
-            new HuecoTorre(this, 450, 250, 'torre'),
-        ];
-
-        // new TorreUI(this, 80, 100, 'torre', 50, TorreClase);
-
-        this.physics.add.overlap(this.Torre.rangeCircle, this.enemies, (range, enemy) => {
-            const torre = range.parentTorre;
-            if (!torre.currentTarget && enemy.active) {
-                torre.currentTarget = enemy;
-                console.log(`${enemy.nombre} ha entrado en el rango de ${torre.nombre}`);
-            }
-        });
-
-        // BOTONES
+    crearBotones(){
         const selectBtn = this.add.sprite(this.sys.game.canvas.width * 0.25, this.sys.game.canvas.height * 0.7, 'selectButton').setInteractive({ useHandCursor: true });
         selectBtn.on('pointerdown', () => {
             this.scene.start('SelectScene');
@@ -105,6 +100,29 @@ export default class Level1 extends Phaser.Scene {
         shopBtn.on('pointerout', () => shopBtn.setScale(1.0));
     }
 
+    checkColisions(){
+        //collision rango torre con enemigo
+        this.physics.add.overlap(this.Torre, this.enemies, (range, enemy) => {
+            if (!enemy.isBeingTarget) {
+                enemy.isBeingTarget = true;
+                const bullet = this.Torre.shoot(enemy); // ahora sí existe la variable
+                bullet.setScale(0.2,0.3);
+                enemy.getDamaged(bullet.damage);
+                enemy.checkAlive();
+                console.log(`${enemy.nombre} esta siendo atacado`);
+            }
+        });
+
+        //colsion bala con loro
+        this.physics.add.overlap(this.Torre.rangeCircle, this.enemies, (range, enemy) => {
+            const torre = range.parentTorre;
+            if (!torre.currentTarget && enemy.active) {
+                torre.currentTarget = enemy;
+                console.log(`${enemy.nombre} ha entrado en el rango de ${torre.nombre}`);
+            }
+        });
+    }
+
     endLevel() {
         this.scene.start('Shop', { shopMoney: this.shopMoney });
     }
@@ -115,6 +133,7 @@ export default class Level1 extends Phaser.Scene {
         });
         // añado el update de torre
         this.Torre.update();
+        
         if (this.playerHealth <= 0) {
             this.scene.start('GameOverScene');
         }
