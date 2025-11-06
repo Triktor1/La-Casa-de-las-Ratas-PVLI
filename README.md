@@ -1,4 +1,4 @@
-# readme
+# Filthy Feathers
 
 Este juego es un trabajo universitario de alumnos de la Universidad Complutense de Madrid. Los miembros del grupo son:
 Víctor Castro Álvarez
