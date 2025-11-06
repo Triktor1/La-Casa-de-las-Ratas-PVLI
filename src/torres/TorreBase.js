@@ -1,52 +1,55 @@
-export default class Torre extends Phaser.GameObjects.Image{
+import Bullet from "../bullets/bullet.js"; 
 
-    constructor(scene, x=20, y=0 , speed, damage =100 , torrename , texture , frame = 0)
-    {
-        //declaracioness
+export default class Torre extends Phaser.GameObjects.Image {
+    constructor(scene, x = 20, y = 0, speed = 1000, damage = 10, torrename = "torreBase", texture = "torre", frame = 0) {
         super(scene, x, y, texture, frame);
+        this.scene = scene;
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
-        
-        //atributos
-        this.vida = 100;
+
+        // Atributos base
         this.nombre = torrename;
-        this.range= 150; 
         this.damage = damage;
+        this.rangeValue = 150; // radio de alcance
+        this.fireRate = speed; // milisegundos entre disparos
+        this.lastShotTime = 0;
+        this.currentTarget = null; // enemigo actual en rango
 
-        //cuerpo circular (rango)
-        //this.body.setCircle(this.range, this.width/2 - this.range, this.height/2 - this.range);
-        //this.body.setAllowGravity(false);
-        //this.body.setImmovable(true);
+        // Collider circular invisible (rango)
+        this.rangeCircle = this.scene.add.circle(this.x, this.y, this.rangeValue, 0x00ff00, 0.15);
+        this.scene.physics.add.existing(this.rangeCircle);
+        this.rangeCircle.body.setCircle(this.rangeValue);
+        this.rangeCircle.body.setAllowGravity(false);
+        this.rangeCircle.body.setImmovable(true);
+        this.rangeCircle.setVisible(false); // oculta el rango visual
 
-        this.body.setCircle(this.range);
-        this.body.setAllowGravity(false);
-        this.body.setImmovable(true);
-
-       
-    }   
-    update() {
-        if (this.rangeCircle){
-            this.rangeCircle.x = this.x; 
-            this.rangeCircle.y = this.y;
-        }
-             
+        // Mantiene el rango asociado a la torre
+        this.rangeCircle.parentTorre = this;
     }
 
-    shoot(target) {
-        const dir = new Phaser.Math.Vector2(target.x - this.x, target.y - this.y).normalize();
-        const bullet = new this.scene.Bullet(
-            this.scene,
-            this.x,
-            this.y,
-            'bullet',
-            300,
-            this.damage,
-            dir,
-            2000,
-            false,
-            true,
-            0,
-            0.1
-        );       
+    update(time) {
+        // Mantiene el rango en la posición de la torre
+        if (this.rangeCircle) {
+            this.rangeCircle.x = this.x;
+            this.rangeCircle.y = this.y;
+        }
+
+        // Control de disparo automático
+        if (this.currentTarget && time - this.lastShotTime > this.fireRate) {
+            this.shoot(this.currentTarget);
+            this.lastShotTime = time;
+        }
+
+        // Si el objetivo ya ha muerto o salido del rango, deja de apuntar
+        if (this.currentTarget && (!this.currentTarget.active || this.currentTarget.vida <= 0)) {
+            this.currentTarget = null;
+        }
+    }
+
+    shoot(enemy) {
+        const dir = new Phaser.Math.Vector2(enemy.x - this.x, enemy.y - this.y).normalize();
+        const bullet = new Bullet(this.scene, this.x, this.y, 'bullet', 700, 50, dir, 750, false, true, 0, 0.1);
+        this.scene.bullets.add(bullet);
+        return bullet; // <--- devolver bala
     }
 }

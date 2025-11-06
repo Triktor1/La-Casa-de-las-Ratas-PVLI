@@ -18,13 +18,12 @@ export default class Level1 extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('loro', 'assets/ParrotPlaceholder.png')
+        this.load.image('loro', 'assets/ParrotPlaceholder.png');
         this.load.image('selectButton', 'assets/lvlselectboton.png');
         this.load.image('shopButton', 'assets/shop.png');
         this.load.image('torre', 'assets/torre.png');
         this.load.image('background', 'assets/bg.png');
         this.load.image('bullet', 'assets/bullet.png');
-
     }
 
     preUpdate(t, dt) {
@@ -37,7 +36,7 @@ export default class Level1 extends Phaser.Scene {
         bg.displayHeight = this.scale.height;
         bg.displayWidth = this.scale.width;
 
-        //CAMINO
+        // CAMINO
         this.path = new Phaser.Curves.Path(100, 100);
         this.path.lineTo(400, 200);
         this.path.lineTo(400, 300);
@@ -47,71 +46,57 @@ export default class Level1 extends Phaser.Scene {
         this.graphics.lineStyle(2, 0xffffff, 1);
         this.path.draw(this.graphics);
 
-        //ENEMIGOS
+        // ENEMIGOS
         this.enemies = this.physics.add.group();
         let loro = new Loro(this, this.path, 100, 100, 15, 10, 100, 10, 'basicLoro', 'loro', 0);
         this.enemies.add(loro);
         loro.startFollowing();
+
         loro = new Loro(this, this.path, 100, 100, 10, 10, 100, 10, 'basicLoro', 'loro', 0);
         this.enemies.add(loro);
         loro.startFollowingReversed();
 
-        //TORRE
+        // TORRE
         this.Torre = new Torre(this, 500, 200, 0, 10, "basictorre", "torre");
 
-        //Grupo balsas accesible
+        // Grupo balas accesible
         this.bullets = this.physics.add.group();
         this.Bullet = Bullet;
 
-        const dir = new Phaser.Math.Vector2(1, 0); //Derecha
-        const bullet = new Bullet(this, 500, 200, 'bullet', 700, 2500000, dir, 750, false, true, 0, 0.1);
-        this.bullets.add(bullet);
-
-
-        //Torre detecta loros en rango (OVERLAP)
-        this.physics.add.overlap(this.Torre, this.enemies, (range, enemy)=>{
-            if(!enemy.isBeingTarget){
-                enemy.isBeingTarget= true; 
-                this.Torre.shoot(enemy);
-                console.log(`${enemy.nombre} esta siendo atacado`);
-            }
-        })
-
-        this.physics.add.overlap(this.bullets, this.enemies, (bullet, enemy)=>{
-            if(bullet.teamRat && enemy.Loro){
+        // Torre detecta loros en rango (OVERLAP)
+        this.physics.add.overlap(this.Torre, this.enemies, (range, enemy) => {
+            if (!enemy.isBeingTarget) {
+                enemy.isBeingTarget = true;
+                const bullet = this.Torre.shoot(enemy); // ahora sí existe la variable
                 enemy.getDamaged(bullet.damage);
                 enemy.checkAlive();
-                if(!bullet.piercing) bullet.destroy();
+                console.log(`${enemy.nombre} esta siendo atacado`);
             }
-
-        })
-        
-
+        });
 
         this.huecosTorre = [
             new HuecoTorre(this, 300, 250, 'torre'),
             new HuecoTorre(this, 450, 250, 'torre'),
         ];
 
-        //Habría que hacer un bucle con todas las disponibles y que se vayan colocando: (UI TORREs)
-        //new TorreUI(this, 80, 100, 'torre', 50, TorreClase);
+        // new TorreUI(this, 80, 100, 'torre', 50, TorreClase);
 
-        this.physics.add.overlap(this.bullets, this.enemies, (bullet, enemy) => {
-            if (bullet.teamRat && enemy instanceof Loro) {
-                enemy.getDamaged(bullet.damage);
-                if (!bullet.piercing) bullet.destroy(); //comprobar si es perforante
+        this.physics.add.overlap(this.Torre.rangeCircle, this.enemies, (range, enemy) => {
+            const torre = range.parentTorre;
+            if (!torre.currentTarget && enemy.active) {
+                torre.currentTarget = enemy;
+                console.log(`${enemy.nombre} ha entrado en el rango de ${torre.nombre}`);
             }
         });
 
-        //BOTONES
-        //Seleccion de niveles
+        // BOTONES
         const selectBtn = this.add.sprite(this.sys.game.canvas.width * 0.25, this.sys.game.canvas.height * 0.7, 'selectButton').setInteractive({ useHandCursor: true });
         selectBtn.on('pointerdown', () => {
             this.scene.start('SelectScene');
         });
         selectBtn.on('pointerover', () => selectBtn.setScale(1.1));
         selectBtn.on('pointerout', () => selectBtn.setScale(1.0));
-        //Tienda
+
         const shopBtn = this.add.sprite(this.sys.game.canvas.width * 0.8, this.sys.game.canvas.height * 0.7, 'shopButton').setInteractive({ useHandCursor: true });
         shopBtn.on('pointerdown', () => {
             this.scene.start('Shop');
@@ -119,7 +104,6 @@ export default class Level1 extends Phaser.Scene {
         shopBtn.on('pointerover', () => shopBtn.setScale(1.1));
         shopBtn.on('pointerout', () => shopBtn.setScale(1.0));
     }
-
 
     endLevel() {
         this.scene.start('Shop', { shopMoney: this.shopMoney });
@@ -129,8 +113,8 @@ export default class Level1 extends Phaser.Scene {
         this.bullets.children.iterate(bullet => {
             if (bullet) bullet.update(time, delta);
         });
-        //añado el update de torre
-        this.Torre.update(); 
+        // añado el update de torre
+        this.Torre.update();
         if (this.playerHealth <= 0) {
             this.scene.start('GameOverScene');
         }
