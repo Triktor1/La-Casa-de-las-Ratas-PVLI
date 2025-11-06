@@ -17,6 +17,7 @@ export default class Level1 extends Phaser.Scene {
         this.levelNum = 1;
         this.playerHealth = 100;
         this.enemySpawnNum = 5;
+        this.tasaSpawn = 2;
     }
 
     init(data) {
@@ -158,8 +159,14 @@ export default class Level1 extends Phaser.Scene {
 
     spawnEnemy()
     {
-        this.newLoro = new Loro(this, this.path, 100, 100, 10, 10, 100, 10, 'basicLoro', 'loro', 0)
-        this.enemies.add(this.newLoro);
-        this.newLoro.startFollowing();
+
+        if (this.tasaSpawn > 0)
+        {
+            this.newLoro = new Loro(this, this.path, 100, 100, 10, 10, 100, 10, 'basicLoro', 'loro', 0)
+            this.enemies.add(this.newLoro);
+            this.newLoro.startFollowing();
+            
+            this.tasaSpawn = this.tasaSpawn - 1;
+        }
     }
 }
