@@ -16,7 +16,7 @@ let config = {
   pixelArt: false,
   backgroundColor: "#201726",
   scale: {
-    parent: 'site-content',
+    parent: 'canvasContainer',
     autoCenter: Phaser.Scale.CENTER_HORIZONTALLY,
     mode: Phaser.Scale.FIT,
     min: {
@@ -45,4 +45,8 @@ let config = {
     },
 };
 
-new Phaser.Game(config);
+let game = new Phaser.Game(config);
+
+window.addEventListener('resize', () => {
+  game.scale.refresh(window.innerWidth, window.innerHeight);
+});

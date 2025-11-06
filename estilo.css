@@ -13,6 +13,19 @@
   padding: 0;
 }
 
+.headerList {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0px;
+}
+
+.headerLogo {
+  height: 60px;
+  width: 60px;
+}
+
 .headerEquipo {
   text-align: right;
   position: absolute;
@@ -39,8 +52,13 @@ body::-webkit-scrollbar-button {
 
 canvas {
   display: block;
-  padding-bottom: 50px;
+  margin: 0 auto;
+}
 
+#canvasContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
 }
 
 h1 {

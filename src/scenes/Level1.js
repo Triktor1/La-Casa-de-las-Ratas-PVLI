@@ -76,18 +76,25 @@ export default class Level1 extends Phaser.Scene {
     let torreBase = new Torre(this, 500, 200, 0, 10, "basictorre", "torre");
     this.torres.add(torreBase);
 
-    this.bullets = this.physics.add.group();
-    this.Bullet = Bullet; 
+        this.bullets = this.physics.add.group();
+        this.BUllet = Bullet; 
     }
 
     crearHuecos(){
-    this.huecosTorre = [
-        new HuecoTorre(this, 300, 250, 'torre'),
-        new HuecoTorre(this, 450, 250, 'torre'),
-    ];
+        this.huecosTorre = [
+            new HuecoTorre(this, 300, 250, 'torre'),
+            new HuecoTorre(this, 450, 250, 'torre'),
+        ];
     }
 
-    crearBotones(){
+        //Habría que hacer un bucle con todas las disponibles y que se vayan colocando: (UI TORREs)
+        new TorreUI(this, 80, 100, 'torre', 50, TorreClase);
+
+        
+
+        //BOTONES
+        //Seleccion de niveles
+        crearBotones(){
         const selectBtn = this.add.sprite(this.sys.game.canvas.width * 0.25, this.sys.game.canvas.height * 0.7, 'selectButton').setInteractive({ useHandCursor: true });
         selectBtn.on('pointerdown', () => {
             this.scene.start('SelectScene');
@@ -101,9 +108,10 @@ export default class Level1 extends Phaser.Scene {
         });
         shopBtn.on('pointerover', () => shopBtn.setScale(1.1));
         shopBtn.on('pointerout', () => shopBtn.setScale(1.0));
-    }
+        }
+    
 
-      checkColisions(){
+    checkColisions(){
         //collision rango torre con enemigo
         this.torres.children.iterate(torre => {
             if(!torre) return; 
@@ -138,6 +146,14 @@ export default class Level1 extends Phaser.Scene {
             enemy.checkAlive();
 
             if (!bullet.piercing) bullet.destroy();
+        });
+
+        //colisioni original bala con loro
+        this.physics.add.overlap(this.bullets, this.enemies, (bullet, enemy) => {
+            if (bullet.teamRat && enemy instanceof Loro) {
+                enemy.getDamaged(bullet.damage);
+                if (!bullet.piercing) bullet.destroy(); //comprobar si es perforante
+            }
         });
     } 
  
