@@ -4,24 +4,15 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
         super(scene, path, x, y, texture, frame) //constructora  pathfollower
         this.scene = scene;
         this.scene.add.existing(this);
-        this.scene.physics.add.existing(this);
-        this.body.setSize(this.width * 0.8, this.height * 0.8); // ajustar tamaño del collider
-        this.body.setOffset(this.width * 0.1, this.height * 0.1);
+        
         //Atributos loro
         this.nombre = loroname;
         this.damage = damage;
         this.speed = speed;
         this.vida = vida;
         this.moneyDrop = moneyDrop;
-        this.type = "loro"; 
 
     }
-   preUpdate(time, delta) {
-    super.preUpdate(time, delta);
-    if (this.follower) {
-        this.follower.update(delta);
-    }
-}
 
     create() {
 
