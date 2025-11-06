@@ -88,7 +88,7 @@ export default class Level1 extends Phaser.Scene {
     }
 
         //Habría que hacer un bucle con todas las disponibles y que se vayan colocando: (UI TORREs)
-        new TorreUI(this, 80, 100, 'torre', 50, TorreClase);
+        //new TorreUI(this, 80, 100, 'torre', 50, TorreClase);
 
         
 
@@ -112,7 +112,7 @@ export default class Level1 extends Phaser.Scene {
     
 
     checkColisions(){
-        //collision rango torre con enemigo
+        //Disparo desde torre
         this.torres.children.iterate(torre => {
             if(!torre) return; 
 
@@ -127,7 +127,7 @@ export default class Level1 extends Phaser.Scene {
         }); 
  
         
-        //colision rango de torre 
+        //Deteccion enemigo con rango torre
         this.physics.add.overlap(torre.rangeCircle, this.enemies, (range, enemy) => {
             const torre = range.parentTorre;
             if (!torre.currentTarget && enemy.active) {
@@ -139,7 +139,7 @@ export default class Level1 extends Phaser.Scene {
         })
          
         //colision bala con loro
-        this.physics.add.overlap(this.bullets, this.enemies, (bullet, enemy) => {
+        /* this.physics.add.overlap(this.bullets, this.enemies, (bullet, enemy) => {
             if (!bullet.active || !enemy.active) return;
 
             enemy.getDamaged(bullet.damage);
@@ -147,7 +147,7 @@ export default class Level1 extends Phaser.Scene {
 
             if (!bullet.piercing) bullet.destroy();
         });
-
+ */
         //colisioni original bala con loro
         this.physics.add.overlap(this.bullets, this.enemies, (bullet, enemy) => {
             if (bullet.teamRat && enemy instanceof Loro) {
