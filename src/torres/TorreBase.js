@@ -36,6 +36,44 @@ export default class Torre extends Phaser.GameObjects.Image {
         this.rango.setVisible(false);    
         return rango;
     } */
+
+    /* checkCollisions(enemies, bullets){
+        //Disparo inmediato. Collision directa torre-enemigo
+
+        this.physics.add.overlap(this, enemies, (torre, enemy) => {
+        if (!enemy.isBeingTarget) {
+                enemy.isBeingTarget = true;
+                const bullet = torre.shoot(enemy); // ahora sí existe la variable
+                //enemy.getDamaged(bullet.damage);
+                //enemy.checkAlive();
+                console.log(`${enemy.nombre} esta siendo atacado`);
+            }
+        }); 
+ 
+        
+        //Deteccion de objetivo, colision rango de torre 
+        this.physics.add.overlap(this.rangeCircle, enemies, (range, enemy) => {
+            const torre = range.parentTorre;
+            if (!torre.currentTarget && enemy.active) {
+                torre.currentTarget = enemy;
+                console.log(`${enemy.nombre} ha entrado en el rango de ${torre.nombre}`);
+            }
+        });
+        
+        
+         
+        //colision bala con loro
+        this.physics.add.overlap(bullets, enemies, (bullet, enemy) => {
+            if (!bullet.active || !enemy.active) return;
+
+            enemy.getDamaged(bullet.damage);
+            enemy.checkAlive();
+
+            if (!bullet.piercing) bullet.destroy();
+        });
+
+    } */
+
     update(time) {
         // Mantiene el rango en la posición de la torre
         if (this.rangeCircle) {

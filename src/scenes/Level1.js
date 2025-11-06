@@ -103,7 +103,7 @@ export default class Level1 extends Phaser.Scene {
         shopBtn.on('pointerout', () => shopBtn.setScale(1.0));
     }
 
-    checkColisions(){
+     checkColisions(){
         //collision rango torre con enemigo
         this.torres.children.iterate(torre => {
             if(!torre) return; 
@@ -139,7 +139,7 @@ export default class Level1 extends Phaser.Scene {
 
             if (!bullet.piercing) bullet.destroy();
         });
-    }
+    } 
 
     endLevel() {
         this.scene.start('Shop', { shopMoney: this.shopMoney });
