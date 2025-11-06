@@ -73,11 +73,19 @@ export default class Level1 extends Phaser.Scene {
             if(!enemy.isBeingTarget){
                 enemy.isBeingTarget= true; 
                 this.Torre.shoot(enemy);
-                console.log('{enemy.nombre} esta siendo atacado');
+                console.log(`${enemy.nombre} esta siendo atacado`);
             }
         })
-        
 
+        this.physics.add.overlap(this.bullets, this.enemies, (bullet, enemy)=>{
+            if(bullet.teamRat && enemy.Loro){
+                enemy.getDamaged(bullet.damage);
+                enemy.checkAlive();
+                if(!bullet.piercing) bullet.destroy();
+            }
+
+        })
+        
 
 
         this.huecosTorre = [
