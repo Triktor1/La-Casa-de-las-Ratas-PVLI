@@ -3,6 +3,7 @@ export default class Bullet extends Phaser.GameObjects.Image {
     {
         super(scene, x, y, texture, frame); // constructora
         scene.add.existing(this);
+        scene.physics.add.existing(this)
 
         //Atributos
         this.speed = speed;                             //VELOCIDAD DE LA BALA

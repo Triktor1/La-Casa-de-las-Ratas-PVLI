@@ -2,16 +2,16 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
 
     constructor(scene, path, x = 0, y = 0, speed = 15, damage = 10, vida = 100, moneyDrop, loroname, texture = "loro", frame = 0) {
         super(scene, path, x, y, texture, frame) //constructora  pathfollower
-        this.scene.add.existing(this);
-
-        //Atributos loro
         this.scene = scene;
+        this.scene.add.existing(this);
+        
+        //Atributos loro
         this.nombre = loroname;
         this.damage = damage;
         this.speed = speed;
         this.vida = vida;
         this.moneyDrop = moneyDrop;
-
+        this.setScale(0.5);
     }
 
     create() {
@@ -40,20 +40,23 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
     getDamaged(damage) {
         this.vida -= damage;
         this.checkAlive();
+        console.log (`Vida restante: ${this.vida}`);
     }
 
     checkAlive(reachedEnd = false) {
         if (reachedEnd) {
             this.scene.changePlayerHealth(-this.damage);
-            this.destroy();
             this.stopFollow();
+            this.destroy();
         }
         else if (this.vida <= 0) {
-            this.scene.changeLevelMoney(this.moneyDrop);
+            console.log(`${this.nombre} ha muerto`);
+            this.scene.changeLevelMoney(this.moneyDrop); //esto da problemas por ahora
             this.scene.writeLevelMoney();
             this.destroy();
             this.stopFollow();
         }
+      
     }
 
     startFollowing() {
