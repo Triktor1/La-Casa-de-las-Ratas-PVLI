@@ -16,4 +16,9 @@ Filthy feathers es un Tower Defense hecho en Phaser 3. El reino de las ratas est
 
 ## Preview del juego
 
+CAPTURAS PENDIENTES
+
+
+## Enlace a la web del juego
+
 [FILTHY FEATHERS](https://triktor1.github.io/La-Casa-de-las-Ratas-PVLI)
