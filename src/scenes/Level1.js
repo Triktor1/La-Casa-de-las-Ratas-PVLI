@@ -72,7 +72,7 @@ export default class Level1 extends Phaser.Scene {
         this.physics.add.overlap(this.Torre, this.enemies, (range, enemy)=>{
             if(!enemy.isBeingTarget){
                 enemy.isBeingTarget= true; 
-                Torre.shoot(enemy);
+                this.Torre.shoot(enemy);
                 console.log('{enemy.nombre} esta siendo atacado');
             }
         })

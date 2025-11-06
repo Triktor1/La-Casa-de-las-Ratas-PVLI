@@ -5,8 +5,8 @@ export default class Torre extends Phaser.GameObjects.Image{
         //declaracioness
         super(scene, x, y, texture, frame);
         this.scene.add.existing(this);
-        this.scene.phsyics.add.existing(this);
-
+        this.scene.physics.add.existing(this);
+        
         //atributos
         this.vida = 100;
         this.nombre = torrename;
@@ -14,23 +14,26 @@ export default class Torre extends Phaser.GameObjects.Image{
         this.damage = damage;
 
         //cuerpo circular (rango)
-        this.body.setCircle(this.range, this.width/2 - this.range, this.height/2 - this.range);
+        //this.body.setCircle(this.range, this.width/2 - this.range, this.height/2 - this.range);
+        //this.body.setAllowGravity(false);
+        //this.body.setImmovable(true);
+
+        this.body.setCircle(this.range);
         this.body.setAllowGravity(false);
         this.body.setImmovable(true);
 
-        //debug
-        this.rangeCircle = this.scene.add.circle(this.x, this.y, this.range, 0x00ff00, 0.15);
-
-        //aceso al grupo de balas
-        this.bulletGroup = this.scene.bullet; 
-        
-    }
+       
+    }   
     update() {
+        if (this.rangeCircle){
             this.rangeCircle.x = this.x; 
-            this.rangeCircle.y = this.y; 
+            this.rangeCircle.y = this.y;
         }
+             
+    }
 
-        shoot(target) {
+    shoot(target) {
+        const dir = new Phaser.Math.Vector2(target.x - this.x, target.y - this.y).normalize();
         const bullet = new this.scene.Bullet(
             this.scene,
             this.x,
@@ -44,6 +47,6 @@ export default class Torre extends Phaser.GameObjects.Image{
             true,
             0,
             0.1
-        );        this.bulletGroup.add(bullet);
-        }
+        );       
+    }
 }
