@@ -34,7 +34,7 @@ export default class Level1 extends Phaser.Scene {
         this.crearFondo();
         this.crearCamino();
         this.crearEnemigos();
-        this.crearTorre();
+        this.crearTorres();
         this.crearHuecos();
         this.crearBotones();
         this.checkColisions();
@@ -71,8 +71,11 @@ export default class Level1 extends Phaser.Scene {
         loro.startFollowingReversed();
     }
 
-    crearTorre(){
-    this.Torre = new Torre(this, 500, 200, 0, 10, "basictorre", "torre");
+    crearTorres(){
+    this.torres = this.physics.add.group();
+    let torreBase = new Torre(this, 500, 200, 0, 10, "basictorre", "torre");
+    this.torres.add(torreBase);
+
     this.bullets = this.physics.add.group();
     this.Bullet = Bullet; 
     }
@@ -102,24 +105,40 @@ export default class Level1 extends Phaser.Scene {
 
     checkColisions(){
         //collision rango torre con enemigo
-        this.physics.add.overlap(this.Torre, this.enemies, (range, enemy) => {
+        this.torres.children.iterate(torre => {
+            if(!torre) return; 
+
+            this.physics.add.overlap(torre, this.enemies, (range, enemy) => {
             if (!enemy.isBeingTarget) {
                 enemy.isBeingTarget = true;
-                const bullet = this.Torre.shoot(enemy); // ahora sí existe la variable
+                const bullet = torre.shoot(enemy); // ahora sí existe la variable
                 bullet.setScale(0.2,0.3);
-                enemy.getDamaged(bullet.damage);
-                enemy.checkAlive();
+                //enemy.getDamaged(bullet.damage);
+                //enemy.checkAlive();
                 console.log(`${enemy.nombre} esta siendo atacado`);
             }
-        });
-
-        //colsion bala con loro
-        this.physics.add.overlap(this.Torre.rangeCircle, this.enemies, (range, enemy) => {
+        }); 
+ 
+        
+        //colision rango de torre 
+        this.physics.add.overlap(torre.rangeCircle, this.enemies, (range, enemy) => {
             const torre = range.parentTorre;
             if (!torre.currentTarget && enemy.active) {
                 torre.currentTarget = enemy;
                 console.log(`${enemy.nombre} ha entrado en el rango de ${torre.nombre}`);
             }
+        });
+        
+        })
+         
+        //colision bala con loro
+        this.physics.add.overlap(this.bullets, this.enemies, (bullet, enemy) => {
+            if (!bullet.active || !enemy.active) return;
+
+            enemy.getDamaged(bullet.damage);
+            enemy.checkAlive();
+
+            if (!bullet.piercing) bullet.destroy();
         });
     }
 
@@ -132,8 +151,10 @@ export default class Level1 extends Phaser.Scene {
             if (bullet) bullet.update(time, delta);
         });
         // añado el update de torre
-        this.Torre.update();
-        
+        this.torres.children.iterate(torre =>{
+           if(torre) torre.update(time);
+        });
+
         if (this.playerHealth <= 0) {
             this.scene.start('GameOverScene');
         }

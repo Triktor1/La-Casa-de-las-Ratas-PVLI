@@ -1,7 +1,7 @@
 import Bullet from "../bullets/bullet.js"; 
 
 export default class Torre extends Phaser.GameObjects.Image {
-    constructor(scene, x = 20, y = 0, speed = 1000, damage = 10, torrename = "torreBase", texture = "torre", frame = 0) {
+    constructor(scene, x = 20, y = 0, speed = 0.1, damage = 10, torrename = "torreBase", texture = "torre", frame = 0) {
         super(scene, x, y, texture, frame);
         this.scene = scene;
         this.scene.add.existing(this);
@@ -27,6 +27,15 @@ export default class Torre extends Phaser.GameObjects.Image {
         this.rangeCircle.parentTorre = this;
     }
 
+    /* rangeSensor(){
+        const rango = this.scene.add.circle(this.x, this.y, this.rangeValue, 0x00ff00, 0.15);
+        this.scene.physics.add.existing(this.rango);
+        this.rango.body.setCircle(this.rangeValue);
+        this.rango.body.setAllowGravity(false);
+        this.rango.body.setImmovable(true);
+        this.rango.setVisible(false);    
+        return rango;
+    } */
     update(time) {
         // Mantiene el rango en la posición de la torre
         if (this.rangeCircle) {
@@ -48,8 +57,8 @@ export default class Torre extends Phaser.GameObjects.Image {
 
     shoot(enemy) {
         const dir = new Phaser.Math.Vector2(enemy.x - this.x, enemy.y - this.y).normalize();
-        const bullet = new Bullet(this.scene, this.x, this.y, 'bullet', 700, 50, dir, 750, false, true, 0, 0.1);
+        const bullet = new Bullet(this.scene, this.x, this.y, 'bullet', 700, 20, dir, 750, false, true, 0, 0.1);
         this.scene.bullets.add(bullet);
-        return bullet; // <--- devolver bala
+        return bullet; 
     }
 }
