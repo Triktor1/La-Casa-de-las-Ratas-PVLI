@@ -25,6 +25,9 @@ export default class Torre extends Phaser.GameObjects.Image {
 
         // Mantiene el rango asociado a la torre
         this.rangeCircle.parentTorre = this;
+
+        this.scene.torres?.add(this);
+        //this.checkCollisions(this.scene.enemies, this.scene.bullets);
     }
 
     /* rangeSensor(){
@@ -37,10 +40,13 @@ export default class Torre extends Phaser.GameObjects.Image {
         return rango;
     } */
 
-    /* checkCollisions(enemies, bullets){
+    /*  checkCollisions(enemies, bullets){
         //Disparo inmediato. Collision directa torre-enemigo
-
-        this.physics.add.overlap(this, enemies, (torre, enemy) => {
+         if (!this.body || !this.rangeCircle.body || !enemies || !bullets) {
+        console.warn("Colisión no configurada por datos incompletos");
+        return;
+    }
+        this.scene.physics.add.overlap(this, enemies, (torre, enemy) => {
         if (!enemy.isBeingTarget) {
                 enemy.isBeingTarget = true;
                 const bullet = torre.shoot(enemy); // ahora sí existe la variable
@@ -52,7 +58,7 @@ export default class Torre extends Phaser.GameObjects.Image {
  
         
         //Deteccion de objetivo, colision rango de torre 
-        this.physics.add.overlap(this.rangeCircle, enemies, (range, enemy) => {
+        this.scene.physics.add.overlap(this.rangeCircle, enemies, (range, enemy) => {
             const torre = range.parentTorre;
             if (!torre.currentTarget && enemy.active) {
                 torre.currentTarget = enemy;
@@ -63,7 +69,7 @@ export default class Torre extends Phaser.GameObjects.Image {
         
          
         //colision bala con loro
-        this.physics.add.overlap(bullets, enemies, (bullet, enemy) => {
+        this.scene.physics.add.overlap(bullets, enemies, (bullet, enemy) => {
             if (!bullet.active || !enemy.active) return;
 
             enemy.getDamaged(bullet.damage);
@@ -72,7 +78,7 @@ export default class Torre extends Phaser.GameObjects.Image {
             if (!bullet.piercing) bullet.destroy();
         });
 
-    } */
+    }  */
 
     update(time) {
         // Mantiene el rango en la posición de la torre
