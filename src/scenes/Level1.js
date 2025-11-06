@@ -113,16 +113,16 @@ export default class Level1 extends Phaser.Scene {
     
 
     checkColisions(){
+        //estas colisiones fueron las que hice cuando simplemente estaba la torre ahi puesta
+        //por eso tanto rollo.
         //Disparo desde torre
-        this.torres.children.iterate(torre => {
+        /* this.torres.children.iterate(torre => {
             if(!torre) return; 
 
             this.physics.add.overlap(torre, this.enemies, (range, enemy) => {
             if (!enemy.isBeingTarget) {
                 enemy.isBeingTarget = true;
                 const bullet = torre.shoot(enemy); // ahora sí existe la variable
-                //enemy.getDamaged(bullet.damage);
-                //enemy.checkAlive();
                 console.log(`${enemy.nombre} esta siendo atacado`);
             }
         }); 
@@ -137,7 +137,7 @@ export default class Level1 extends Phaser.Scene {
             }
         });
         
-        })
+        }) */
          
         //colision bala con loro
         /* this.physics.add.overlap(this.bullets, this.enemies, (bullet, enemy) => {
