@@ -5,14 +5,20 @@ import PlayerData from "../PlayerData/PlayerData.js";
 export default class Level extends Phaser.Scene
 {
 
-
-    constructor(levelkey , currentLevel)
+    constructor(levelkey)
     {
         super({key:levelkey});
+
+        this.levelMoney = 0;
+        this.playerHealth = 0;
+        this.levelNum;
+        
     }
     init(data)
     {
-        this.add.text(20,20, data.sceneName);
+        this.add.text(20,20, data.sceneName);  
+        this.playerInfoCopy = data.playerInfo;
+        this.levelNum = data.nextLevel;
     }
     preload()
     {
@@ -23,6 +29,21 @@ export default class Level extends Phaser.Scene
         this.load.image('torre', 'assets/torre.png');
         this.load.image('background', 'assets/bg.png');
         this.load.image('bullet', 'assets/bullet.png');
+    }
+    preUpdate(t, dt) {
+        super.preUpdate(t, dt);
+    }
+
+    changePlayerHealth(amount) {
+        this.playerHealth += amount;
+    }
+
+    changeLevelMoney(amount) {
+        this.levelMoney += amount;
+    }
+
+    writeLevelMoney() {
+        console.log("Dinero del nivel: " + this.levelMoney);
     }
 
 }

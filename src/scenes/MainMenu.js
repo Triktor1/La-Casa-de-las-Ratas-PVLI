@@ -1,26 +1,35 @@
+import PlayerData from "../PlayerData/PlayerData.js";
+
+
 export default class MainMenu extends Phaser.Scene {
-    constructor(){
-        super({key:"MainMenu"});
+    constructor() {
+        super({ key: "MainMenu" });
+    }
+
+    init() {
 
     }
 
-    init(){
-
-    }
-    
-    preload(){
+    preload() {
         this.load.image('startButton', 'assets/start.png'); // Botón de start
     }
 
-    preUpdate(t, dt){
+    preUpdate(t, dt) {
         super.preUpdate(t, dt);
     }
 
-    create(){
-        this.add.text(20,20,"Main Menu");
-        const startBtn = this.add.sprite(this.sys.game.canvas.width * 0.5, this.sys.game.canvas.height * 0.7, 'startButton').setInteractive({ useHandCursor: true });
+    create() {
+
+        let keyScene = "LevelClassTest";
+        this.playerInfo = new PlayerData();
+
+        this.add.text(225, 200, "Filthy Feathers", {
+            fontSize: '100px',
+            fontFamily: 'Arial Black'
+        }); const startBtn = this.add.sprite(this.sys.game.canvas.width * 0.5, this.sys.game.canvas.height * 0.7, 'startButton').setInteractive({ useHandCursor: true });
         startBtn.on('pointerdown', () => {
-            this.scene.start('TutorialLevel');
+            //this.scene.start(keyScene, {sceneName: "Class Level Test" , playerInfo: this.playerInfo , nextLevel: 1});
+            this.scene.start("Level1");
         });
         startBtn.on('pointerover', () => startBtn.setScale(1.1));
         startBtn.on('pointerout', () => startBtn.setScale(1.0));
