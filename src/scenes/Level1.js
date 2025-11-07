@@ -1,5 +1,8 @@
 import Loro from "../enemies/loro.js";
+
 import Torre from "../torres/TorreBase.js";
+import RataSilicona from "../torres/RataSilicona.js";
+
 import Bullet from "../bullets/bullet.js";
 import HuecoTorre from "../torres/HuecoTorre.js";
 import TorreUI from "../torres/TorreUI.js";
@@ -53,8 +56,11 @@ export default class Level1 extends Phaser.Scene {
             fontFamily: 'Arial Black',
             fontSize: '25px'
         })
+        
 
+        // UI DE TORRES
         new TorreUI(this, 80, 100, 'torre', 50, Torre);
+        //new TorreUI(this, 240, 100, 'torre', 50, RataSilicona);
         //this.crearBotones();
         this.checkColisions();
 
