@@ -1,7 +1,7 @@
 import Bullet from "../bullets/bullet.js";
 
 export default class Torre extends Phaser.GameObjects.Image {
-    constructor(scene, x = 20, y = 0, speed = 1000, damage = 10, torrename = "torreBase", texture = "torre", frame = 0) {
+    constructor(scene, x = 20, y = 0, speed = 1250, damage = 10, torrename = "torreBase", texture = "torre", frame = 0) {
         super(scene, x, y, texture, frame);
         this.scene = scene;
         this.scene.add.existing(this);
@@ -14,19 +14,32 @@ export default class Torre extends Phaser.GameObjects.Image {
         this.fireRate = speed; // milisegundos entre disparos
         this.lastShotTime = 0;
         this.currentTarget = null; // enemigo actual en rango
-               
+
         // Collider circular invisible (rango)
         this.rangeCircle = this.scene.add.circle(this.x, this.y, this.rangeValue, 0x00ff00, 0.15);
         this.scene.physics.add.existing(this.rangeCircle);
         this.rangeCircle.body.setCircle(this.rangeValue);
         this.rangeCircle.body.setAllowGravity(false);
         this.rangeCircle.body.setImmovable(true);
-        this.rangeCircle.setVisible(false); // oculta el rango visual
+        this.rangeCircle.setVisible(false);
+
+        this.rangeGraphics = this.scene.add.graphics();
+        this.rangeGraphics.lineStyle(2, 0x00ff00, 0.4);
+        this.rangeGraphics.strokeCircle(x, y, this.rangeValue);
+                
+        this.setInteractive({ useHandCursor: true });
+
+        this.on('pointerover', () => {
+            this.rangeGraphics.setVisible(true); //hover en torre
+        });
+        this.on('pointerout', () => {
+            this.rangeGraphics.setVisible(false); //fuera del hover
+        });
 
         // Mantiene el rango asociado a la torre
         this.rangeCircle.parentTorre = this;
 
-        this.scene.torres?.add(this);
+
         //this.checkCollisions(this.scene.enemies, this.scene.bullets);
     }
 
@@ -97,6 +110,7 @@ export default class Torre extends Phaser.GameObjects.Image {
         if (this.currentTarget && (!this.currentTarget.active || this.currentTarget.vida <= 0)) {
             this.currentTarget = null;
         }
+
     }
 
     shoot(enemy) {
