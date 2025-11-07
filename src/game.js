@@ -19,7 +19,6 @@ let config = {
   scale: {
     parent: 'canvasContainer',
     autoCenter: Phaser.Scale.CENTER_HORIZONTALLY,
-    mode: Phaser.Scale.FIT,
     min: {
         width: 328,
         height: 188
