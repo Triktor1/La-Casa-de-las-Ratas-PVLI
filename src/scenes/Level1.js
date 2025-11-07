@@ -17,6 +17,7 @@ export default class Level1 extends Phaser.Scene {
         this.levelNum = 1;
         this.playerHealth = 100;
         this.enemySpawnNum = 5;
+
     }
 
     init(data) {
@@ -30,9 +31,9 @@ export default class Level1 extends Phaser.Scene {
         this.load.image('torre', 'assets/torre.png');
         this.load.image('background', 'assets/bg.png');
         this.load.image('bullet', 'assets/bullet.png');
-        this.load.image('loroGrum' , 'assets/GrumetePH.png');
-        this.load.image('loroCan' , 'assets/CanonPH.png');
-        this.load.image('loroBarr' , 'assets/BarrilPH.png');
+        this.load.image('loroGrum', 'assets/GrumetePH.png');
+        this.load.image('loroCan', 'assets/CanonPH.png');
+        this.load.image('loroBarr', 'assets/BarrilPH.png');
 
     }
 
@@ -41,6 +42,7 @@ export default class Level1 extends Phaser.Scene {
     }
 
     create() {
+        this.enemies = this.physics.add.group();
         this.crearFondo();
         this.crearCamino();
         this.crearEnemigos();
@@ -84,38 +86,31 @@ export default class Level1 extends Phaser.Scene {
 
     crearEnemigos() {
 
-        if (this.enemySpawnNum > 0)
-        {
-
-            this.enemies = this.physics.add.group();
+        if (this.enemySpawnNum > 0) {
 
             this.randomnum = Math.floor(Math.random() * 3)
             console.log(this.randomnum)
 
             let loro;
 
-            if(this.randomnum == 0 )
-            {
+            if (this.randomnum == 0) {
                 loro = new Loro(this, this.path, -50, 600, 10, 10, 100, 10, 'basicLoro', 'loro', 0);
             }
-            else if (this.randomnum == 1)
-            {
-                loro = new loroCanonero(this , this.path , -50 , 600 ,'loroCan')
+            else if (this.randomnum == 1) {
+                loro = new loroCanonero(this, this.path, -50, 600, 'loroCan')
             }
-            else if (this.randomnum == 2)
-            {
+            else if (this.randomnum == 2) {
                 loro = new loroGrumete(this, this.path, -50, 600, 'loroGrum')
             }
-            else if (this.randomnum == 3)
-            {
-                loro = new loroBarril(this, this.path, -50, 600, 'loroBarr') ;
+            else if (this.randomnum == 3) {
+                loro = new loroBarril(this, this.path, -50, 600, 'loroBarr');
             }
 
-            
-            
+
+
             this.enemies.add(loro);
             loro.startFollowing();
-            this.enemySpawnNum = this.enemySpawnNum  - 1;
+            this.enemySpawnNum = this.enemySpawnNum - 1;
         }
     }
 
