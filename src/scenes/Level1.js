@@ -18,13 +18,17 @@ export default class Level1 extends Phaser.Scene {
         this.shopMoney;
         this.levelMoney = 100;
         this.levelNum = 1;
-        this.playerHealth = 30;
-        this.enemySpawnNum = 20;
+        this.playerHealth = 100;
+        this.enemySpawnNum = 2;30
 
     }
 
     init(data) {
         this.shopMoney = data.shopMoney || 0;
+        this.levelMoney = 100;
+        this.levelNum = 1;
+        this.playerHealth = 30;
+        this.enemySpawnNum = 20;
     }
 
     preload() {
@@ -56,7 +60,7 @@ export default class Level1 extends Phaser.Scene {
             fontFamily: 'Arial Black',
             fontSize: '25px'
         })
-        
+
 
         // UI DE TORRES
         new TorreUI(this, 80, 100, 'torre', 50, Torre);
@@ -66,7 +70,7 @@ export default class Level1 extends Phaser.Scene {
 
         this.timedEvent = this.time.addEvent({
 
-            delay: 5000,
+            delay: Math.floor(Math.random()*3000 + 2000),
             loop: true,
             callback: this.crearEnemigos,
             callbackScope: this

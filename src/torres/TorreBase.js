@@ -115,7 +115,7 @@ export default class Torre extends Phaser.GameObjects.Image {
 
     shoot(enemy) {
         const dir = new Phaser.Math.Vector2(enemy.x - this.x, enemy.y - this.y).normalize();
-        const bullet = new Bullet(this.scene, this.x, this.y, 'bullet', 800, 50, dir, 750, false, true, 0, 0.1);
+        const bullet = new Bullet(this.scene, this.x, this.y, 'bullet', 1000, 20, dir, 750, false, true, 0, 0.1);
         bullet.setScale(0.2, 0.3);
         this.scene.bullets.add(bullet);
         return bullet;
