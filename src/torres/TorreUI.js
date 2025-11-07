@@ -9,7 +9,7 @@ export default class TorreUI extends Phaser.GameObjects.Image {
         this.TorreClase = TorreClase;//Clase que se va a colocar, se tendrá que importar con el js
 
         //Texto del precio
-        this.priceText = scene.add.text(this.x, this.y + 100, `Precio: ${this.cost}`, { fontSize: '20px', color: '#ffffff', fontStyle: 'bold' }).setOrigin(0.5);
+        this.priceText = scene.add.text(this.x, this.y + 100, `Precio: ${this.cost}`, { fontSize: '20px', color: '#ffffff', fontFamily: 'Arial Black' }).setOrigin(0.5);
 
 
         this.setInteractive({ draggable: true });

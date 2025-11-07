@@ -1,6 +1,6 @@
-export default class GameOverScene extends Phaser.Scene {
+export default class Win extends Phaser.Scene {
     constructor(){
-        super({key:"GameOverScene"});
+        super({key:"Win"});
     }
     
     preload(){
@@ -12,7 +12,7 @@ export default class GameOverScene extends Phaser.Scene {
     }
 
     create(){
-        this.add.text(350, 250,"GameOver", {
+        this.add.text(350, 250,"VICTORY!", {
             fontSize: '100px',
             fontFamily: 'Arial Black'
         });

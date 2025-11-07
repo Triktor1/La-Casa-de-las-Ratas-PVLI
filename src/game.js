@@ -8,6 +8,7 @@ import SelectScene from './scenes/SelectScene.js';
 import GameOverScene from './scenes/GameOverScene.js';
 import TestEnemyScene from './scenes/TestEnemyScene.js';
 import LevelClassTest from './scenes/LevelClassTest.js';
+import Win from './scenes/Win.js';
 
 let config = {
   type: Phaser.CANVAS,
@@ -29,7 +30,7 @@ let config = {
     },
     zoom: 1
   },
-  scene: [MainMenu, Level1, Level2, Level3, Shop, SelectScene, TutorialLevel, GameOverScene , LevelClassTest],
+  scene: [MainMenu, Level1, Level2, Level3, Shop, SelectScene, GameOverScene, Win, TutorialLevel , LevelClassTest],
 
       physics: {  
         default: 'arcade', 

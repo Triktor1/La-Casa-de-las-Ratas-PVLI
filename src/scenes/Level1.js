@@ -15,8 +15,8 @@ export default class Level1 extends Phaser.Scene {
         this.shopMoney;
         this.levelMoney = 100;
         this.levelNum = 1;
-        this.playerHealth = 100;
-        this.enemySpawnNum = 5;
+        this.playerHealth = 30;
+        this.enemySpawnNum = 20;
 
     }
 
@@ -37,10 +37,6 @@ export default class Level1 extends Phaser.Scene {
 
     }
 
-    preUpdate(t, dt) {
-        super.preUpdate(t, dt);
-    }
-
     create() {
         this.enemies = this.physics.add.group();
         this.crearFondo();
@@ -48,6 +44,16 @@ export default class Level1 extends Phaser.Scene {
         this.crearEnemigos();
         this.crearTorres();
         this.crearHuecos();
+        //UI
+        this.dineroText = this.add.text(200, 10, "Dinero: " + this.levelMoney, {
+            fontFamily: 'Arial Black',
+            fontSize: '25px'
+        });
+        this.vidaText = this.add.text(450 + 20, 10, "Vida: " + this.playerHealth, {
+            fontFamily: 'Arial Black',
+            fontSize: '25px'
+        })
+
         new TorreUI(this, 80, 100, 'torre', 50, Torre);
         //this.crearBotones();
         this.checkColisions();
@@ -62,7 +68,6 @@ export default class Level1 extends Phaser.Scene {
     }
 
     crearFondo() {
-        this.add.text(20, 20, "Level1");
         const bg = this.add.image(0, 0, 'background').setOrigin(0, 0).setScale(2);
         bg.displayHeight = this.scale.height;
         bg.displayWidth = this.scale.width;
@@ -224,10 +229,14 @@ export default class Level1 extends Phaser.Scene {
         this.torres.children.iterate(torre => {
             if (torre) torre.update(time);
         });
-
+        if (this.enemySpawnNum <= 0 && this.enemies.countActive() == 0) {
+            this.scene.start('Win');
+        }
         if (this.playerHealth <= 0) {
             this.scene.start('GameOverScene');
         }
+        this.dineroText.text = "Dinero: " + this.levelMoney;
+        this.vidaText.text = "Vida: " + this.playerHealth;
     }
 
     changePlayerHealth(amount) {
