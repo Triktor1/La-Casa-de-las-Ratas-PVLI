@@ -47,8 +47,16 @@ export default class Level1 extends Phaser.Scene {
         this.crearTorres();
         this.crearHuecos();
         new TorreUI(this, 80, 100, 'torre', 50, Torre);
-        this.crearBotones();
+        //this.crearBotones();
         this.checkColisions();
+
+        this.timedEvent = this.time.addEvent({
+
+            delay: 5000,
+            loop: true,
+            callback: this.crearEnemigos,
+            callbackScope: this
+        })
     }
 
     crearFondo() {
@@ -75,10 +83,15 @@ export default class Level1 extends Phaser.Scene {
     }
 
     crearEnemigos() {
-        this.enemies = this.physics.add.group();
-        let loro = new Loro(this, this.path, -50, 600, 10, 10, 100, 10, 'basicLoro', 'loro', 0);
-        this.enemies.add(loro);
-        loro.startFollowing();
+
+        if (this.enemySpawnNum > 0)
+        {
+            this.enemies = this.physics.add.group();
+            let loro = new Loro(this, this.path, -50, 600, 10, 10, 100, 10, 'basicLoro', 'loro', 0);
+            this.enemies.add(loro);
+            loro.startFollowing();
+            this.enemySpawnNum = this.enemySpawnNum  - 1;
+        }
     }
 
     crearTorres() {
@@ -195,7 +208,6 @@ export default class Level1 extends Phaser.Scene {
         if (this.playerHealth <= 0) {
             this.scene.start('GameOverScene');
         }
-        this.text.setText(`Event.progress: ${this.timedEvent.getProgress().toString().substr(0, 4)}`);
     }
 
     changePlayerHealth(amount) {
