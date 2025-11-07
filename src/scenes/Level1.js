@@ -3,6 +3,11 @@ import Torre from "../torres/TorreBase.js";
 import Bullet from "../bullets/bullet.js";
 import HuecoTorre from "../torres/HuecoTorre.js";
 import TorreUI from "../torres/TorreUI.js";
+import loroGrumete from "../enemies/loroGrumete.js";
+import loroBarril from "../enemies/loroBarril.js";
+import loroCanonero from "../enemies/loroCanonero.js";
+
+
 
 export default class Level1 extends Phaser.Scene {
     constructor() {
@@ -11,6 +16,7 @@ export default class Level1 extends Phaser.Scene {
         this.levelMoney = 100;
         this.levelNum = 1;
         this.playerHealth = 100;
+        this.enemySpawnNum = 5;
     }
 
     init(data) {
@@ -24,6 +30,10 @@ export default class Level1 extends Phaser.Scene {
         this.load.image('torre', 'assets/torre.png');
         this.load.image('background', 'assets/bg.png');
         this.load.image('bullet', 'assets/bullet.png');
+        this.load.image('loroGrum' , 'assets/GrumetePH.png');
+        this.load.image('loroCan' , 'assets/CanonPH.png');
+        this.load.image('loroBarr' , 'assets/BarrilPH.png');
+
     }
 
     preUpdate(t, dt) {
@@ -110,6 +120,15 @@ export default class Level1 extends Phaser.Scene {
         });
         shopBtn.on('pointerover', () => shopBtn.setScale(1.1));
         shopBtn.on('pointerout', () => shopBtn.setScale(1.0));
+
+        this.text = this.add.text(30,30)
+        this.timedEvent = this.time.addEvent({
+
+            delay: 5000,
+            loop: true,
+            callback: this.spawnEnemy,
+            callbackScope: this
+        })
     }
         */
 
@@ -176,6 +195,7 @@ export default class Level1 extends Phaser.Scene {
         if (this.playerHealth <= 0) {
             this.scene.start('GameOverScene');
         }
+        this.text.setText(`Event.progress: ${this.timedEvent.getProgress().toString().substr(0, 4)}`);
     }
 
     changePlayerHealth(amount) {
