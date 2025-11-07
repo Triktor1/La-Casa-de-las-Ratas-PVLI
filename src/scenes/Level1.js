@@ -23,6 +23,7 @@ export default class Level1 extends Phaser.Scene {
 
     }
 
+    
     init(data) {
         this.shopMoney = data.shopMoney || 0;
         this.levelMoney = 100;
