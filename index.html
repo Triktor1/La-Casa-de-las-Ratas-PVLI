@@ -25,7 +25,7 @@
       <h2 id="CasaDeLasRatasTitulo">La Casa de las Ratas</h2>
       <a href="https://static.nationalgeographicla.com/files/styles/image_3200/public/01-rat-friends-nationalgeographic_1162144.webp?w=1600&h=900"
         target="_blank">
-        <img src="./assets/CasaDeLasRatasLogoSmall.png" alt="LogoCasaDeLasRatas" draggable="false">
+        <img onclick="playSound('mouseSqueak')" src="./assets/CasaDeLasRatasLogoSmall.png" alt="LogoCasaDeLasRatas" draggable="false">
       </a>
     </div>
     <div class="RowList">
@@ -59,7 +59,7 @@
     </div>
 
     <script src="./src/game.js" type="module"></script>
-    <!--Aquí podriamos cargar los scripts, también se puede en el <body>, y pasa lo mismo que con el css de antes, en verdad aquí no estamos cargando nada-->
+    <script src="./src/web.js"></script>
 </body>
 
 </html>
