@@ -19,7 +19,7 @@ export default class Level1 extends Phaser.Scene {
         this.levelMoney = 100;
         this.levelNum = 1;
         this.playerHealth = 100;
-        this.enemySpawnNum = 2;30
+        this.enemySpawnNum = 30;
 
     }
 
@@ -29,6 +29,7 @@ export default class Level1 extends Phaser.Scene {
         this.levelNum = 1;
         this.playerHealth = 30;
         this.enemySpawnNum = 20;
+        this.enemySpawnNum = 30;
     }
 
     preload() {
@@ -70,7 +71,7 @@ export default class Level1 extends Phaser.Scene {
 
         this.timedEvent = this.time.addEvent({
 
-            delay: Math.floor(Math.random()*3000 + 2000),
+            delay: Math.floor(Math.random() * 3000 + 2000),
             loop: true,
             callback: this.crearEnemigos,
             callbackScope: this

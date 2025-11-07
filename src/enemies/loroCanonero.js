@@ -3,6 +3,6 @@ export default class LoroCanonero extends Loro
 {
         constructor(scene , path , x , y , texture = 'loro')
     {
-        super(scene , path , x , y , 5 , 10 , 70 , 5 , "Cañonero" , texture , 0)
+        super(scene , path , x , y , 5 , 10 , 80 , 5 , "Cañonero" , texture , 0)
     }
 }
