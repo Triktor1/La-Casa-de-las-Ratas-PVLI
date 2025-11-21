@@ -225,8 +225,7 @@ export default class Level1 extends Phaser.Scene {
         //colisioni original bala con loro
         this.physics.add.overlap(this.bullets, this.enemies, (bullet, enemy) => {
             if (bullet.teamRat && enemy instanceof Loro) {
-                enemy.getDamaged(bullet.damage);
-                if (!bullet.piercing) bullet.destroy(); //comprobar si es perforante
+                bullet.effectCollision(enemy);
             }
         });
     }
