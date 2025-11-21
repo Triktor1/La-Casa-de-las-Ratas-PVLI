@@ -29,4 +29,9 @@ export default class Bullet extends Phaser.GameObjects.Image {
         this.timeToLive -= delta;
         if (this.timeToLive <= 0) this.destroy();
     }
+
+    effectCollision(enemy) {
+        enemy.getDamaged(this.damage);
+        if (!this.piercing) this.destroy(); //comprobar si es perforante
+    }
 }

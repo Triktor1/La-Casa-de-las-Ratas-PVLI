@@ -23,6 +23,7 @@ export default class Level1 extends Phaser.Scene {
 
     }
 
+    
     init(data) {
         this.shopMoney = data.shopMoney || 0;
         this.levelMoney = 100;
@@ -37,8 +38,10 @@ export default class Level1 extends Phaser.Scene {
         this.load.image('selectButton', 'assets/lvlselectboton.png');
         this.load.image('shopButton', 'assets/shop.png');
         this.load.image('torre', 'assets/torre.png');
+        this.load.image('rataSilicona', 'assets/siliconeRat.png');
         this.load.image('background', 'assets/bg.png');
         this.load.image('bullet', 'assets/bullet.png');
+        this.load.image('siliconeBullet', 'assets/siliconeBullet.png');
         this.load.image('loroGrum', 'assets/GrumetePH.png');
         this.load.image('loroCan', 'assets/CanonPH.png');
         this.load.image('loroBarr', 'assets/BarrilPH.png');
@@ -65,7 +68,7 @@ export default class Level1 extends Phaser.Scene {
 
         // UI DE TORRES
         new TorreUI(this, 80, 100, 'torre', 50, Torre);
-        //new TorreUI(this, 240, 100, 'torre', 50, RataSilicona);
+        new TorreUI(this, 240, 100, 'torre', 50, RataSilicona);
         //this.crearBotones();
         this.checkColisions();
 
@@ -222,8 +225,7 @@ export default class Level1 extends Phaser.Scene {
         //colisioni original bala con loro
         this.physics.add.overlap(this.bullets, this.enemies, (bullet, enemy) => {
             if (bullet.teamRat && enemy instanceof Loro) {
-                enemy.getDamaged(bullet.damage);
-                if (!bullet.piercing) bullet.destroy(); //comprobar si es perforante
+                bullet.effectCollision(enemy);
             }
         });
     }
