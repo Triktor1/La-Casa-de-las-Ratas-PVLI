@@ -38,11 +38,32 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
     }
 
     getDamaged(damage) {
-        this.vida -= damage;
-        this.checkAlive();
-        console.log (`Vida restante: ${this.vida}`);
+        // Si no se comprueba esto, es posible que cuente su muerte mas de una vez si sufre daño tras haber muerto
+        if (this.vida > 0){
+            this.vida -= damage;
+            this.checkAlive();
+            console.log (`Vida restante: ${this.vida}`);
+        }
     }
 
+    getPoisoned(damage, ticks, interval) {
+        for (let i = 0; i < ticks; i++){
+            this.scene.time.addEvent({
+                delay: interval * (i + 1),
+                callback: () => {
+                    this.getDamaged(damage);
+                }
+            });
+        }
+
+    }
+
+    slowed(factor){
+        // hay que rehacer el metodo de movimiento para que esto funcione, pues actualmente no hace nada
+        this.speed *= factor;
+        
+
+    }
     checkAlive(reachedEnd = false) {
         if (reachedEnd) {
             this.scene.changePlayerHealth(-this.damage);
@@ -53,8 +74,8 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
             console.log(`${this.nombre} ha muerto`);
             this.scene.changeLevelMoney(this.moneyDrop); //esto da problemas por ahora
             this.scene.writeLevelMoney();
-            this.destroy();
             this.stopFollow();
+            this.destroy();
         }
       
     }

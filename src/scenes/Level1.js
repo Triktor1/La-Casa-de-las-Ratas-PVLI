@@ -2,6 +2,7 @@ import Loro from "../enemies/loro.js";
 
 import Torre from "../torres/TorreBase.js";
 import RataSilicona from "../torres/RataSilicona.js";
+import RataJeringa from "../torres/RataJeringa.js";
 
 import Bullet from "../bullets/bullet.js";
 import HuecoTorre from "../torres/HuecoTorre.js";
@@ -9,6 +10,7 @@ import TorreUI from "../torres/TorreUI.js";
 import loroGrumete from "../enemies/loroGrumete.js";
 import loroBarril from "../enemies/loroBarril.js";
 import loroCanonero from "../enemies/loroCanonero.js";
+
 
 
 
@@ -69,6 +71,7 @@ export default class Level1 extends Phaser.Scene {
         // UI DE TORRES
         new TorreUI(this, 80, 100, 'torre', 50, Torre);
         new TorreUI(this, 240, 100, 'torre', 50, RataSilicona);
+        new TorreUI(this, 400, 100, 'torre', 50, RataJeringa);
         //this.crearBotones();
         this.checkColisions();
 
@@ -133,7 +136,7 @@ export default class Level1 extends Phaser.Scene {
         }
     }
 
-    crearTorres() {
+    crearTorres() { 
         this.torres = this.physics.add.group();
         //let torreBase = new Torre(this, 500, 200, 0, 10, "basictorre", "torre");
         //this.torres.add(torreBase);
@@ -142,6 +145,7 @@ export default class Level1 extends Phaser.Scene {
         this.Bullet = Bullet;
     }
 
+    //HUECOS DONDE SE COLOCAL LAS TORRES
     crearHuecos() {
         this.huecosTorre = [
             new HuecoTorre(this, 400, 600, 'torre'),
@@ -212,17 +216,7 @@ export default class Level1 extends Phaser.Scene {
         
         }) */
 
-        //colision bala con loro
-        /* this.physics.add.overlap(this.bullets, this.enemies, (bullet, enemy) => {
-            if (!bullet.active || !enemy.active) return;
-
-            enemy.getDamaged(bullet.damage);
-            enemy.checkAlive();
-
-            if (!bullet.piercing) bullet.destroy();
-        });
- */
-        //colisioni original bala con loro
+        //COLISION DE LAS BALAS CON LOS LOROS
         this.physics.add.overlap(this.bullets, this.enemies, (bullet, enemy) => {
             if (bullet.teamRat && enemy instanceof Loro) {
                 bullet.effectCollision(enemy);
