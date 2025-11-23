@@ -10,7 +10,8 @@ export default class JeringaBullet extends Bullet {
     }
         //SOBREESCRITURA DEL METODO DE COLISION DE LA CLASE BASE BULLET
     effectCollision(enemy){
-        enemy.getPoisoned(this.damage, this.ticks, this.interval, this.type); //EN VEZ DE DAÑAR DE UNA, APLICA VENENO
+        enemy.getDamaged(this.damage, this.type);
+        enemy.getPoisoned(this.damage, this.ticks - 1, this.interval, this.type); //EN VEZ DE DAÑAR DE UNA, APLICA VENENO
         if (!this.piercing) this.destroy(); //comprobar si es perforante
     }
 

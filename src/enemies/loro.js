@@ -4,7 +4,7 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
         super(scene, path, x, y, texture, frame) //constructora  pathfollower
         this.scene = scene;
         this.scene.add.existing(this);
-        
+
         //Atributos loro
         this.nombre = loroname;
         this.damage = damage;
@@ -13,8 +13,6 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
         this.type = type; // ESTE ES EL TIPO DE LORO, SERA CLASIFICADO COMO R,B,G.   R critico a G, G critico a B, B critico a R
         this.moneyDrop = moneyDrop;
         this.setScale(0.5);
-
-
     }
 
     create() {
@@ -41,17 +39,27 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
     }
 
     getDamaged(damage, bulletType) {
-        // Si no se comprueba esto, es posible que cuente su muerte mas de una vez si sufre daño tras haber muerto
+        // Si no se comprueba esto, es posible que cuente su muerte mas de una vez si sufre daño tras haber muertoi
         if (this.vida > 0){
             //comprobamos si el daño es critico
             if ((this.type == "G" && bulletType == "R") || (this.type == "R" && bulletType == "B") || (this.type == "B" && bulletType == "G")) {
+                this.setAlpha(0.2);
                 this.vida -= 2*damage;
                 console.log("CRITICO");
             }
             else {
+                this.setAlpha(0.75);
                 this.vida -= damage;
             }
-            //una vez hecho el daño, comprobamos si esta vivo
+            //una vez hecho el daño, comprobamos si esta vivo y quitamos la transparencia
+            if (this.active){
+                this.scene.time.addEvent({
+                    delay : 200,
+                    callback: () => {
+                        this.setAlpha(1);
+                    }
+                })
+            }
             this.checkAlive();
             console.log (`Vida restante: ${this.vida}`);
         }
@@ -59,14 +67,16 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
 
     getPoisoned(damage, ticks, interval, bulletType) {
         for (let i = 0; i < ticks; i++){
-            this.scene.time.addEvent({
-                delay: interval * (i + 1),
-                callback: () => {
-                    if (this.active){ //para asegurarse de que el loro está vivo
-                    this.getDamaged(damage, bulletType);
+            if (this.active){ //para asegurarse de que el loro está vivo
+                this.scene.time.addEvent({
+                    delay: interval * (i + 1),
+                    callback: () => {
+
+                        this.getDamaged(damage, bulletType);
+                        
                     }
-                }
-            });
+                })
+            }
         }
     }
 
@@ -106,7 +116,7 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
         }
         else if (this.vida <= 0) {
             console.log(`${this.nombre} ha muerto`);
-            this.scene.changeLevelMoney(this.moneyDrop); //esto da problemas por ahora
+            if (this.active) this.scene.changeLevelMoney(this.moneyDrop); //esto da problemas por ahora
             this.scene.writeLevelMoney();
             this.stopFollow();
             this.destroy();
