@@ -116,7 +116,7 @@ export default class Level1 extends Phaser.Scene {
             let loro;
 
             if (this.randomnum == 0) {
-                loro = new Loro(this, this.path, -50, 600, 10, 10, 100, 10, 'basicLoro', 'loro', 0);
+                loro = new Loro(this, this.path, -50, 600, 10, 10, 100,"G", 10, 'basicLoro', 'loro', 0);
             }
             else if (this.randomnum == 1) {
                 loro = new loroCanonero(this, this.path, -50, 600, 'loroCan')

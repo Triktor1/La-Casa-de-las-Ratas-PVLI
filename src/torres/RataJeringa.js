@@ -8,7 +8,7 @@ export default class RataJeringa extends Torre{
 
 shoot(enemy) {
     const dir = new Phaser.Math.Vector2(enemy.x - this.x, enemy.y - this.y).normalize();
-    const bullet = new JeringaBullet(this.scene, this.x, this.y, 'jeringaBullet', 800, this.damage, dir, 750, false, true, 0, "", 0.2, 0);
+    const bullet = new JeringaBullet(this.scene, this.x, this.y, 'jeringaBullet', 800, this.damage, dir, 750, false, true, 0, "G", 0.2, 0);
     this.scene.bullets.add(bullet);
     return bullet;
 }

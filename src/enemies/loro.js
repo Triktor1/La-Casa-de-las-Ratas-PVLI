@@ -1,6 +1,6 @@
 export default class Loro extends Phaser.GameObjects.PathFollower {
 
-    constructor(scene, path, x = 0, y = 0, speed = 15, damage = 10, vida = 100, moneyDrop, loroname, texture = "loro", frame = 0) {
+    constructor(scene, path, x = 0, y = 0, speed = 15, damage = 10, vida = 100, type, moneyDrop, loroname, texture = "loro", frame = 0) {
         super(scene, path, x, y, texture, frame) //constructora  pathfollower
         this.scene = scene;
         this.scene.add.existing(this);
@@ -10,8 +10,11 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
         this.damage = damage;
         this.speed = speed;
         this.vida = vida;
+        this.type = type; // ESTE ES EL TIPO DE LORO, SERA CLASIFICADO COMO R,B,G.   R critico a G, G critico a B, B critico a R
         this.moneyDrop = moneyDrop;
         this.setScale(0.5);
+
+
     }
 
     create() {
@@ -37,25 +40,34 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
         }
     }
 
-    getDamaged(damage) {
+    getDamaged(damage, bulletType) {
         // Si no se comprueba esto, es posible que cuente su muerte mas de una vez si sufre daño tras haber muerto
         if (this.vida > 0){
-            this.vida -= damage;
+            //comprobamos si el daño es critico
+            if ((this.type == "G" && bulletType == "R") || (this.type == "R" && bulletType == "B") || (this.type == "B" && bulletType == "G")) {
+                this.vida -= 2*damage;
+                console.log("CRITICO");
+            }
+            else {
+                this.vida -= damage;
+            }
+            //una vez hecho el daño, comprobamos si esta vivo
             this.checkAlive();
             console.log (`Vida restante: ${this.vida}`);
         }
     }
 
-    getPoisoned(damage, ticks, interval) {
+    getPoisoned(damage, ticks, interval, bulletType) {
         for (let i = 0; i < ticks; i++){
             this.scene.time.addEvent({
                 delay: interval * (i + 1),
                 callback: () => {
-                    this.getDamaged(damage);
+                    if (this.active){ //para asegurarse de que el loro está vivo
+                    this.getDamaged(damage, bulletType);
+                    }
                 }
             });
         }
-
     }
 
     //Aplica lentitud al enemigo
@@ -68,17 +80,19 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
         this.data.elapsed = this.current * this.data.duration; 
 
         //Se pasa el efecto
-        this.scene.time.addEvent({
-            delay: time,
-            callback: () => {
-                if (this.active){ //para asegurarse de que el loro está vivo
-                    this.current = this.data.current;
-                    // el 40k es el tiempo en milisegundos que tarda en recorrerlo, numero magico igual habria que corregirlo
-                    this.data.duration = 40000 / this.speed;  
-                    this.data.elapsed = this.current * this.data.duration; 
-                } 
-            }
-        });
+        if (this.active){
+            this.scene.time.addEvent({
+                delay: time,
+                callback: () => {
+                    if (this.active && this.data){ //para asegurarse de que el loro está vivo
+                        this.current = this.data.current;
+                        // el 40k es el tiempo en milisegundos que tarda en recorrerlo, numero magico igual habria que corregirlo
+                        this.data.duration = 40000 / this.speed;  
+                        this.data.elapsed = this.current * this.data.duration; 
+                    } 
+                }
+            });
+        }
     }
 
 
