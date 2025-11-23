@@ -43,15 +43,34 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
         if (this.vida > 0){
             //comprobamos si el daño es critico
             if ((this.type == "G" && bulletType == "R") || (this.type == "R" && bulletType == "B") || (this.type == "B" && bulletType == "G")) {
-                this.setAlpha(0.2);
+
+                // TEÑIR EL SPRITE DE ROJO:
+                //  aqui es donde se debería teñir de rojo el sprite, pero no lo hace:
+                this.setTint(0xffff0000);
+                //  tampoco se tiñe con setTintFill. Deberia teñirse brevemente y volver a la normalidad después
+                //  Para comprobar si se tiñe:
+                /*   1 Abrir el juego y hacer click en el botón superior de "start"
+                     2 Arrastrar con click izquierdo y mantener cualquiera de las torres de la esquina superior izq a una de las torres
+                        transparentes del tablero, entonces soltar. Esto colocara la torre que atacará a los loros
+                     3 cuando estas torres disparen a los loros, observar si se tiñen de rojo
+            */
+                
+                //this.setAlpha(0.2);
                 this.vida -= 2*damage;
                 console.log("CRITICO");
             }
+            
             else {
-                this.setAlpha(0.75);
+                // CAMBIAR EL ALPHA ES DE PRUEBA HASTA QUE FUNCIONE EL TEÑIDO
+                //  this.setTint(0xffff0000);
+                //this.setAlpha(0.75);
                 this.vida -= damage;
             }
+            
+
+
             //una vez hecho el daño, comprobamos si esta vivo y quitamos la transparencia
+            /* placeholder que vuelve opaco el loro, temporal hasta que funcione el teñido
             if (this.active){
                 this.scene.time.addEvent({
                     delay : 200,
@@ -60,6 +79,7 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
                     }
                 })
             }
+            */
             this.checkAlive();
             console.log (`Vida restante: ${this.vida}`);
         }
