@@ -12,6 +12,7 @@ export default class MainMenu extends Phaser.Scene {
 
     preload() {
         this.load.image('startButton', 'assets/start.png'); // Botón de start
+        this.load.image('galleryButton', 'assets/start.png'); // Botón de sgalería (placeholder)
     }
 
     preUpdate(t, dt) {
@@ -26,12 +27,22 @@ export default class MainMenu extends Phaser.Scene {
         this.add.text(225, 200, "Filthy Feathers", {
             fontSize: '100px',
             fontFamily: 'Arial Black'
-        }); const startBtn = this.add.sprite(this.sys.game.canvas.width * 0.5, this.sys.game.canvas.height * 0.7, 'startButton').setInteractive({ useHandCursor: true });
+        });
+
+        //Configuración del botón Start
+        const startBtn = this.add.sprite(this.sys.game.canvas.width * 0.5, this.sys.game.canvas.height * 0.6, 'startButton').setInteractive({ useHandCursor: true }).setScale(0.7);
         startBtn.on('pointerdown', () => {
-            //this.scene.start(keyScene, {sceneName: "Class Level Test" , playerInfo: this.playerInfo , nextLevel: 1});
             this.scene.start("Level1");
         });
-        startBtn.on('pointerover', () => startBtn.setScale(1.1));
-        startBtn.on('pointerout', () => startBtn.setScale(1.0));
+        startBtn.on('pointerover', () => startBtn.setScale(0.8));
+        startBtn.on('pointerout', () => startBtn.setScale(0.7));
+
+        //Configuración del botón Gallery
+        const galleryBtn = this.add.sprite(this.sys.game.canvas.width * 0.5, this.sys.game.canvas.height * 0.8, 'galleryButton').setInteractive({ useHandCursor: true }).setScale(0.7);
+        galleryBtn.on('pointerdown', () => {
+            this.scene.start("Gallery");
+        });
+        galleryBtn.on('pointerover', () => galleryBtn.setScale(0.8));
+        galleryBtn.on('pointerout', () => galleryBtn.setScale(0.7));
     }
 }

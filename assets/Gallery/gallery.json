@@ -1,0 +1,18 @@
+{
+    "imagenes": [
+        {
+            "id": "img1",
+            "archivo": "RataWorld9.png",
+            "nombre": "Rata rupestre",
+            "autor": "WorldNine-NINETENDO",
+            "descripcion": "Una fiel recreación de los retratos de nuestras ratas ancestras. Esta rata parece estar sujetando un trozo de queso, reliquia muy valiosa y escasa en tiempos ancestrales."
+        },
+        {
+            "id": "img2",
+            "archivo": "CasaDeLasRatasLogoBeta.jpeg",
+            "nombre": "Sketch de logo",
+            "autor": "La Casa de las Ratas",
+            "descripcion": "Uno de los logos rechazados de La Casa de las Ratas. Fue el primero que propusimos, pero finalmente decidimos decantarnos por nuestro logo actual.\nQué tonta la rata. Me encanta."
+        }
+    ]
+}

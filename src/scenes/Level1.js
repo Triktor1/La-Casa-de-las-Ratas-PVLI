@@ -25,8 +25,9 @@ export default class Level1 extends Phaser.Scene {
 
     }
 
-    
+
     init(data) {
+        //Inicialización de variables principales
         this.shopMoney = data.shopMoney || 0;
         this.levelMoney = 100;
         this.levelNum = 1;
@@ -36,6 +37,7 @@ export default class Level1 extends Phaser.Scene {
     }
 
     preload() {
+        //Carga de imágenes
         this.load.image('loro', 'assets/ParrotPlaceholder.png');
         this.load.image('selectButton', 'assets/lvlselectboton.png');
         this.load.image('shopButton', 'assets/shop.png');
@@ -51,6 +53,7 @@ export default class Level1 extends Phaser.Scene {
     }
 
     create() {
+        //Creación de elementos del nivel
         this.enemies = this.physics.add.group();
         this.crearFondo();
         this.crearCamino();
@@ -136,7 +139,7 @@ export default class Level1 extends Phaser.Scene {
         }
     }
 
-    crearTorres() { 
+    crearTorres() {
         this.torres = this.physics.add.group();
         //let torreBase = new Torre(this, 500, 200, 0, 10, "basictorre", "torre");
         //this.torres.add(torreBase);
@@ -154,68 +157,7 @@ export default class Level1 extends Phaser.Scene {
         ];
     }
 
-    //Habría que hacer un bucle con todas las disponibles y que se vayan colocando: (UI TORREs)
-    //new TorreUI(this, 80, 100, 'torre', 50, TorreClase);
-
-
-
-    //BOTONES
-    //Seleccion de niveles
-    /*
-    crearBotones() {
-        const selectBtn = this.add.sprite(this.sys.game.canvas.width * 0.25, this.sys.game.canvas.height * 0.7, 'selectButton').setInteractive({ useHandCursor: true });
-        selectBtn.on('pointerdown', () => {
-            this.scene.start('SelectScene');
-        });
-        selectBtn.on('pointerover', () => selectBtn.setScale(1.1));
-        selectBtn.on('pointerout', () => selectBtn.setScale(1.0));
-
-        const shopBtn = this.add.sprite(this.sys.game.canvas.width * 0.8, this.sys.game.canvas.height * 0.7, 'shopButton').setInteractive({ useHandCursor: true });
-        shopBtn.on('pointerdown', () => {
-            this.scene.start('Shop');
-        });
-        shopBtn.on('pointerover', () => shopBtn.setScale(1.1));
-        shopBtn.on('pointerout', () => shopBtn.setScale(1.0));
-
-        this.text = this.add.text(30,30)
-        this.timedEvent = this.time.addEvent({
-
-            delay: 5000,
-            loop: true,
-            callback: this.spawnEnemy,
-            callbackScope: this
-        })
-    }
-        */
-
-
     checkColisions() {
-        //estas colisiones fueron las que hice cuando simplemente estaba la torre ahi puesta
-        //por eso tanto rollo.
-        //Disparo desde torre
-        /* this.torres.children.iterate(torre => {
-            if(!torre) return; 
-
-            this.physics.add.overlap(torre, this.enemies, (range, enemy) => {
-            if (!enemy.isBeingTarget) {
-                enemy.isBeingTarget = true;
-                const bullet = torre.shoot(enemy); // ahora sí existe la variable
-                console.log(`${enemy.nombre} esta siendo atacado`);
-            }
-        }); 
- 
-        
-        //Deteccion enemigo con rango torre
-        this.physics.add.overlap(torre.rangeCircle, this.enemies, (range, enemy) => {
-            const torre = range.parentTorre;
-            if (!torre.currentTarget && enemy.active) {
-                torre.currentTarget = enemy;
-                console.log(`${enemy.nombre} ha entrado en el rango de ${torre.nombre}`);
-            }
-        });
-        
-        }) */
-
         //COLISION DE LAS BALAS CON LOS LOROS
         this.physics.add.overlap(this.bullets, this.enemies, (bullet, enemy) => {
             if (bullet.teamRat && enemy instanceof Loro) {
