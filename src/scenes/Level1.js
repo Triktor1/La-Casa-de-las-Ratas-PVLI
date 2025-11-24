@@ -3,6 +3,8 @@ import Loro from "../enemies/loro.js";
 import Torre from "../torres/TorreBase.js";
 import RataSilicona from "../torres/RataSilicona.js";
 import RataJeringa from "../torres/RataJeringa.js";
+import RataGorda from "../torres/RataGorda.js";
+import RataManguera from "../torres/RataManguera.js";
 
 import Bullet from "../bullets/bullet.js";
 import HuecoTorre from "../torres/HuecoTorre.js";
@@ -43,9 +45,12 @@ export default class Level1 extends Phaser.Scene {
         this.load.image('shopButton', 'assets/UI/shop.png');
         this.load.image('torre', 'assets/Ratas/torre.png');
         this.load.image('rataSilicona', 'assets/Ratas/siliconeRat.png');
+        this.load.image('BigCheese', 'assets/Ratas/BigCheese.png');
+        this.load.image('rataManguera', 'assets/Ratas/RataManguera.jpg');
         this.load.image('background', 'assets/bg.png');
         this.load.image('bullet', 'assets/Ratas/bullet.png');
         this.load.image('siliconeBullet', 'assets/Ratas/siliconeBullet.png');
+        this.load.image('FatBullet', 'assets/Ratas/FatBullet.png');
         this.load.image('loroGrum', 'assets/Loros/GrumetePH.png');
         this.load.image('loroCan', 'assets/Loros/CanonPH.png');
         this.load.image('loroBarr', 'assets/Loros/BarrilPH.png');
@@ -77,6 +82,9 @@ export default class Level1 extends Phaser.Scene {
         new TorreUI(this, 80, 100, 'torre', 50, Torre);
         new TorreUI(this, 240, 100, 'torre', 50, RataSilicona);
         new TorreUI(this, 400, 100, 'torre', 50, RataJeringa);
+        new TorreUI(this, 560, 100, 'torre', 50, RataGorda);
+        new TorreUI(this, 720, 100, 'torre', 50, RataManguera);
+
         //this.crearBotones();
         this.checkColisions();
 
@@ -155,7 +163,7 @@ export default class Level1 extends Phaser.Scene {
         this.huecosTorre = [
             new HuecoTorre(this, 400, 600, 'torre'),
             new HuecoTorre(this, 800, 100, 'torre'),
-            new HuecoTorre(this, 900, 470, 'torre')
+            new HuecoTorre(this, 900, 470, 'torre'),
         ];
     }
 
