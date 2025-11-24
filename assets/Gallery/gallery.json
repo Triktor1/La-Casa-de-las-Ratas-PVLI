@@ -33,7 +33,7 @@
             "archivo": "Peroquecojonestio.png",
             "nombre": "Primer ataque",
             "autor": "La Casa de las Ratas",
-            "descripcion": "Momento del primer asalto aviár por parte de los loros a las cloacas. En ella podemos contemplar una de las ratas algo confusa ante la repentina invasión. Se dice que la rata que tomó la foto está actualmente en trauma, desgarrada por la tragedia"
+            "descripcion": "Momento del primer asalto aviár por parte de los loros a las cloacas. En ella podemos contemplar una de las ratas algo confusa ante la repentina invasión. Se dice que la rata que tomó la foto está actualmente en trauma, desgarrada por la tragedia."
         },
         {
             "id": "img6",
@@ -54,7 +54,7 @@
             "archivo": "Lo siento mucho.png",
             "nombre": "Enemies to lovers",
             "autor": "La Casa de las Ratas",
-            "descripcion": "Mavarilloso"
+            "descripcion": "VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI "
         },
         {
             "id": "img9",
@@ -62,6 +62,13 @@
             "nombre": "Rey Rata",
             "autor": "La Casa de las Ratas",
             "descripcion": "EL REY DE LAS RATASH? ES EN SERIO?"
+        },
+        {
+            "id": "img10",
+            "archivo": "retratoreyrata.png",
+            "nombre": "Rey Ratoncio I",
+            "autor": "Canibalismo Galletil",
+            "descripcion": "EL REY DE LAS RATASH? Pues ya no, "
         }
     ]
 }
