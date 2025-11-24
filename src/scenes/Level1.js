@@ -40,6 +40,16 @@ export default class Level1 extends Phaser.Scene {
 
     preload() {
         //Carga de imágenes
+
+
+        
+        this.load.json('L1Data' , 'src/scenes/LevelJsons/Level1.json');
+        this.load.json('L2Data' , 'src/scenes/LevelJsons/Level2.json');
+        this.load.json('L3Data' , 'src/scenes/LevelJsons/Level3.json');
+
+        this.levelArray = ['L1Data' , 'L2Data' , 'L3Data'];
+
+
         this.load.image('loro', 'assets/Loros/ParrotPlaceholder.png');
         this.load.image('selectButton', 'assets/UI/lvlselectboton.png');
         this.load.image('shopButton', 'assets/UI/shop.png');
@@ -60,6 +70,12 @@ export default class Level1 extends Phaser.Scene {
     }
 
     create() {
+
+        
+        this.jsonData = this.cache.json.get(this.levelArray[1]).Name;
+
+
+
         //Creación de elementos del nivel
         this.enemies = this.physics.add.group();
         this.crearFondo();
@@ -76,6 +92,8 @@ export default class Level1 extends Phaser.Scene {
             fontFamily: 'Arial Black',
             fontSize: '25px'
         })
+        this.jsonTextLevel = this.add.text(700 , 10, "Nivel" + this.jsonData);
+
 
 
         // UI DE TORRES
