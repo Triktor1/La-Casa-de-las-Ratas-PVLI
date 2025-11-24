@@ -52,7 +52,7 @@ export default class Gallery extends Phaser.Scene {
                 ease: 'Expo.easeIn',
             }));
         backBtn.on('pointerout', () =>
-            this.tweens.add({
+            this.volverBack = this.tweens.add({
                 targets: backBtn,
                 scale: 0.4,
                 rotation: 0,
@@ -69,29 +69,34 @@ export default class Gallery extends Phaser.Scene {
         this.flechaDer.flipX = true;
 
         //Tweens con hover de los botones de flechas
+        const originalXIzq = this.flechaIzqX;
         this.tweens.killTweensOf(this.flechaIzq);
+        this.flechaIzq.x = originalXIzq;
         this.flechaIzq.on('pointerover', () => this.tweens.add({
             targets: this.flechaIzq,
-            x: this.flechaIzq.x - 8,
+            x: originalXIzq - 8,
             duration: 70,
             ease: 'Linear',
         }));
         this.flechaIzq.on('pointerout', () => this.tweens.add({
             targets: this.flechaIzq,
-            x: this.flechaIzq.x + 8,
+            x: originalXIzq + 8,
             duration: 70,
             ease: 'Linear',
         }));
+        const originalXDer = this.flechaDerX;
         this.tweens.killTweensOf(this.flechaDer);
+        this.flechaDer.x = originalXDer;
         this.flechaDer.on('pointerover', () => this.tweens.add({
             targets: this.flechaDer,
-            x: this.flechaDer.x + 8,
+            x: originalXDer + 8,
             duration: 70,
             ease: 'Linear',
         }));
+
         this.flechaDer.on('pointerout', () => this.tweens.add({
             targets: this.flechaDer,
-            x: this.flechaDer.x - 8,
+            x: originalXDer - 8,
             duration: 70,
             ease: 'Linear',
         }));
