@@ -13,7 +13,7 @@ export default class Gallery extends Phaser.Scene {
 
         //Carga de imágenes (aparte de las de la galería)
         this.load.image('flecha', 'assets/UI/FlechaGaleria.png');
-        this.load.image('backButton', 'assets/start.png'); // Botón de galería (placeholder)
+        this.load.image('backButton', 'assets/backbutton.png'); // Botón de galería (placeholder)
     }
 
     preUpdate(t, dt) {
@@ -37,12 +37,28 @@ export default class Gallery extends Phaser.Scene {
         }).setOrigin(0.5, 0.5);
 
         //Configuración del botón de volver
-        const galleryBtn = this.add.sprite(this.sys.game.canvas.width * 0.07, this.sys.game.canvas.height * 0.92, 'backButton').setInteractive({ useHandCursor: true }).setScale(0.4);
+        const galleryBtn = this.add.sprite(this.sys.game.canvas.width * 0.08, this.sys.game.canvas.height * 0.92, 'backButton').setInteractive({ useHandCursor: true }).setScale(0.4);
         galleryBtn.on('pointerdown', () => {
             this.scene.start("MainMenu");
         });
-        galleryBtn.on('pointerover', () => galleryBtn.setScale(0.45));
-        galleryBtn.on('pointerout', () => galleryBtn.setScale(0.4));
+
+        //Tweens con hover del botón de volver
+        galleryBtn.on('pointerover', () =>
+            this.tweens.add({
+                targets: galleryBtn,
+                scale: 0.45,
+                rotation: -0.125,
+                duration: 150,
+                ease: 'Expo.easeIn',
+            }));
+        galleryBtn.on('pointerout', () =>
+            this.tweens.add({
+                targets: galleryBtn,
+                scale: 0.4,
+                rotation: 0,
+                duration: 70,
+                ease: 'Linear',
+            }));
 
         //Botones de flechas
         this.flechaIzqX = this.sys.game.canvas.width * 0.06;
@@ -51,6 +67,35 @@ export default class Gallery extends Phaser.Scene {
         this.flechaDerX = this.sys.game.canvas.width * 0.94;
         this.flechaDer = this.add.sprite(this.sys.game.canvas.width * 0.94, this.sys.game.canvas.height * 0.5, 'flecha').setInteractive({ useHandCursor: true }).setScale(0.8);
         this.flechaDer.flipX = true;
+
+        //Tweens con hover de los botones de flechas
+        this.tweens.killTweensOf(this.flechaIzq);
+        this.flechaIzq.on('pointerover', () => this.tweens.add({
+            targets: this.flechaIzq,
+            x: this.flechaIzq.x - 8,
+            duration: 70,
+            ease: 'Linear',
+        }));
+        this.flechaIzq.on('pointerout', () => this.tweens.add({
+            targets: this.flechaIzq,
+            x: this.flechaIzq.x + 8,
+            duration: 70,
+            ease: 'Linear',
+        }));
+        this.tweens.killTweensOf(this.flechaDer);
+        this.flechaDer.on('pointerover', () => this.tweens.add({
+            targets: this.flechaDer,
+            x: this.flechaDer.x + 8,
+            duration: 70,
+            ease: 'Linear',
+        }));
+        this.flechaDer.on('pointerout', () => this.tweens.add({
+            targets: this.flechaDer,
+            x: this.flechaDer.x - 8,
+            duration: 70,
+            ease: 'Linear',
+        }));
+
 
         //Cambio el índice para que cambie de imagen, loopeando si llega a un extremo (haciendo clic en las flechas de la pantalla)
         this.flechaIzq.on('pointerdown', () => {
@@ -89,7 +134,8 @@ export default class Gallery extends Phaser.Scene {
         this.flechaIzq.x = originalX;
         this.tweens.add({
             targets: this.flechaIzq,
-            x: originalX - 10,
+            x: originalX - 30,
+            scale: 0.9,
             duration: 100,
             ease: 'Linear',
             onComplete: () => {
@@ -97,6 +143,7 @@ export default class Gallery extends Phaser.Scene {
                 this.tweens.add({
                     targets: this.flechaIzq,
                     x: originalX,
+                    scale: 0.8,
                     duration: 100,
                     ease: 'Linear'
                 });
@@ -115,7 +162,8 @@ export default class Gallery extends Phaser.Scene {
         this.flechaDer.x = originalX;
         this.tweens.add({
             targets: this.flechaDer,
-            x: originalX + 10,
+            x: originalX + 30,
+            scale: 0.9,
             duration: 100,
             ease: 'Linear',
             onComplete: () => {
@@ -123,6 +171,7 @@ export default class Gallery extends Phaser.Scene {
                 this.tweens.add({
                     targets: this.flechaDer,
                     x: originalX,
+                    scale: 0.8,
                     duration: 100,
                     ease: 'Linear'
                 });
@@ -152,7 +201,7 @@ export default class Gallery extends Phaser.Scene {
         if (this.indexNum) this.indexNum.destroy();
 
         //Creo unas dimensiones máximas para la imagen, como metíendola en una "caja"
-        const sizeX = 650, sizeY = 500, posX = 80, posY = 120;
+        const sizeX = 500, sizeY = 500, posX = 165, posY = 120;
         const texture = this.textures.get(img.id);
         const frame = texture.getSourceImage();
         let imgScale = Math.min(sizeX / frame.width, sizeY / frame.height)
@@ -179,8 +228,16 @@ export default class Gallery extends Phaser.Scene {
 
         //Contador de número de obras en la galería
         this.indexNumText;
-        if (this.index < 9) this.indexNumText = `0${this.index + 1}/${this.gallery.length}`;
-        else this.indexNumText = `${this.index + 1}/${this.gallery.length}`;
+        if (this.index < 9) {
+            this.indexNumText = `0${this.index + 1}/`;
+        }
+        else {
+            this.indexNumText = `${this.index + 1}/`;
+        }
+        if (this.gallery.length < 9) {
+            this.indexNumText += '0';
+        }
+        this.indexNumText += this.gallery.length;
 
         const indexNumX = 40, indexNumY = 120;
         this.indexNum = this.add.text(indexNumX, indexNumY, this.indexNumText, {
