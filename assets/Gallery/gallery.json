@@ -13,6 +13,20 @@
             "nombre": "Sketch de logo",
             "autor": "La Casa de las Ratas",
             "descripcion": "Uno de los logos rechazados de La Casa de las Ratas. Fue el primero que propusimos, pero finalmente decidimos decantarnos por nuestro logo actual.\nQué tonta la rata. Me encanta."
+        },
+        {
+            "id": "img3",
+            "archivo": "Perro-Rata.png",
+            "nombre": "Perro-rata",
+            "autor": "Víctor Valenzuela",
+            "descripcion": "hola"
+        },
+        {
+            "id": "img4",
+            "archivo": "LoroPirataToni.png",
+            "nombre": "Loro pirata",
+            "autor": "Toni",
+            "descripcion": ""
         }
     ]
 }
