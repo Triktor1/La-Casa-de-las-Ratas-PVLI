@@ -11,8 +11,8 @@ export default class MainMenu extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('startButton', 'assets/start.png'); // Botón de start
-        this.load.image('galleryButton', 'assets/gallery.png'); // Botón de galería (placeholder)
+        this.load.image('startButton', 'assets/UI/start.png'); // Botón de start
+        this.load.image('galleryButton', 'assets/UI/gallery.png'); // Botón de galería (placeholder)
     }
 
     preUpdate(t, dt) {

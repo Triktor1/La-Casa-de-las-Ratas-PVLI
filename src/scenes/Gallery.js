@@ -13,7 +13,7 @@ export default class Gallery extends Phaser.Scene {
 
         //Carga de imágenes (aparte de las de la galería)
         this.load.image('flecha', 'assets/UI/FlechaGaleria.png');
-        this.load.image('backButton', 'assets/backbutton.png'); // Botón de galería (placeholder)
+        this.load.image('backButton', 'assets/UI/backbutton.png'); // Botón de galería (placeholder)
     }
 
     preUpdate(t, dt) {

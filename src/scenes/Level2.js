@@ -10,8 +10,8 @@ export default class Level2 extends Phaser.Scene {
     }
     
     preload(){
-        this.load.image('selectButton', 'assets/selectBt.png'); 
-        this.load.image('shopButton', 'assets/shop.png')
+        this.load.image('selectButton', 'assets/UI/selectBt.png'); 
+        this.load.image('shopButton', 'assets/UI/shop.png')
     }
 
     preUpdate(t, dt){

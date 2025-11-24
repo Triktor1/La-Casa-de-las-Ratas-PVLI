@@ -4,7 +4,7 @@ export default class GameOverScene extends Phaser.Scene {
     }
     
     preload(){
-        this.load.image('btnStart', 'assets/start.png');
+        this.load.image('btnStart', 'assets/UI/start.png');
     }
 
     preUpdate(t, dt){

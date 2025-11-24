@@ -11,7 +11,7 @@ export default class Shop extends Phaser.Scene {
     }
     
     preload(){
-        this.load.image('botonVolver', 'assets/backbutton.png');
+        this.load.image('botonVolver', 'assets/UI/backbutton.png');
     }
 
     preUpdate(t, dt){

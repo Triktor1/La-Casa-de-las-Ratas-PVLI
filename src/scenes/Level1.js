@@ -38,17 +38,17 @@ export default class Level1 extends Phaser.Scene {
 
     preload() {
         //Carga de imágenes
-        this.load.image('loro', 'assets/ParrotPlaceholder.png');
-        this.load.image('selectButton', 'assets/lvlselectboton.png');
-        this.load.image('shopButton', 'assets/shop.png');
-        this.load.image('torre', 'assets/torre.png');
-        this.load.image('rataSilicona', 'assets/siliconeRat.png');
+        this.load.image('loro', 'assets/Loros/ParrotPlaceholder.png');
+        this.load.image('selectButton', 'assets/UI/lvlselectboton.png');
+        this.load.image('shopButton', 'assets/UI/shop.png');
+        this.load.image('torre', 'assets/Ratas/torre.png');
+        this.load.image('rataSilicona', 'assets/Ratas/siliconeRat.png');
         this.load.image('background', 'assets/bg.png');
-        this.load.image('bullet', 'assets/bullet.png');
-        this.load.image('siliconeBullet', 'assets/siliconeBullet.png');
-        this.load.image('loroGrum', 'assets/GrumetePH.png');
-        this.load.image('loroCan', 'assets/CanonPH.png');
-        this.load.image('loroBarr', 'assets/BarrilPH.png');
+        this.load.image('bullet', 'assets/Ratas/bullet.png');
+        this.load.image('siliconeBullet', 'assets/Ratas/siliconeBullet.png');
+        this.load.image('loroGrum', 'assets/Loros/GrumetePH.png');
+        this.load.image('loroCan', 'assets/Loros/CanonPH.png');
+        this.load.image('loroBarr', 'assets/Loros/BarrilPH.png');
 
         //Carga de sonido
         this.load.audio('Critico', 'assets/sonidos/SonidoOriginalParaDañoCriticoNoRobado.mp3'); 

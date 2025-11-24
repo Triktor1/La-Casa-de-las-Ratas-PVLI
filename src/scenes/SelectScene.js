@@ -9,11 +9,11 @@ export default class MainMenu extends Phaser.Scene {
     }
    
     preload(){
-        this.load.image('botonlvl1', 'assets/boton1.png')
-        this.load.image('botonlvl2', 'assets/boton2.png')
-        this.load.image('botonlvl3', 'assets/boton3.png')
-        this.load.image('botonShop', 'assets/shop.png')
-        this.load.image('botonTutorial', 'assets/tutorial.png')
+        this.load.image('botonlvl1', 'assets/UI/boton1.png')
+        this.load.image('botonlvl2', 'assets/UI/boton2.png')
+        this.load.image('botonlvl3', 'assets/UI/boton3.png')
+        this.load.image('botonShop', 'assets/UI/shop.png')
+        this.load.image('botonTutorial', 'assets/UI/tutorial.png')
     }
 
     preUpdate(t, dt){

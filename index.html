@@ -15,7 +15,7 @@
   <header class="webHeader">
     <div class="headerList">
       <h1>Filthy Feathers</h1>
-      <img class="headerLogo" src="assets/loroPlumaWeb.png" draggable="false">
+      <img class="headerLogo" src="assets/WebSprites/loroPlumaWeb.png" draggable="false">
     </div>
     <a class="headerEquipo" href="conoceAlEquipo.html">Conoce al equipo</a>
   </header>
@@ -25,17 +25,18 @@
       <h2 id="CasaDeLasRatasTitulo">La Casa de las Ratas</h2>
       <a href="https://static.nationalgeographicla.com/files/styles/image_3200/public/01-rat-friends-nationalgeographic_1162144.webp?w=1600&h=900"
         target="_blank">
-        <img onclick="playSound('mouseSqueak')" src="./assets/CasaDeLasRatasLogoSmall.png" alt="LogoCasaDeLasRatas" draggable="false">
+        <img onclick="playSound('mouseSqueak')" src="./assets/WebSprites/CasaDeLasRatasLogoSmall.png" alt="LogoCasaDeLasRatas"
+          draggable="false">
       </a>
     </div>
     <div class="RowList">
       <button id="Redes" onclick="window.open('https://x.com/CasaDeLasRatas', '_blank')">
         <h4>Síguenos en redes</h4>
-        <img id="XLogo" src="./assets/X.png" alt="LogoTwitterPeroMal" draggable="false">
+        <img id="XLogo" src="./assets/WebSprites/X.png" alt="LogoTwitterPeroMal" draggable="false">
       </button>
       <button id="GitHub" onclick="window.open('https://github.com/Triktor1/La-Casa-de-las-Ratas-PVLI', '_blank')">
         <h4>GitHub</h4>
-        <img id="GitHubRepo" src="./assets/github.png" alt="GitHubLogo" draggable="false">
+        <img id="GitHubRepo" src="./assets/WebSprites/github.png" alt="GitHubLogo" draggable="false">
       </button>
     </div>
     <h2>Descripción</h2>
@@ -51,11 +52,20 @@
     <div>
       <h2>Controles</h2>
       <p>
-        El juego se controla únicamente con el ratón. No se necesita el teclado para nada.
+        El juego principal se controla únicamente con el ratón.
+        La galería también es completamente navegable con ratón, pero puedes ir pasando por las obras con las flechas
+        del teclado.
       </p>
-      <p>
-        Puedes jugar a Filthy Feathers mientras te tomas el café de las mañanas.
-      </p>
+      <ul style="list-style-type: none; display: flex; flex-direction: row;">
+        <li>
+          <p style="width: 700px">
+            Puedes jugar a Filthy Feathers mientras te tomas el café de las mañanas.
+          </p>
+        </li>
+        <li>
+          <img src="assets/WebSprites/coffee-logo-clipart-xl.png" style="width: 7%; margin-top: 10px" draggable="false">
+        </li>
+      </ul>
     </div>
 
     <script src="./src/game.js" type="module"></script>
