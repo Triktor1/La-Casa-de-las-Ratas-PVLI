@@ -37,23 +37,23 @@ export default class Gallery extends Phaser.Scene {
         }).setOrigin(0.5, 0.5);
 
         //Configuración del botón de volver
-        const galleryBtn = this.add.sprite(this.sys.game.canvas.width * 0.08, this.sys.game.canvas.height * 0.92, 'backButton').setInteractive({ useHandCursor: true }).setScale(0.4);
-        galleryBtn.on('pointerdown', () => {
+        const backBtn = this.add.sprite(this.sys.game.canvas.width * 0.08, this.sys.game.canvas.height * 0.93, 'backButton').setInteractive({ useHandCursor: true }).setScale(0.4);
+        backBtn.on('pointerdown', () => {
             this.scene.start("MainMenu");
         });
 
         //Tweens con hover del botón de volver
-        galleryBtn.on('pointerover', () =>
+        backBtn.on('pointerover', () =>
             this.tweens.add({
-                targets: galleryBtn,
+                targets: backBtn,
                 scale: 0.45,
                 rotation: -0.125,
                 duration: 150,
                 ease: 'Expo.easeIn',
             }));
-        galleryBtn.on('pointerout', () =>
+        backBtn.on('pointerout', () =>
             this.tweens.add({
-                targets: galleryBtn,
+                targets: backBtn,
                 scale: 0.4,
                 rotation: 0,
                 duration: 70,
