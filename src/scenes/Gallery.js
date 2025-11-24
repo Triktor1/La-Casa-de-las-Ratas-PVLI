@@ -21,7 +21,7 @@ export default class Gallery extends Phaser.Scene {
     }
 
     create() {
-        this.cameras.main.setBackgroundColor(0xa6859f);
+        this.cameras.main.setBackgroundColor(0x967194);
         //Creación del objeto galería y carga de las imágenes
         this.gallery = this.cache.json.get('galeria').imagenes;
         this.gallery.forEach(item => {
@@ -234,7 +234,7 @@ export default class Gallery extends Phaser.Scene {
         else {
             this.indexNumText = `${this.index + 1}/`;
         }
-        if (this.gallery.length < 9) {
+        if (this.gallery.length < 10) {
             this.indexNumText += '0';
         }
         this.indexNumText += this.gallery.length;

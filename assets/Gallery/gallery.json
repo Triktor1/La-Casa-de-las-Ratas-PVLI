@@ -27,6 +27,41 @@
             "nombre": "Loro capitán",
             "autor": "Toni",
             "descripcion": "Cuán arto grandiosa ave tenemos el privilegio de contemplar, alto cargo de la armada de loros de los siete mares que parlamenta en los más altos consejos de esta su armada."
+        },
+        {
+            "id": "img5",
+            "archivo": "Peroquecojonestio.png",
+            "nombre": "Primer ataque",
+            "autor": "La Casa de las Ratas",
+            "descripcion": "Cuán arto grandiosa ave tenemos el privilegio de contemplar, alto cargo de la armada de loros de los siete mares que parlamenta en los más altos consejos de esta su armada."
+        },
+        {
+            "id": "img6",
+            "archivo": "LoroCannon.png",
+            "nombre": "Loros cañoneros",
+            "autor": "La Casa de las Ratas",
+            "descripcion": "Cuán arto grandiosa ave tenemos el privilegio de contemplar, alto cargo de la armada de loros de los siete mares que parlamenta en los más altos consejos de esta su armada."
+        },
+        {
+            "id": "img7",
+            "archivo": "CuriCalamardo.png",
+            "nombre": "Loro vagabundo",
+            "autor": "La Casa de las Ratas",
+            "descripcion": "Cuán arto grandiosa ave tenemos el privilegio de contemplar, alto cargo de la armada de loros de los siete mares que parlamenta en los más altos consejos de esta su armada."
+        },
+        {
+            "id": "img8",
+            "archivo": "Lo siento mucho.png",
+            "nombre": "Enemies to lovers",
+            "autor": "La Casa de las Ratas",
+            "descripcion": "Cuán arto grandiosa ave tenemos el privilegio de contemplar, alto cargo de la armada de loros de los siete mares que parlamenta en los más altos consejos de esta su armada."
+        },
+        {
+            "id": "img9",
+            "archivo": "ReyRatas.png",
+            "nombre": "Rey Rata",
+            "autor": "La Casa de las Ratas",
+            "descripcion": "Cuán arto grandiosa ave tenemos el privilegio de contemplar, alto cargo de la armada de loros de los siete mares que parlamenta en los más altos consejos de esta su armada."
         }
     ]
 }
