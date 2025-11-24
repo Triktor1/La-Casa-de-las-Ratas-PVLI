@@ -50,6 +50,8 @@ export default class Level1 extends Phaser.Scene {
         this.load.image('loroCan', 'assets/CanonPH.png');
         this.load.image('loroBarr', 'assets/BarrilPH.png');
 
+        //Carga de sonido
+        this.load.audio('Critico', 'assets/sonidos/SonidoOriginalParaDañoCriticoNoRobado.mp3'); 
     }
 
     create() {

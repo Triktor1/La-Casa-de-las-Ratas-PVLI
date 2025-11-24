@@ -13,6 +13,10 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
         this.type = type; // ESTE ES EL TIPO DE LORO, SERA CLASIFICADO COMO R,B,G.   R critico a G, G critico a B, B critico a R
         this.moneyDrop = moneyDrop;
         this.setScale(0.5);
+
+        this.criticoSonido = this.scene.sound.add('Critico', { volume: 0.5 });
+
+        
     }
 
     create() {
@@ -43,43 +47,24 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
         if (this.vida > 0){
             //comprobamos si el daño es critico
             if ((this.type == "G" && bulletType == "R") || (this.type == "R" && bulletType == "B") || (this.type == "B" && bulletType == "G")) {
-
-                // TEÑIR EL SPRITE DE ROJO:
-                //  aqui es donde se debería teñir de rojo el sprite, pero no lo hace:
-                this.setTint(0xffff0000);
-                //  tampoco se tiñe con setTintFill. Deberia teñirse brevemente y volver a la normalidad después
-                //  Para comprobar si se tiñe:
-                /*   1 Abrir el juego y hacer click en el botón superior de "start"
-                     2 Arrastrar con click izquierdo y mantener cualquiera de las torres de la esquina superior izq a una de las torres
-                        transparentes del tablero, entonces soltar. Esto colocara la torre que atacará a los loros
-                     3 cuando estas torres disparen a los loros, observar si se tiñen de rojo
-            */
-                
-                //this.setAlpha(0.2);
+                this.criticoSonido.play();
+                this.setTint(0xffff0000); //Rojo intenso por el critico
                 this.vida -= 2*damage;
-                console.log("CRITICO");
             }
             
             else {
-                // CAMBIAR EL ALPHA ES DE PRUEBA HASTA QUE FUNCIONE EL TEÑIDO
-                //  this.setTint(0xffff0000);
-                //this.setAlpha(0.75);
+                this.setTint(0xff999999); //Tintado gris por daño normal
                 this.vida -= damage;
             }
             
-
-
-            //una vez hecho el daño, comprobamos si esta vivo y quitamos la transparencia
-            /* placeholder que vuelve opaco el loro, temporal hasta que funcione el teñido
-            if (this.active){
+            if (this.active){ //ESTO ES PARA DEVOLVER AL LORO SU TINTE NORMAL
                 this.scene.time.addEvent({
                     delay : 200,
                     callback: () => {
-                        this.setAlpha(1);
+                        this.clearTint();
                     }
                 })
             }
-            */
             this.checkAlive();
             console.log (`Vida restante: ${this.vida}`);
         }

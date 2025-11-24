@@ -12,7 +12,7 @@ import Win from './scenes/Win.js';
 import Gallery from './scenes/Gallery.js'
 
 let config = {
-  type: Phaser.CANVAS,
+  type: Phaser.WEBGL,
   canvas: document.getElementById('gameCanvas'),
   width: 1280,
   height: 720,
