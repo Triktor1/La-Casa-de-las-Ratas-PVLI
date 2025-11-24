@@ -86,13 +86,14 @@ export default class Gallery extends Phaser.Scene {
         }));
         const originalXDer = this.flechaDerX;
         this.tweens.killTweensOf(this.flechaDer);
-        this.flechaIzq.x = originalXDer;
+        this.flechaDer.x = originalXDer;
         this.flechaDer.on('pointerover', () => this.tweens.add({
             targets: this.flechaDer,
             x: originalXDer + 8,
             duration: 70,
             ease: 'Linear',
         }));
+
         this.flechaDer.on('pointerout', () => this.tweens.add({
             targets: this.flechaDer,
             x: originalXDer - 8,
