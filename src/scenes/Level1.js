@@ -72,10 +72,8 @@ export default class Level1 extends Phaser.Scene {
     create() {
 
         
-        this.jsonData = this.cache.json.get(this.levelArray[1]).Name;
-
-
-
+        this.jsonDataName = this.cache.json.get(this.levelArray[0]).Name;
+        this.jsonDataArray = this.cache.json.get(this.levelArray[0]).path;
         //Creación de elementos del nivel
         this.enemies = this.physics.add.group();
         this.crearFondo();
@@ -92,7 +90,7 @@ export default class Level1 extends Phaser.Scene {
             fontFamily: 'Arial Black',
             fontSize: '25px'
         })
-        this.jsonTextLevel = this.add.text(700 , 10, "Nivel" + this.jsonData);
+        this.jsonTextLevel = this.add.text(700 , 10, "Nivel: " + this.jsonDataName + " Puntos: " + this.jsonDataArray.length);
 
 
 
@@ -123,6 +121,13 @@ export default class Level1 extends Phaser.Scene {
     }
 
     crearCamino() {
+
+        this.path = new Phaser.Curves.Path(this.jsonDataArray[0].x , this.jsonDataArray[0].y )
+        for(var a = 1 ; a < this.jsonDataArray.length;a++)
+        {
+            this.path.lineTo(this.jsonDataArray[a].x , this.jsonDataArray[a].y)
+        }
+        /*
         this.path = new Phaser.Curves.Path(-50, 600);
         this.path.lineTo(300, 600);
         this.path.lineTo(300, 200);
@@ -131,7 +136,7 @@ export default class Level1 extends Phaser.Scene {
         this.path.lineTo(1000, 600);
         this.path.lineTo(1000, 300);
         this.path.lineTo(1300, 300);
-
+        */
         this.graphics = this.add.graphics();
         this.graphics.lineStyle(2, 0xffffff, 1);
         this.path.draw(this.graphics);
