@@ -20,7 +20,7 @@ export default class Level1 extends Phaser.Scene {
     constructor() {
         super({ key: "Level1" });
         this.shopMoney;
-        this.levelMoney = 100;
+        this.levelMoney = 1000;
         this.levelNum = 1;
         this.playerHealth = 100;
         this.enemySpawnNum = 30;
@@ -31,7 +31,7 @@ export default class Level1 extends Phaser.Scene {
     init(data) {
         //Inicialización de variables principales
         this.shopMoney = data.shopMoney || 0;
-        this.levelMoney = 100;
+        this.levelMoney = 1000;
         this.levelNum = 1;
         this.playerHealth = 30;
         this.enemySpawnNum = 20;
@@ -168,9 +168,8 @@ export default class Level1 extends Phaser.Scene {
     }
 
     crearTorres() {
-        this.torres = this.physics.add.group();
-        //let torreBase = new Torre(this, 500, 200, 0, 10, "basictorre", "torre");
-        //this.torres.add(torreBase);
+        this.torresGrupo = this.physics.add.group();
+        this.torresArray = [];
 
         this.bullets = this.physics.add.group();
         this.Bullet = Bullet;
@@ -203,7 +202,7 @@ export default class Level1 extends Phaser.Scene {
             if (bullet) bullet.update(time, delta);
         });
         // añado el update de torre
-        this.torres.children.iterate(torre => {
+        this.torresGrupo.children.iterate(torre => {
             if (torre) torre.update(time);
         });
         if (this.enemySpawnNum <= 0 && this.enemies.countActive() == 0) {

@@ -15,6 +15,14 @@ export default class Torre extends Phaser.GameObjects.Image {
         this.lastShotTime = 0;
         this.currentTarget = null; // enemigo actual en rango
         this.setScale(scale);
+
+        // Atributos de mejora de torre
+        this.damageUpgrade = 3;
+        this.fireRateUpgrade = 200;
+        this.rangeUpgrade = 39;
+        this.bulletSpeedUpgrade = 1;
+
+        this.mejorable = true; 
         
         // Collider circular invisible (rango)
         this.rangeCircle = this.scene.add.circle(this.x, this.y, this.rangeValue, 0x00ff00, 0.15);
@@ -116,9 +124,16 @@ export default class Torre extends Phaser.GameObjects.Image {
 
     shoot(enemy) {
         const dir = new Phaser.Math.Vector2(enemy.x - this.x, enemy.y - this.y).normalize();
-        const bullet = new Bullet(this.scene, this.x, this.y, 'bullet', 1000, 20, dir, 750, false, true, 0, "R");
+        const bullet = new Bullet(this.scene, this.x, this.y, 'bullet', 1000 * this.bulletSpeedUpgrade, this.damage, dir, 750, false, true, 0, "R");
         bullet.setScale(0.2, 0.3);
         this.scene.bullets.add(bullet);
         return bullet;
+    }
+
+    upgrade(){
+        this.damage += this.damageUpgrade;
+        this.fireRate -= this.fireRateUpgrade;
+        this.rangeValue += this.rangeUpgrade;
+        this.bulletSpeedUpgrade += 0.2;
     }
 }

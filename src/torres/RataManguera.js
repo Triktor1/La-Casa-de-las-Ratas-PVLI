@@ -8,7 +8,7 @@ export default class RataManguera extends Torre{
 
 shoot(enemy) {
     const dir = new Phaser.Math.Vector2(enemy.x - this.x, enemy.y - this.y).normalize();
-    const bullet = new WaterBullet(this.scene, this.x, this.y, 'siliconeBullet', 1700, 0.375, dir, 380, true, true, 0, "G", 0.075, 0);
+    const bullet = new WaterBullet(this.scene, this.x, this.y, 'siliconeBullet', 1700 * this.bulletSpeedUpgrade, 0.375, dir, 380, true, true, 0, "G", 0.075, 0);
     this.scene.bullets.add(bullet);
     return bullet;
 }

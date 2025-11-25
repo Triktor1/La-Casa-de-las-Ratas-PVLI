@@ -23,18 +23,19 @@ export default class TorreUI extends Phaser.GameObjects.Image {
         this.on('dragend', (pointer) => { //Al soltarse
             if (this.scene.levelMoney >= this.cost) {
                 const hueco = this.scene.huecosTorre?.find(h =>
-                    !h.ocupado && Phaser.Math.Distance.Between(this.x, this.y, h.x, h.y) < 80
-                );
+                    !h.ocupado && Phaser.Math.Distance.Between(this.x, this.y, h.x, h.y) < 80);
+                const miClase = this.scene.torresArray?.find(t => Phaser.Math.Distance.Between(this.x, this.y, t.x, t.y) < 80);
                 if (hueco) {
                     //crear torre y añadir al grupo 
                     const nuevaTorre = new this.TorreClase(this.scene, hueco.x, hueco.y);
-                    this.scene.torres.add(nuevaTorre);
+                    this.scene.torresGrupo.add(nuevaTorre);
+                    this.scene.torresArray.push(nuevaTorre);
                     //activar colisiones rango enemigo
                      this.scene.physics.add.overlap(nuevaTorre.rangeCircle, this.scene.enemies, (range, enemy) => {
                         const torre = range.parentTorre;
                         if (!torre.currentTarget && enemy.active) {
                         torre.currentTarget = enemy;
-                        console.log(enemy.nombre + " ha entrado en el rango de " + torre.nombre);
+                        //console.log(enemy.nombre + " ha entrado en el rango de " + torre.nombre);
                         }
                     });
 
@@ -43,19 +44,25 @@ export default class TorreUI extends Phaser.GameObjects.Image {
                         if (!enemy.isBeingTarget) {
                         enemy.isBeingTarget = true;
                         torre.shoot(enemy);
-                        console.log(enemy.nombre + " está siendo atacado por " + torre.nombre);
                         }
                     });
                     hueco.ocupar();
                     this.scene.levelMoney -= this.cost;
-                    console.log("Dinero actual", this.scene.levelMoney);
                     this.cost += this.increase;
                     this.priceText.setText(`Precio: ${this.cost}`);
+                }
+                if (miClase) {
+                    console.log('Mejorando torre:', miClase);
+                    miClase.upgrade();
+                    this.scene.levelMoney -= this.cost;
+                    this.cost += this.increase;
+                     this.priceText.setText(`Precio: ${this.cost}`);
                 }
             }
             this.resetPosition();
         });
     }
+
     resetPosition() {
         this.x = this.input.dragStartX;
         this.y = this.input.dragStartY;
