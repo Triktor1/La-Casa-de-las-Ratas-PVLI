@@ -6,15 +6,16 @@ import RataJeringa from "../torres/RataJeringa.js";
 import RataGorda from "../torres/RataGorda.js";
 import RataManguera from "../torres/RataManguera.js";
 
+import Tropa from "../tropas/TropaBase.js";
+import TropaUI from "../tropas/TropaUI.js"
+
 import Bullet from "../bullets/bullet.js";
 import HuecoTorre from "../torres/HuecoTorre.js";
 import TorreUI from "../torres/TorreUI.js";
 import loroGrumete from "../enemies/loroGrumete.js";
 import loroBarril from "../enemies/loroBarril.js";
 import loroCanonero from "../enemies/loroCanonero.js";
-
-
-
+import RataComecables from "../tropas/RataComecables.js";
 
 export default class Level1 extends Phaser.Scene {
     constructor() {
@@ -42,12 +43,12 @@ export default class Level1 extends Phaser.Scene {
         //Carga de imágenes
 
 
-        
-        this.load.json('L1Data' , 'src/scenes/LevelJsons/Level1.json');
-        this.load.json('L2Data' , 'src/scenes/LevelJsons/Level2.json');
-        this.load.json('L3Data' , 'src/scenes/LevelJsons/Level3.json');
 
-        this.levelArray = ['L1Data' , 'L2Data' , 'L3Data'];
+        this.load.json('L1Data', 'src/scenes/LevelJsons/Level1.json');
+        this.load.json('L2Data', 'src/scenes/LevelJsons/Level2.json');
+        this.load.json('L3Data', 'src/scenes/LevelJsons/Level3.json');
+
+        this.levelArray = ['L1Data', 'L2Data', 'L3Data'];
 
 
         this.load.image('loro', 'assets/Loros/ParrotPlaceholder.png');
@@ -55,6 +56,7 @@ export default class Level1 extends Phaser.Scene {
         this.load.image('shopButton', 'assets/UI/shop.png');
         this.load.image('torre', 'assets/Ratas/torre.png');
         this.load.image('rataSilicona', 'assets/Ratas/siliconeRat.png');
+        this.load.image('rataComecables', 'assets/Ratas/rataComecables.png');
         this.load.image('BigCheese', 'assets/Ratas/BigCheese.png');
         this.load.image('rataManguera', 'assets/Ratas/RataManguera.jpg');
         this.load.image('background', 'assets/bg.png');
@@ -66,7 +68,7 @@ export default class Level1 extends Phaser.Scene {
         this.load.image('loroBarr', 'assets/Loros/BarrilPH.png');
 
         //Carga de sonido
-        this.load.audio('Critico', 'assets/sonidos/SonidoOriginalParaDañoCriticoNoRobado.mp3'); 
+        this.load.audio('Critico', 'assets/sonidos/SonidoOriginalParaDañoCriticoNoRobado.mp3');
     }
 
     create() {
@@ -80,6 +82,7 @@ export default class Level1 extends Phaser.Scene {
         this.crearCamino();
         this.crearEnemigos();
         this.crearTorres();
+        this.crearTropas();
         this.crearHuecos();
         //UI
         this.dineroText = this.add.text(200, 10, "Dinero: " + this.levelMoney, {
@@ -93,7 +96,6 @@ export default class Level1 extends Phaser.Scene {
         this.jsonTextLevel = this.add.text(700 , 10, "Nivel: " + this.jsonDataName + " Puntos: " + this.jsonDataArray.length);
 
 
-
         // UI DE TORRES
         new TorreUI(this, 80, 100, 'torre', 50, Torre);
         new TorreUI(this, 240, 100, 'torre', 50, RataSilicona);
@@ -101,7 +103,10 @@ export default class Level1 extends Phaser.Scene {
         new TorreUI(this, 560, 100, 'torre', 50, RataGorda);
         new TorreUI(this, 720, 100, 'torre', 50, RataManguera);
 
-        //this.crearBotones();
+        //UI DE TROPAS
+        new TropaUI(this, 880, 100, 'torre', 20, 5, RataComecables);
+        
+        //COLISIONES
         this.checkColisions();
 
         this.timedEvent = this.time.addEvent({
@@ -152,7 +157,7 @@ export default class Level1 extends Phaser.Scene {
             let loro;
 
             if (this.randomnum == 0) {
-                loro = new Loro(this, this.path, -50, 600, 10, 10, 100,"G", 10, 'basicLoro', 'loro', 0);
+                loro = new Loro(this, this.path, -50, 600, 10, 10, 100, "G", 10, 'basicLoro', 'loro', 0);
             }
             else if (this.randomnum == 1) {
                 loro = new loroCanonero(this, this.path, -50, 600, 'loroCan')
@@ -163,8 +168,6 @@ export default class Level1 extends Phaser.Scene {
             else if (this.randomnum == 3) {
                 loro = new loroBarril(this, this.path, -50, 600, 'loroBarr');
             }
-
-
 
             this.enemies.add(loro);
             loro.startFollowing();
@@ -178,6 +181,10 @@ export default class Level1 extends Phaser.Scene {
 
         this.bullets = this.physics.add.group();
         this.Bullet = Bullet;
+    }
+
+    crearTropas() {
+        this.tropas = this.physics.add.group();
     }
 
     //HUECOS DONDE SE COLOCAL LAS TORRES
