@@ -7,13 +7,11 @@ export default class RataGorda extends Torre{
 
         this.damage = 25;
         this.bulletDuration = 100;
-        this.bulletInterval = 
-
 
         //Atributos de mejora al mejorar la torre
         this.damageBoost = 5;
         this.rangeBoost = 20;
-        this.bulletIntervalBoost = 25;
+        this.bulletDurationBoost = 25;
     }
 
     shoot(enemy) {
