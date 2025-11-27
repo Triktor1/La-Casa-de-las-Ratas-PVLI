@@ -51,7 +51,7 @@ export default class TorreUI extends Phaser.GameObjects.Image {
                     this.cost += this.increase;
                     this.priceText.setText(`Precio: ${this.cost}`);
                 }
-                if (miClase) {
+                if (miClase instanceof this.TorreClase && miClase.checkLevelUp()) {
                     console.log('Mejorando torre:', miClase);
                     miClase.upgrade();
                     this.scene.levelMoney -= this.cost;

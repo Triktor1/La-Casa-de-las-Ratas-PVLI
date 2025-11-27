@@ -70,6 +70,46 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
         }
     }
 
+        getPoisoned(damage, ticks, interval, bulletType) {
+        for (let i = 0; i < ticks; i++){
+            if (this.active){ //para asegurarse de que el loro está vivo
+                this.scene.time.addEvent({
+                    delay: interval * (i + 1),
+                    callback: () => {
+
+                        this.getDamaged(damage, bulletType);
+                        
+                    }
+                })
+            }
+        }
+    }
+
+    //Aplica lentitud al enemigo
+    slowed(factor, time) {
+        this.data = this.pathTween.data[0];
+        this.current = this.data.current; //data.current es el progreso del path follower, que funciona entre 0 y 1
+
+        //Ajuste del tween
+        this.data.duration = 40000 / (this.speed * factor);  
+        this.data.elapsed = this.current * this.data.duration; 
+
+        //Se pasa el efecto
+        if (this.active){
+            this.scene.time.addEvent({
+                delay: time,
+                callback: () => {
+                    if (this.active && this.data){ //para asegurarse de que el loro está vivo
+                        this.current = this.data.current;
+                        // el 40k es el tiempo en milisegundos que tarda en recorrerlo, numero magico igual habria que corregirlo
+                        this.data.duration = 40000 / this.speed;  
+                        this.data.elapsed = this.current * this.data.duration; 
+                    } 
+                }
+            });
+        }
+    }
+
     checkAlive(reachedEnd = false) {
         if (reachedEnd) {
             this.scene.changePlayerHealth(-this.damage);

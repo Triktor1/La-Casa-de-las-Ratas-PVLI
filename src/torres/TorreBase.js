@@ -16,13 +16,8 @@ export default class Torre extends Phaser.GameObjects.Image {
         this.currentTarget = null; // enemigo actual en rango
         this.setScale(scale);
 
-        // Atributos de mejora de torre
-        this.damageUpgrade = 3;
-        this.fireRateUpgrade = 200;
-        this.rangeUpgrade = 39;
-        this.bulletSpeedUpgrade = 1;
-
-        this.mejorable = true; 
+        this.upgradeLevel = 1;
+        this.maxLevel = 3;
         
         // Collider circular invisible (rango)
         this.rangeCircle = this.scene.add.circle(this.x, this.y, this.rangeValue, 0x00ff00, 0.15);
@@ -52,56 +47,6 @@ export default class Torre extends Phaser.GameObjects.Image {
         //this.checkCollisions(this.scene.enemies, this.scene.bullets);
     }
 
-    /* rangeSensor(){
-        const rango = this.scene.add.circle(this.x, this.y, this.rangeValue, 0x00ff00, 0.15);
-        this.scene.physics.add.existing(this.rango);
-        this.rango.body.setCircle(this.rangeValue);
-        this.rango.body.setAllowGravity(false);
-        this.rango.body.setImmovable(true);
-        this.rango.setVisible(false);    
-        return rango;
-    } */
-
-    /*  checkCollisions(enemies, bullets){
-        //Disparo inmediato. Collision directa torre-enemigo
-         if (!this.body || !this.rangeCircle.body || !enemies || !bullets) {
-        console.warn("Colisión no configurada por datos incompletos");
-        return;
-    }
-        this.scene.physics.add.overlap(this, enemies, (torre, enemy) => {
-        if (!enemy.isBeingTarget) {
-                enemy.isBeingTarget = true;
-                const bullet = torre.shoot(enemy); // ahora sí existe la variable
-                //enemy.getDamaged(bullet.damage);
-                //enemy.checkAlive();
-                console.log(`${enemy.nombre} esta siendo atacado`);
-            }
-        }); 
- 
-        
-        //Deteccion de objetivo, colision rango de torre 
-        this.scene.physics.add.overlap(this.rangeCircle, enemies, (range, enemy) => {
-            const torre = range.parentTorre;
-            if (!torre.currentTarget && enemy.active) {
-                torre.currentTarget = enemy;
-                console.log(`${enemy.nombre} ha entrado en el rango de ${torre.nombre}`);
-            }
-        });
-        
-        
-         
-        //colision bala con loro
-        this.scene.physics.add.overlap(bullets, enemies, (bullet, enemy) => {
-            if (!bullet.active || !enemy.active) return;
-
-            enemy.getDamaged(bullet.damage);
-            enemy.checkAlive();
-
-            if (!bullet.piercing) bullet.destroy();
-        });
-
-    }  */
-
     update(time) {
         // Mantiene el rango en la posición de la torre
         if (this.rangeCircle) {
@@ -124,16 +69,40 @@ export default class Torre extends Phaser.GameObjects.Image {
 
     shoot(enemy) {
         const dir = new Phaser.Math.Vector2(enemy.x - this.x, enemy.y - this.y).normalize();
-        const bullet = new Bullet(this.scene, this.x, this.y, 'bullet', 1000 * this.bulletSpeedUpgrade, this.damage, dir, 750, false, true, 0, "R");
+        const bullet = new Bullet(this.scene, this.x, this.y, 'bullet', 1000, this.damage, dir, 750, false, true, 0, "R");
         bullet.setScale(0.2, 0.3);
         this.scene.bullets.add(bullet);
         return bullet;
     }
 
     upgrade(){
-        this.damage += this.damageUpgrade;
-        this.fireRate -= this.fireRateUpgrade;
-        this.rangeValue += this.rangeUpgrade;
-        this.bulletSpeedUpgrade += 0.2;
+        //Individual para cada torre, usando override
+    }
+
+    checkLevelUp(){
+        if (this.upgradeLevel < this.maxLevel) {
+            this.upgradeLevel += 1;
+            return true;
+        }
+        else return false;
+    }
+    //ESTE METODO ES PARA LAS TORRES QUE MEJORAN SU RANGO CON EL METODO UPGRADE
+    resetRange(){
+        if (this.rangeCircle) {
+            this.rangeCircle.destroy();
+            this.rangeGraphics.clear();
+        }
+        this.rangeCircle = this.scene.add.circle(this.x, this.y, this.rangeValue, 0x00ff00, 0.15);
+        this.scene.physics.add.existing(this.rangeCircle);
+        this.rangeCircle.body.setCircle(this.rangeValue);
+        this.rangeCircle.body.setAllowGravity(false);
+        this.rangeCircle.body.setImmovable(true);
+        this.rangeCircle.setVisible(false);
+
+        this.rangeGraphics = this.scene.add.graphics();
+        this.rangeGraphics.lineStyle(2, 0x00ff00, 0.4);
+        this.rangeGraphics.strokeCircle(this.x, this.y, this.rangeValue);
+
+        this.scene.physics.add.overlap(this.rangeCircle, this.scene.enemies, (range, enemy) => {this.currentTarget = enemy;});
     }
 }

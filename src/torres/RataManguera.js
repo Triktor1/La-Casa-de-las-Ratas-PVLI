@@ -4,13 +4,30 @@ import WaterBullet from "../bullets/waterBullet.js";
 export default class RataManguera extends Torre{
     constructor(scene, x, y) {
         super(scene, x, y, 135, 15, "rataManguera", "rataManguera", 0, 0.225, 275);
+
+        //Atributos base
+        this.damage = 0.375;
+        this.bulletSpeed = 1700;
+        this.fireRate = 135;
+
+        //Atributos de mejora al mejorar la torre
+        this.damageBoost = 0.025;
+        this.rangeBoost = 15;
+        this.fireRateBoost = 25;
+
     }
 
-shoot(enemy) {
-    const dir = new Phaser.Math.Vector2(enemy.x - this.x, enemy.y - this.y).normalize();
-    const bullet = new WaterBullet(this.scene, this.x, this.y, 'siliconeBullet', 1700 * this.bulletSpeedUpgrade, 0.375, dir, 380, true, true, 0, "G", 0.075, 0);
-    this.scene.bullets.add(bullet);
-    return bullet;
-}
+    shoot(enemy) {
+        const dir = new Phaser.Math.Vector2(enemy.x - this.x, enemy.y - this.y).normalize();
+        const bullet = new WaterBullet(this.scene, this.x, this.y, 'siliconeBullet', this.bulletSpeed, this.damage, dir, 380, true, true, 0, "G", 0.075, 0);
+        this.scene.bullets.add(bullet);
+        return bullet;
+    }
 
+    upgrade(){
+        this.damage += this.damageBoost;
+        this.rangeValue += this.rangeBoost;
+        this.fireRate -= this.fireRateBoost;    
+        this.resetRange();
+    }
 }

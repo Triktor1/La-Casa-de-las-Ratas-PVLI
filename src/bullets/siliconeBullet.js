@@ -1,10 +1,10 @@
 import Bullet from "../bullets/bullet.js";
 
 export default class SiliconeBullet extends Bullet {
-    constructor(scene, x, y, texture, speed, damage, direction, timeToLive, piercing, teamRat, healValue, type, scale, frame) {
+    constructor(scene, x, y, texture, speed, damage, direction, timeToLive, piercing, teamRat, healValue, type, scale, frame, slow, duration) {
         super(scene, x, y, texture, speed, damage, direction, timeToLive, piercing, teamRat, healValue, type, scale, frame);
-        this.slowAmount = 0.5; //VAlor de multiplicacion de velocidad
-        this.duration = 1800; //Duracion del slow
+        this.slowAmount = slow; //VAlor de multiplicacion de velocidad
+        this.duration = duration; //Duracion del slow
     }
         effectCollision(enemy){
         enemy.getDamaged(this.damage);

@@ -98,14 +98,13 @@ export default class Level1 extends Phaser.Scene {
 
 
         // UI DE TORRES
-        new TorreUI(this, 80, 100, 'torre', 50, Torre);
-        new TorreUI(this, 240, 100, 'torre', 50, RataSilicona);
-        new TorreUI(this, 400, 100, 'torre', 50, RataJeringa);
-        new TorreUI(this, 560, 100, 'torre', 50, RataGorda);
-        new TorreUI(this, 720, 100, 'torre', 50, RataManguera);
+        new TorreUI(this, 80, 100, 'torre', 50, RataSilicona);
+        new TorreUI(this, 240, 100, 'torre', 50, RataJeringa);
+        new TorreUI(this, 400, 100, 'torre', 50, RataGorda);
+        new TorreUI(this, 560, 100, 'torre', 50, RataManguera);
 
         //UI DE TROPAS
-        new TropaUI(this, 880, 100, 'torre', 20, 5, RataComecables);
+        new TropaUI(this, 720, 100, 'torre', 20, 5, RataComecables);
         
         //COLISIONES
         this.checkColisions();
