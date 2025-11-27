@@ -40,17 +40,15 @@ export default class Level1 extends Phaser.Scene {
     }
 
     preload() {
-        //Carga de imágenes
-
-
-
+        
+        //Carga jsons de niveles
         this.load.json('L1Data', 'src/scenes/LevelJsons/Level1.json');
         this.load.json('L2Data', 'src/scenes/LevelJsons/Level2.json');
         this.load.json('L3Data', 'src/scenes/LevelJsons/Level3.json');
 
         this.levelArray = ['L1Data', 'L2Data', 'L3Data'];
 
-
+        //Carga de imágenes
         this.load.image('loro', 'assets/Loros/ParrotPlaceholder.png');
         this.load.image('selectButton', 'assets/UI/lvlselectboton.png');
         this.load.image('shopButton', 'assets/UI/shop.png');
@@ -76,6 +74,9 @@ export default class Level1 extends Phaser.Scene {
         
         this.jsonDataName = this.cache.json.get(this.levelArray[0]).Name;
         this.jsonDataArray = this.cache.json.get(this.levelArray[0]).path;
+        this.levelMoney = this.cache.json.get(this.levelArray[0]).levelMoney;
+        this.enemySpawnNum = this.cache.json.get(this.levelArray[0]).enemySpawnNum;
+
         //Creación de elementos del nivel
         this.enemies = this.physics.add.group();
         this.crearFondo();
