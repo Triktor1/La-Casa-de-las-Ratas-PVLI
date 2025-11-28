@@ -16,7 +16,7 @@ export default class Tropa extends Phaser.GameObjects.PathFollower {
         this.hasDied = false;
         this.currentEnemy = null; 
         
-        this.setScale(scale);
+        this.setScale(0.2);
 
         this.criticoSonido = this.scene.sound.add('Critico', { volume: 0.5 });
 

@@ -214,7 +214,7 @@ export default class Level1 extends Phaser.Scene {
                 bullet.heal(tropa);
             }
         });
-        
+
          //Colisiones tropas con loros
         this.physics.add.overlap(this.tropas, this.enemies, (tropa, loro) =>{
             
@@ -226,6 +226,17 @@ export default class Level1 extends Phaser.Scene {
             if(tropa.isFighting && tropa.currentEnemy !==loro ) return;
             if(loro.isFighting && loro.currentEnemy !== tropa) return;
 
+            //comprobacion antifreeze
+            const t = tropa;
+            const e = loro;
+
+            this.time.delayedCall(50, () => {
+
+                if (!this.physics.overlap(t, e)) {
+                    if (t.startWalking) t.startWalking();
+                    if (e.startWalking) e.startWalking();
+                }
+            });
 
             //inicia combate
             tropa.isFighting = true;
@@ -265,6 +276,7 @@ export default class Level1 extends Phaser.Scene {
                 tropa.startWalking(); 
             }
         })
+      
     }
 
     endLevel() {
