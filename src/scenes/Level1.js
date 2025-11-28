@@ -5,6 +5,7 @@ import RataSilicona from "../torres/RataSilicona.js";
 import RataJeringa from "../torres/RataJeringa.js";
 import RataGorda from "../torres/RataGorda.js";
 import RataManguera from "../torres/RataManguera.js";
+import RataChef from "../torres/RataCamarera.js";
 
 import Tropa from "../tropas/TropaBase.js";
 import TropaUI from "../tropas/TropaUI.js"
@@ -55,6 +56,7 @@ export default class Level1 extends Phaser.Scene {
         this.load.image('torre', 'assets/Ratas/torre.png');
         this.load.image('rataSilicona', 'assets/Ratas/siliconeRat.png');
         this.load.image('rataComecables', 'assets/Ratas/rataComecables.png');
+        this.load.image('rataChef', 'assets/Ratas/RataChef.png');
         this.load.image('BigCheese', 'assets/Ratas/BigCheese.png');
         this.load.image('rataManguera', 'assets/Ratas/RataManguera.jpg');
         this.load.image('background', 'assets/bg.png');
@@ -79,6 +81,7 @@ export default class Level1 extends Phaser.Scene {
 
         //Creación de elementos del nivel
         this.enemies = this.physics.add.group();
+        this.tropas = this.physics.add.group();
         this.crearFondo();
         this.crearCamino();
         this.crearEnemigos();
@@ -102,6 +105,7 @@ export default class Level1 extends Phaser.Scene {
         new TorreUI(this, 240, 100, 'torre', 50, RataJeringa);
         new TorreUI(this, 400, 100, 'torre', 50, RataGorda);
         new TorreUI(this, 560, 100, 'torre', 50, RataManguera);
+        new TorreUI(this, 880, 100, 'torre', 50, RataChef);
 
         //UI DE TROPAS
         new TropaUI(this, 720, 100, 'torre', 20, 5, RataComecables);
@@ -199,8 +203,13 @@ export default class Level1 extends Phaser.Scene {
     checkColisions() {
         //COLISION DE LAS BALAS CON LOS LOROS
         this.physics.add.overlap(this.bullets, this.enemies, (bullet, enemy) => {
-            if (bullet.teamRat && enemy instanceof Loro) {
+            if (bullet.teamRat  && bullet.damage!=0 && enemy instanceof Loro) {
                 bullet.effectCollision(enemy);
+            }
+        });
+        this.physics.add.overlap(this.bullets, this.tropas, (bullet, tropa) => {
+            if (bullet.teamRat && bullet.damage == 0 && tropa instanceof Tropa) {
+                bullet.heal(tropa);
             }
         });
     }

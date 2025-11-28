@@ -15,6 +15,7 @@ export default class Torre extends Phaser.GameObjects.Image {
         this.lastShotTime = 0;
         this.currentTarget = null; // enemigo actual en rango
         this.setScale(scale);
+        this.heal = false; //Si la torre es curandera o no 
 
         this.upgradeLevel = 1;
         this.maxLevel = 3;

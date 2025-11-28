@@ -31,21 +31,20 @@ export default class TorreUI extends Phaser.GameObjects.Image {
                     this.scene.torresGrupo.add(nuevaTorre);
                     this.scene.torresArray.push(nuevaTorre);
                     //activar colisiones rango enemigo
-                     this.scene.physics.add.overlap(nuevaTorre.rangeCircle, this.scene.enemies, (range, enemy) => {
-                        const torre = range.parentTorre;
-                        if (!torre.currentTarget && enemy.active) {
-                        torre.currentTarget = enemy;
-                        //console.log(enemy.nombre + " ha entrado en el rango de " + torre.nombre);
-                        }
-                    });
+                    if (!nuevaTorre.heal){
+                        this.scene.physics.add.overlap(nuevaTorre.rangeCircle, this.scene.enemies, (range, enemy) => {
+                            const torre = range.parentTorre;
+                            if (!torre.currentTarget && enemy.active) {
+                            torre.currentTarget = enemy;}
+                        });
+                    } else{
+                        this.scene.physics.add.overlap(nuevaTorre.rangeCircle, this.scene.tropas, (range, tropa) => {
+                            const torre = range.parentTorre;
+                            if (!torre.currentTarget && tropa.active) {
+                            torre.currentTarget = tropa;}
+                        });
 
-                    // activar colisiones de torre con enemigos (accion de disparo)
-                    this.scene.physics.add.overlap(nuevaTorre, this.scene.enemies, (torre, enemy) => {
-                        if (!enemy.isBeingTarget) {
-                        enemy.isBeingTarget = true;
-                        torre.shoot(enemy);
-                        }
-                    });
+                    }
                     hueco.ocupar();
                     this.scene.levelMoney -= this.cost;
                     this.cost += this.increase;

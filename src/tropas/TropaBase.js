@@ -1,6 +1,6 @@
 export default class Tropa extends Phaser.GameObjects.PathFollower {
 
-    constructor(scene, path, x = 0, y = 0, speed = 15, damage = 10, vida = 100, type, tropaname, texture = "rataComecables", frame = 0) {
+    constructor(scene, path, x = 0, y = 0, speed = 15, damage = 10, vida = 100, type, tropaname, texture = "rataComecables", frame = 0, scale = 0.5) {
         super(scene, path, x, y, texture, frame) //constructora  pathfollower
         this.scene = scene;
         this.scene.add.existing(this);
@@ -11,7 +11,7 @@ export default class Tropa extends Phaser.GameObjects.PathFollower {
         this.speed = speed;
         this.vida = vida;
         this.type = type; // ESTE ES EL TIPO DE LORO, SERA CLASIFICADO COMO R,B,G.   R critico a G, G critico a B, B critico a R
-        this.setScale(0.5);
+        this.setScale(scale);
 
         this.criticoSonido = this.scene.sound.add('Critico', { volume: 0.5 });
 
@@ -67,6 +67,11 @@ export default class Tropa extends Phaser.GameObjects.PathFollower {
             this.checkAlive();
             console.log(`Vida restante: ${this.vida}`);
         }
+    }
+
+    getHealed(heal){
+        this.vida+=heal;
+        console.log("Me he curado");
     }
 
     checkAlive(reachedEnd = false) {
