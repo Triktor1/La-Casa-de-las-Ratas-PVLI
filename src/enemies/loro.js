@@ -12,11 +12,16 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
         this.vida = vida;
         this.type = type; // ESTE ES EL TIPO DE LORO, SERA CLASIFICADO COMO R,B,G.   R critico a G, G critico a B, B critico a R
         this.moneyDrop = moneyDrop;
+
+        //cosas combate loro
+        this.isFighting = false; 
+        this.currentEnemy = null; 
+
         this.setScale(0.5);
 
         this.criticoSonido = this.scene.sound.add('Critico', { volume: 0.5 });
-
-        
+        // this.stopMovement = () => this.pauseFollow();
+        // this.resumeMovement = () => this.resumeFollow();
     }
 
     create() {
@@ -61,7 +66,7 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
                 this.scene.time.addEvent({
                     delay : 200,
                     callback: () => {
-                        this.clearTint();
+                        if (this.active) this.clearTint();
                     }
                 })
             }
@@ -69,6 +74,24 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
             console.log (`Vida restante: ${this.vida}`);
         }
     }
+    getPhysycalDamage(amount){
+        if(!this.active) return; 
+        this.vida -=amount; 
+
+        this.setTint(0xff999999);
+
+        this.scene.time.addEvent({
+            delay: 150,
+            callback:() => {
+                if (this.active) this.clearTint();
+            }
+        })
+
+        this.checkAlive();
+
+    }
+
+
 
         getPoisoned(damage, ticks, interval, bulletType) {
         for (let i = 0; i < ticks; i++){
@@ -118,6 +141,13 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
         }
         else if (this.vida <= 0) {
             console.log(`${this.nombre} ha muerto`);
+            //si estaba luchando
+            if (this.isFighting && this.currentEnemy){
+                //hace que el enemigo resete loss valores y que siga caminando
+                this.currentEnemy.currentEnemy = null; 
+                this.currentEnemy.isFighting = false; 
+                this.currentEnemy.startWalking();
+            }
             if (this.active){ //evitar crasheos
                 this.scene.changeLevelMoney(this.moneyDrop); //esto da problemas por ahora
                 this.scene.writeLevelMoney();
@@ -138,6 +168,16 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
                 console.log(`${this.nombre} ha llegado al final del path!`);
             }
         });
+    }
+
+    startWalking() {
+    if (!this.active) return;
+    this.resumeFollow();
+    }
+
+    stopWalking() {
+        if (!this.active) return;
+        this.pauseFollow();
     }
 
 }

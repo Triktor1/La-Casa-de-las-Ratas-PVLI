@@ -214,6 +214,57 @@ export default class Level1 extends Phaser.Scene {
                 bullet.heal(tropa);
             }
         });
+        
+         //Colisiones tropas con loros
+        this.physics.add.overlap(this.tropas, this.enemies, (tropa, loro) =>{
+            
+            //Si uno ya no existe/destruye, ignorar
+            if (!tropa || !loro) return; 
+            if (!tropa.active || !loro.active) return; 
+
+            //Si ya se esetan pegando con otro, ignorar
+            if(tropa.isFighting && tropa.currentEnemy !==loro ) return;
+            if(loro.isFighting && loro.currentEnemy !== tropa) return;
+
+
+            //inicia combate
+            tropa.isFighting = true;
+            loro.isFighting = true;
+
+            tropa.currentEnemy = loro; 
+            loro.currentEnemy = tropa; 
+
+            //Machetazos
+            tropa.stopWalking();
+            loro.stopWalking();
+
+            const now = this.time.now; 
+            const cooldown = 300; 
+            
+            
+            if (!tropa.lastAttackTime) tropa.lastAttackTime = 0;
+            if (!loro.lastAttackTime) loro.lastAttackTime = 0;
+
+            if (now - tropa.lastAttackTime >= cooldown) {
+                tropa.getPhysycalDamage(loro.damage);
+                loro.getPhysycalDamage(tropa.damage);
+
+                tropa.lastAttackTime = now;
+                loro.lastAttackTime = now;
+            }
+            
+            //resultado de batalla (movimiento)
+            if (!tropa.active || tropa.hasDied){
+                loro.isFighting = false; 
+                loro.currentEnemy = null; 
+                loro.startWalking();
+            }
+            if (!loro.active || loro.hasDied){
+                tropa.isFighting = false;
+                tropa.currentEnemy = null; 
+                tropa.startWalking(); 
+            }
+        })
     }
 
     endLevel() {

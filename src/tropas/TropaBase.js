@@ -11,11 +11,18 @@ export default class Tropa extends Phaser.GameObjects.PathFollower {
         this.speed = speed;
         this.vida = vida;
         this.type = type; // ESTE ES EL TIPO DE LORO, SERA CLASIFICADO COMO R,B,G.   R critico a G, G critico a B, B critico a R
+        //combate tropas
+        this.isFighting = false; 
+        this.hasDied = false;
+        this.currentEnemy = null; 
+        
         this.setScale(scale);
 
         this.criticoSonido = this.scene.sound.add('Critico', { volume: 0.5 });
 
         this.startFollowingReversed();
+        //this.stopMovement = () => this.pauseFollow();
+        //this.resumeMovement = () => this.resumeFollow();
     }
 
     create() {
@@ -60,7 +67,7 @@ export default class Tropa extends Phaser.GameObjects.PathFollower {
                 this.scene.time.addEvent({
                     delay: 200,
                     callback: () => {
-                        this.clearTint();
+                       if (this.active) this.clearTint();
                     }
                 })
             }
@@ -68,12 +75,27 @@ export default class Tropa extends Phaser.GameObjects.PathFollower {
             console.log(`Vida restante: ${this.vida}`);
         }
     }
+    getPhysycalDamage(amount){
+        if(!this.active) return; 
+
+        this.vida -=amount; 
+        this.setTint(0xffFF0000);
+
+        this.scene.time.addEvent({
+            delay: 150,
+            callback:() => {
+                if (this.active) this.clearTint();
+            }
+        })
+
+        this.checkAlive();
+
+    }
 
     getHealed(heal){
         this.vida+=heal;
         console.log("Me he curado");
     }
-
     checkAlive(reachedEnd = false) {
         if (reachedEnd) {
             this.stopFollow();
@@ -84,7 +106,6 @@ export default class Tropa extends Phaser.GameObjects.PathFollower {
             this.stopFollow();
             this.destroy();
         }
-
     }
 
     startFollowingReversed() {
@@ -100,6 +121,16 @@ export default class Tropa extends Phaser.GameObjects.PathFollower {
                 console.log("speed: " + this.speed);
             }
         });
+    }
+
+    startWalking() {
+        if (!this.active) return;
+        this.resumeFollow();
+    }
+
+    stopWalking() {
+        if (!this.active) return;
+        this.pauseFollow();
     }
 
 }
