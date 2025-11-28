@@ -6,6 +6,7 @@ import RataJeringa from "../torres/RataJeringa.js";
 import RataGorda from "../torres/RataGorda.js";
 import RataManguera from "../torres/RataManguera.js";
 import RataChef from "../torres/RataCamarera.js";
+import RatSniper from "../torres/TorreSniper.js";
 
 import Tropa from "../tropas/TropaBase.js";
 import TropaUI from "../tropas/TropaUI.js"
@@ -106,6 +107,7 @@ export default class Level1 extends Phaser.Scene {
         new TorreUI(this, 400, 100, 'torre', 50, RataGorda);
         new TorreUI(this, 560, 100, 'torre', 50, RataManguera);
         new TorreUI(this, 880, 100, 'torre', 50, RataChef);
+        new TorreUI(this, 1040, 100, 'torre', 50, RatSniper);
 
         //UI DE TROPAS
         new TropaUI(this, 720, 100, 'torre', 20, 5, RataComecables);
