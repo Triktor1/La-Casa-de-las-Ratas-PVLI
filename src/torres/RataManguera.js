@@ -6,12 +6,12 @@ export default class RataManguera extends Torre{
         super(scene, x, y, 135, 15, "rataManguera", "rataManguera", 0, 0.225, 275);
 
         //Atributos base
-        this.damage = 0.375;
+        this.damage = 1;
         this.bulletSpeed = 1700;
         this.fireRate = 135;
 
         //Atributos de mejora al mejorar la torre
-        this.damageBoost = 0.025;
+        this.damageBoost = 0.5;
         this.rangeBoost = 15;
         this.fireRateBoost = 25;
 

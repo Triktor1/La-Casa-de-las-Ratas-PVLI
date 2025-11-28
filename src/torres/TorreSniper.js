@@ -3,7 +3,7 @@ import Bullet from "../bullets/bullet.js";
 
 export default class RatSniper extends Torre{
     constructor(scene, x, y) {
-        super(scene, x, y, 3000, 5, "torreBase", "torre", 0, 0.5, 450);
+        super(scene, x, y, 3500, 5, "torreBase", "torre", 0, 0.5, 450);
 
         this.damage = 35;
         this.bulletSpeed = 3500;
@@ -11,8 +11,8 @@ export default class RatSniper extends Torre{
 
         //Atributos de mejora al mejorar la torre
         this.damageBoost = 5;
-        this.rangeBoost = 20;
-        this.fireRateBoost = 250;
+        this.rangeBoost = 50;
+        this.fireRateBoost = 500;
     }
 
     shoot(enemy) {
