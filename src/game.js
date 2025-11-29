@@ -9,7 +9,8 @@ import GameOverScene from './scenes/GameOverScene.js';
 import TestEnemyScene from './scenes/TestEnemyScene.js';
 import LevelClassTest from './scenes/LevelClassTest.js';
 import Win from './scenes/Win.js';
-import Gallery from './scenes/Gallery.js'
+import GalleryImages from './scenes/GalleryImages.js';
+import GalleryGrid from './scenes/GalleryGrid.js';
 
 let config = {
   type: Phaser.WEBGL,
@@ -31,7 +32,7 @@ let config = {
     },
     zoom: 1
   },
-  scene: [MainMenu, Level1, Level2, Level3, Shop, SelectScene, GameOverScene, Win, TutorialLevel , LevelClassTest, Gallery],
+  scene: [MainMenu, Level1, Level2, Level3, Shop, SelectScene, GameOverScene, Win, TutorialLevel, GalleryImages,  GalleryGrid, LevelClassTest],
 
       physics: {  
         default: 'arcade', 

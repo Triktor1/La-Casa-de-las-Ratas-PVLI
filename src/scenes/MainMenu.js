@@ -54,7 +54,7 @@ export default class MainMenu extends Phaser.Scene {
         //Configuración del botón Gallery
         const galleryBtn = this.add.sprite(this.sys.game.canvas.width * 0.5, this.sys.game.canvas.height * 0.8, 'galleryButton').setInteractive({ useHandCursor: true }).setScale(0.7);
         galleryBtn.on('pointerdown', () => {
-            this.scene.start("Gallery");
+            this.scene.start("GalleryGrid");
         });
         galleryBtn.on('pointerover', () =>
             this.tweens.add({

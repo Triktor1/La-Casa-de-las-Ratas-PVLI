@@ -1,10 +1,12 @@
-export default class Gallery extends Phaser.Scene {
+export default class GalleryImages extends Phaser.Scene {
     constructor() {
-        super({ key: "Gallery" });
+        super({ key: "GalleryImages" });
     }
 
-    init() {
-
+    init(datos) {
+        this.index = datos.index;
+        this.rowNum = datos.rowNum;
+        this.colNum = datos.colNum;
     }
 
     preload() {
@@ -21,25 +23,22 @@ export default class Gallery extends Phaser.Scene {
     }
 
     create() {
+        //Color de fondo
         this.cameras.main.setBackgroundColor(0x967194);
+
         //Creación del objeto galería y carga de las imágenes
         this.gallery = this.cache.json.get('galeria').imagenes;
         this.gallery.forEach(item => {
             this.load.image(item.id, `assets/Gallery/${item.archivo}`);
         });
 
-        //Texto del título de la galería
-        const titleX = 640, titleY = 55;
-        this.add.text(titleX, titleY, "La Galería de las Ratas", {
-            fontSize: '75px',
-            fontFamily: 'Arial Black',
-            color: '#4a3052'
-        }).setOrigin(0.5, 0.5);
-
         //Configuración del botón de volver
         const backBtn = this.add.sprite(this.sys.game.canvas.width * 0.08, this.sys.game.canvas.height * 0.93, 'backButton').setInteractive({ useHandCursor: true }).setScale(0.4);
         backBtn.on('pointerdown', () => {
-            this.scene.start("MainMenu");
+            this.scene.start("GalleryGrid", {
+                primeraFila: Math.floor(this.index / this.colNum),
+                selectedIndex: this.index % this.colNum
+            });
         });
 
         //Tweens con hover del botón de volver
@@ -110,8 +109,13 @@ export default class Gallery extends Phaser.Scene {
             this.indexShiftRight();
         });
 
-        //Controles con flechas de teclado
+        //Controles
         this.cursorKeys = this.input.keyboard.createCursorKeys();
+        this.input.keyboard.on("keydown-ESC", () =>
+            this.scene.start("GalleryGrid", {
+                primeraFila: Math.floor(this.index / this.colNum),
+                selectedIndex: this.index % this.colNum
+            }));
 
         //Crea la galería en cuanto carga todas las imágenes
         this.load.once('complete', () => {
@@ -124,7 +128,6 @@ export default class Gallery extends Phaser.Scene {
 
     //Inicialización de galería
     createGallery() {
-        this.index = 0;
         this.mostrarImagenActual();
     }
 
@@ -202,6 +205,7 @@ export default class Gallery extends Phaser.Scene {
         if (this.sprite) this.sprite.destroy();
         if (this.nombre) this.nombre.destroy();
         if (this.autor) this.autor.destroy();
+        if (this.grupo) this.grupo.destroy();
         if (this.descripcion) this.descripcion.destroy();
         if (this.indexNum) this.indexNum.destroy();
 
@@ -213,13 +217,19 @@ export default class Gallery extends Phaser.Scene {
         this.sprite = this.add.image(posX + sizeX / 2, posY + sizeY / 2, img.id).setScale(imgScale);
 
         //Creo de nuevo los textos con sus propiedades
-        const nombreX = 720, nombreY = 120, autorX = 722, autorY = 180, descX = 720, descY = 240, descLength = 380;
+        const nombreX = 640, nombreY = 55, autorX = 720, autorY = 120, grupoX = 722, grupoY = 180, descX = 720, descY = 240, descLength = 380;
+        
         this.nombre = this.add.text(nombreX, nombreY, img.nombre, {
-            fontSize: '50px',
+            fontSize: '75px',
+            fontFamily: 'Arial Black',
+            color: '#4a3052'
+        }).setOrigin(0.5, 0.5);
+        this.autor = this.add.text(autorX, autorY, img.autor, {
+            fontSize: '45px',
             fontFamily: 'Arial Black',
             color: '#4a3052'
         });
-        this.autor = this.add.text(autorX, autorY, img.autor, {
+        this.grupo = this.add.text(grupoX, grupoY, img.grupo, {
             fontSize: '25px',
             fontFamily: 'Arial Black',
             color: '#4a3052'

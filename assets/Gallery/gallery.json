@@ -4,7 +4,8 @@
             "id": "img1",
             "archivo": "RataWorld9.png",
             "nombre": "Rata rupestre",
-            "autor": "WorldNine-NINETENDO",
+            "autor": "Ferrán",
+            "grupo": "WorldNine-NINETENDO",
             "descripcion": "Una fiel recreación de los retratos de nuestras ratas ancestras. Esta rata parece estar sujetando un trozo de queso, reliquia muy valiosa y escasa en tiempos ancestrales."
         },
         {
@@ -12,6 +13,7 @@
             "archivo": "CasaDeLasRatasLogoBeta.jpeg",
             "nombre": "Sketch de logo",
             "autor": "La Casa de las Ratas",
+            "grupo": "",
             "descripcion": "Uno de los logos rechazados de La Casa de las Ratas. Fue el primero que propusimos, pero finalmente decidimos decantarnos por nuestro logo actual.\nQué tonta la rata."
         },
         {
@@ -19,6 +21,7 @@
             "archivo": "Perro-Rata.png",
             "nombre": "Perro-rata",
             "autor": "Víctor Valenzuela",
+            "grupo": "",
             "descripcion": "La verdad es que ni siquiera nosotros sabemos lo que es esto, pero nos lo encontramos y dijo que era una rata así que nos lo trajimos con nosotros. Lo protegeríamos con nuestra vida."
         },
         {
@@ -26,6 +29,7 @@
             "archivo": "LoroPirataToni.png",
             "nombre": "Loro capitán",
             "autor": "Toni",
+            "grupo": "Profesores",
             "descripcion": "Cuán arto grandiosa ave tenemos el privilegio de contemplar, alto cargo de la armada de loros de los siete mares que parlamenta en los más altos consejos de esta su armada."
         },
         {
@@ -33,6 +37,7 @@
             "archivo": "Peroquecojonestio.png",
             "nombre": "Primer ataque",
             "autor": "La Casa de las Ratas",
+            "grupo": "",
             "descripcion": "Momento del primer asalto aviár por parte de los loros a las cloacas. En ella podemos contemplar una de las ratas algo confusa ante la repentina invasión. Se dice que la rata que tomó la foto está actualmente en trauma, desgarrada por la tragedia."
         },
         {
@@ -40,6 +45,7 @@
             "archivo": "LoroCannon.png",
             "nombre": "Loros cañoneros",
             "autor": "La Casa de las Ratas",
+            "grupo": "",
             "descripcion": "S"
         },
         {
@@ -47,6 +53,7 @@
             "archivo": "CuriCalamardo.png",
             "nombre": "Loro vagabundo",
             "autor": "La Casa de las Ratas",
+            "grupo": "",
             "descripcion": "Loro pidiendo "
         },
         {
@@ -54,6 +61,7 @@
             "archivo": "Lo siento mucho.png",
             "nombre": "Enemies to lovers",
             "autor": "La Casa de las Ratas",
+            "grupo": "",
             "descripcion": "VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI VIVAELYAOIVIVAELYAOI "
         },
         {
@@ -61,13 +69,31 @@
             "archivo": "ReyRatas.png",
             "nombre": "Rey Rata",
             "autor": "La Casa de las Ratas",
+            "grupo": "",
             "descripcion": "EL REY DE LAS RATASH? ES EN SERIO?"
         },
         {
             "id": "img10",
             "archivo": "retratoreyrata.png",
             "nombre": "Rey Ratoncio I",
-            "autor": "Canibalismo Galletil",
+            "autor": "Liling Chen",
+            "grupo": "Canibalismo Galletil",
+            "descripcion": "EL REY DE LAS RATASH? Pues ya no, "
+        },
+        {
+            "id": "img11",
+            "archivo": "ratitanic.png",
+            "nombre": "Enemies to lovers II",
+            "autor": "Lumei",
+            "grupo": "Canibalismo Galletil",
+            "descripcion": "EL REY DE LAS RATASH? Pues ya no, "
+        },
+        {
+            "id": "img12",
+            "archivo": "rataCubo.jpg",
+            "nombre": "Rata Cubo",
+            "autor": "Manio",
+            "grupo": "",
             "descripcion": "EL REY DE LAS RATASH? Pues ya no, "
         }
     ]
