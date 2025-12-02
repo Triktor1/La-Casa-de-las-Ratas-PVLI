@@ -1,15 +1,16 @@
 export default class PlayerData
 {
 
-
-    constructor(Feathers = 0  , HighestLevel = 1 , unlockedTowers = 0 , unlockedTropes = 0)
+    constructor(TropasCosas , Feathers = 0  , CurrentLevel = 1 , unlockedTowers = 0 , unlockedTropes = 0)
     {
         this.feathers = Feathers;
-        this.HighestLevel = HighestLevel;
+        this.CurrentLevel = HighestLevel;
         this.unlockedTowers = unlockedTowers;
-        this.unlockedTropes = unlockedTropes;
-    }
+        this.unlockedTropes = unlockedTropes
 
+
+        this.A = TropasCosas;
+    }
 
     getFeathers()
     {
@@ -18,19 +19,6 @@ export default class PlayerData
     setFeathers(newAmount)
     {
         this.feathers = newAmount;
-    }
-
-    getCurrentLevel()
-    {
-
-    }
-
-    updateData(newMoney , newCurrentLvl , newUnlockedTws , newUnlockedTrps)
-    {
-        money = newMoney;
-        CurrentLevel = newCurrentLvl;
-        unlockedTowers = newUnlockedTws;
-        unlockedTropes = newUnlockedTrps; 
     }
 
 }

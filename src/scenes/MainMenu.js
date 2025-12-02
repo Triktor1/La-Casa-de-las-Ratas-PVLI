@@ -13,6 +13,8 @@ export default class MainMenu extends Phaser.Scene {
     preload() {
         this.load.image('startButton', 'assets/UI/start.png'); // Botón de start
         this.load.image('galleryButton', 'assets/UI/gallery.png'); // Botón de galería (placeholder)
+        this.load.json('TropeDefaultData' , 'src/scenes/ShopDataManagement/TropaShopData.json')
+        
     }
 
     preUpdate(t, dt) {
@@ -21,9 +23,12 @@ export default class MainMenu extends Phaser.Scene {
 
     create() {
 
-        let keyScene = "LevelClassTest";
-        this.playerInfo = new PlayerData();
+        this.arrayCosas = this.cache.json.get('TropeDefaultData').tropas;
 
+        let keyScene = "LevelClassTest";
+        this.playerInfo = new PlayerData(this.arrayCosas);
+
+        console.log(this.playerInfo);
         this.add.text(225, 200, "Filthy Feathers", {
             fontSize: '100px',
             fontFamily: 'Arial Black'
@@ -32,7 +37,7 @@ export default class MainMenu extends Phaser.Scene {
         //Configuración del botón Start
         const startBtn = this.add.sprite(this.sys.game.canvas.width * 0.5, this.sys.game.canvas.height * 0.6, 'startButton').setInteractive({ useHandCursor: true }).setScale(0.7);
         startBtn.on('pointerdown', () => {
-            this.scene.start("Level1");
+            this.scene.start("Level1" , {playerInfo : this.playerInfo , dummy : 1});
         });
 
         //Tweens del botón Start

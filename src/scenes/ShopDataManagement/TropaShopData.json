@@ -1,0 +1,26 @@
+{
+
+    "tropas" :
+    [
+        {
+            "Nombre" : "Rata 1",
+            "Precio" : 8,
+            "Nivel Desbloqueo" : 0,
+            "Desbloqueado" : true
+        }
+        ,
+        {   
+            "Nombre" : "Rata 2",
+            "Precio" : 8,
+            "Nivel Desbloqueo" : 1,
+            "Desbloqueado" : false
+        }
+        ,
+        {
+            "Nombre" : "Rata 3",
+            "Precio" : 8,
+            "Nivel Desbloqueo" : 2,
+            "Desbloqueado" : false
+        }
+    ]
+}

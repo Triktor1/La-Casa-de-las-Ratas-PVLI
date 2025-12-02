@@ -18,6 +18,7 @@ import loroGrumete from "../enemies/loroGrumete.js";
 import loroBarril from "../enemies/loroBarril.js";
 import loroCanonero from "../enemies/loroCanonero.js";
 import RataComecables from "../tropas/RataComecables.js";
+import PlayerData from "../PlayerData/PlayerData.js";
 
 export default class Level1 extends Phaser.Scene {
     constructor() {
@@ -27,13 +28,14 @@ export default class Level1 extends Phaser.Scene {
         this.levelNum = 1;
         this.playerHealth = 100;
         this.enemySpawnNum = 30;
-
     }
 
 
     init(data) {
         //Inicialización de variables principales
+        this.test = data.dummy;
         this.shopMoney = data.shopMoney || 0;
+        this.playerInfo = data.playerInfo;
         this.levelMoney = 1000;
         this.levelNum = 1;
         this.playerHealth = 30;
@@ -79,6 +81,9 @@ export default class Level1 extends Phaser.Scene {
         this.jsonDataArray = this.cache.json.get(this.levelArray[0]).path;
         this.levelMoney = this.cache.json.get(this.levelArray[0]).levelMoney;
         this.enemySpawnNum = this.cache.json.get(this.levelArray[0]).enemySpawnNum;
+
+        console.log(this.test);
+        console.log(this.playerInfo);
 
         //Creación de elementos del nivel
         this.enemies = this.physics.add.group();
@@ -138,16 +143,7 @@ export default class Level1 extends Phaser.Scene {
         {
             this.path.lineTo(this.jsonDataArray[a].x , this.jsonDataArray[a].y)
         }
-        /*
-        this.path = new Phaser.Curves.Path(-50, 600);
-        this.path.lineTo(300, 600);
-        this.path.lineTo(300, 200);
-        this.path.lineTo(700, 200);
-        this.path.lineTo(700, 600);
-        this.path.lineTo(1000, 600);
-        this.path.lineTo(1000, 300);
-        this.path.lineTo(1300, 300);
-        */
+     
         this.graphics = this.add.graphics();
         this.graphics.lineStyle(2, 0xffffff, 1);
         this.path.draw(this.graphics);
@@ -279,10 +275,6 @@ export default class Level1 extends Phaser.Scene {
       
     }
 
-    endLevel() {
-        this.scene.start('Shop', { shopMoney: this.shopMoney });
-    }
-
     update(time, delta) {
         this.bullets.children.iterate(bullet => {
             if (bullet) bullet.update(time, delta);
@@ -292,7 +284,7 @@ export default class Level1 extends Phaser.Scene {
             if (torre) torre.update(time);
         });
         if (this.enemySpawnNum <= 0 && this.enemies.countActive() == 0) {
-            this.scene.start('Win');
+            this.scene.start('Shop' ,{ shopMoney: this.shopMoney , playerInfo : this.playerInfo} );
         }
         if (this.playerHealth <= 0) {
             this.scene.start('GameOverScene');

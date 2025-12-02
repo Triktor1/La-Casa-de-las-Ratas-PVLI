@@ -1,17 +1,23 @@
+import PlayerData from "../PlayerData/PlayerData.js";
+import TropeButton from "./ShopDataManagement/TropeButton.js";
 export default class Shop extends Phaser.Scene {
     shopMoney;
     levelNum;
+    playerInfo;
     constructor(){
         super({key:"Shop"});
     }
 
     init(data){
-        this.shopMoney = data.shopMoney || 0;
+        this.playerInfo = data.playerInfo;
+        this.shopMoney = data.shopMoney || 10;
         this.levelNum = data.levelNum || 1;
     }
     
     preload(){
         this.load.image('botonVolver', 'assets/UI/backbutton.png');
+        this.load.image('botonPlaceholder' , 'assets/WebSprites/Rick.png')
+        this.load.json('coordsBotones' , 'src/scenes/ShopDataManagement/ShopGapsCoords.json')
     }
 
     preUpdate(t, dt){
@@ -19,10 +25,15 @@ export default class Shop extends Phaser.Scene {
     }
 
     create(){
+
+        //TEXTO
+
         this.add.text(20,20,"Shop");
+        this.dineroTienda = this.add.text(20 , 50 , "Plumas: " + this.shopMoney);
+        
 
-        const btnBack = this.add.sprite(this.scale.width / 2, 220, 'botonVolver').setInteractive({ useHandCursor: true });
-
+        //BOTONES
+        const btnBack = this.add.sprite(this.scale.width - 220, 220, 'botonVolver').setInteractive({ useHandCursor: true });
         btnBack.on('pointerdown', () => {
             this.endShop();
         });
@@ -30,7 +41,46 @@ export default class Shop extends Phaser.Scene {
         //efectos
         btnBack.on('pointerover', () => btnBack.setScale(1.1));
         btnBack.on('pointerout', () => btnBack.setScale(1.0));
+
+
+        //BOTONES COMPRA TEST
+
+        /*
+        const a = new TropeButton(this , 100 , 200 , 'botonPlaceholder' , 5);
+        a.setInteractive({useHandCursor : true});
+        a.setScale(0.2 , 0.2);
+        a.on('pointerover', () =>
+        {
+            a.setScale(0.21);
+            console.log(a.desc);
+        });
+        a.on('pointerout', () => a.setScale(0.2));
+
+        a.on('pointerdown' , () =>
+        {
+            if (a.isUnlocked == false && this.shopMoney >= a.precio)
+            {
+                a.preFX.addColorMatrix().grayscale(1);
+                this.shopMoney = this.shopMoney - a.precio;
+                a.esComprada();
+                console.log(this.shopMoney);
+            }
+        })
+
+        */
+        //CREACION BOTONES COMPRA
+        
+        //console.log(this.playerInfo);
+
+        this.buttonPos = this.cache.json.get("coordsBotones").buttonPosition;
+        this.buttonArray = [];
+        for(let i = 0 ; i < this.playerInfo.A.length; i++)
+        {
+            this.buttonArray[i] = new TropeButton(this, this.buttonPos[i].x , this.buttonPos[i].y , 'botonPlaceholder' , 
+                this.playerInfo.A[i].precio ,this.playerInfo.A[i].Desbloqueado )
+            this.buttonArray[i].setScale(0.2 , 0.2);
         }
+    }
 
     endShop(){
         let levelID = 'Level' + this.levelNum;
