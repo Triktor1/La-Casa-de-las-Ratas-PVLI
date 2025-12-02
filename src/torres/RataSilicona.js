@@ -12,6 +12,8 @@ export default class RataSilicona extends Torre{
         this.damageBoost = 5;
         this.slowBoost = 0.1;
         this.durationBoost = 450;
+
+        this.setUpgradeText("Siguiente nivel: \ndaño + " + this.damageBoost + "\nlentitud + " + this.slowBoost + "\nduracion + " + this.durationBoost/1000 + "s", 24, 3);
     }
 
     shoot(enemy) {

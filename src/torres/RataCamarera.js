@@ -11,6 +11,8 @@ export default class RataChef extends Torre{
         // MEJORAS DE STATS POR MEJORAR LA TORRE (j)
         this.healBoost = 5;
         this.firerateBoost = 0.1;
+
+        this.setUpgradeText("Siguiente nivel: \ncuracion + " + this.healBoost + "\nvelocidad + " + this.firerateBoost + "s", 24, 3);
     }
 
     shoot(enemy) {

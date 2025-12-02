@@ -12,6 +12,8 @@ export default class RataGorda extends Torre{
         this.damageBoost = 5;
         this.rangeBoost = 20;
         this.bulletDurationBoost = 25;
+
+        this.setUpgradeText("Siguiente nivel: \ndaño + " + this.damageBoost + "\nrango + " + this.rangeBoost, 24, 2);
     }
 
     shoot(enemy) {

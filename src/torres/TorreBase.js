@@ -17,6 +17,7 @@ export default class Torre extends Phaser.GameObjects.Image {
         this.setScale(scale);
         this.heal = false; //Si la torre es curandera o no 
 
+        this.upgradeText = "C";
         this.upgradeLevel = 1;
         this.maxLevel = 3;
         
@@ -32,18 +33,32 @@ export default class Torre extends Phaser.GameObjects.Image {
         this.rangeGraphics.lineStyle(2, 0x00ff00, 0.4);
         this.rangeGraphics.strokeCircle(x, y, this.rangeValue);
                 
+        this.upgradeText = this.scene.add.text(this.x, this.y, this.upgradeText, { fontSize: '16px', color: '#ffffffff', fontFamily: 'Arial Black' }).setOrigin(0.5);
+        this.scene.physics.add.existing(this.upgradeText);
+        this.upgradeGraphics = this.scene.add.graphics();
+        this.upgradeGraphics.fillStyle(0x000000, 0.5);
+        this.upgradeGraphics.setDepth(1);
+        this.upgradeText.setDepth(2);
+        this.upgradeText.setVisible(false);
+
         this.setInteractive({ useHandCursor: true });
 
         this.on('pointerover', () => {
             this.rangeGraphics.setVisible(true); //hover en torre
+            if (this.upgradeLevel < this.maxLevel) {
+                this.upgradeText.setVisible(true);
+                this.upgradeGraphics.setVisible(true);
+            }
+
         });
         this.on('pointerout', () => {
             this.rangeGraphics.setVisible(false); //fuera del hover
+            this.upgradeText.setVisible(false);
+            this.upgradeGraphics.setVisible(false);
         });
 
         // Mantiene el rango asociado a la torre
         this.rangeCircle.parentTorre = this;
-
 
         //this.checkCollisions(this.scene.enemies, this.scene.bullets);
     }
@@ -80,6 +95,17 @@ export default class Torre extends Phaser.GameObjects.Image {
         //Individual para cada torre, usando override
     }
 
+    setUpgradeText(text, difY , lineas) {
+        this.upgradeText.setText(text);
+
+        const width = this.upgradeText.width + 12;
+        const height = this.upgradeText.height + 12;
+
+        this.upgradeGraphics.clear();
+        this.upgradeGraphics.fillStyle(0x000000, 0.5);
+        this.upgradeGraphics.fillRect(this.x - width / 2, this.y - difY * (lineas-1), width, height);
+    }
+
     checkLevelUp(){
         if (this.upgradeLevel < this.maxLevel) {
             this.upgradeLevel += 1;
@@ -106,4 +132,6 @@ export default class Torre extends Phaser.GameObjects.Image {
 
         this.scene.physics.add.overlap(this.rangeCircle, this.scene.enemies, (range, enemy) => {this.currentTarget = enemy;});
     }
+
+    
 }

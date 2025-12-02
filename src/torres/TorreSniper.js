@@ -13,6 +13,8 @@ export default class RatSniper extends Torre{
         this.damageBoost = 5;
         this.rangeBoost = 50;
         this.fireRateBoost = 500;
+
+        this.setUpgradeText("Siguiente nivel: \ndaño + " + this.damageBoost + "\nrango + " + this.rangeBoost + "\nvelocidad - " + this.fireRateBoost/1000 + "s", 24, 3);
     }
 
     shoot(enemy) {

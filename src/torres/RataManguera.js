@@ -15,6 +15,7 @@ export default class RataManguera extends Torre{
         this.rangeBoost = 15;
         this.fireRateBoost = 25;
 
+        this.setUpgradeText("Siguiente nivel: \ndaño + " + this.damageBoost + "\nrango + " + this.rangeBoost + "\nvelocidad - " + this.fireRateBoost/1000 + "s", 24, 3);
     }
 
     shoot(enemy) {

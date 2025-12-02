@@ -13,9 +13,10 @@ export default class RataJeringa extends Torre{
 
         //Atributos de mejora al mejorar la torre
         this.damageBoost = 1;
-        this.bulletSpeedBoost = 100;    
         this.tickUpgrade = 1;
         this.intervalUpgrade = 125;
+
+        this.setUpgradeText("Siguiente nivel: \ndaño + " + this.damageBoost + "\ngolpes + " + this.tickUpgrade + "\nintervalo veneno - " + this.intervalUpgrade, 24, 3);
     }
 
     shoot(enemy) {
@@ -27,7 +28,6 @@ export default class RataJeringa extends Torre{
 
     upgrade(){
         this.damage += this.damageBoost;
-        this.bulletSpeed += this.bulletSpeedBoost;
         this.tick += this.tickUpgrade;
         this.interval -= this.intervalUpgrade;
     }
