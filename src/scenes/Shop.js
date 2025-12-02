@@ -74,11 +74,17 @@ export default class Shop extends Phaser.Scene {
 
         this.buttonPos = this.cache.json.get("coordsBotones").buttonPosition;
         this.buttonArray = [];
+        let a  = 0;
         for(let i = 0 ; i < this.playerInfo.A.length; i++)
         {
-            this.buttonArray[i] = new TropeButton(this, this.buttonPos[i].x , this.buttonPos[i].y , 'botonPlaceholder' , 
+            if(this.playerInfo.A[i].NivelDesbloqueo <= this.playerInfo.CurrentLevel)
+            {
+            this.buttonArray[a] = new TropeButton(this, this.buttonPos[a].x , this.buttonPos[a].y , 'botonPlaceholder' , 
                 this.playerInfo.A[i].precio ,this.playerInfo.A[i].Desbloqueado )
             this.buttonArray[i].setScale(0.2 , 0.2);
+            a++
+            }
+            
         }
     }
 

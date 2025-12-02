@@ -4,7 +4,7 @@ export default class PlayerData
     constructor(TropasCosas , Feathers = 0  , CurrentLevel = 1 , unlockedTowers = 0 , unlockedTropes = 0)
     {
         this.feathers = Feathers;
-        this.CurrentLevel = HighestLevel;
+        this.CurrentLevel = CurrentLevel;
         this.unlockedTowers = unlockedTowers;
         this.unlockedTropes = unlockedTropes
 
