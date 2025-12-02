@@ -257,8 +257,8 @@ export default class Level1 extends Phaser.Scene {
             if (!loro.lastAttackTime) loro.lastAttackTime = 0;
 
             if (now - tropa.lastAttackTime >= cooldown) {
-                tropa.getPhysycalDamage(loro.damage);
-                loro.getPhysycalDamage(tropa.damage);
+                tropa.getDamaged(loro.damage, loro.type);
+                loro.getDamaged(tropa.damage, tropa.type);
 
                 tropa.lastAttackTime = now;
                 loro.lastAttackTime = now;

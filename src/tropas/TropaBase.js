@@ -75,22 +75,6 @@ export default class Tropa extends Phaser.GameObjects.PathFollower {
             console.log(`Vida restante: ${this.vida}`);
         }
     }
-    getPhysycalDamage(amount){
-        if(!this.active) return; 
-
-        this.vida -=amount; 
-        this.setTint(0xffFF0000);
-
-        this.scene.time.addEvent({
-            delay: 150,
-            callback:() => {
-                if (this.active) this.clearTint();
-            }
-        })
-
-        this.checkAlive();
-
-    }
 
     getHealed(heal){
         this.vida+=heal;

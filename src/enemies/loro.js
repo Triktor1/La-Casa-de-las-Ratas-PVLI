@@ -74,39 +74,6 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
             console.log (`Vida restante: ${this.vida}`);
         }
     }
-    getPhysycalDamage(amount){
-        if(!this.active) return; 
-        this.vida -=amount; 
-
-        this.setTint(0xff999999);
-
-        this.scene.time.addEvent({
-            delay: 150,
-            callback:() => {
-                if (this.active) this.clearTint();
-            }
-        })
-
-        this.checkAlive();
-
-    }
-
-
-
-        getPoisoned(damage, ticks, interval, bulletType) {
-        for (let i = 0; i < ticks; i++){
-            if (this.active){ //para asegurarse de que el loro está vivo
-                this.scene.time.addEvent({
-                    delay: interval * (i + 1),
-                    callback: () => {
-
-                        this.getDamaged(damage, bulletType);
-                        
-                    }
-                })
-            }
-        }
-    }
 
     //Aplica lentitud al enemigo
     slowed(factor, time) {
