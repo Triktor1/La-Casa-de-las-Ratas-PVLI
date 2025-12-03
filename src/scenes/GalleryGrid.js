@@ -97,8 +97,8 @@ export default class GalleryGrid extends Phaser.Scene {
         });
 
         //Visibilidad inicial flechas
-        this.flechaArriba.setVisible(false);
-        this.flechaAbajo.setVisible(true);
+        this.flechaArriba.setVisible(this.filaActual > this.visibleRows - 1);
+        this.flechaAbajo.setVisible(this.endIndex < this.gallery.length);
 
         //Controles
         this.cursorKeys = this.input.keyboard.createCursorKeys();
