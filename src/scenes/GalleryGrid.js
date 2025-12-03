@@ -4,7 +4,7 @@ export default class GalleryGrid extends Phaser.Scene {
     }
 
     init(datos) {
-        this.globalIndex = datos.selectedIndex || 0;
+        this.globalIndex = datos.selectedIndex ?? 0;
     }
 
     preload() {
@@ -25,7 +25,7 @@ export default class GalleryGrid extends Phaser.Scene {
             color: '#4a3052'
         }).setOrigin(0.5);
 
-        // Botón de volver
+        //Botón de volver
         const backBtn = this.add.sprite(this.sys.game.canvas.width * 0.08, this.sys.game.canvas.height * 0.93, 'backButton')
             .setInteractive({ useHandCursor: true })
             .setScale(0.4);
@@ -45,23 +45,70 @@ export default class GalleryGrid extends Phaser.Scene {
             ease: 'Linear'
         }));
 
-        // Flechas
+        //Flechas
         this.flechaArriba = this.add.sprite(this.sys.game.canvas.width / 2, this.sys.game.canvas.height * 0.18, "flecha")
             .setInteractive().setAngle(90).setScale(0.6);
         this.flechaArribaYOriginal = this.flechaArriba.y;
+        this.flechaArribaScaleOriginal = this.flechaArriba.scale;
 
         this.flechaAbajo = this.add.sprite(this.sys.game.canvas.width / 2, this.sys.game.canvas.height * 0.92, "flecha")
             .setInteractive().setAngle(-90).setScale(0.6);
         this.flechaAbajoYOriginal = this.flechaAbajo.y;
+        this.flechaAbajoScaleOriginal = this.flechaAbajo.scale;
 
-        this.flechaArriba.on('pointerdown', () => this.indexShiftUp());
-        this.flechaAbajo.on('pointerdown', () => this.indexShiftDown());
+        this.flechaArriba.on('pointerdown', () => this.indexShiftUp(true));
+        this.flechaAbajo.on('pointerdown', () => this.indexShiftDown(true));
 
+        //Tweens de flechas
+        //Arriba
+        this.flechaArriba.on("pointerover", () => {
+            this.tweens.add({
+                targets: this.flechaArriba,
+                y: this.flechaArribaYOriginal - 10,
+                duration: 120,
+                ease: "Linear"
+            });
+        });
+        this.flechaArriba.on("pointerout", () => {
+            this.tweens.add({
+                targets: this.flechaArriba,
+                y: this.flechaArribaYOriginal,
+                duration: 120,
+                ease: "Linear"
+            });
+        });
+
+        //Abajo
+        this.flechaAbajo.on("pointerover", () => {
+            this.tweens.add({
+                targets: this.flechaAbajo,
+                y: this.flechaAbajoYOriginal + 10,
+                duration: 120,
+                ease: "Linear"
+            });
+        });
+        this.flechaAbajo.on("pointerout", () => {
+            this.tweens.add({
+                targets: this.flechaAbajo,
+                y: this.flechaAbajoYOriginal,
+                duration: 120,
+                ease: "Linear"
+            });
+        });
+
+        //Visibilidad inicial flechas
+        this.flechaArriba.setVisible(false);
+        this.flechaAbajo.setVisible(true);
+
+        //Controles
         this.cursorKeys = this.input.keyboard.createCursorKeys();
         this.input.keyboard.on("keydown-ENTER", () => this.activarImagenSeleccionada());
         this.input.keyboard.on("keydown-ESC", () => this.scene.start("MainMenu"));
 
-        this.load.once('complete', () => this.createGrid());
+        this.load.once('complete', () => {
+            this.createGrid();
+            this.dibujarGrid();
+        });
         this.load.start();
     }
 
@@ -77,25 +124,27 @@ export default class GalleryGrid extends Phaser.Scene {
         this.spaceX = 70 + this.boxSizeX;
         this.spaceY = 40 + this.boxSizeY;
 
+        this.firstTime = true;
+
         this.imageSprites = [];
         this.dibujarGrid();
     }
 
     dibujarGrid() {
-        // Destruir sprites antiguos
+        //Destruir sprites antiguos
         this.imageSprites.forEach(s => s.destroy());
         this.imageSprites = [];
 
-        // Calcular fila actual y startIndex
-        this.filaActual = Math.floor(this.globalIndex / this.visibleCols / this.visibleRows);
-        const startIndex = this.filaActual * this.visibleRows * this.visibleCols;
-        const endIndex = Math.min(startIndex + this.pageSize, this.gallery.length);
+        //Calcular fila actual y startIndex
+        this.filaActual = Math.floor(this.globalIndex / this.visibleCols);
+        console.log("Fila actual:", this.filaActual);
+        console.log("Índice global:", this.globalIndex);
+        console.log("Índice local:", this.globalIndex % this.pageSize);
 
-        // Mostrar flechas
-        this.flechaArriba.setVisible(this.filaActual > 0);
-        this.flechaAbajo.setVisible(endIndex < this.gallery.length);
+        this.startIndex = this.globalIndex - (this.globalIndex % this.pageSize);
+        this.endIndex = Math.min(this.startIndex + this.pageSize, this.gallery.length);
 
-        const visibles = this.gallery.slice(startIndex, endIndex);
+        const visibles = this.gallery.slice(this.startIndex, this.endIndex);
         visibles.forEach((img, i) => {
             const col = i % this.visibleCols;
             const row = Math.floor(i / this.visibleCols);
@@ -107,12 +156,16 @@ export default class GalleryGrid extends Phaser.Scene {
             const frame = texture.getSourceImage();
             const imgScale = Math.min(this.boxSizeX / frame.width, this.boxSizeY / frame.height);
 
+            const globalIndex = this.startIndex + i;
             const sprite = this.add.image(x, y, img.id).setInteractive({ useHandCursor: true });
+            sprite.globalIndex = globalIndex;
             sprite.originalScale = imgScale;
             sprite.setScale(imgScale);
-            sprite.globalIndex = startIndex + i;
 
-            sprite.on("pointerdown", () => { this.globalIndex = sprite.globalIndex; this.actualizarSeleccion(); this.activarImagenSeleccionada(); });
+            sprite.on("pointerdown", () => {
+                this.globalIndex = sprite.globalIndex;
+                this.actualizarSeleccion(); this.activarImagenSeleccionada();
+            });
             sprite.on("pointerover", () =>
                 this.tweens.add({
                     targets: sprite,
@@ -133,8 +186,8 @@ export default class GalleryGrid extends Phaser.Scene {
             this.imageSprites.push(sprite);
         });
 
-        // Índice local dentro de la página
-        this.selectedIndex = this.globalIndex - startIndex;
+        //Índice local dentro de la página
+        this.selectedIndex = this.globalIndex - this.startIndex;
         this.actualizarSeleccion();
     }
 
@@ -163,38 +216,111 @@ export default class GalleryGrid extends Phaser.Scene {
         });
     }
 
-    indexShiftUp() {
-        if (this.filaActual > 0) { this.filaActual--; this.globalIndex -= this.visibleCols * this.visibleRows; this.dibujarGrid(); }
+    indexShiftUp(clicked = false) {
+        this.globalIndex = Math.max(this.globalIndex - this.visibleCols, 0);
+        this.dibujarGrid();
+
+        if (this.filaActual > this.visibleRows - 1) this.flechaArriba.setVisible(true);
+        if (this.endIndex < this.gallery.length) this.flechaAbajo.setVisible(true);
+        //Tween flecha arriba
+        if (this.globalIndex % this.pageSize >= this.visibleCols || clicked) {
+            const originalY = this.flechaArribaYOriginal;
+            const originalScale = this.flechaArribaScaleOriginal;
+            this.tweens.killTweensOf(this.flechaArriba);
+            this.flechaArribaYOriginal = originalY;
+            this.tweens.add({
+                targets: this.flechaArriba,
+                y: originalY - 20,
+                scale: originalScale * 1.1,
+                duration: 100,
+                ease: 'Linear',
+                onComplete: () => {
+                    //Tween de regreso a la posición original
+                    this.tweens.add({
+                        targets: this.flechaArriba,
+                        y: originalY,
+                        scale: originalScale,
+                        duration: 100,
+                        ease: 'Linear',
+                        onComplete: () => {
+                            this.flechaArriba.setVisible(this.filaActual > this.visibleRows - 1);
+                            this.flechaAbajo.setVisible(this.endIndex < this.gallery.length);
+                        }
+                    });
+                }
+            });
+        }
+
     }
-    indexShiftDown() {
-        const maxFila = Math.ceil(this.gallery.length / (this.visibleCols * this.visibleRows)) - 1;
-        if (this.filaActual < maxFila) {
-            this.filaActual++; this.globalIndex += this.visibleCols * this.visibleRows; this.dibujarGrid();
+
+    indexShiftDown(clicked = false) {
+        const maxIndex = this.gallery.length - 1;
+        this.globalIndex = Math.min(this.globalIndex + this.visibleCols, maxIndex);
+
+        this.dibujarGrid();
+
+        if (this.filaActual > this.visibleRows - 1) this.flechaArriba.setVisible(true);
+        if (this.endIndex < this.gallery.length) this.flechaAbajo.setVisible(true);
+        //Tween flecha abajo
+        if (this.globalIndex % this.pageSize < this.visibleCols || clicked) {
+            const originalY = this.flechaAbajoYOriginal;
+            const originalScale = this.flechaAbajoScaleOriginal;
+            this.tweens.killTweensOf(this.flechaAbajo);
+            this.flechaAbajoYOriginal = originalY;
+            this.tweens.add({
+                targets: this.flechaAbajo,
+                y: originalY + 20,
+                scale: originalScale * 1.2,
+                duration: 100,
+                ease: 'Linear',
+                onComplete: () => {
+                    //Tween de regreso a la posición original
+                    this.tweens.add({
+                        targets: this.flechaAbajo,
+                        y: originalY,
+                        scale: originalScale,
+                        duration: 100,
+                        ease: 'Linear',
+                        onComplete: () => {
+                            this.flechaArriba.setVisible(this.filaActual > this.visibleRows - 1);
+                            this.flechaAbajo.setVisible(this.endIndex < this.gallery.length);
+                        }
+                    });
+                }
+            });
         }
     }
 
+
     update() {
         const maxIndex = this.gallery.length - 1;
-
         if (Phaser.Input.Keyboard.JustDown(this.cursorKeys.left)) {
             if (this.globalIndex > 0) {
-                this.globalIndex--; this.dibujarGrid();
+                this.globalIndex--;
+                this.dibujarGrid();
+                this.flechaArriba.setVisible(this.filaActual > this.visibleRows - 1);
+                this.flechaAbajo.setVisible(this.endIndex < this.gallery.length);
+                console.log("Max index:", maxIndex);
             }
         }
         if (Phaser.Input.Keyboard.JustDown(this.cursorKeys.right)) {
             if (this.globalIndex < maxIndex) {
-                this.globalIndex++; this.dibujarGrid();
+                this.globalIndex++;
+                this.dibujarGrid();
+                this.flechaArriba.setVisible(this.filaActual > this.visibleRows - 1);
+                this.flechaAbajo.setVisible(this.endIndex < this.gallery.length);
+                console.log("Max index:", maxIndex);
             }
         }
         if (Phaser.Input.Keyboard.JustDown(this.cursorKeys.up)) {
-            if (this.globalIndex - this.visibleCols >= 0) { 
-                this.globalIndex -= this.visibleCols; this.dibujarGrid(); 
-            }
+            this.indexShiftUp();
+            console.log("Max index:", maxIndex);
+
+
         }
         if (Phaser.Input.Keyboard.JustDown(this.cursorKeys.down)) {
-            if (this.globalIndex + this.visibleCols <= maxIndex) { 
-                this.globalIndex += this.visibleCols; this.dibujarGrid(); 
-            }
+            this.indexShiftDown();
+            console.log("Max index:", maxIndex);
         }
     }
 

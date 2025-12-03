@@ -37,7 +37,7 @@ export default class GalleryImages extends Phaser.Scene {
         backBtn.on('pointerdown', () => {
             this.scene.start("GalleryGrid", {
                 primeraFila: Math.floor(this.index / this.colNum),
-                selectedIndex: this.index % this.colNum
+                selectedIndex: this.index
             });
         });
 
@@ -114,7 +114,7 @@ export default class GalleryImages extends Phaser.Scene {
         this.input.keyboard.on("keydown-ESC", () =>
             this.scene.start("GalleryGrid", {
                 primeraFila: Math.floor(this.index / this.colNum),
-                selectedIndex: this.index % this.colNum
+                selectedIndex: this.index
             }));
 
         //Crea la galería en cuanto carga todas las imágenes
