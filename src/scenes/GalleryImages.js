@@ -26,6 +26,7 @@ export default class GalleryImages extends Phaser.Scene {
         //Color de fondo
         this.cameras.main.setBackgroundColor(0x967194);
 
+
         //Creación del objeto galería y carga de las imágenes
         this.gallery = this.cache.json.get('galeria').imagenes;
         this.gallery.forEach(item => {
@@ -214,11 +215,14 @@ export default class GalleryImages extends Phaser.Scene {
         const texture = this.textures.get(img.id);
         const frame = texture.getSourceImage();
         let imgScale = Math.min(sizeX / frame.width, sizeY / frame.height)
-        this.sprite = this.add.image(posX + sizeX / 2, posY + sizeY / 2, img.id).setScale(imgScale);
+        this.sprite = this.add.image(posX + sizeX / 2, posY + sizeY / 2, img.id).setScale(imgScale).setInteractive({useHandCursor: true});
+        this.sprite.on('pointerdown', () => {
+            this.crearZoom();
+        });
 
         //Creo de nuevo los textos con sus propiedades
         const nombreX = 640, nombreY = 55, autorX = 720, autorY = 120, grupoX = 722, grupoY = 180, descX = 720, descY = 240, descLength = 380;
-        
+
         this.nombre = this.add.text(nombreX, nombreY, img.nombre, {
             fontSize: '75px',
             fontFamily: 'Arial Black',
@@ -260,5 +264,40 @@ export default class GalleryImages extends Phaser.Scene {
             fontFamily: 'Arial Black',
             color: '#4a3052'
         });
+    }
+
+    crearZoom() {
+        this.gfx = this.add.graphics();
+        this.gfx.fillStyle(0x000000, 0.6);
+        this.gfx.fillRect(0, 0, this.game.scale.width, this.game.scale.height);
+
+        this.gfx.setInteractive(
+            new Phaser.Geom.Rectangle(0, 0, this.game.scale.width, this.game.scale.height),
+            Phaser.Geom.Rectangle.Contains
+        );
+        this.gfx.on('pointerdown', () => {
+            this.quitarZoom();
+        });
+
+        const sizeX = 1160, sizeY = 660, posX = 60, posY = 30;
+        const img = this.gallery[this.index];
+        const texture = this.textures.get(img.id);
+        const frame = texture.getSourceImage();
+        let imgScale = Math.min(sizeX / frame.width, sizeY / frame.height)
+        this.sprite = this.add.image(posX + sizeX / 2, posY + sizeY / 2, img.id).setScale(imgScale);
+
+        this.sprite.setInteractive();
+        this.sprite.on('pointerdown', () => this.quitarZoom());
+    }
+
+    quitarZoom() {
+        if (this.sprite) {
+            this.sprite.destroy();
+            this.sprite = null;
+        }
+        if (this.gfx) {
+            this.gfx.destroy();
+            this.gfx = null;
+        }
     }
 }
