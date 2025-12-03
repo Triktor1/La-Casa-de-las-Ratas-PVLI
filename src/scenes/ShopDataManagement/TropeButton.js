@@ -1,7 +1,7 @@
 export default class TropeButton extends Phaser.GameObjects.Image
 {
 
-    constructor(scene , x , y , sprite , precio , estado , nivelDisp , desc)
+    constructor(scene , x , y , sprite , precio , estado , desc)
     {
         super(scene , x , y , sprite , 0)
         
@@ -9,7 +9,7 @@ export default class TropeButton extends Phaser.GameObjects.Image
 
         this.isUnlocked = estado;
         this.tropa = 0;
-        this.desc = "Esta tropa hace esto";
+        this.desc = desc;
         this.precio = precio;
         scene.add.existing(this);
 

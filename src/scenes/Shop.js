@@ -69,23 +69,59 @@ export default class Shop extends Phaser.Scene {
 
         */
         //CREACION BOTONES COMPRA
-        
-        //console.log(this.playerInfo);
 
         this.buttonPos = this.cache.json.get("coordsBotones").buttonPosition;
         this.buttonArray = [];
-        let a  = 0;
+        let a = 0;
         for(let i = 0 ; i < this.playerInfo.A.length; i++)
         {
             if(this.playerInfo.A[i].NivelDesbloqueo <= this.playerInfo.CurrentLevel)
             {
-            this.buttonArray[a] = new TropeButton(this, this.buttonPos[a].x , this.buttonPos[a].y , 'botonPlaceholder' , 
-                this.playerInfo.A[i].precio ,this.playerInfo.A[i].Desbloqueado )
-            this.buttonArray[i].setScale(0.2 , 0.2);
-            a++
+                console.log(a);
+                console.log(i);
+
+                this.buttonArray[a] = new TropeButton(this , this.buttonPos[a].x , this.buttonPos[a].y , 'botonPlaceholder' , this.playerInfo.A[i].Precio , this.playerInfo.A[i].Desbloqueado , this.playerInfo.A[i].Descripcion);
+                this.buttonArray[a].setScale(0.2);
+                this.buttonArray[a].setInteractive({useHandCursor : true});
+                
+                a++;
             }
-            
         }
+
+
+        //Funciones a la hora de interactuar con el cursor
+
+        for (let i = 0 ; i < this.buttonArray.length ; i++)
+        {
+
+            //ANIMACIONES Y DISPLAY DE FUNCIONALIDAD DE LA TROPA/TORRE
+
+            this.buttonArray[i].on("pointerover" , () => {
+                console.log(this.buttonArray[i].desc);
+                this.buttonArray[i].setScale(0.21);
+            })
+
+            this.buttonArray[i].on("pointerout" , () =>{
+                this.buttonArray[i].setScale(0.2);
+            })
+
+            this.buttonArray[i].on("pointerdown" , () =>
+            {
+                 if (this.buttonArray[i].isUnlocked == false && this.shopMoney >= this.buttonArray[i].precio)
+                {
+                    this.buttonArray[i].preFX.addColorMatrix().grayscale(1);
+                    this.shopMoney = this.shopMoney - this.buttonArray[i].precio;
+                    this.buttonArray[i].esComprada();
+                    //console.log(this.shopMoney);
+                }
+            })
+
+        }
+    }
+
+    update()
+    {
+        this.dineroTienda = "Plumas: " + this.shopMoney
     }
 
     endShop(){

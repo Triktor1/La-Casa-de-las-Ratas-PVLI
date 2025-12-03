@@ -6,21 +6,32 @@
             "Nombre" : "Rata 1",
             "Precio" : 8,
             "NivelDesbloqueo" : 0,
-            "Desbloqueado" : true
+            "Desbloqueado" : true,
+            "Descripcion" : "Esta tropa hace esta cosilla"
         }
         ,
         {   
             "Nombre" : "Rata 2",
             "Precio" : 8,
             "NivelDesbloqueo" : 1,
-            "Desbloqueado" : false
+            "Desbloqueado" : false,
+            "Descripcion" : "Esta tropa hace esta cosaza"
         }
         ,
         {
             "Nombre" : "Rata 3",
             "Precio" : 8,
             "NivelDesbloqueo" : 2,
-            "Desbloqueado" : false
+            "Desbloqueado" : false,
+            "Descripcion" : "Esta tropa hace otra cosita"
+        }
+        ,
+        {
+            "Nombre" : "Rata 4",
+            "Precio" : 8,
+            "NivelDesbloqueo" : 1,
+            "Desbloqueado" : false,
+            "Descripcion" : "Esta tropa hace otra va despues de una de nvl2"
         }
     ]
 }
