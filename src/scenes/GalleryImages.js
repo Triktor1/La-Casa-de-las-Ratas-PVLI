@@ -26,7 +26,6 @@ export default class GalleryImages extends Phaser.Scene {
         //Color de fondo
         this.cameras.main.setBackgroundColor(0x967194);
 
-
         //Creación del objeto galería y carga de las imágenes
         this.gallery = this.cache.json.get('galeria').imagenes;
         this.gallery.forEach(item => {
@@ -68,45 +67,62 @@ export default class GalleryImages extends Phaser.Scene {
         this.flechaDer = this.add.sprite(this.sys.game.canvas.width * 0.94, this.sys.game.canvas.height * 0.5, 'flecha').setInteractive({ useHandCursor: true }).setScale(0.8);
         this.flechaDer.flipX = true;
 
+        this.canMove = true;
+
         //Tweens con hover de los botones de flechas
         const originalXIzq = this.flechaIzqX;
         this.tweens.killTweensOf(this.flechaIzq);
         this.flechaIzq.x = originalXIzq;
-        this.flechaIzq.on('pointerover', () => this.tweens.add({
-            targets: this.flechaIzq,
-            x: originalXIzq - 8,
-            duration: 70,
-            ease: 'Linear',
-        }));
-        this.flechaIzq.on('pointerout', () => this.tweens.add({
-            targets: this.flechaIzq,
-            x: originalXIzq + 8,
-            duration: 70,
-            ease: 'Linear',
-        }));
+        this.flechaIzq.on('pointerover', () => {
+            if (!this.canMove) return;
+            this.tweens.add({
+                targets: this.flechaIzq,
+                x: originalXIzq - 8,
+                duration: 70,
+                ease: 'Linear',
+
+            })
+        });
+        this.flechaIzq.on('pointerout', () => {
+            if (!this.canMove) return;
+            this.tweens.add({
+                targets: this.flechaIzq,
+                x: originalXIzq + 8,
+                duration: 70,
+                ease: 'Linear',
+            })
+        });
         const originalXDer = this.flechaDerX;
         this.tweens.killTweensOf(this.flechaDer);
         this.flechaDer.x = originalXDer;
-        this.flechaDer.on('pointerover', () => this.tweens.add({
-            targets: this.flechaDer,
-            x: originalXDer + 8,
-            duration: 70,
-            ease: 'Linear',
-        }));
+        this.flechaDer.on('pointerover', () => {
+            if (!this.canMove) return;
+            this.tweens.add({
+                targets: this.flechaDer,
+                x: originalXDer + 8,
+                duration: 70,
+                ease: 'Linear',
+            })
+        });
 
-        this.flechaDer.on('pointerout', () => this.tweens.add({
-            targets: this.flechaDer,
-            x: originalXDer - 8,
-            duration: 70,
-            ease: 'Linear',
-        }));
+        this.flechaDer.on('pointerout', () => {
+            if (!this.canMove) return;
+            this.tweens.add({
+                targets: this.flechaDer,
+                x: originalXDer - 8,
+                duration: 70,
+                ease: 'Linear',
+            })
+        });
 
 
         //Cambio el índice para que cambie de imagen, loopeando si llega a un extremo (haciendo clic en las flechas de la pantalla)
         this.flechaIzq.on('pointerdown', () => {
+            if (!this.canMove) return;
             this.indexShiftLeft();
         });
         this.flechaDer.on('pointerdown', () => {
+            if (!this.canMove) return;
             this.indexShiftRight();
         });
 
@@ -191,9 +207,11 @@ export default class GalleryImages extends Phaser.Scene {
     update() {
         //Cambio el índice para que cambie de imagen, loopeando si llega a un extremo (con flecha de teclado)
         if (Phaser.Input.Keyboard.JustDown(this.cursorKeys.left)) {
+            if (!this.canMove) return;
             this.indexShiftLeft();
         }
         if (Phaser.Input.Keyboard.JustDown(this.cursorKeys.right)) {
+            if (!this.canMove) return;
             this.indexShiftRight();
         }
     }
@@ -215,7 +233,7 @@ export default class GalleryImages extends Phaser.Scene {
         const texture = this.textures.get(img.id);
         const frame = texture.getSourceImage();
         let imgScale = Math.min(sizeX / frame.width, sizeY / frame.height)
-        this.sprite = this.add.image(posX + sizeX / 2, posY + sizeY / 2, img.id).setScale(imgScale).setInteractive({useHandCursor: true});
+        this.sprite = this.add.image(posX + sizeX / 2, posY + sizeY / 2, img.id).setScale(imgScale).setInteractive({ useHandCursor: true });
         this.sprite.on('pointerdown', () => {
             this.crearZoom();
         });
@@ -267,6 +285,7 @@ export default class GalleryImages extends Phaser.Scene {
     }
 
     crearZoom() {
+        this.canMove = false;
         this.gfx = this.add.graphics();
         this.gfx.fillStyle(0x000000, 0.6);
         this.gfx.fillRect(0, 0, this.game.scale.width, this.game.scale.height);
@@ -275,29 +294,30 @@ export default class GalleryImages extends Phaser.Scene {
             new Phaser.Geom.Rectangle(0, 0, this.game.scale.width, this.game.scale.height),
             Phaser.Geom.Rectangle.Contains
         );
-        this.gfx.on('pointerdown', () => {
-            this.quitarZoom();
-        });
-
+        
         const sizeX = 1160, sizeY = 660, posX = 60, posY = 30;
         const img = this.gallery[this.index];
         const texture = this.textures.get(img.id);
         const frame = texture.getSourceImage();
         let imgScale = Math.min(sizeX / frame.width, sizeY / frame.height)
-        this.sprite = this.add.image(posX + sizeX / 2, posY + sizeY / 2, img.id).setScale(imgScale);
-
-        this.sprite.setInteractive();
-        this.sprite.on('pointerdown', () => this.quitarZoom());
+        this.zoomedSprite = this.add.image(posX + sizeX / 2, posY + sizeY / 2, img.id).setScale(imgScale);
+        
+        this.zoomedSprite.setInteractive();
+        this.zoomedSprite.on('pointerdown', () => this.quitarZoom());
+        this.gfx.on('pointerdown', () => {
+            this.quitarZoom();
+        });
     }
 
     quitarZoom() {
-        if (this.sprite) {
-            this.sprite.destroy();
-            this.sprite = null;
+        if (this.zoomedSprite) {
+            this.zoomedSprite.destroy();
+            this.zoomedSprite = null;
         }
         if (this.gfx) {
             this.gfx.destroy();
             this.gfx = null;
         }
+        this.canMove = true;
     }
 }
