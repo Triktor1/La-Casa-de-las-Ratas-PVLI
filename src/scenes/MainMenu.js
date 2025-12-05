@@ -13,6 +13,7 @@ export default class MainMenu extends Phaser.Scene {
     preload() {
         this.load.image('startButton', 'assets/UI/start.png'); // Botón de start
         this.load.image('galleryButton', 'assets/UI/gallery.png'); // Botón de galería (placeholder)
+        this.load.image('logo', 'assets/UI/FilthyFeathersLogo.png'); // Logo del juego
         this.load.json('TropeDefaultData' , 'src/scenes/ShopDataManagement/TropaShopData.json')
         
     }
@@ -29,10 +30,7 @@ export default class MainMenu extends Phaser.Scene {
         this.playerInfo = new PlayerData(this.arrayCosas);
 
         console.log(this.playerInfo);
-        this.add.text(225, 200, "Filthy Feathers", {
-            fontSize: '100px',
-            fontFamily: 'Arial Black'
-        });
+        this.add.sprite(this.sys.game.canvas.width*0.5, this.sys.canvas.height * 0.3, 'logo').setScale(0.5);
 
         //Configuración del botón Start
         const startBtn = this.add.sprite(this.sys.game.canvas.width * 0.5, this.sys.game.canvas.height * 0.6, 'startButton').setInteractive({ useHandCursor: true }).setScale(0.7);
