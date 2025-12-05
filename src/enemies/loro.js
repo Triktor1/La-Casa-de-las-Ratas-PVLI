@@ -22,6 +22,10 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
         this.criticoSonido = this.scene.sound.add('Critico', { volume: 0.5 });
         // this.stopMovement = () => this.pauseFollow();
         // this.resumeMovement = () => this.resumeFollow();
+
+        //Para el slow 
+        this.slowTimer = 0;
+        this.slowApplied = false;
     }
 
     create() {
@@ -74,12 +78,13 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
             console.log (`Vida restante: ${this.vida}`);
         }
     }
-
     //Aplica lentitud al enemigo
     slowed(factor, time) {
         this.data = this.pathTween.data[0];
         this.current = this.data.current; //data.current es el progreso del path follower, que funciona entre 0 y 1
 
+        this.slowApplied = true;
+        this.slowTimer = this.scene.time.now + time;
         //Ajuste del tween
         this.data.duration = 40000 / (this.speed * factor);  
         this.data.elapsed = this.current * this.data.duration; 
@@ -89,11 +94,12 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
             this.scene.time.addEvent({
                 delay: time,
                 callback: () => {
-                    if (this.active && this.data){ //para asegurarse de que el loro está vivo
+                    if (this.active && this.data && this.slowTimer <= this.scene.time.now){ //para asegurarse de que el loro está vivo o que no se ha reseteado el slow
                         this.current = this.data.current;
                         // el 40k es el tiempo en milisegundos que tarda en recorrerlo, numero magico igual habria que corregirlo
                         this.data.duration = 40000 / this.speed;  
                         this.data.elapsed = this.current * this.data.duration; 
+                        this.slowApplied = false;
                     } 
                 }
             });
@@ -162,4 +168,9 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
         this.pauseFollow();
     }
 
+    update(time, delta) {
+        if (this.slowApplied) {
+            this.slowTimer -= delta;
+        }
+    }
 }
