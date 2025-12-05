@@ -26,5 +26,12 @@ export default class RataChef extends Torre{
     upgrade(){
         this.healAmount += this.healBoost;
         this.firerate -= this.firerateBoost;
+
+        if (this.upgradeLevel == 2){
+            this.setTexture("rataChef2");
+        }
+        else if (this.upgradeLevel == 3){
+            this.setTexture("rataChef3");
+        }
     }
 }

@@ -57,15 +57,46 @@ export default class Level1 extends Phaser.Scene {
         this.load.image('selectButton', 'assets/UI/lvlselectboton.png');
         this.load.image('shopButton', 'assets/UI/shop.png');
         this.load.image('torre', 'assets/Ratas/torre.png');
-        this.load.image('rataSilicona', 'assets/Ratas/siliconeRat.png');
         this.load.image('rataComecables', 'assets/Ratas/rataComecables.png');
-        this.load.image('rataChef', 'assets/Ratas/RataChef.png');
-        this.load.image('BigCheese', 'assets/Ratas/BigCheese.png');
-        this.load.image('rataManguera', 'assets/Ratas/RataManguera.jpg');
-        this.load.image('background', 'assets/bg.png');
-        this.load.image('bullet', 'assets/Ratas/bullet.png');
+
+        //SPRITES DE RATA SILICONA
+        this.load.image('rataSilicona', 'assets/Ratas/siliconeRat.png');
+        this.load.image('rataSilicona2', 'assets/Ratas/siliconeRat2.png');
+        this.load.image('rataSilicona3', 'assets/Ratas/siliconeRat3.png');
         this.load.image('siliconeBullet', 'assets/Ratas/siliconeBullet.png');
+
+        //SPRITES DE RATA CHEF
+        this.load.image('rataChef', 'assets/Ratas/RataChef.png');
+        this.load.image('rataChef2', 'assets/Ratas/RataChef2.png');
+        this.load.image('rataChef3', 'assets/Ratas/RataChef3.png');
+        this.load.image('gourmetBullet', 'assets/Ratas/Gourmet.png');
+
+        //SPRITES DE RATA GORDA
+        this.load.image('BigCheese', 'assets/Ratas/BigCheese.png');
+        this.load.image('BigCheese2', 'assets/Ratas/BigCheese2.png');
+        this.load.image('BigCheese3', 'assets/Ratas/BigCheese3.png');
         this.load.image('FatBullet', 'assets/Ratas/FatBullet.png');
+
+        //SPRITES DE RATA MANGUERA
+        this.load.image('rataManguera', 'assets/Ratas/RataManguera.jpg');
+        this.load.image('rataManguera2', 'assets/Ratas/RataManguera2.png');
+        this.load.image('rataManguera3', 'assets/Ratas/RataManguera3.png');
+
+        //SPRITES DE RATA SNIPER
+        this.load.image('Sniper', 'assets/Ratas/Sniper.png');
+        this.load.image('Sniper2', 'assets/Ratas/Sniper2.png');
+        this.load.image('Sniper3', 'assets/Ratas/Sniper3.png');
+        this.load.image('bullet', 'assets/Ratas/bullet.png');
+
+        //SPRITES DE RATA JERINGA
+        this.load.image('rataJeringa', 'assets/Ratas/RataJeringa.png');
+        this.load.image('rataJeringa2', 'assets/Ratas/RataJeringa2.png');
+        this.load.image('rataJeringa3', 'assets/Ratas/RataJeringa3.png');
+        this.load.image('jeringaBullet', 'assets/Ratas/Jeringa.png');
+
+        this.load.image('background', 'assets/bg.png');
+
+
         this.load.image('loroGrum', 'assets/Loros/GrumetePH.png');
         this.load.image('loroCan', 'assets/Loros/CanonPH.png');
         this.load.image('loroBarr', 'assets/Loros/BarrilPH.png');

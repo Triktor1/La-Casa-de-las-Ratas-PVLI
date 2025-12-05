@@ -28,6 +28,12 @@ export default class RataSilicona extends Torre{
         this.damage += this.damageBoost;
         this.slowAmount -= this.slowBoost;
         this.duration += this.durationBoost;
+        
+        if (this.upgradeLevel == 2){
+            this.setTexture("rataSilicona2");
+        }
+        else if (this.upgradeLevel == 3){
+            this.setTexture("rataSilicona3");
+        }
     }
-
 }

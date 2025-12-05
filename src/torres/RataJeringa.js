@@ -3,7 +3,7 @@ import JeringaBullet from "../bullets/jeringaBullet.js";
 
 export default class RataJeringa extends Torre{
     constructor(scene, x, y) {
-        super(scene, x, y, 1500, 15, "rataJeringa", "rataJeringa", 0);
+        super(scene, x, y, 1500, 15, "rataJeringa", "rataJeringa", 0,0.6);
 
         //Atributos propios
         this.damage = 8;
@@ -30,5 +30,12 @@ export default class RataJeringa extends Torre{
         this.damage += this.damageBoost;
         this.tick += this.tickUpgrade;
         this.interval -= this.intervalUpgrade;
+
+        if (this.upgradeLevel == 2){
+            this.setTexture("rataJeringa2");
+        }
+        else if (this.upgradeLevel == 3){
+            this.setTexture("rataJeringa3");
+        }
     }
 }

@@ -30,5 +30,12 @@ export default class RataManguera extends Torre{
         this.rangeValue += this.rangeBoost;
         this.fireRate -= this.fireRateBoost;    
         this.resetRange();
+
+        if (this.upgradeLevel == 2){
+            this.setTexture("rataManguera2");
+        }
+        else if (this.upgradeLevel == 3){
+            this.setTexture("rataManguera3");
+        }
     }
 }

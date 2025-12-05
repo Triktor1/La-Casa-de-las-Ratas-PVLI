@@ -28,6 +28,12 @@ export default class RataGorda extends Torre{
         this.rangeValue += this.rangeBoost;
         this.bulletDuration += this.bulletDurationBoost;
         
+        if (this.upgradeLevel == 2){
+            this.setTexture("BigCheese2");
+        }
+        else if (this.upgradeLevel == 3){
+            this.setTexture("BigCheese3");
+        }
         this.resetRange();
     }
 }
