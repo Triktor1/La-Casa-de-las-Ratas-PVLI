@@ -62,7 +62,7 @@ export default class Tropa extends Phaser.GameObjects.PathFollower {
                 this.setTint(0xff999999); //Tintado gris por daño normal
                 this.vida -= damage;
             }
-
+            
             if (this.active) { //ESTO ES PARA DEVOLVER AL LORO SU TINTE NORMAL
                 this.scene.time.addEvent({
                     delay: 200,

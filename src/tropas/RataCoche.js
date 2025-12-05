@@ -30,6 +30,7 @@ export default class RataCoche extends Tropa {
             //daño normal
          enemy.getDamaged(this.damage, this.type);
         }
+        this.getDamaged(enemy.damage, enemy.type);
     }
 
     playExplosion(x,y){
@@ -43,7 +44,7 @@ export default class RataCoche extends Tropa {
             targets: exp,
             scale: 1.3,
             duration: 2000,
-            ease: "Sube.easeInOut",
+            ease: "Sine.easeInOut",
             flipX: true,
             yoyo: true,
             repeat:2,

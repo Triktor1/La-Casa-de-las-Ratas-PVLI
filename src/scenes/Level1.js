@@ -265,11 +265,17 @@ export default class Level1 extends Phaser.Scene {
             //caso rataCoche
             if(tropa instanceof RataCoche){
                 tropa.onCollision(loro);
-                //loro.isFighting = false; 
-                //loro.currentEnemy = null; 
+                if (!loro.lastAttackTime) loro.lastAttackTime = 0;  
 
-                //tropa.isFighting =false; 
-                //tropa.currentEnemy = null; 
+
+                //al ser un caso apartado se declara de nuevo el comportamiento del ataque de los loros, porque no llega a la logica donde se realiza para el caso generico
+                const now = this.time.now;
+                const cooldown = 300; // milisegundos entre ataques
+
+                if (now - loro.lastAttackTime >= cooldown) {
+                    tropa.getDamaged(loro.damage, loro.type); // el loro ataca a la tropa
+                    loro.lastAttackTime = now;
+                }
                 return; 
             }
 
