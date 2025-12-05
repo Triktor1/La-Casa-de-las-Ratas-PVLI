@@ -83,14 +83,15 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
         this.data = this.pathTween.data[0];
         this.current = this.data.current; //data.current es el progreso del path follower, que funciona entre 0 y 1
 
-        this.slowApplied = true;
-        this.slowTimer = this.scene.time.now + time;
         //Ajuste del tween
         this.data.duration = 40000 / (this.speed * factor);  
         this.data.elapsed = this.current * this.data.duration; 
 
         //Se pasa el efecto
         if (this.active){
+            this.slowApplied = true;
+            this.slowTimer = this.scene.time.now + time;
+
             this.scene.time.addEvent({
                 delay: time,
                 callback: () => {

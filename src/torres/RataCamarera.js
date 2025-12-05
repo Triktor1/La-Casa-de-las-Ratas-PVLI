@@ -1,5 +1,5 @@
 import Torre from "./TorreBase.js";
-import GourmetBullet from "../bullets/gourmetBullet.js";
+import NormalBullet from "../bullets/normalBullet.js";
 
 export default class RataChef extends Torre{
     constructor(scene, x, y) {
@@ -17,7 +17,7 @@ export default class RataChef extends Torre{
 
     shoot(enemy) {
         const dir = new Phaser.Math.Vector2(enemy.x - this.x, enemy.y - this.y).normalize();
-        const bullet = new GourmetBullet(this.scene, this.x, this.y, 'gourmetBullet', 800, 0, dir, 750, false, true, this.healAmount, "B ", 0.2, 0,
+        const bullet = new NormalBullet(this.scene, this.x, this.y, 'gourmetBullet', 800, 0, dir, 750, false, true, this.healAmount, "B ", 0.2, 0,
              this.slowAmount, this.duration);
         this.scene.bullets.add(bullet);
         return bullet;

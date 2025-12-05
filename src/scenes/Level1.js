@@ -343,8 +343,15 @@ export default class Level1 extends Phaser.Scene {
         });
         if (this.enemySpawnNum <= 0 && this.enemies.countActive() == 0) {
 
-            this.playerInfo.CurrentLevel++;
-            this.scene.start('Shop' ,{ shopMoney: this.shopMoney , playerInfo: this.playerInfo} );
+            if (this.playerInfo.CurrentLevel < 2)
+            {
+                this.playerInfo.CurrentLevel++;
+                this.scene.start('Shop' ,{ shopMoney: this.shopMoney , playerInfo: this.playerInfo} );
+            }
+            else
+            {
+                this.scene.start('Win' ,{ shopMoney: this.shopMoney , playerInfo: this.playerInfo} );
+            }
         }
         if (this.playerHealth <= 0) {
             this.scene.start('GameOverScene');

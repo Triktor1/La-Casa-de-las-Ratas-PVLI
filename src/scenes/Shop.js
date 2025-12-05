@@ -29,7 +29,7 @@ export default class Shop extends Phaser.Scene {
         //TEXTO
 
         this.add.text(20,20,"Shop");
-        this.dineroTienda = this.add.text(20 , 50)
+        this.dineroTienda = this.add.text(20 , 50 , "Plumas: " + this.shopMoney)
         
 
         //BOTONES
@@ -71,7 +71,7 @@ export default class Shop extends Phaser.Scene {
             //ANIMACIONES Y DISPLAY DE FUNCIONALIDAD DE LA TROPA/TORRE
 
             this.buttonArray[i].on("pointerover" , () => {
-                //console.log(this.buttonArray[i].desc);
+                console.log(this.buttonArray[i].desc);
                 this.buttonArray[i].setScale(0.21);
             })
 
@@ -85,7 +85,11 @@ export default class Shop extends Phaser.Scene {
                 {
                     this.buttonArray[i].preFX.addColorMatrix().grayscale(1);
                     this.shopMoney = this.shopMoney - this.buttonArray[i].precio;
+
                     this.buttonArray[i].esComprada();
+                    this.playerInfo.A[i].Desbloqueado = true;
+
+                    this.dineroTienda.text = "Plumas: " + this.shopMoney;
                     //console.log(this.shopMoney);
                 }
             })
@@ -95,7 +99,7 @@ export default class Shop extends Phaser.Scene {
 
     update()
     {
-        this.dineroTienda = "Plumas: " + this.shopMoney
+        
     }
 
     endShop(){

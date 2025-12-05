@@ -1,6 +1,6 @@
 import Bullet from "../bullets/bullet.js";
 
-export default class FatBullet extends Bullet {
+export default class NormalBullet extends Bullet {
     constructor(scene, x, y, texture, speed, damage, direction, timeToLive, piercing, teamRat, healValue, type, scale, frame) {
         super(scene, x, y, texture, speed, damage, direction, timeToLive, piercing, teamRat, healValue, type, scale, frame);
     }
