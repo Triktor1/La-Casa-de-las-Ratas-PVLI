@@ -68,8 +68,8 @@ export default class Torre extends Phaser.GameObjects.Image {
         if (this.rangeCircle) {
             this.rangeCircle.x = this.x;
             this.rangeCircle.y = this.y;
-        }
-
+        }6
+        
         // Control de disparo automático
         if (this.currentTarget && time - this.lastShotTime > this.fireRate) {
             this.shoot(this.currentTarget);
@@ -77,7 +77,8 @@ export default class Torre extends Phaser.GameObjects.Image {
         }
 
         // Si el objetivo ya ha muerto o salido del rango, deja de apuntar
-        if (this.currentTarget && (!this.currentTarget.active || this.currentTarget.vida <= 0)) {
+        if (this.currentTarget && (!this.currentTarget.active || this.currentTarget.vida <= 0 
+            || Phaser.Math.Distance.Between(this.x, this.y, this.currentTarget.x, this.currentTarget.y)> this.rangeValue) ) {
             this.currentTarget = null;
         }
 
