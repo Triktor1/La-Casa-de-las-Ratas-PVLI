@@ -19,6 +19,8 @@ import loroBarril from "../enemies/loroBarril.js";
 import loroCanonero from "../enemies/loroCanonero.js";
 import RataComecables from "../tropas/RataComecables.js";
 import PlayerData from "../PlayerData/PlayerData.js";
+import RataCoche from "../tropas/RataCoche.js";
+import RataRodadero from "../tropas/RataRodadero.js";
 
 export default class Level1 extends Phaser.Scene {
     constructor() {
@@ -96,13 +98,18 @@ export default class Level1 extends Phaser.Scene {
 
         this.load.image('background', 'assets/bg.png');
 
-
+        //SPRITES DE TROPAS LORO
         this.load.image('loroGrum', 'assets/Loros/GrumetePH.png');
         this.load.image('loroCan', 'assets/Loros/CanonPH.png');
         this.load.image('loroBarr', 'assets/Loros/BarrilPH.png');
+        //SPRITES DE TROPAS RATA
+        this.load.image('rataCoche', 'assets/Ratas/rataCoche.png');
+        this.load.image('rataRodadero', 'assets/Ratas/rataRodadero.png');
+        this.load.image('explosion', 'assets/Ratas/explosion.png');
 
         //Carga de sonido
         this.load.audio('Critico', 'assets/sonidos/SonidoOriginalParaDañoCriticoNoRobado.mp3');
+        this.load.audio('Boom', 'assets/sonidos/Boom.mp3');
     }
 
     create() {
@@ -147,6 +154,8 @@ export default class Level1 extends Phaser.Scene {
 
         //UI DE TROPAS
         new TropaUI(this, 720, 100, 'torre', 20, 5, RataComecables);
+        new TropaUI(this, 560, 200, 'torre', 20, 5, RataCoche);
+        new TropaUI(this, 1200, 100, 'torre', 20, 5, RataRodadero);
         
         //COLISIONES
         this.checkColisions();
@@ -252,6 +261,17 @@ export default class Level1 extends Phaser.Scene {
             //Si ya se esetan pegando con otro, ignorar
             if(tropa.isFighting && tropa.currentEnemy !==loro ) return;
             if(loro.isFighting && loro.currentEnemy !== tropa) return;
+
+            //caso rataCoche
+            if(tropa instanceof RataCoche){
+                tropa.onCollision(loro);
+                //loro.isFighting = false; 
+                //loro.currentEnemy = null; 
+
+                //tropa.isFighting =false; 
+                //tropa.currentEnemy = null; 
+                return; 
+            }
 
             //comprobacion antifreeze
             const t = tropa;
