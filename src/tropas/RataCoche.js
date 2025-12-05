@@ -15,9 +15,7 @@ export default class RataCoche extends Tropa {
         if (now - this.lastHitTime < this.hitCooldown) return;
         this.lastHitTime = now;
 
-        const esCritico = 
-          (this.type === "R" && enemy.type === "B") 
-        if (esCritico) {
+        if (enemy.type ==="B") {
             enemy.vida = 0; // instakill
             console.log("BOOM");
 
@@ -42,12 +40,10 @@ export default class RataCoche extends Tropa {
         // tween 
         this.scene.tweens.add({
             targets: exp,
-            scale: 1.3,
-            duration: 2000,
-            ease: "Sine.easeInOut",
+            scale: 0.6,
+            duration: 60,
             flipX: true,
             yoyo: true,
-            repeat:2,
             onComplete: () => exp.destroy()
         });
     }
