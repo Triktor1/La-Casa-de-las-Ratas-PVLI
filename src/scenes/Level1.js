@@ -114,14 +114,15 @@ export default class Level1 extends Phaser.Scene {
 
     create() {
 
-        
-        this.jsonDataName = this.cache.json.get(this.levelArray[0]).Name;
-        this.jsonDataArray = this.cache.json.get(this.levelArray[0]).path;
-        this.levelMoney = this.cache.json.get(this.levelArray[0]).levelMoney;
-        this.enemySpawnNum = this.cache.json.get(this.levelArray[0]).enemySpawnNum;
 
-        console.log(this.test);
-        console.log(this.playerInfo);
+        console.log(this.playerInfo.CurrentLevel);
+        this.jsonDataName = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).Name;
+        this.jsonDataArray = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).path;
+        this.levelMoney = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).levelMoney;
+        this.enemySpawnNum = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).enemySpawnNum;
+
+        //console.log(this.test);
+        //console.log(this.playerInfo);
 
         //Creación de elementos del nivel
         this.enemies = this.physics.add.group();
@@ -341,7 +342,9 @@ export default class Level1 extends Phaser.Scene {
             if (torre) torre.update(time);
         });
         if (this.enemySpawnNum <= 0 && this.enemies.countActive() == 0) {
-            this.scene.start('Shop' ,{ shopMoney: this.shopMoney , playerInfo : this.playerInfo} );
+
+            this.playerInfo.CurrentLevel++;
+            this.scene.start('Shop' ,{ shopMoney: this.shopMoney , playerInfo: this.playerInfo} );
         }
         if (this.playerHealth <= 0) {
             this.scene.start('GameOverScene');

@@ -29,7 +29,7 @@ export default class Shop extends Phaser.Scene {
         //TEXTO
 
         this.add.text(20,20,"Shop");
-        this.dineroTienda = this.add.text(20 , 50 , "Plumas: " + this.shopMoney);
+        this.dineroTienda = this.add.text(20 , 50)
         
 
         //BOTONES
@@ -42,32 +42,6 @@ export default class Shop extends Phaser.Scene {
         btnBack.on('pointerover', () => btnBack.setScale(1.1));
         btnBack.on('pointerout', () => btnBack.setScale(1.0));
 
-
-        //BOTONES COMPRA TEST
-
-        /*
-        const a = new TropeButton(this , 100 , 200 , 'botonPlaceholder' , 5);
-        a.setInteractive({useHandCursor : true});
-        a.setScale(0.2 , 0.2);
-        a.on('pointerover', () =>
-        {
-            a.setScale(0.21);
-            console.log(a.desc);
-        });
-        a.on('pointerout', () => a.setScale(0.2));
-
-        a.on('pointerdown' , () =>
-        {
-            if (a.isUnlocked == false && this.shopMoney >= a.precio)
-            {
-                a.preFX.addColorMatrix().grayscale(1);
-                this.shopMoney = this.shopMoney - a.precio;
-                a.esComprada();
-                console.log(this.shopMoney);
-            }
-        })
-
-        */
         //CREACION BOTONES COMPRA
 
         this.buttonPos = this.cache.json.get("coordsBotones").buttonPosition;
@@ -77,8 +51,8 @@ export default class Shop extends Phaser.Scene {
         {
             if(this.playerInfo.A[i].NivelDesbloqueo <= this.playerInfo.CurrentLevel)
             {
-                console.log(a);
-                console.log(i);
+                //console.log(a);
+                //console.log(i);
 
                 this.buttonArray[a] = new TropeButton(this , this.buttonPos[a].x , this.buttonPos[a].y , 'botonPlaceholder' , this.playerInfo.A[i].Precio , this.playerInfo.A[i].Desbloqueado , this.playerInfo.A[i].Descripcion);
                 this.buttonArray[a].setScale(0.2);
@@ -97,7 +71,7 @@ export default class Shop extends Phaser.Scene {
             //ANIMACIONES Y DISPLAY DE FUNCIONALIDAD DE LA TROPA/TORRE
 
             this.buttonArray[i].on("pointerover" , () => {
-                console.log(this.buttonArray[i].desc);
+                //console.log(this.buttonArray[i].desc);
                 this.buttonArray[i].setScale(0.21);
             })
 
@@ -127,10 +101,10 @@ export default class Shop extends Phaser.Scene {
     endShop(){
         let levelID = 'Level' + this.levelNum;
         if(this.levelNum === 0){
-            this.scene.start('TutorialLevel', {shopMoney: this.shopMoney});
+            this.scene.start('TutorialLevel', {playerInfo : this.playerInfo , dummy : 2});
         }
         else{
-            this.scene.start(levelID, {shopMoney: this.shopMoney});
+            this.scene.start(levelID, {playerInfo: this.playerInfo , dummy : 2});
         }
     }
 }

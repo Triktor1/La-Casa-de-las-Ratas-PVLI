@@ -21,7 +21,7 @@
         {
             "Nombre" : "Rata 3",
             "Precio" : 8,
-            "NivelDesbloqueo" : 2,
+            "NivelDesbloqueo" : 1,
             "Desbloqueado" : false,
             "Descripcion" : "Esta tropa hace otra cosita"
         }
@@ -29,9 +29,17 @@
         {
             "Nombre" : "Rata 4",
             "Precio" : 8,
-            "NivelDesbloqueo" : 1,
+            "NivelDesbloqueo" : 2,
             "Desbloqueado" : false,
-            "Descripcion" : "Esta tropa hace otra va despues de una de nvl2"
+            "Descripcion" : "Esta tropa es de nivel 2"
+        }
+        ,
+        {
+            "Nombre" : "Rata 5",
+            "Precio" : 8,
+            "NivelDesbloqueo" : 2,
+            "Desbloqueado" : false,
+            "Descripcion" : "Esta tropa es tambien de nivel 2"
         }
     ]
 }
