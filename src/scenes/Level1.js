@@ -279,6 +279,9 @@ export default class Level1 extends Phaser.Scene {
                 }
                 return; 
             }
+            if(tropa instanceof RataComecables){
+                tropa.onCollision(loro);
+            }
 
             //comprobacion antifreeze
             const t = tropa;
