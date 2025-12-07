@@ -49,7 +49,7 @@ export default class Shop extends Phaser.Scene {
         let a = 0;
         for(let i = 0 ; i < this.playerInfo.A.length; i++)
         {
-            if(this.playerInfo.A[i].NivelDesbloqueo <= this.playerInfo.CurrentLevel)
+            if(this.playerInfo.A[i].NivelDesbloqueo <= this.playerInfo.CurrentLevel && this.playerInfo.A[i].NivelDesbloqueo > 0)
             {
                 //console.log(a);
                 //console.log(i);
@@ -85,12 +85,16 @@ export default class Shop extends Phaser.Scene {
                 {
                     this.buttonArray[i].preFX.addColorMatrix().grayscale(1);
                     this.shopMoney = this.shopMoney - this.buttonArray[i].precio;
-
                     this.buttonArray[i].esComprada();
+
+                    console.log(this.playerInfo.A[i].Desbloqueado);
                     this.playerInfo.A[i].Desbloqueado = true;
 
                     this.dineroTienda.text = "Plumas: " + this.shopMoney;
                     //console.log(this.shopMoney);
+
+
+                    console.log(this.playerInfo);
                 }
             })
 

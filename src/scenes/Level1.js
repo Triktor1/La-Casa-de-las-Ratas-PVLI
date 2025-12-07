@@ -114,6 +114,7 @@ export default class Level1 extends Phaser.Scene {
 
     create() {
 
+        this.listaClases = [RatSniper , RataComecables , RataChef , RataGorda , RataRodadero , RataManguera , RataCoche , RataSilicona , RataJeringa]
 
         console.log(this.playerInfo.CurrentLevel);
         this.jsonDataName = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).Name;
@@ -145,6 +146,7 @@ export default class Level1 extends Phaser.Scene {
         this.jsonTextLevel = this.add.text(700 , 10, "Nivel: " + this.jsonDataName + " Puntos: " + this.jsonDataArray.length);
 
 
+        /*
         // UI DE TORRES
         new TorreUI(this, 80, 100, 'torre', 50, RataSilicona);
         new TorreUI(this, 240, 100, 'torre', 50, RataJeringa);
@@ -157,7 +159,34 @@ export default class Level1 extends Phaser.Scene {
         new TropaUI(this, 720, 100, 'torre', 20, 5, RataComecables);
         new TropaUI(this, 560, 200, 'torre', 20, 5, RataCoche);
         new TropaUI(this, 1200, 100, 'torre', 20, 5, RataRodadero);
+        */
+
+        //CREACION UI
+
+
+        console.log(this.playerInfo);
+        let xOrder = 80;
+        for(let i = 0 ; i < this.playerInfo.A.length ; i++)
+        {
+            if(this.playerInfo.A[i].Desbloqueado)
+            {
+                if(this.playerInfo.A[i].Tipo == "Torre")
+                {
+                    new TorreUI(this , xOrder , 100 , 'torre' , 50 , this.listaClases[i])
+                }
+                else
+                {
+                    new TropaUI(this , xOrder , 100 , 'torre' , 20  , 5, this.listaClases[i])
+                }
+            }
+
+            xOrder += 160;
+        }
         
+
+
+
+
         //COLISIONES
         this.checkColisions();
 

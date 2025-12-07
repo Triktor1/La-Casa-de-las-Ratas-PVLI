@@ -3,43 +3,84 @@
     "tropas" :
     [
         {
-            "Nombre" : "Rata 1",
+            "Nombre" : "Rata Sniper",
             "Precio" : 8,
             "NivelDesbloqueo" : 0,
             "Desbloqueado" : true,
-            "Descripcion" : "Esta tropa hace esta cosilla"
+            "Descripcion" : "Esta es la rata sniper",
+            "Tipo" : "Torre"
+        }
+        ,
+        {
+            "Nombre" : "Rata Comecables",
+            "Precio" : 8,
+            "NivelDesbloqueo" : 0,
+            "Desbloqueado" : true,
+            "Descripcion" : "Esta es la rata comecables",
+            "Tipo" : "Tropa"
+        }
+        ,
+        {
+            "Nombre" : "Rata Camarera",
+            "Precio" : 8,
+            "NivelDesbloqueo" : 0,
+            "Desbloqueado" : true,
+            "Descripcion" : "Esta es la rata camarera",
+            "Tipo" : "Torre"
         }
         ,
         {   
-            "Nombre" : "Rata 2",
+            "Nombre" : "Rata Gorda",
             "Precio" : 8,
             "NivelDesbloqueo" : 1,
             "Desbloqueado" : false,
-            "Descripcion" : "Esta tropa hace esta cosaza"
+            "Descripcion" : "Esta es la rata gorda",
+            "Tipo" : "Torre"
         }
         ,
         {
-            "Nombre" : "Rata 3",
+            "Nombre" : "Rata Rodadora",
             "Precio" : 8,
             "NivelDesbloqueo" : 1,
             "Desbloqueado" : false,
-            "Descripcion" : "Esta tropa hace otra cosita"
+            "Descripcion" : "Esta es la rata rodadora",
+            "Tipo" : "Tropa"
         }
         ,
         {
-            "Nombre" : "Rata 4",
+            "Nombre" : "Rata Manguera",
             "Precio" : 8,
-            "NivelDesbloqueo" : 2,
+            "NivelDesbloqueo" : 1,
             "Desbloqueado" : false,
-            "Descripcion" : "Esta tropa es de nivel 2"
+            "Descripcion" : "Esta es la rata manguera",
+            "Tipo" : "Torre"
         }
         ,
         {
-            "Nombre" : "Rata 5",
+            "Nombre" : "Rata Silicona",
             "Precio" : 8,
             "NivelDesbloqueo" : 2,
             "Desbloqueado" : false,
-            "Descripcion" : "Esta tropa es tambien de nivel 2"
+            "Descripcion" : "Esta es la rata silicona",
+            "Tipo" : "Torre"
+        }
+        ,
+        {
+            "Nombre" : "Rata Coche",
+            "Precio" : 8,
+            "NivelDesbloqueo" : 2,
+            "Desbloqueado" : false,
+            "Descripcion" : "Esta es la rata coche",
+            "Tipo" : "Tropa"
+        }
+        ,
+        {
+            "Nombre" : "Rata Jeringa",
+            "Precio" : 8,
+            "NivelDesbloqueo" : 2,
+            "Desbloqueado" : false,
+            "Descripcion" : "Esta es la rata jeringas",
+            "Tipo" : "Torre"
         }
     ]
 }
