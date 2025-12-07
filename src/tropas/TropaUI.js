@@ -5,7 +5,7 @@ export default class TropaUI extends Phaser.GameObjects.Image {
 
         this.scene = scene;
         this.cost = cost;             //Precio
-        this.increase = increase;           //lo que sube el precio por cada compra
+        this.increase = increase;     //lo que sube el precio por cada compra
         this.TropaClase = TropaClase; //Clase que se va a colocar, se tendrá que importar con el js
 
         //Texto del precio

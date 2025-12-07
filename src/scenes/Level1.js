@@ -46,7 +46,7 @@ export default class Level1 extends Phaser.Scene {
     }
 
     preload() {
-        
+
         //Carga jsons de niveles
         this.load.json('L1Data', 'src/scenes/LevelJsons/Level1.json');
         this.load.json('L2Data', 'src/scenes/LevelJsons/Level2.json');
@@ -59,7 +59,10 @@ export default class Level1 extends Phaser.Scene {
         this.load.image('selectButton', 'assets/UI/lvlselectboton.png');
         this.load.image('shopButton', 'assets/UI/shop.png');
         this.load.image('torre', 'assets/Ratas/torre.png');
+
+        //SPRITES DE RATA COMECABLES
         this.load.image('rataComecables', 'assets/Ratas/rataComecables.png');
+        this.load.image('comecablesBullet', 'assets/Ratas/comecablesBullet.png');
 
         //SPRITES DE RATA SILICONA
         this.load.image('rataSilicona', 'assets/Ratas/siliconeRat.png');
@@ -114,7 +117,7 @@ export default class Level1 extends Phaser.Scene {
 
     create() {
 
-        this.listaClases = [RatSniper , RataComecables , RataChef , RataGorda , RataRodadero , RataManguera , RataCoche , RataSilicona , RataJeringa]
+        this.listaClases = [RatSniper, RataComecables, RataChef, RataGorda, RataRodadero, RataManguera, RataCoche, RataSilicona, RataJeringa]
 
         console.log(this.playerInfo.CurrentLevel);
         this.jsonDataName = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).Name;
@@ -143,7 +146,7 @@ export default class Level1 extends Phaser.Scene {
             fontFamily: 'Arial Black',
             fontSize: '25px'
         })
-        this.jsonTextLevel = this.add.text(700 , 10, "Nivel: " + this.jsonDataName + " Puntos: " + this.jsonDataArray.length);
+        this.jsonTextLevel = this.add.text(700, 10, "Nivel: " + this.jsonDataName + " Puntos: " + this.jsonDataArray.length);
 
 
         /*
@@ -166,26 +169,18 @@ export default class Level1 extends Phaser.Scene {
 
         console.log(this.playerInfo);
         let xOrder = 80;
-        for(let i = 0 ; i < this.playerInfo.A.length ; i++)
-        {
-            if(this.playerInfo.A[i].Desbloqueado)
-            {
-                if(this.playerInfo.A[i].Tipo == "Torre")
-                {
-                    new TorreUI(this , xOrder , 100 , 'torre' , 50 , this.listaClases[i])
+        for (let i = 0; i < this.playerInfo.A.length; i++) {
+            if (this.playerInfo.A[i].Desbloqueado) {
+                if (this.playerInfo.A[i].Tipo == "Torre") {
+                    new TorreUI(this, xOrder, 100, 'torre', 50, this.listaClases[i])
                 }
-                else
-                {
-                    new TropaUI(this , xOrder , 100 , 'torre' , 20  , 5, this.listaClases[i])
+                else {
+                    new TropaUI(this, xOrder, 100, 'torre', 20, 5, this.listaClases[i])
                 }
             }
 
             xOrder += 160;
         }
-        
-
-
-
 
         //COLISIONES
         this.checkColisions();
@@ -208,12 +203,11 @@ export default class Level1 extends Phaser.Scene {
 
     crearCamino() {
 
-        this.path = new Phaser.Curves.Path(this.jsonDataArray[0].x , this.jsonDataArray[0].y )
-        for(var a = 1 ; a < this.jsonDataArray.length;a++)
-        {
-            this.path.lineTo(this.jsonDataArray[a].x , this.jsonDataArray[a].y)
+        this.path = new Phaser.Curves.Path(this.jsonDataArray[0].x, this.jsonDataArray[0].y)
+        for (var a = 1; a < this.jsonDataArray.length; a++) {
+            this.path.lineTo(this.jsonDataArray[a].x, this.jsonDataArray[a].y)
         }
-     
+
         this.graphics = this.add.graphics();
         this.graphics.lineStyle(2, 0xffffff, 1);
         this.path.draw(this.graphics);
@@ -271,7 +265,7 @@ export default class Level1 extends Phaser.Scene {
     checkColisions() {
         //COLISION DE LAS BALAS CON LOS LOROS
         this.physics.add.overlap(this.bullets, this.enemies, (bullet, enemy) => {
-            if (bullet.teamRat  && bullet.damage!=0 && enemy instanceof Loro) {
+            if (bullet.teamRat && bullet.damage != 0 && enemy instanceof Loro) {
                 bullet.effectCollision(enemy);
             }
         });
@@ -281,21 +275,21 @@ export default class Level1 extends Phaser.Scene {
             }
         });
 
-         //Colisiones tropas con loros
-        this.physics.add.overlap(this.tropas, this.enemies, (tropa, loro) =>{
-            
-            //Si uno ya no existe/destruye, ignorar
-            if (!tropa || !loro) return; 
-            if (!tropa.active || !loro.active) return; 
+        //Colisiones tropas con loros
+        this.physics.add.overlap(this.tropas, this.enemies, (tropa, loro) => {
 
-            //Si ya se esetan pegando con otro, ignorar
-            if(tropa.isFighting && tropa.currentEnemy !==loro ) return;
-            if(loro.isFighting && loro.currentEnemy !== tropa) return;
+            //Si uno ya no existe/destruye, ignorar
+            if (!tropa || !loro) return;
+            if (!tropa.active || !loro.active) return;
+
+            //Si ya se están pegando con otro, ignorar
+            if (tropa.isFighting && tropa.currentEnemy !== loro) return;
+            if (loro.isFighting && loro.currentEnemy !== tropa) return;
 
             //caso rataCoche
-            if(tropa instanceof RataCoche){
+            if (tropa instanceof RataCoche) {
                 tropa.onCollision(loro);
-                if (!loro.lastAttackTime) loro.lastAttackTime = 0;  
+                if (!loro.lastAttackTime) loro.lastAttackTime = 0;
 
 
                 //al ser un caso apartado se declara de nuevo el comportamiento del ataque de los loros, porque no llega a la logica donde se realiza para el caso generico
@@ -306,10 +300,39 @@ export default class Level1 extends Phaser.Scene {
                     tropa.getDamaged(loro.damage, loro.type); // el loro ataca a la tropa
                     loro.lastAttackTime = now;
                 }
-                return; 
+                return;
             }
-            if(tropa instanceof RataComecables){
+
+            //caso rataComecables
+            if (tropa instanceof RataComecables) {
+                //resultado de batalla (tropa)
+                if (!loro.active || loro.hasDied) {
+                    tropa.isFighting = false;
+                    tropa.currentEnemy = null;
+                    tropa.startWalking();
+                }
+
+                //Hago que se marque que están peleando la comecables y el loro
+                tropa.isFighting = true;
+                tropa.currentEnemy = loro;
+                loro.isFighting = true;
+                loro.currentEnemy = tropa;
+
+                tropa.stopWalking();
+                loro.stopWalking();
+
                 tropa.onCollision(loro);
+
+                //Si están vivos, ataca de nuevo
+                tropa.isFighting = true;
+
+                //Resultado de la batalla (loro)
+                if (!tropa.active || tropa.hasDied) {
+                    loro.isFighting = false;
+                    loro.currentEnemy = null;
+                    loro.startWalking();
+                }
+                return;
             }
 
             //comprobacion antifreeze
@@ -328,17 +351,17 @@ export default class Level1 extends Phaser.Scene {
             tropa.isFighting = true;
             loro.isFighting = true;
 
-            tropa.currentEnemy = loro; 
-            loro.currentEnemy = tropa; 
+            tropa.currentEnemy = loro;
+            loro.currentEnemy = tropa;
 
             //Machetazos
             tropa.stopWalking();
             loro.stopWalking();
 
-            const now = this.time.now; 
-            const cooldown = 300; 
-            
-            
+            const now = this.time.now;
+            const cooldown = 300;
+
+
             if (!tropa.lastAttackTime) tropa.lastAttackTime = 0;
             if (!loro.lastAttackTime) loro.lastAttackTime = 0;
 
@@ -349,20 +372,20 @@ export default class Level1 extends Phaser.Scene {
                 tropa.lastAttackTime = now;
                 loro.lastAttackTime = now;
             }
-            
+
             //resultado de batalla (movimiento)
-            if (!tropa.active || tropa.hasDied){
-                loro.isFighting = false; 
-                loro.currentEnemy = null; 
+            if (!tropa.active || tropa.hasDied) {
+                loro.isFighting = false;
+                loro.currentEnemy = null;
                 loro.startWalking();
             }
-            if (!loro.active || loro.hasDied){
+            if (!loro.active || loro.hasDied) {
                 tropa.isFighting = false;
-                tropa.currentEnemy = null; 
-                tropa.startWalking(); 
+                tropa.currentEnemy = null;
+                tropa.startWalking();
             }
         })
-      
+
     }
 
     update(time, delta) {
@@ -375,14 +398,12 @@ export default class Level1 extends Phaser.Scene {
         });
         if (this.enemySpawnNum <= 0 && this.enemies.countActive() == 0) {
 
-            if (this.playerInfo.CurrentLevel < 2)
-            {
+            if (this.playerInfo.CurrentLevel < 2) {
                 this.playerInfo.CurrentLevel++;
-                this.scene.start('Shop' ,{ shopMoney: this.shopMoney , playerInfo: this.playerInfo} );
+                this.scene.start('Shop', { shopMoney: this.shopMoney, playerInfo: this.playerInfo });
             }
-            else
-            {
-                this.scene.start('Win' ,{ shopMoney: this.shopMoney , playerInfo: this.playerInfo} );
+            else {
+                this.scene.start('Win', { shopMoney: this.shopMoney, playerInfo: this.playerInfo });
             }
         }
         if (this.playerHealth <= 0) {
