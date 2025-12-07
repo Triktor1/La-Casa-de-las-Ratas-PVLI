@@ -332,6 +332,16 @@ export default class Level1 extends Phaser.Scene {
                     loro.currentEnemy = null;
                     loro.startWalking();
                 }
+
+                //Comprobación antifreeze comecables
+                this.time.delayedCall(50, () => {
+
+                    if (!this.physics.overlap(t, e)) {
+                        if (t.startWalking) t.startWalking();
+                        if (e.startWalking) e.startWalking();
+                    }
+                });
+
                 return;
             }
 
