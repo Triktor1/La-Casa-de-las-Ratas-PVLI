@@ -83,9 +83,8 @@ export default class Level1 extends Phaser.Scene {
         this.load.image('FatBullet', 'assets/Ratas/FatBullet.png');
 
         //SPRITES DE RATA MANGUERA
-        this.load.image('rataManguera', 'assets/Ratas/RataManguera.jpg');
-        this.load.image('rataManguera2', 'assets/Ratas/RataManguera2.png');
-        this.load.image('rataManguera3', 'assets/Ratas/RataManguera3.png');
+        this.load.spritesheet('rataManguera', 'assets/Ratas/RataManguera-Sheet.png', { frameWidth: 250, frameHeight: 250 });
+        this.load.image('mangueraBullet', 'assets/Ratas/MangueraBullet.png');
 
         //SPRITES DE RATA SNIPER
         this.load.image('Sniper', 'assets/Ratas/Sniper.png');
@@ -116,6 +115,44 @@ export default class Level1 extends Phaser.Scene {
     }
 
     create() {
+        //ANIMACIONES
+        //RATA MANGUERA
+        this.anims.create({
+            key: 'mangueraIdle1',
+            frames: this.anims.generateFrameNumbers("rataManguera", { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'mangueraAttack1',
+            frames: this.anims.generateFrameNumbers("rataManguera", { start: 3, end: 3 }),
+            frameRate: 5,
+            repeat: 0
+        });
+        this.anims.create({
+            key: 'mangueraIdle2',
+            frames: this.anims.generateFrameNumbers("rataManguera", { start: 4, end: 6 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'mangueraAttack2',
+            frames: this.anims.generateFrameNumbers("rataManguera", { start: 7, end: 7 }),
+            frameRate: 5,
+            repeat: 0
+        });
+        this.anims.create({
+            key: 'mangueraIdle3',
+            frames: this.anims.generateFrameNumbers("rataManguera", { start: 8, end: 10 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'mangueraAttack3',
+            frames: this.anims.generateFrameNumbers("rataManguera", { start: 11, end: 11 }),
+            frameRate: 5,
+            repeat: 0
+        });
 
         this.listaClases = [RatSniper, RataComecables, RataChef, RataGorda, RataRodadero, RataManguera, RataCoche, RataSilicona, RataJeringa]
 
@@ -333,6 +370,18 @@ export default class Level1 extends Phaser.Scene {
                     loro.startWalking();
                 }
 
+                //comprobacion antifreeze
+                const t = tropa;
+                const e = loro;
+    
+                this.time.delayedCall(50, () => {
+    
+                    if (!this.physics.overlap(t, e)) {
+                        if (t.startWalking) t.startWalking();
+                        if (e.startWalking) e.startWalking();
+                    }
+                });
+
                 //Comprobación antifreeze comecables
                 this.time.delayedCall(50, () => {
 
@@ -345,17 +394,6 @@ export default class Level1 extends Phaser.Scene {
                 return;
             }
 
-            //comprobacion antifreeze
-            const t = tropa;
-            const e = loro;
-
-            this.time.delayedCall(50, () => {
-
-                if (!this.physics.overlap(t, e)) {
-                    if (t.startWalking) t.startWalking();
-                    if (e.startWalking) e.startWalking();
-                }
-            });
 
             //inicia combate
             tropa.isFighting = true;

@@ -1,6 +1,6 @@
 import Bullet from "../bullets/bullet.js";
 
-export default class Torre extends Phaser.GameObjects.Image {
+export default class Torre extends Phaser.GameObjects.Sprite {
     constructor(scene, x = 20, y = 0, speed = 1000, damage = 10, torrename = "torreBase", texture = "torre", frame = 0, scale, rangeValue = 300) {
         super(scene, x, y, texture, frame);
         this.scene = scene;
