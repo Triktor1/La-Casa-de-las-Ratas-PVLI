@@ -95,6 +95,14 @@
             "autor": "Manio",
             "grupo": "",
             "descripcion": "EL REY DE LAS RATASH? Pues ya no, "
+        },
+        {
+            "id": "img13",
+            "archivo": "LoroAryan.jpg",
+            "nombre": "Loro pirata (live action)",
+            "autor": "Aryan Guerrero",
+            "grupo": "Zorro Cósmico",
+            "descripcion": "Los live actions casi nunca son buenos, pero en este caso parece que sí. Este es un loro fotorrealista con elementos piratas dibujados encima."
         }
     ]
 }
