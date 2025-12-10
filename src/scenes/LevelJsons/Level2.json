@@ -1,6 +1,6 @@
 {
     "Name" : "Soy el Level 2",
-    "enemySpawnNum" : 40,
+    "enemySpawnNum" : 1,
     "path" : [
         {
             "x": -50,

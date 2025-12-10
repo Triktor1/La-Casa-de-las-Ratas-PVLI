@@ -86,10 +86,13 @@ export default class Shop extends Phaser.Scene {
                     this.buttonArray[i].preFX.addColorMatrix().grayscale(1);
                     this.shopMoney = this.shopMoney - this.buttonArray[i].precio;
                     this.buttonArray[i].esComprada();
-
-                    console.log(this.playerInfo.A[i].Desbloqueado);
-                    this.playerInfo.A[i].Desbloqueado = true;
-
+                    for(let j = 0 ; j < this.playerInfo.A.length ; j++)
+                    {   
+                        if (this.playerInfo.A[j].Descripcion == this.buttonArray[i].desc)
+                            {
+                                this.playerInfo.A[j].Desbloqueado = true;
+                            }   
+                    }
                     this.dineroTienda.text = "Plumas: " + this.shopMoney;
                     //console.log(this.shopMoney);
 
