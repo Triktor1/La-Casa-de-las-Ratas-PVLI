@@ -5,7 +5,6 @@ import Shop from './scenes/Shop.js';
 import SelectScene from './scenes/SelectScene.js';
 import GameOverScene from './scenes/GameOverScene.js';
 import TestEnemyScene from './scenes/TestEnemyScene.js';
-import LevelClassTest from './scenes/LevelClassTest.js';
 import Win from './scenes/Win.js';
 import GalleryImages from './scenes/GalleryImages.js';
 import GalleryGrid from './scenes/GalleryGrid.js';
@@ -30,7 +29,7 @@ let config = {
     },
     zoom: 1
   },
-  scene: [MainMenu, Level1, Shop, SelectScene, GameOverScene, Win, TutorialLevel, GalleryImages,  GalleryGrid, LevelClassTest],
+  scene: [MainMenu, Level1, Shop, SelectScene, GameOverScene, Win, TutorialLevel, GalleryImages,  GalleryGrid],
 
       physics: {  
         default: 'arcade', 
