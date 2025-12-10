@@ -60,10 +60,6 @@ export default class Level1 extends Phaser.Scene {
         this.load.image('shopButton', 'assets/UI/shop.png');
         this.load.image('torre', 'assets/Ratas/torre.png');
 
-        //SPRITES DE RATA COMECABLES
-        this.load.image('rataComecables', 'assets/Ratas/rataComecables.png');
-        this.load.image('comecablesBullet', 'assets/Ratas/comecablesBullet.png');
-
         //SPRITES DE RATA SILICONA
         this.load.image('rataSilicona', 'assets/Ratas/siliconeRat.png');
         this.load.image('rataSilicona2', 'assets/Ratas/siliconeRat2.png');
@@ -87,9 +83,7 @@ export default class Level1 extends Phaser.Scene {
         this.load.image('mangueraBullet', 'assets/Ratas/MangueraBullet.png');
 
         //SPRITES DE RATA SNIPER
-        this.load.image('Sniper', 'assets/Ratas/Sniper.png');
-        this.load.image('Sniper2', 'assets/Ratas/Sniper2.png');
-        this.load.image('Sniper3', 'assets/Ratas/Sniper3.png');
+        this.load.spritesheet('rataSniper', 'assets/Ratas/rataSniper.png', { frameWidth: 150, frameHeight: 250 });
         this.load.image('bullet', 'assets/Ratas/bullet.png');
 
         //SPRITES DE RATA JERINGA
@@ -105,9 +99,11 @@ export default class Level1 extends Phaser.Scene {
         this.load.image('loroCan', 'assets/Loros/CanonPH.png');
         this.load.image('loroBarr', 'assets/Loros/BarrilPH.png');
         //SPRITES DE TROPAS RATA
-        this.load.image('rataCoche', 'assets/Ratas/rataCoche.png');
+        this.load.spritesheet('rataCoche', 'assets/Ratas/rataCoche.png', { frameWidth: 250, frameHeight: 250 });
         this.load.spritesheet('rataRodadero', 'assets/Ratas/RataRodadero.png', { frameWidth: 250, frameHeight: 250 });
         this.load.image('explosion', 'assets/Ratas/explosion.png');
+        this.load.image('rataComecables', 'assets/Ratas/rataComecables.png');
+        this.load.image('comecablesBullet', 'assets/Ratas/comecablesBullet.png');
 
         //Carga de sonido
         this.load.audio('Critico', 'assets/sonidos/SonidoOriginalParaDañoCriticoNoRobado.mp3');
@@ -153,6 +149,25 @@ export default class Level1 extends Phaser.Scene {
             frameRate: 5,
             repeat: 0
         });
+        //RATA SNIPER
+        this.anims.create({
+            key: 'sniperIdle1',
+            frames: this.anims.generateFrameNumbers("rataSniper", { start: 0, end: 1 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'sniperIdle2',
+            frames: this.anims.generateFrameNumbers("rataSniper", { start: 2, end: 3 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'sniperIdle3',
+            frames: this.anims.generateFrameNumbers("rataSniper", { start: 4, end: 5 }),
+            frameRate: 5,
+            repeat: -1
+        });
         //TROPAS
         this.anims.create({
             key: 'rodaderoAnim',
@@ -160,14 +175,20 @@ export default class Level1 extends Phaser.Scene {
             frameRate: 5,
             repeat: -1
         });
+        this.anims.create({
+            key: 'cocheAnim',
+            frames: this.anims.generateFrameNumbers("rataCoche", { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        });
 
         //Cheats
         this.cursorKeys = this.input.keyboard.createCursorKeys();
         this.input.keyboard.on("keydown-SPACE", () => {
-                this.addMoney();
+            this.addMoney();
         });
 
-        this.listaClases = [RatSniper, RataComecables, RataChef, RataGorda, RataRodadero, RataManguera, RataCoche, RataSilicona, RataJeringa]
+        this.listaClases = [RatSniper, RataComecables, RataChef, RataGorda, RataRodadero, RataManguera, RataSilicona, RataCoche, RataJeringa]
 
         console.log(this.playerInfo.CurrentLevel);
         this.jsonDataName = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).Name;

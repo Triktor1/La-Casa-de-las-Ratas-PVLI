@@ -1,7 +1,7 @@
 import Torre from "./TorreBase.js";
 import Bullet from "../bullets/bullet.js";
 
-export default class RatSniper extends Torre{
+export default class RatSniper extends Torre {
     constructor(scene, x, y) {
         super(scene, x, y, 3500, 5, "Sniper", "Sniper", 0, 0.5, 450);
 
@@ -13,8 +13,9 @@ export default class RatSniper extends Torre{
         this.damageBoost = 5;
         this.rangeBoost = 50;
         this.fireRateBoost = 500;
+        this.play('sniperIdle1');
 
-        this.setUpgradeText("Siguiente nivel: \ndaño + " + this.damageBoost + "\nrango + " + this.rangeBoost + "\nvelocidad - " + this.fireRateBoost/1000 + "s", 24, 3);
+        this.setUpgradeText("Siguiente nivel: \ndaño + " + this.damageBoost + "\nrango + " + this.rangeBoost + "\nvelocidad - " + this.fireRateBoost / 1000 + "s", 24, 3);
     }
 
     shoot(enemy) {
@@ -24,17 +25,12 @@ export default class RatSniper extends Torre{
         return bullet;
     }
 
-    upgrade(){
+    upgrade() {
         this.damage += this.damageBoost;
         this.rangeValue += this.rangeBoost;
         this.fireRate -= this.fireRateBoost;
         this.resetRange();
+        this.play('sniperIdle' + this.upgradeLevel);
 
-        if (this.upgradeLevel == 2){
-            this.setTexture("Sniper2");
-        }
-        else if (this.upgradeLevel == 3){
-            this.setTexture("Sniper3");
-        }
     }
 }

@@ -69,7 +69,7 @@
             "Nombre" : "Rata Coche",
             "Precio" : 8,
             "NivelDesbloqueo" : 2,
-            "Desbloqueado" : false,
+            "Desbloqueado" : true,
             "Descripcion" : "Esta es la rata coche",
             "Tipo" : "Tropa"
         }

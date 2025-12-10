@@ -1,38 +1,38 @@
 import Tropa from "./TropaBase.js"
 export default class RataCoche extends Tropa {
     constructor(scene, path, x, y, texture = "rataCoche") {
-        super(scene, path, x, y, 20, 15, 60, "R", "rataCoche", "rataCoche", 0, 0.3);
-        this.setScale(0.12)
-        this.hitCooldown = 250; 
-        this.explosionSound = this.scene.sound.add("Boom", { volume: 7});
+        super(scene, path, x, y, 20, 15, 60, "R", "rataCoche", texture, 0, 0.8);
+        this.hitCooldown = 250;
+        this.explosionSound = this.scene.sound.add("Boom", { volume: 7 });
+        this.anims.play('cocheAnim');
     }
 
 
-    onCollision(enemy){
-        if(!enemy || !enemy.active) return; 
+    onCollision(enemy) {
+        if (!enemy || !enemy.active) return;
 
         const now = this.scene.time.now;
         if (now - this.lastHitTime < this.hitCooldown) return;
         this.lastHitTime = now;
 
-        if (enemy.type ==="B") {
+        if (enemy.type === "B") {
             enemy.vida = 0; // instakill
             console.log("BOOM");
 
-            this.playExplosion(enemy.x,enemy.y);
+            this.playExplosion(enemy.x, enemy.y);
             //explosion 
             if (this.explosionSound) this.explosionSound.play();
             enemy.checkAlive();
 
         } else {
             //daño normal
-         enemy.getDamaged(this.damage, this.type);
+            enemy.getDamaged(this.damage, this.type);
         }
         this.getDamaged(enemy.damage, enemy.type);
     }
 
-    playExplosion(x,y){
-         const exp = this.scene.add.image(x, y, "explosion");
+    playExplosion(x, y) {
+        const exp = this.scene.add.image(x, y, "explosion");
 
         exp.setScale(0.4);
         exp.setAlpha(1);
