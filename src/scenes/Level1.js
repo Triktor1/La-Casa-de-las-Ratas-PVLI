@@ -106,7 +106,7 @@ export default class Level1 extends Phaser.Scene {
         this.load.image('loroBarr', 'assets/Loros/BarrilPH.png');
         //SPRITES DE TROPAS RATA
         this.load.image('rataCoche', 'assets/Ratas/rataCoche.png');
-        this.load.spritesheet('rataRodadero', 'assets/Ratas/RataRodadero.png', {frameWidth: 250, frameHeight: 250});
+        this.load.spritesheet('rataRodadero', 'assets/Ratas/RataRodadero.png', { frameWidth: 250, frameHeight: 250 });
         this.load.image('explosion', 'assets/Ratas/explosion.png');
 
         //Carga de sonido
@@ -159,6 +159,12 @@ export default class Level1 extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers("rataRodadero", { start: 0, end: 2 }),
             frameRate: 5,
             repeat: -1
+        });
+
+        //Cheats
+        this.cursorKeys = this.input.keyboard.createCursorKeys();
+        this.input.keyboard.on("keydown-SPACE", () => {
+                this.addMoney();
         });
 
         this.listaClases = [RatSniper, RataComecables, RataChef, RataGorda, RataRodadero, RataManguera, RataCoche, RataSilicona, RataJeringa]
@@ -478,5 +484,9 @@ export default class Level1 extends Phaser.Scene {
 
     writeLevelMoney() {
         console.log("Dinero del nivel: " + this.levelMoney);
+    }
+
+    addMoney() {
+        this.levelMoney += 100;
     }
 }
