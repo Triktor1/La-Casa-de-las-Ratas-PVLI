@@ -15,8 +15,8 @@ export default class Tropa extends Phaser.GameObjects.PathFollower {
         this.isFighting = false; 
         this.hasDied = false;
         this.currentEnemy = null; 
-        
-        this.setScale(0.2);
+        this.texture = texture
+        this.setScale(scale);
 
         this.criticoSonido = this.scene.sound.add('Critico', { volume: 0.5 });
 
@@ -97,7 +97,8 @@ export default class Tropa extends Phaser.GameObjects.PathFollower {
             duration: 40000 / this.speed,
             from: 1,
             to: 0,
-            rotateToPath: false,
+            rotateToPath: true,
+            pathRotateOffset: 180,
             positionOnPath: true,
             onComplete: () => {
                 this.checkAlive(true);
