@@ -106,7 +106,7 @@ export default class Level1 extends Phaser.Scene {
         this.load.image('loroBarr', 'assets/Loros/BarrilPH.png');
         //SPRITES DE TROPAS RATA
         this.load.image('rataCoche', 'assets/Ratas/rataCoche.png');
-        this.load.image('rataRodadero', 'assets/Ratas/rataRodadero.png');
+        this.load.spritesheet('rataRodadero', 'assets/Ratas/RataRodadero.png', {frameWidth: 250, frameHeight: 250});
         this.load.image('explosion', 'assets/Ratas/explosion.png');
 
         //Carga de sonido
@@ -152,6 +152,13 @@ export default class Level1 extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers("rataManguera", { start: 11, end: 11 }),
             frameRate: 5,
             repeat: 0
+        });
+        //TROPAS
+        this.anims.create({
+            key: 'rodaderoAnim',
+            frames: this.anims.generateFrameNumbers("rataRodadero", { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
         });
 
         this.listaClases = [RatSniper, RataComecables, RataChef, RataGorda, RataRodadero, RataManguera, RataCoche, RataSilicona, RataJeringa]
@@ -373,9 +380,9 @@ export default class Level1 extends Phaser.Scene {
                 //comprobacion antifreeze
                 const t = tropa;
                 const e = loro;
-    
+
                 this.time.delayedCall(50, () => {
-    
+
                     if (!this.physics.overlap(t, e)) {
                         if (t.startWalking) t.startWalking();
                         if (e.startWalking) e.startWalking();
