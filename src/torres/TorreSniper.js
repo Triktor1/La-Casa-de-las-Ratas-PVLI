@@ -3,7 +3,7 @@ import Bullet from "../bullets/bullet.js";
 
 export default class RatSniper extends Torre {
     constructor(scene, x, y) {
-        super(scene, x, y, 3500, 5, "Sniper", "Sniper", 0, 0.5, 450);
+        super(scene, x, y, 3500, 5, "Sniper", "Sniper", 0, 0.8, 450);
 
         this.damage = 35;
         this.bulletSpeed = 3500;
