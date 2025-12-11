@@ -65,7 +65,7 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
                 this.vida -= 2*damage;
                 if (Phaser.Math.Between(1, this.audioChance) == 1) {
                     let index = Phaser.Math.Between(0, this.audiosCrit.length - 1);
-                    if (this.audiosCrit[index]) this.audiosCrit[index].play();
+                    if (this.audiosCrit[index]) this.audiosCrita[index].play();
                 }
             }
             

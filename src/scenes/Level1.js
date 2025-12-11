@@ -30,6 +30,16 @@ export default class Level1 extends Phaser.Scene {
         this.levelNum = 1;
         this.playerHealth = 100;
         this.enemySpawnNum = 30;
+        this.enemyCount;
+        //PARA SABER CUANDO VIENEN PRIMERA Y ULTIMA OLEADA
+        this.enemiesTillMiddleWave = 15;
+        this.enemiesTillFinalWave = 30;
+        //INTERVALO MIN Y MAX RANDOM DE SPAWN DE ENEMIGOS
+        this.enemiesMinInterval = 2000;
+        this.enemiesMaxInterval = 5000;
+        //NUMERO DE ENEMIGOS EN PRIMERA Y ULTIMA OLEADA
+        this.enemiesInMiddleWave= 5;
+        this.enemiesInFinalWave= 8;
     }
 
 
@@ -195,6 +205,13 @@ export default class Level1 extends Phaser.Scene {
         this.jsonDataArray = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).path;
         this.levelMoney = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).levelMoney;
         this.enemySpawnNum = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).enemySpawnNum;
+        this.enemiesTillMiddleWave = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).enemySpawnNum;
+        this.enemiesTillFinalWave = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).enemySpawnNum;
+        this.enemiesMinInterval = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).enemiesMinInterval;
+        this.enemiesMaxInterval = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).enemiesMaxInterval;
+        this.enemiesInMiddleWave= this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).enemiesInMiddleWave;
+        this.enemiesInFinalWave= this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).enemiesInFinalWave;
+        this.enemyCount = this.enemySpawnNum;
 
         //console.log(this.test);
         //console.log(this.playerInfo);
@@ -257,10 +274,19 @@ export default class Level1 extends Phaser.Scene {
         this.checkColisions();
 
         this.timedEvent = this.time.addEvent({
-
-            delay: Math.floor(Math.random() * 3000 + 2000),
+            delay: Phaser.Math.Between(this.enemiesMinInterval, this.enemiesMaxInterval),
             loop: true,
-            callback: this.crearEnemigos,
+            callback:() => {
+                if (this.enemiesTillMiddleWave > 0 && (this.enemyCount - this.enemySpawnNum) == this.enemiesTillMiddleWave) {
+                    for (let i = 0; i < this.enemiesInMiddleWave; i++) this.crearEnemigos();
+                    this.enemiesTillMiddleWave = -1; //ESTO SIGNIFICA QUE YA HA SIDO INVOCADA
+                }
+                else if (this.enemiesTillFinalWave > 0 && (this.enemyCount - this.enemySpawnNum) == this.enemiesTillFinalWave) {
+                    for (let i = 0; i < this.enemiesInFinalWave; i++) this.crearEnemigos();
+                    this.enemiesTillFinalWave = -1; //ESTO SIGNIFICA QUE YA HA SIDO INVOCADA
+                }
+                else this.crearEnemigos();
+            },
             callbackScope: this
         })
     }
