@@ -41,6 +41,9 @@ export default class Torre extends Phaser.GameObjects.Sprite {
         this.upgradeText.setDepth(2);
         this.upgradeText.setVisible(false);
 
+        this.audiosHit = [];
+        this.audioChance = 2;
+
         this.setInteractive({ useHandCursor: true });
 
         this.on('pointerover', () => {
@@ -89,6 +92,9 @@ export default class Torre extends Phaser.GameObjects.Sprite {
         const bullet = new Bullet(this.scene, this.x, this.y, 'bullet', 1000, this.damage, dir, 750, false, true, 0, "R");
         bullet.setScale(0.2, 0.3);
         this.scene.bullets.add(bullet);
+        if (Phaser.Math.Between(1, this.audioChance) == 1) {
+            this.audiosHit[Phaser.Math.Between(0, this.audiosHit.length - 1)].play();
+        }
         return bullet;
     }
 

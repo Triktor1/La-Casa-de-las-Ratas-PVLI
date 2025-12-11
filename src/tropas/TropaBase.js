@@ -17,6 +17,9 @@ export default class Tropa extends Phaser.GameObjects.PathFollower {
         this.currentEnemy = null; 
         this.texture = texture
         this.setScale(scale);
+        this.audiosHit = [];
+        this.audiosCrit = [];
+        this.audioChance = 2;
 
         this.criticoSonido = this.scene.sound.add('Critico', { volume: 0.5 });
 
@@ -56,11 +59,17 @@ export default class Tropa extends Phaser.GameObjects.PathFollower {
                 this.criticoSonido.play();
                 this.setTint(0xffff0000); //Rojo intenso por el critico
                 this.vida -= 2 * damage;
+                if (Phaser.Math.Between(1, this.audioChance) == 1) {
+                    this.audiosCrit[Phaser.Math.Between(0, this.audiosCrit.length - 1)].play();
+                }
             }
 
             else {
                 this.setTint(0xff999999); //Tintado gris por daño normal
                 this.vida -= damage;
+                if (Phaser.Math.Between(1, this.audioChance) == 1) {
+                    this.audiosHit[Phaser.Math.Between(0, this.audiosHit.length - 1)].play();
+                }
             }
             
             if (this.active) { //ESTO ES PARA DEVOLVER AL LORO SU TINTE NORMAL
