@@ -4,6 +4,7 @@ export default class Shop extends Phaser.Scene {
     shopMoney;
     levelNum;
     playerInfo;
+    descText;
     constructor(){
         super({key:"Shop"});
     }
@@ -18,6 +19,7 @@ export default class Shop extends Phaser.Scene {
         this.load.image('botonVolver', 'assets/UI/backbutton.png');
         this.load.image('botonPlaceholder' , 'assets/WebSprites/Rick.png')
         this.load.json('coordsBotones' , 'src/scenes/ShopDataManagement/ShopGapsCoords.json')
+        this.load.json('frasesNavi' , 'src/scenes/ShopDataManagement/FrasesNavi.json')
     }
 
     preUpdate(t, dt){
@@ -26,11 +28,14 @@ export default class Shop extends Phaser.Scene {
 
     create(){
 
-        //TEXTO
+        //Frases navi
 
+        this.frasesNavi = this.cache.json.get('frasesNavi');
+        this.randomnum = Math.floor(Math.random() * 3)
+        //TEXTO
         this.add.text(20,20,"Shop");
+        this.descText = this.add.text(800 , 500 , this.frasesNavi.FrasesNavi[this.randomnum].Frase)
         this.dineroTienda = this.add.text(20 , 50 , "Plumas: " + this.shopMoney)
-        
 
         //BOTONES
         const btnBack = this.add.sprite(this.scale.width - 220, 220, 'botonVolver').setInteractive({ useHandCursor: true });
@@ -73,15 +78,19 @@ export default class Shop extends Phaser.Scene {
             this.buttonArray[i].on("pointerover" , () => {
                 console.log(this.buttonArray[i].desc);
                 this.buttonArray[i].setScale(0.21);
+                
+                this.descText.text = this.buttonArray[i].desc;
             })
 
             this.buttonArray[i].on("pointerout" , () =>{
                 this.buttonArray[i].setScale(0.2);
+                this.randomnum = Math.floor(Math.random() * 3)
+                this.descText.text = this.frasesNavi.FrasesNavi[this.randomnum].Frase
             })
 
             this.buttonArray[i].on("pointerdown" , () =>
             {
-                 if (this.buttonArray[i].isUnlocked == false && this.shopMoney >= this.buttonArray[i].precio)
+                if (this.buttonArray[i].isUnlocked == false && this.shopMoney >= this.buttonArray[i].precio)
                 {
                     this.buttonArray[i].preFX.addColorMatrix().grayscale(1);
                     this.shopMoney = this.shopMoney - this.buttonArray[i].precio;
@@ -94,10 +103,14 @@ export default class Shop extends Phaser.Scene {
                             }   
                     }
                     this.dineroTienda.text = "Plumas: " + this.shopMoney;
-                    //console.log(this.shopMoney);
-
 
                     console.log(this.playerInfo);
+                }
+                else
+                {
+                    this.randomnum = Math.floor(Math.random() * 2)
+                    console.log(this.randomnum);
+                    this.descText.text = this.frasesNavi.FrasePobre[this.randomnum].Frase
                 }
             })
 

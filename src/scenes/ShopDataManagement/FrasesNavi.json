@@ -1,0 +1,29 @@
+{
+    "FrasesNavi" : [
+        {
+            "Frase" : "Si no vas a comprar, vete."
+        }
+        ,
+        {
+            "Frase" : "¡Bienvenido!. Hueles mal."
+        }
+        ,
+        {
+            "Frase" : "No preguntes para qué usaré las plumas."
+        }
+        ,
+        {
+            "Frase" : "Vendo lo mejor de las alcantarillas.\nClaro que el liston no esta muy alto"
+        }
+    ]
+    ,
+    "FrasePobre" : [
+        {
+            "Frase" : "¿Banca rota?. Vete entonces."
+        }
+        ,
+        {
+            "Frase" : "No tienes nada que me interese."
+        }
+    ]
+}
