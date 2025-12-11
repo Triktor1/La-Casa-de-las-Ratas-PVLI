@@ -64,7 +64,8 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
                 this.setTint(0xffff0000); //Rojo intenso por el critico
                 this.vida -= 2*damage;
                 if (Phaser.Math.Between(1, this.audioChance) == 1) {
-                    this.audiosCrit[Phaser.Math.Between(0, this.audiosCrit.length - 1)].play();
+                    let index = Phaser.Math.Between(0, this.audiosCrit.length - 1);
+                    if (this.audiosCrit[index]) this.audiosCrit[index].play();
                 }
             }
             
@@ -72,7 +73,8 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
                 this.setTint(0xff999999); //Tintado gris por daño normal
                 this.vida -= damage;
                 if (Phaser.Math.Between(1, this.audioChance) == 1) {
-                    this.audiosHit[Phaser.Math.Between(0, this.audiosHit.length - 1)].play();
+                    let index = Phaser.Math.Between(0, this.audiosHit.length - 1);
+                    if (this.audiosHit[index]) this.audiosHit[index].play();
                 }
             }
             

@@ -93,7 +93,8 @@ export default class Torre extends Phaser.GameObjects.Sprite {
         bullet.setScale(0.2, 0.3);
         this.scene.bullets.add(bullet);
         if (Phaser.Math.Between(1, this.audioChance) == 1) {
-            this.audiosHit[Phaser.Math.Between(0, this.audiosHit.length - 1)].play();
+            let index = Phaser.Math.Between(0, this.audiosHit.length - 1);
+            if (this.audiosHit[index]) this.audiosHit[index].play();
         }
         return bullet;
     }
