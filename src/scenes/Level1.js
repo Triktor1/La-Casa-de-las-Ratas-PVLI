@@ -83,11 +83,7 @@ export default class Level1 extends Phaser.Scene {
         this.load.image('gourmetBullet', 'assets/Ratas/Gourmet.png');
 
         //SPRITES DE RATA GORDA
-        this.load.image('BigCheese', 'assets/Ratas/BigCheese.png');
-        this.load.image('BigCheese2', 'assets/Ratas/BigCheese2.png');
-        this.load.image('BigCheese3', 'assets/Ratas/BigCheese3.png');
-        this.load.image('FatBullet', 'assets/Ratas/FatBullet.png');
-
+        this.load.spritesheet('bombastic', 'assets/Ratas/Bombastic-Sheet.png', { frameWidth: 250, frameHeight: 250 });
         //SPRITES DE RATA MANGUERA
         this.load.spritesheet('rataManguera', 'assets/Ratas/RataManguera-Sheet.png', { frameWidth: 250, frameHeight: 250 });
         this.load.image('mangueraBullet', 'assets/Ratas/MangueraBullet.png');
@@ -122,6 +118,45 @@ export default class Level1 extends Phaser.Scene {
 
     create() {
         //ANIMACIONES
+
+        //RATA GORDA
+        this.anims.create({
+            key: 'bombasticIdle1',
+            frames: this.anims.generateFrameNumbers("bombastic", { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'bombasticAttack1',
+            frames: this.anims.generateFrameNumbers("bombastic", { start: 3, end: 3 }),
+            frameRate: 5,
+            repeat: 0
+        });
+        this.anims.create({
+            key: 'bombasticIdle2',
+            frames: this.anims.generateFrameNumbers("bombastic", { start: 4, end: 6 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'bombasticAttack2',
+            frames: this.anims.generateFrameNumbers("bombastic", { start: 7, end: 7 }),
+            frameRate: 5,
+            repeat: 0
+        });
+        this.anims.create({
+            key: 'bombasticIdle3',
+            frames: this.anims.generateFrameNumbers("bombastic", { start: 8, end: 10 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'bombasticAttack3',
+            frames: this.anims.generateFrameNumbers("bombastic", { start: 11, end: 11 }),
+            frameRate: 5,
+            repeat: 0
+        });
+
         //RATA MANGUERA
         this.anims.create({
             key: 'mangueraIdle1',
