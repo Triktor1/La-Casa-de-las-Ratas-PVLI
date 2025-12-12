@@ -1,0 +1,11 @@
+Personaje:
+Rata Comecables
+Loro pirata
+	-> Navi (habilidad del loro pirata, copiado de Xhurro Games)
+
+Ambientación:
+Baño
+AI (Actual Intelligence) <- creada por nosotros, viene de la carta Drawn to Card
+
+Mecánicas:
+Bloons Tower Defense
