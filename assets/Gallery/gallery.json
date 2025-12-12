@@ -104,5 +104,13 @@ es {
             "grupo": "Zorro Cósmico",
             "descripcion": "Los live actions casi nunca son buenos, pero en este caso parece que sí. Este es un loro fotorrealista con elementos piratas dibujados encima."
         }
+        {
+            "id": "img14",
+            "archivo": "SinUsar.jpg",
+            "nombre": "Fondo Alcantarillico",
+            "autor": "Oscar Daniel",
+            "grupo": "La Casa de las Ratas",
+            "descripcion": "Fondo no usado para la tienda, que iba a estar en las alcantarillas"
+        }
     ]
 }
