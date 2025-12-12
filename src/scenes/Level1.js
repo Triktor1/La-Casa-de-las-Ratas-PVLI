@@ -49,7 +49,7 @@ export default class Level1 extends Phaser.Scene {
         this.playerInfo = data.playerInfo;
         this.levelMoney = 1000;
         this.levelNum = 1;
-        this.playerHealth = 30;
+        this.playerHealth = 100;;
         this.enemySpawnNum = 20;
         this.enemySpawnNum = 30;
     }
@@ -65,15 +65,15 @@ export default class Level1 extends Phaser.Scene {
 
         //Carga de imágenes
         this.load.image('background', 'assets/Fondos/Nivel.png');
-        this.load.image('shopButton', 'assets/UI/shop.png');
-        this.load.image('torre', 'assets/Ratas/torre.png');
+        this.load.image('shopButton', 'assets/UI/Shop.png');
+        this.load.image('torre', 'assets/Ratas/Torre.png');
         this.load.image('caminolvl1', 'assets/Nivel/caminolvl1.png');
         this.load.image('caminolvl2', 'assets/Nivel/caminolvl2.png');
         this.load.image('caminolvl3', 'assets/Nivel/caminolvl3.png');
 
         //SPRITES DE RATA SILICONA
-        this.load.spritesheet('rataSilicona', 'assets/Ratas/siliconeRat.png', { frameWidth: 250, frameHeight: 250 });
-        this.load.image('siliconeBullet', 'assets/Ratas/siliconeBullet.png');
+        this.load.spritesheet('rataSilicona', 'assets/Ratas/SiliconeRat.png', { frameWidth: 250, frameHeight: 250 });
+        this.load.image('siliconeBullet', 'assets/Ratas/SiliconeBullet.png');
 
         //SPRITES DE RATA CHEF
         this.load.spritesheet('rataChef', 'assets/Ratas/RataChef.png', { frameWidth: 250, frameHeight: 250 });
@@ -86,11 +86,11 @@ export default class Level1 extends Phaser.Scene {
         this.load.image('mangueraBullet', 'assets/Ratas/MangueraBullet.png');
 
         //SPRITES DE RATA SNIPER
-        this.load.spritesheet('rataSniper', 'assets/Ratas/rataSniper.png', { frameWidth: 150, frameHeight: 250 });
-        this.load.image('bullet', 'assets/Ratas/bullet.png');
+        this.load.spritesheet('rataSniper', 'assets/Ratas/RataSniper.png', { frameWidth: 150, frameHeight: 250 });
+        this.load.image('bullet', 'assets/Ratas/Bullet.png');
 
         //SPRITES DE RATA JERINGA
-        this.load.spritesheet('rataJeringa', '/assets/Ratas/rataJeringa-Sheet.png', { frameWidth: 250, frameHeight: 250 });
+        this.load.spritesheet('rataJeringa', '/assets/Ratas/RataJeringa-Sheet.png', { frameWidth: 250, frameHeight: 250 });
         this.load.image('jeringaBullet', 'assets/Ratas/Jeringa.png');
 
 
@@ -99,12 +99,14 @@ export default class Level1 extends Phaser.Scene {
         this.load.spritesheet('loroGrum', 'assets/Loros/LoroGrumete-Sheet.png', { frameWidth: 250, frameHeight: 250 });
         this.load.spritesheet('loroCan', 'assets/Loros/LoroCañon.png', { frameWidth: 250, frameHeight: 250 });
         this.load.spritesheet('loroBarr', 'assets/Loros/LoroBarril-Sheet.png', { frameWidth: 250, frameHeight: 250 });
+        this.load.spritesheet('loroPrin', 'assets/Loros/LoroPrinceso.png', { frameWidth: 250, frameHeight: 250 });
         //SPRITES DE TROPAS RATA
-        this.load.spritesheet('rataCoche', 'assets/Ratas/rataCoche.png', { frameWidth: 250, frameHeight: 250 });
+        this.load.spritesheet('rataCoche', 'assets/Ratas/RataCoche.png', { frameWidth: 250, frameHeight: 250 });
         this.load.spritesheet('rataRodadero', 'assets/Ratas/RataRodadero.png', { frameWidth: 250, frameHeight: 250 });
-        this.load.image('explosion', 'assets/Ratas/explosion.png');
-        this.load.image('rataComecables', 'assets/Ratas/rataComecables.png');
-        this.load.image('comecablesBullet', 'assets/Ratas/comecablesBullet.png');
+        this.load.spritesheet('rataComecables', 'assets/Ratas/RataComecables.png', { frameWidth: 250, frameHeight: 250 });
+        this.load.image('explosion', 'assets/Ratas/Explosion.png');
+
+        this.load.spritesheet('comecablesBullet', 'assets/Ratas/comecablesBullet.png', { frameWidth: 250, frameHeight: 250 });
 
         //Carga de sonido
         this.load.audio('Critico', 'assets/sonidos/SonidoOriginalParaDañoCriticoNoRobado.mp3');
@@ -153,7 +155,7 @@ export default class Level1 extends Phaser.Scene {
         });
 
         //RATA SILICONA
-        +        this.anims.create({
+        this.anims.create({
             key: 'siliconeIdle1',
             frames: this.anims.generateFrameNumbers("rataSilicona", { start: 0, end: 2 }),
             frameRate: 5,
@@ -335,6 +337,18 @@ export default class Level1 extends Phaser.Scene {
             frameRate: 5,
             repeat: -1
         });
+        this.anims.create({
+            key: 'comecablesAnim',
+            frames: this.anims.generateFrameNumbers("rataComecables", { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'comecablesRayo',
+            frames: this.anims.generateFrameNumbers("comecablesBullet", { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        });
         //ENEMIGOS
         this.anims.create({
             key: 'grumeteIdle',
@@ -359,6 +373,12 @@ export default class Level1 extends Phaser.Scene {
         this.cursorKeys = this.input.keyboard.createCursorKeys();
         this.input.keyboard.on("keydown-SPACE", () => {
             this.addMoney();
+        });
+        this.input.keyboard.on("keydown-ESC", () => {
+            if (this.playerInfo.CurrentLevel < 2) {
+                this.playerInfo.CurrentLevel++;
+                this.scene.start('Shop', { shopMoney: this.shopMoney, playerInfo: this.playerInfo });
+            }
         });
 
         this.listaClases = [RatSniper, RataComecables, RataChef, RataGorda, RataRodadero, RataManguera, RataSilicona, RataCoche, RataJeringa]
@@ -390,15 +410,15 @@ export default class Level1 extends Phaser.Scene {
         this.crearTropas();
         this.crearHuecos();
         //UI
-        this.dineroText = this.add.text(200, 10, "Dinero: " + this.levelMoney, {
+        this.dineroText = this.add.text(10, 10, "Dinero: " + this.levelMoney, {
             fontFamily: 'Arial Black',
             fontSize: '25px'
         });
-        this.vidaText = this.add.text(450 + 20, 10, "Vida: " + this.playerHealth, {
+        this.vidaText = this.add.text(260 + 20, 10, "Vida: " + this.playerHealth, {
             fontFamily: 'Arial Black',
             fontSize: '25px'
         })
-        this.jsonTextLevel = this.add.text(700, 10, "Nivel: " + this.jsonDataName + " Puntos: " + this.jsonDataArray.length);
+        //this.jsonTextLevel = this.add.text(700, 10, "Nivel: " + this.jsonDataName + " Puntos: " + this.jsonDataArray.length);
 
 
         /*
@@ -420,19 +440,16 @@ export default class Level1 extends Phaser.Scene {
 
 
         console.log(this.playerInfo);
-        let xOrder = 80;
+        let xOrder = 500;
         for (let i = 0; i < this.playerInfo.A.length; i++) {
             if (this.playerInfo.A[i].Desbloqueado) {
                 if (this.playerInfo.A[i].Tipo == "Torre") {
-                    new TorreUI(this, xOrder, 100, 'torre', 50, this.listaClases[i])
-                    xOrder += 160;
-
+                    new TorreUI(this, xOrder, 100, this.playerInfo.A[i].Sprite, 50, this.listaClases[i]).setScale(0.5)
                 }
                 else {
-                    new TropaUI(this, xOrder, 100, 'torre', 20, 5, this.listaClases[i])
-                    xOrder += 160;
-
+                    new TropaUI(this, xOrder, 100, this.playerInfo.A[i].Sprite, 20, 5, this.listaClases[i]).setScale(0.5)
                 }
+                xOrder += 110;
             }
 
         }
@@ -476,11 +493,19 @@ export default class Level1 extends Phaser.Scene {
         const bg = this.add.image(0, 0, 'background').setOrigin(0, 0).setScale(2);
         bg.displayHeight = this.scale.height;
         bg.displayWidth = this.scale.width;
-
-        const caminostr = 'caminolvl'+this.levelNum;
-        const camino = this.add.image(0, 0, caminostr).setOrigin(0, 0);
-        camino.displayHeight = this.scale.height;
-        camino.displayWidth = this.scale.width;
+        this.camino = this.add.image(0, 0, 'caminolvl1').setOrigin(0, 0);;
+        this.camino.destroy();
+        if (this.playerInfo.CurrentLevel == 0) {
+            this.camino = this.add.image(0, 0, 'caminolvl1').setOrigin(0, 0);
+        }
+        else if (this.playerInfo.CurrentLevel == 1) {
+            this.camino = this.add.image(0, 0, 'caminolvl2').setOrigin(0, 0);
+        }
+        else if (this.playerInfo.CurrentLevel == 2) {
+            this.camino = this.add.image(0, 0, 'caminolvl3').setOrigin(0, 0);
+        }
+        this.camino.displayHeight = this.scale.height;
+        this.camino.displayWidth = this.scale.width;
     }
 
     crearCamino() {
@@ -495,7 +520,7 @@ export default class Level1 extends Phaser.Scene {
 
         if (this.enemySpawnNum > 0) {
 
-            this.randomnum = Math.floor(Math.random() * 4)
+            this.randomnum = Math.floor(Math.random() * 5)
             console.log(this.randomnum)
 
             let loro;
@@ -509,7 +534,7 @@ export default class Level1 extends Phaser.Scene {
                 loro = new loroBarril(this, this.path, this.jsonDataArray[0].x, this.jsonDataArray[0].y, 'loroBarr');
             }
             else if (this.randomnum <= 4) {
-                loro = new loroPrinceso(this, this.path, this.jsonDataArray[0].x, this.jsonDataArray[0].y, 'loroBarr');
+                loro = new loroPrinceso(this, this.path, this.jsonDataArray[0].x, this.jsonDataArray[0].y, 'loroPrin');
             }
 
             this.enemies.add(loro);

@@ -16,9 +16,13 @@ export default class Shop extends Phaser.Scene {
     }
     
     preload(){
+
+        this.load.spritesheet('VaterRata' , 'assets/Tienda/rataTienda-Sheet.png',{ frameWidth: 250, frameHeight: 250 });
+        this.load.spritesheet('Navi' , 'assets/Tienda/navi-Sheet.png',{ frameWidth: 275, frameHeight: 128 });
+
         this.load.image('backgroundTienda' , 'assets/Fondos/Tienda.png')
         this.load.image('textboxNavi' , 'assets/Tienda/TextBoxNavi.png')
-        this.load.image('botonVolver', 'assets/UI/backbutton.png');
+        this.load.image('botonVolver', 'assets/UI/backbuttonTienda.png');
         this.load.image('botonPlaceholder', 'assets/WebSprites/Rick.png')
         this.load.json('coordsBotones', 'src/scenes/ShopDataManagement/ShopGapsCoords.json')
         this.load.json('frasesNavi', 'src/scenes/ShopDataManagement/FrasesNavi.json')
@@ -29,10 +33,38 @@ export default class Shop extends Phaser.Scene {
     }
 
     create(){
+
+
+
+        //ANIMACIONES
+
+        this.anims.create({
+            key: 'NaviIdle',
+            frames: this.anims.generateFrameNumbers("Navi", { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'VaterIdle',
+            frames: this.anims.generateFrameNumbers("VaterRata", { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        })
+
         const bg = this.add.image(0, 0, 'backgroundTienda').setOrigin(0, 0).setScale(2);
         bg.displayHeight = this.scale.height;
         bg.displayWidth = this.scale.width;
 
+
+        let rataVater = this.add.sprite(900,400,'VaterRata');
+        let navi = this.add.sprite(1150, 250, 'Navi');
+
+        rataVater.setScale(2.5);
+
+        rataVater.play('VaterIdle');
+        navi.play('NaviIdle');
+        
         //Frases navi
         this.frasesNavi = this.cache.json.get('frasesNavi');
         this.randomnum = Math.floor(Math.random() * 3)
@@ -47,14 +79,14 @@ export default class Shop extends Phaser.Scene {
         this.dineroTienda = this.add.text(20 , 50 , "Plumas: " + this.shopMoney)
 
         //BOTONES
-        const btnBack = this.add.sprite(this.scale.width - 220, 220, 'botonVolver').setInteractive({ useHandCursor: true });
+        const btnBack = this.add.sprite(this.scale.width - 220, 0, 'botonVolver').setOrigin(0,0).setInteractive({ useHandCursor: true }).setScale(4);
         btnBack.on('pointerdown', () => {
             this.endShop();
         });
 
         //efectos
-        btnBack.on('pointerover', () => btnBack.setScale(1.1));
-        btnBack.on('pointerout', () => btnBack.setScale(1.0));
+        btnBack.on('pointerover', () => btnBack.setScale(4.1));
+        btnBack.on('pointerout', () => btnBack.setScale(4));
 
         //CREACION BOTONES COMPRA
 
@@ -63,11 +95,11 @@ export default class Shop extends Phaser.Scene {
         let a = 0;
         for (let i = 0; i < this.playerInfo.A.length; i++) {
             if (this.playerInfo.A[i].NivelDesbloqueo <= this.playerInfo.CurrentLevel && this.playerInfo.A[i].NivelDesbloqueo > 0) {
-                //console.log(a);
-                //console.log(i);
+                
 
-                this.buttonArray[a] = new TropeButton(this, this.buttonPos[a].x, this.buttonPos[a].y, 'botonPlaceholder', this.playerInfo.A[i].Precio, this.playerInfo.A[i].Desbloqueado, this.playerInfo.A[i].Descripcion);
-                this.buttonArray[a].setScale(0.2);
+
+                this.buttonArray[a] = new TropeButton(this, this.buttonPos[a].x, this.buttonPos[a].y, this.playerInfo.A[i].Sprite , this.playerInfo.A[i].Precio, this.playerInfo.A[i].Desbloqueado, this.playerInfo.A[i].Descripcion);
+                this.buttonArray[a].setScale(0.5)
                 this.buttonArray[a].setInteractive({ useHandCursor: true });
 
                 a++;
@@ -83,13 +115,13 @@ export default class Shop extends Phaser.Scene {
 
             this.buttonArray[i].on("pointerover", () => {
                 console.log(this.buttonArray[i].desc);
-                this.buttonArray[i].setScale(0.21);
+                this.buttonArray[i].setScale(0.6);
 
                 this.descText.text = this.buttonArray[i].desc;
             })
 
             this.buttonArray[i].on("pointerout", () => {
-                this.buttonArray[i].setScale(0.2);
+                this.buttonArray[i].setScale(0.5);
                 this.randomnum = Math.floor(Math.random() * 3)
                 this.descText.text = this.frasesNavi.FrasesNavi[this.randomnum].Frase
             })

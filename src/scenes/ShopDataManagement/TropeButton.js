@@ -1,4 +1,4 @@
-export default class TropeButton extends Phaser.GameObjects.Image
+export default class TropeButton extends Phaser.GameObjects.Sprite
 {
 
     constructor(scene , x , y , sprite , precio , estado , desc)
@@ -11,6 +11,9 @@ export default class TropeButton extends Phaser.GameObjects.Image
         this.tropa = 0;
         this.desc = desc;
         this.precio = precio;
+        this.anims.play(sprite);
+
+
         scene.add.existing(this);
 
         if (this.isUnlocked)

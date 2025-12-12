@@ -1,4 +1,4 @@
-es {
+{
     "imagenes": [
         {
             "id": "img1",
@@ -103,6 +103,14 @@ es {
             "autor": "Aryan Guerrero",
             "grupo": "Zorro Cósmico",
             "descripcion": "Los live actions casi nunca son buenos, pero en este caso parece que sí. Este es un loro fotorrealista con elementos piratas dibujados encima."
+        },
+        {
+            "id": "img14",
+            "archivo": "Tunel.jpeg",
+            "nombre": "Tunel de las Ratas",
+            "autor": "La Casa de las Ratas",
+            "grupo": "",
+            "descripcion": "Representación visual de uno de los túneles que conforman el sistema subterráneo de La Casa de las Ratas. Normalmente es un sitio muy concurrido, fue difícil dibujarlo durante tanto tiempo sin que pasara nadie."
         }
         {
             "id": "img14",
