@@ -444,12 +444,26 @@ export default class Level1 extends Phaser.Scene {
             loop: true,
             callback:() => {
                 if (this.enemiesTillMiddleWave > 0 && (this.enemyCount - this.enemySpawnNum) == this.enemiesTillMiddleWave) {
-                    for (let i = 0; i < this.enemiesInMiddleWave; i++) this.crearEnemigos();
                     this.enemiesTillMiddleWave = -1; //ESTO SIGNIFICA QUE YA HA SIDO INVOCADA
+                    this.time.addEvent({
+                        delay: this.enemiesMinInterval/2,
+                        repeat: this.enemiesInMiddleWave,
+                        callback: () => {
+                            this.crearEnemigos();
+                        },
+                        callbackScope: this
+                    });
                 }
                 else if (this.enemiesTillFinalWave > 0 && (this.enemyCount - this.enemySpawnNum) == this.enemiesTillFinalWave) {
-                    for (let i = 0; i < this.enemiesInFinalWave; i++) this.crearEnemigos();
                     this.enemiesTillFinalWave = -1; //ESTO SIGNIFICA QUE YA HA SIDO INVOCADA
+                    this.time.addEvent({
+                        delay: this.enemiesMinInterval/3,
+                        repeat: this.enemiesInFinalWave,
+                        callback: () => {
+                            this.crearEnemigos();
+                        },
+                        callbackScope: this
+                    });
                 }
                 else this.crearEnemigos();
             },
