@@ -65,9 +65,11 @@ export default class Level1 extends Phaser.Scene {
 
         //Carga de imágenes
         this.load.image('background', 'assets/Fondos/Nivel.png');
-        this.load.image('loro', 'assets/Loros/ParrotPlaceholder.png');
         this.load.image('shopButton', 'assets/UI/shop.png');
         this.load.image('torre', 'assets/Ratas/torre.png');
+        this.load.image('caminolvl1', 'assets/Nivel/caminolvl1.png');
+        this.load.image('caminolvl2', 'assets/Nivel/caminolvl2.png');
+        this.load.image('caminolvl3', 'assets/Nivel/caminolvl3.png');
 
         //SPRITES DE RATA SILICONA
         this.load.spritesheet('rataSilicona', 'assets/Ratas/siliconeRat.png', { frameWidth: 250, frameHeight: 250 });
@@ -445,7 +447,7 @@ export default class Level1 extends Phaser.Scene {
                 if (this.enemiesTillMiddleWave > 0 && (this.enemyCount - this.enemySpawnNum) == this.enemiesTillMiddleWave) {
                     this.enemiesTillMiddleWave = -1; //ESTO SIGNIFICA QUE YA HA SIDO INVOCADA
                     this.time.addEvent({
-                        delay: this.enemiesMinInterval/2,
+                        delay: this.enemiesMinInterval / 2,
                         repeat: this.enemiesInMiddleWave,
                         callback: () => {
                             this.crearEnemigos();
@@ -456,7 +458,7 @@ export default class Level1 extends Phaser.Scene {
                 else if (this.enemiesTillFinalWave > 0 && (this.enemyCount - this.enemySpawnNum) == this.enemiesTillFinalWave) {
                     this.enemiesTillFinalWave = -1; //ESTO SIGNIFICA QUE YA HA SIDO INVOCADA
                     this.time.addEvent({
-                        delay: this.enemiesMinInterval/3,
+                        delay: this.enemiesMinInterval / 3,
                         repeat: this.enemiesInFinalWave,
                         callback: () => {
                             this.crearEnemigos();
@@ -475,6 +477,10 @@ export default class Level1 extends Phaser.Scene {
         bg.displayHeight = this.scale.height;
         bg.displayWidth = this.scale.width;
 
+        const caminostr = 'caminolvl'+this.levelNum;
+        const camino = this.add.image(0, 0, caminostr).setOrigin(0, 0);
+        camino.displayHeight = this.scale.height;
+        camino.displayWidth = this.scale.width;
     }
 
     crearCamino() {
@@ -483,10 +489,6 @@ export default class Level1 extends Phaser.Scene {
         for (var a = 1; a < this.jsonDataArray.length; a++) {
             this.path.lineTo(this.jsonDataArray[a].x, this.jsonDataArray[a].y)
         }
-
-        this.graphics = this.add.graphics();
-        this.graphics.lineStyle(2, 0xffffff, 1);
-        this.path.draw(this.graphics);
     }
 
     crearEnemigos() {
