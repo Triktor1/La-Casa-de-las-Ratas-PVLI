@@ -65,6 +65,7 @@ export default class Level1 extends Phaser.Scene {
         this.levelArray = ['L1Data', 'L2Data', 'L3Data'];
 
         //Carga de imágenes
+        this.load.image('background', 'assets/Fondos/Nivel.png');
         this.load.image('loro', 'assets/Loros/ParrotPlaceholder.png');
         this.load.image('selectButton', 'assets/UI/lvlselectboton.png');
         this.load.image('shopButton', 'assets/UI/shop.png');
@@ -93,12 +94,10 @@ export default class Level1 extends Phaser.Scene {
         this.load.image('bullet', 'assets/Ratas/bullet.png');
 
         //SPRITES DE RATA JERINGA
-        this.load.image('rataJeringa', 'assets/Ratas/RataJeringa.png');
-        this.load.image('rataJeringa2', 'assets/Ratas/RataJeringa2.png');
-        this.load.image('rataJeringa3', 'assets/Ratas/RataJeringa3.png');
+        this.load.spritesheet('rataJeringa','/assets/Ratas/rataJeringa-Sheet.png', {frameWidth: 250, frameHeight: 250 });
         this.load.image('jeringaBullet', 'assets/Ratas/Jeringa.png');
 
-        this.load.image('background', 'assets/bg.png');
+        
 
         //SPRITES DE TROPAS LORO
         this.load.image('loroGrum', 'assets/Loros/GrumetePH.png');
@@ -118,6 +117,44 @@ export default class Level1 extends Phaser.Scene {
 
     create() {
         //ANIMACIONES
+
+        //RATA JERINGA
+       this.anims.create({
+            key: 'jeringaIdle1',
+            frames: this.anims.generateFrameNumbers("rataJeringa", { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'jeringaAttack1',
+            frames: this.anims.generateFrameNumbers("rataJeringa", { start: 3, end: 3 }),
+            frameRate: 5,
+            repeat: 0
+        });
+        this.anims.create({
+            key: 'jeringaIdle2',
+            frames: this.anims.generateFrameNumbers("rataJeringa", { start: 4, end: 6 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'jeringaAttack2',
+            frames: this.anims.generateFrameNumbers("rataJeringa", { start: 7, end: 7 }),
+            frameRate: 5,
+            repeat: 0
+        });
+        this.anims.create({
+            key: 'jeringaIdle3',
+            frames: this.anims.generateFrameNumbers("rataJeringa", { start: 8, end: 10 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'jeringaAttack3',
+            frames: this.anims.generateFrameNumbers("rataJeringa", { start: 11, end: 11 }),
+            frameRate: 5,
+            repeat: 0
+        });
 
         //RATA GORDA
         this.anims.create({
@@ -296,13 +333,16 @@ export default class Level1 extends Phaser.Scene {
             if (this.playerInfo.A[i].Desbloqueado) {
                 if (this.playerInfo.A[i].Tipo == "Torre") {
                     new TorreUI(this, xOrder, 100, 'torre', 50, this.listaClases[i])
+                    xOrder += 160;
+
                 }
                 else {
                     new TropaUI(this, xOrder, 100, 'torre', 20, 5, this.listaClases[i])
+                                xOrder += 160;
+
                 }
             }
 
-            xOrder += 160;
         }
 
         //COLISIONES
@@ -355,16 +395,16 @@ export default class Level1 extends Phaser.Scene {
             let loro;
 
             if (this.randomnum == 0) {
-                loro = new Loro(this, this.path, -50, 600, 10, 10, 100, "G", 10, 'basicLoro', 'loro', 0);
+                loro = new Loro(this, this.path, this.jsonDataArray[0].x, this.jsonDataArray[0].y, 10, 10, 100, "G", 10, 'basicLoro', 'loro', 0);
             }
             else if (this.randomnum == 1) {
-                loro = new loroCanonero(this, this.path, -50, 600, 'loroCan')
+                loro = new loroCanonero(this, this.path, this.jsonDataArray[0].x, this.jsonDataArray[0].y, 'loroCan')
             }
             else if (this.randomnum == 2) {
-                loro = new loroGrumete(this, this.path, -50, 600, 'loroGrum')
+                loro = new loroGrumete(this, this.path, this.jsonDataArray[0].x, this.jsonDataArray[0].y, 'loroGrum')
             }
             else if (this.randomnum == 3) {
-                loro = new loroBarril(this, this.path, -50, 600, 'loroBarr');
+                loro = new loroBarril(this, this.path, this.jsonDataArray[0].x, this.jsonDataArray[0].y, 'loroBarr');
             }
 
             this.enemies.add(loro);

@@ -26,7 +26,7 @@ export default class RataCoche extends Tropa {
 
         } else {
             //daño normal
-            enemy.getDamaged(this.damage, this.type);
+            enemy.getDamaged(this.damage, "N");
         }
         this.getDamaged(enemy.damage, enemy.type);
     }
