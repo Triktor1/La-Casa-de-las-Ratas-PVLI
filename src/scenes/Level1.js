@@ -73,14 +73,10 @@ export default class Level1 extends Phaser.Scene {
 
         //SPRITES DE RATA SILICONA
         this.load.image('rataSilicona', 'assets/Ratas/siliconeRat.png');
-        this.load.image('rataSilicona2', 'assets/Ratas/siliconeRat2.png');
-        this.load.image('rataSilicona3', 'assets/Ratas/siliconeRat3.png');
         this.load.image('siliconeBullet', 'assets/Ratas/siliconeBullet.png');
 
         //SPRITES DE RATA CHEF
         this.load.image('rataChef', 'assets/Ratas/RataChef.png');
-        this.load.image('rataChef2', 'assets/Ratas/RataChef2.png');
-        this.load.image('rataChef3', 'assets/Ratas/RataChef3.png');
         this.load.image('gourmetBullet', 'assets/Ratas/Gourmet.png');
 
         //SPRITES DE RATA GORDA
@@ -117,6 +113,82 @@ export default class Level1 extends Phaser.Scene {
 
     create() {
         //ANIMACIONES
+
+        //RATA CHEF
+         this.anims.create({
+            key: 'chefIdle1',
+            frames: this.anims.generateFrameNumbers("rataChef", { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'chefAttack1',
+            frames: this.anims.generateFrameNumbers("rataChef", { start: 3, end: 3 }),
+            frameRate: 5,
+            repeat: 0
+        });
+        this.anims.create({
+            key: 'chefIdle2',
+            frames: this.anims.generateFrameNumbers("rataChef", { start: 4, end: 6 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'chefAttack2',
+            frames: this.anims.generateFrameNumbers("rataChef", { start: 7, end: 7 }),
+            frameRate: 5,
+            repeat: 0
+        });
+        this.anims.create({
+            key: 'chefIdle3',
+            frames: this.anims.generateFrameNumbers("rataChef", { start: 8, end: 10 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'chefAttack3',
+            frames: this.anims.generateFrameNumbers("rataChef", { start: 11, end: 11 }),
+            frameRate: 5,
+            repeat: 0
+        });
+
+        //RATA SILICONA
++        this.anims.create({
+            key: 'siliconeIdle1',
+            frames: this.anims.generateFrameNumbers("rataSilicona", { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'siliconeAttack1',
+            frames: this.anims.generateFrameNumbers("rataSilicona", { start: 3, end: 3 }),
+            frameRate: 5,
+            repeat: 0
+        });
+        this.anims.create({
+            key: 'siliconeIdle2',
+            frames: this.anims.generateFrameNumbers("rataSilicona", { start: 4, end: 6 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'siliconeAttack2',
+            frames: this.anims.generateFrameNumbers("rataSilicona", { start: 7, end: 7 }),
+            frameRate: 5,
+            repeat: 0
+        });
+        this.anims.create({
+            key: 'siliconeIdle3',
+            frames: this.anims.generateFrameNumbers("rataSilicona", { start: 8, end: 10 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'siliconeAttack3',
+            frames: this.anims.generateFrameNumbers("rataSilicona", { start: 11, end: 11 }),
+            frameRate: 5,
+            repeat: 0
+        });
 
         //RATA JERINGA
        this.anims.create({

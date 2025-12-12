@@ -13,6 +13,13 @@ export default class RataSilicona extends Torre{
         this.slowBoost = 0.1;
         this.durationBoost = 450;
 
+        this.play('siliconeIdle1');
+        this.on('animationcomplete', (anim) => {
+            if (anim.key === 'siliconettack' + this.upgradeLevel) {
+                this.play('siliconeIdle' + this.upgradeLevel);
+            }
+        });
+
         this.setUpgradeText("Siguiente nivel: \ndaño + " + this.damageBoost + "\nlentitud + " + this.slowBoost + "\nduracion + " + this.durationBoost/1000 + "s", 24, 3);
     }
 
@@ -28,12 +35,8 @@ export default class RataSilicona extends Torre{
         this.damage += this.damageBoost;
         this.slowAmount -= this.slowBoost;
         this.duration += this.durationBoost;
-        
-        if (this.upgradeLevel == 2){
-            this.setTexture("rataSilicona2");
-        }
-        else if (this.upgradeLevel == 3){
-            this.setTexture("rataSilicona3");
-        }
+
+        this.play('siliconeIdle'+this.upgradeLevel);
+
     }
 }
