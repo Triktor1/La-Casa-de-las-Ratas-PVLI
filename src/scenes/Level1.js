@@ -332,13 +332,16 @@ export default class Level1 extends Phaser.Scene {
             if (this.playerInfo.A[i].Desbloqueado) {
                 if (this.playerInfo.A[i].Tipo == "Torre") {
                     new TorreUI(this, xOrder, 100, 'torre', 50, this.listaClases[i])
+                    xOrder += 160;
+
                 }
                 else {
                     new TropaUI(this, xOrder, 100, 'torre', 20, 5, this.listaClases[i])
+                                xOrder += 160;
+
                 }
             }
 
-            xOrder += 160;
         }
 
         //COLISIONES
