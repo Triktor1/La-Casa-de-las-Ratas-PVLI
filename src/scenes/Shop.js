@@ -16,6 +16,8 @@ export default class Shop extends Phaser.Scene {
     }
     
     preload(){
+        this.load.image('backgroundTienda' , 'assets/Fondos/Tienda.png')
+        this.load.image('textboxNavi' , 'assets/Tienda/TextBoxNavi.png')
         this.load.image('botonVolver', 'assets/UI/backbutton.png');
         this.load.image('botonPlaceholder' , 'assets/WebSprites/Rick.png')
         this.load.json('coordsBotones' , 'src/scenes/ShopDataManagement/ShopGapsCoords.json')
@@ -27,14 +29,21 @@ export default class Shop extends Phaser.Scene {
     }
 
     create(){
+        const bg = this.add.image(0, 0, 'backgroundTienda').setOrigin(0, 0).setScale(2);
+        bg.displayHeight = this.scale.height;
+        bg.displayWidth = this.scale.width;
 
         //Frases navi
-
         this.frasesNavi = this.cache.json.get('frasesNavi');
         this.randomnum = Math.floor(Math.random() * 3)
+
         //TEXTO
+        
         this.add.text(20,20,"Shop");
-        this.descText = this.add.text(700 , 500 , this.frasesNavi.FrasesNavi[this.randomnum].Frase)
+        
+        this.add.image(650 , 500 , 'textboxNavi').setOrigin(0,0).setScale(2.1);
+        this.descText = this.add.text(700 , 550 , this.frasesNavi.FrasesNavi[this.randomnum].Frase)
+        
         this.dineroTienda = this.add.text(20 , 50 , "Plumas: " + this.shopMoney)
 
         //BOTONES
