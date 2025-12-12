@@ -1,6 +1,5 @@
 import Loro from "../enemies/loro.js";
 
-import Torre from "../torres/TorreBase.js";
 import RataSilicona from "../torres/RataSilicona.js";
 import RataJeringa from "../torres/RataJeringa.js";
 import RataGorda from "../torres/RataGorda.js";
@@ -19,7 +18,6 @@ import loroBarril from "../enemies/loroBarril.js";
 import loroCanonero from "../enemies/loroCanonero.js";
 import loroPrinceso from "../enemies/loroPrinceso.js";
 import RataComecables from "../tropas/RataComecables.js";
-import PlayerData from "../PlayerData/PlayerData.js";
 import RataCoche from "../tropas/RataCoche.js";
 import RataRodadero from "../tropas/RataRodadero.js";
 
@@ -344,12 +342,12 @@ export default class Level1 extends Phaser.Scene {
         });
         this.anims.create({
             key: 'canonIdle',
-            frames: this.anims.generateFrameNumbers("loroCan", { start: 0, end: 3 }),   
+            frames: this.anims.generateFrameNumbers("loroCan", { start: 0, end: 3 }),
             frameRate: 5,
             repeat: -1
         });
         this.anims.create({
-            key: 'barrilIdle',  
+            key: 'barrilIdle',
             frames: this.anims.generateFrameNumbers("loroBarr", { start: 0, end: 3 }),
             frameRate: 5,
             repeat: -1
@@ -485,20 +483,16 @@ export default class Level1 extends Phaser.Scene {
             console.log(this.randomnum)
 
             let loro;
-
-            if (this.randomnum == 0) {
-                loro = new Loro(this, this.path, this.jsonDataArray[0].x, this.jsonDataArray[0].y, 10, 10, 100, "G", 10, 'basicLoro', 'loro', 0);
-            }
-            else if (this.randomnum == 1) {
+            if (this.randomnum <= 1) {
                 loro = new loroCanonero(this, this.path, this.jsonDataArray[0].x, this.jsonDataArray[0].y, 'loroCan')
             }
-            else if (this.randomnum == 2) {
+            else if (this.randomnum <= 2) {
                 loro = new loroGrumete(this, this.path, this.jsonDataArray[0].x, this.jsonDataArray[0].y, 'loroGrum')
             }
-            else if (this.randomnum == 3) {
+            else if (this.randomnum <= 3) {
                 loro = new loroBarril(this, this.path, this.jsonDataArray[0].x, this.jsonDataArray[0].y, 'loroBarr');
             }
-            else if (this.randomnum == 4) {
+            else if (this.randomnum <= 4) {
                 loro = new loroPrinceso(this, this.path, this.jsonDataArray[0].x, this.jsonDataArray[0].y, 'loroBarr');
             }
 
