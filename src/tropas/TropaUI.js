@@ -1,4 +1,4 @@
-export default class TropaUI extends Phaser.GameObjects.Image {
+export default class TropaUI extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, texture, cost, increase = 5, TropaClase) {
         super(scene, x, y, texture);
         scene.add.existing(this);
