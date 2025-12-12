@@ -46,7 +46,6 @@ ul {
   width: 100%;
   height: 100%;
   -webkit-backface-visibility: hidden;
-  /* Safari */
   backface-visibility: hidden;
 }
 
@@ -73,7 +72,6 @@ ul {
 #victor{
   background-color: #5ba675;
 }
-
 
 #silva{
   background-color: #6d80fa;

@@ -26,6 +26,14 @@
   width: 60px;
 }
 
+.gameLogo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-self: center;
+  size: 80%;
+}
+
 .headerEquipo {
   text-align: right;
   position: absolute;
@@ -71,6 +79,13 @@ h1 {
 h2 {
   color: #4a3052;
   justify-self: left;
+  font-size: 35px;
+  font-family: 'Arial Black', sans-serif;
+}
+
+#tutorialFin {
+  color: #4a3052;
+  justify-self: center;
   font-size: 35px;
   font-family: 'Arial Black', sans-serif;
 }

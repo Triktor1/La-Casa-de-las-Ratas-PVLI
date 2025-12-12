@@ -1,0 +1,65 @@
+{
+    "Name" : "Soy el Level 1",
+    "enemySpawnNum": 50,
+    "enemiesTillMiddleWave": 10,
+    "enemiesTillFinalWave": 30,
+    "enemiesMinInterval": 2500,
+    "enemiesMaxInterval": 3500,
+    "enemiesInMiddleWave": 5,
+    "enemiesInFinalWave":  8,
+    "path" : [
+        {
+            "x": -50,
+            "y": 600
+        },
+        {
+            "x": 300,
+            "y": 600
+        },
+        {
+            "x": 300,
+            "y": 200
+        },
+        {
+            "x": 700,
+            "y": 200
+        },
+        {
+            "x": 700,
+            "y": 600
+        },
+        {
+            "x": 1000,
+            "y": 600
+        },
+        {
+            "x": 1000,
+            "y": 300
+        },
+        {
+            "x": 1300,
+            "y": 300
+        }
+        
+    ]
+    ,
+    "towers": [
+        {
+            "x": 400,
+            "y": 600
+        }
+        ,
+        {
+            "x":  800,
+            "y": 100
+        }
+        ,
+        {
+            "x": 900,
+            "y" : 470
+        }
+    ],
+
+    "playerHealth" : 100 ,
+    "levelMoney" : 1000
+}

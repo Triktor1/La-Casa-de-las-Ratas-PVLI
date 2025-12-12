@@ -1,7 +1,14 @@
 import Loro from "../enemies/loro.js";
 
-import Torre from "../torres/TorreBase.js";
 import RataSilicona from "../torres/RataSilicona.js";
+import RataJeringa from "../torres/RataJeringa.js";
+import RataGorda from "../torres/RataGorda.js";
+import RataManguera from "../torres/RataManguera.js";
+import RataChef from "../torres/RataCamarera.js";
+import RatSniper from "../torres/TorreSniper.js";
+
+import Tropa from "../tropas/TropaBase.js";
+import TropaUI from "../tropas/TropaUI.js"
 
 import Bullet from "../bullets/bullet.js";
 import HuecoTorre from "../torres/HuecoTorre.js";
@@ -9,24 +16,38 @@ import TorreUI from "../torres/TorreUI.js";
 import loroGrumete from "../enemies/loroGrumete.js";
 import loroBarril from "../enemies/loroBarril.js";
 import loroCanonero from "../enemies/loroCanonero.js";
-
-
+import loroPrinceso from "../enemies/loroPrinceso.js";
+import RataComecables from "../tropas/RataComecables.js";
+import RataCoche from "../tropas/RataCoche.js";
+import RataRodadero from "../tropas/RataRodadero.js";
 
 export default class Level1 extends Phaser.Scene {
     constructor() {
         super({ key: "Level1" });
         this.shopMoney;
-        this.levelMoney = 100;
+        this.levelMoney = 1000;
         this.levelNum = 1;
         this.playerHealth = 100;
         this.enemySpawnNum = 30;
-
+        this.enemyCount;
+        //PARA SABER CUANDO VIENEN PRIMERA Y ULTIMA OLEADA
+        this.enemiesTillMiddleWave = 15;
+        this.enemiesTillFinalWave = 30;
+        //INTERVALO MIN Y MAX RANDOM DE SPAWN DE ENEMIGOS
+        this.enemiesMinInterval = 2000;
+        this.enemiesMaxInterval = 5000;
+        //NUMERO DE ENEMIGOS EN PRIMERA Y ULTIMA OLEADA
+        this.enemiesInMiddleWave = 5;
+        this.enemiesInFinalWave = 8;
     }
 
-    
+
     init(data) {
+        //Inicialización de variables principales
+        this.test = data.dummy;
         this.shopMoney = data.shopMoney || 0;
-        this.levelMoney = 100;
+        this.playerInfo = data.playerInfo;
+        this.levelMoney = 1000;
         this.levelNum = 1;
         this.playerHealth = 30;
         this.enemySpawnNum = 20;
@@ -34,49 +55,422 @@ export default class Level1 extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('loro', 'assets/ParrotPlaceholder.png');
-        this.load.image('selectButton', 'assets/lvlselectboton.png');
-        this.load.image('shopButton', 'assets/shop.png');
-        this.load.image('torre', 'assets/torre.png');
-        this.load.image('rataSilicona', 'assets/siliconeRat.png');
-        this.load.image('background', 'assets/bg.png');
-        this.load.image('bullet', 'assets/bullet.png');
-        this.load.image('siliconeBullet', 'assets/siliconeBullet.png');
-        this.load.image('loroGrum', 'assets/GrumetePH.png');
-        this.load.image('loroCan', 'assets/CanonPH.png');
-        this.load.image('loroBarr', 'assets/BarrilPH.png');
 
+        //Carga jsons de niveles
+        this.load.json('L1Data', 'src/scenes/LevelJsons/Level1.json');
+        this.load.json('L2Data', 'src/scenes/LevelJsons/Level2.json');
+        this.load.json('L3Data', 'src/scenes/LevelJsons/Level3.json');
+
+        this.levelArray = ['L1Data', 'L2Data', 'L3Data'];
+
+        //Carga de imágenes
+        this.load.image('background', 'assets/Fondos/Nivel.png');
+        this.load.image('shopButton', 'assets/UI/shop.png');
+        this.load.image('torre', 'assets/Ratas/torre.png');
+        this.load.image('caminolvl1', 'assets/Nivel/caminolvl1.png');
+        this.load.image('caminolvl2', 'assets/Nivel/caminolvl2.png');
+        this.load.image('caminolvl3', 'assets/Nivel/caminolvl3.png');
+
+        //SPRITES DE RATA SILICONA
+        this.load.spritesheet('rataSilicona', 'assets/Ratas/siliconeRat.png', { frameWidth: 250, frameHeight: 250 });
+        this.load.image('siliconeBullet', 'assets/Ratas/siliconeBullet.png');
+
+        //SPRITES DE RATA CHEF
+        this.load.spritesheet('rataChef', 'assets/Ratas/RataChef.png', { frameWidth: 250, frameHeight: 250 });
+        this.load.image('gourmetBullet', 'assets/Ratas/Gourmet.png');
+
+        //SPRITES DE RATA GORDA
+        this.load.spritesheet('bombastic', 'assets/Ratas/Bombastic-Sheet.png', { frameWidth: 250, frameHeight: 250 });
+        //SPRITES DE RATA MANGUERA
+        this.load.spritesheet('rataManguera', 'assets/Ratas/RataManguera-Sheet.png', { frameWidth: 250, frameHeight: 250 });
+        this.load.image('mangueraBullet', 'assets/Ratas/MangueraBullet.png');
+
+        //SPRITES DE RATA SNIPER
+        this.load.spritesheet('rataSniper', 'assets/Ratas/rataSniper.png', { frameWidth: 150, frameHeight: 250 });
+        this.load.image('bullet', 'assets/Ratas/bullet.png');
+
+        //SPRITES DE RATA JERINGA
+        this.load.spritesheet('rataJeringa', '/assets/Ratas/rataJeringa-Sheet.png', { frameWidth: 250, frameHeight: 250 });
+        this.load.image('jeringaBullet', 'assets/Ratas/Jeringa.png');
+
+
+
+        //SPRITES DE TROPAS LORO
+        this.load.spritesheet('loroGrum', 'assets/Loros/LoroGrumete-Sheet.png', { frameWidth: 250, frameHeight: 250 });
+        this.load.spritesheet('loroCan', 'assets/Loros/LoroCañon.png', { frameWidth: 250, frameHeight: 250 });
+        this.load.spritesheet('loroBarr', 'assets/Loros/LoroBarril-Sheet.png', { frameWidth: 250, frameHeight: 250 });
+        //SPRITES DE TROPAS RATA
+        this.load.spritesheet('rataCoche', 'assets/Ratas/rataCoche.png', { frameWidth: 250, frameHeight: 250 });
+        this.load.spritesheet('rataRodadero', 'assets/Ratas/RataRodadero.png', { frameWidth: 250, frameHeight: 250 });
+        this.load.image('explosion', 'assets/Ratas/explosion.png');
+        this.load.image('rataComecables', 'assets/Ratas/rataComecables.png');
+        this.load.image('comecablesBullet', 'assets/Ratas/comecablesBullet.png');
+
+        //Carga de sonido
+        this.load.audio('Critico', 'assets/sonidos/SonidoOriginalParaDañoCriticoNoRobado.mp3');
+        this.load.audio('Boom', 'assets/sonidos/Boom.mp3');
     }
 
     create() {
+        //ANIMACIONES
+
+        //RATA CHEF
+        this.anims.create({
+            key: 'chefIdle1',
+            frames: this.anims.generateFrameNumbers("rataChef", { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'chefAttack1',
+            frames: this.anims.generateFrameNumbers("rataChef", { start: 3, end: 3 }),
+            frameRate: 5,
+            repeat: 0
+        });
+        this.anims.create({
+            key: 'chefIdle2',
+            frames: this.anims.generateFrameNumbers("rataChef", { start: 4, end: 6 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'chefAttack2',
+            frames: this.anims.generateFrameNumbers("rataChef", { start: 7, end: 7 }),
+            frameRate: 5,
+            repeat: 0
+        });
+        this.anims.create({
+            key: 'chefIdle3',
+            frames: this.anims.generateFrameNumbers("rataChef", { start: 8, end: 10 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'chefAttack3',
+            frames: this.anims.generateFrameNumbers("rataChef", { start: 11, end: 11 }),
+            frameRate: 5,
+            repeat: 0
+        });
+
+        //RATA SILICONA
+        this.anims.create({
+            key: 'siliconeIdle1',
+            frames: this.anims.generateFrameNumbers("rataSilicona", { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'siliconeAttack1',
+            frames: this.anims.generateFrameNumbers("rataSilicona", { start: 3, end: 3 }),
+            frameRate: 5,
+            repeat: 0
+        });
+        this.anims.create({
+            key: 'siliconeIdle2',
+            frames: this.anims.generateFrameNumbers("rataSilicona", { start: 4, end: 6 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'siliconeAttack2',
+            frames: this.anims.generateFrameNumbers("rataSilicona", { start: 7, end: 7 }),
+            frameRate: 5,
+            repeat: 0
+        });
+        this.anims.create({
+            key: 'siliconeIdle3',
+            frames: this.anims.generateFrameNumbers("rataSilicona", { start: 8, end: 10 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'siliconeAttack3',
+            frames: this.anims.generateFrameNumbers("rataSilicona", { start: 11, end: 11 }),
+            frameRate: 5,
+            repeat: 0
+        });
+
+        //RATA JERINGA
+        this.anims.create({
+            key: 'jeringaIdle1',
+            frames: this.anims.generateFrameNumbers("rataJeringa", { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'jeringaAttack1',
+            frames: this.anims.generateFrameNumbers("rataJeringa", { start: 3, end: 3 }),
+            frameRate: 5,
+            repeat: 0
+        });
+        this.anims.create({
+            key: 'jeringaIdle2',
+            frames: this.anims.generateFrameNumbers("rataJeringa", { start: 4, end: 6 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'jeringaAttack2',
+            frames: this.anims.generateFrameNumbers("rataJeringa", { start: 7, end: 7 }),
+            frameRate: 5,
+            repeat: 0
+        });
+        this.anims.create({
+            key: 'jeringaIdle3',
+            frames: this.anims.generateFrameNumbers("rataJeringa", { start: 8, end: 10 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'jeringaAttack3',
+            frames: this.anims.generateFrameNumbers("rataJeringa", { start: 11, end: 11 }),
+            frameRate: 5,
+            repeat: 0
+        });
+
+        //RATA GORDA
+        this.anims.create({
+            key: 'bombasticIdle1',
+            frames: this.anims.generateFrameNumbers("bombastic", { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'bombasticAttack1',
+            frames: this.anims.generateFrameNumbers("bombastic", { start: 3, end: 3 }),
+            frameRate: 5,
+            repeat: 0
+        });
+        this.anims.create({
+            key: 'bombasticIdle2',
+            frames: this.anims.generateFrameNumbers("bombastic", { start: 4, end: 6 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'bombasticAttack2',
+            frames: this.anims.generateFrameNumbers("bombastic", { start: 7, end: 7 }),
+            frameRate: 5,
+            repeat: 0
+        });
+        this.anims.create({
+            key: 'bombasticIdle3',
+            frames: this.anims.generateFrameNumbers("bombastic", { start: 8, end: 10 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'bombasticAttack3',
+            frames: this.anims.generateFrameNumbers("bombastic", { start: 11, end: 11 }),
+            frameRate: 5,
+            repeat: 0
+        });
+
+        //RATA MANGUERA
+        this.anims.create({
+            key: 'mangueraIdle1',
+            frames: this.anims.generateFrameNumbers("rataManguera", { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'mangueraAttack1',
+            frames: this.anims.generateFrameNumbers("rataManguera", { start: 3, end: 3 }),
+            frameRate: 5,
+            repeat: 0
+        });
+        this.anims.create({
+            key: 'mangueraIdle2',
+            frames: this.anims.generateFrameNumbers("rataManguera", { start: 4, end: 6 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'mangueraAttack2',
+            frames: this.anims.generateFrameNumbers("rataManguera", { start: 7, end: 7 }),
+            frameRate: 5,
+            repeat: 0
+        });
+        this.anims.create({
+            key: 'mangueraIdle3',
+            frames: this.anims.generateFrameNumbers("rataManguera", { start: 8, end: 10 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'mangueraAttack3',
+            frames: this.anims.generateFrameNumbers("rataManguera", { start: 11, end: 11 }),
+            frameRate: 5,
+            repeat: 0
+        });
+        //RATA SNIPER
+        this.anims.create({
+            key: 'sniperIdle1',
+            frames: this.anims.generateFrameNumbers("rataSniper", { start: 0, end: 1 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'sniperIdle2',
+            frames: this.anims.generateFrameNumbers("rataSniper", { start: 2, end: 3 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'sniperIdle3',
+            frames: this.anims.generateFrameNumbers("rataSniper", { start: 4, end: 5 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        //TROPAS
+        this.anims.create({
+            key: 'rodaderoAnim',
+            frames: this.anims.generateFrameNumbers("rataRodadero", { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'cocheAnim',
+            frames: this.anims.generateFrameNumbers("rataCoche", { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        //ENEMIGOS
+        this.anims.create({
+            key: 'grumeteIdle',
+            frames: this.anims.generateFrameNumbers("loroGrum", { start: 0, end: 3 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'canonIdle',
+            frames: this.anims.generateFrameNumbers("loroCan", { start: 0, end: 3 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'barrilIdle',
+            frames: this.anims.generateFrameNumbers("loroBarr", { start: 0, end: 3 }),
+            frameRate: 5,
+            repeat: -1
+        });
+
+        //Cheats
+        this.cursorKeys = this.input.keyboard.createCursorKeys();
+        this.input.keyboard.on("keydown-SPACE", () => {
+            this.addMoney();
+        });
+        this.input.keyboard.on("keydown-ESC", () => {
+            if (this.playerInfo.CurrentLevel < 2) {
+                this.playerInfo.CurrentLevel++;
+                this.scene.start('Shop', { shopMoney: this.shopMoney, playerInfo: this.playerInfo });
+            }
+        });
+
+        this.listaClases = [RatSniper, RataComecables, RataChef, RataGorda, RataRodadero, RataManguera, RataSilicona, RataCoche, RataJeringa]
+
+        console.log(this.playerInfo.CurrentLevel);
+        this.jsonDataName = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).Name;
+        this.jsonDataArray = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).path;
+        this.jsonTowerData = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).towers;
+        this.levelMoney = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).levelMoney;
+        this.enemySpawnNum = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).enemySpawnNum;
+        this.enemiesTillMiddleWave = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).enemySpawnNum;
+        this.enemiesTillFinalWave = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).enemySpawnNum;
+        this.enemiesMinInterval = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).enemiesMinInterval;
+        this.enemiesMaxInterval = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).enemiesMaxInterval;
+        this.enemiesInMiddleWave = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).enemiesInMiddleWave;
+        this.enemiesInFinalWave = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).enemiesInFinalWave;
+        this.enemyCount = this.enemySpawnNum;
+
+        //console.log(this.test);
+        //console.log(this.playerInfo);
+
+        //Creación de elementos del nivel
         this.enemies = this.physics.add.group();
+        this.tropas = this.physics.add.group();
         this.crearFondo();
         this.crearCamino();
         this.crearEnemigos();
         this.crearTorres();
+        this.crearTropas();
         this.crearHuecos();
         //UI
-        this.dineroText = this.add.text(200, 10, "Dinero: " + this.levelMoney, {
+        this.dineroText = this.add.text(10, 10, "Dinero: " + this.levelMoney, {
             fontFamily: 'Arial Black',
             fontSize: '25px'
         });
-        this.vidaText = this.add.text(450 + 20, 10, "Vida: " + this.playerHealth, {
+        this.vidaText = this.add.text(260 + 20, 10, "Vida: " + this.playerHealth, {
             fontFamily: 'Arial Black',
             fontSize: '25px'
         })
+        //this.jsonTextLevel = this.add.text(700, 10, "Nivel: " + this.jsonDataName + " Puntos: " + this.jsonDataArray.length);
 
 
+        /*
         // UI DE TORRES
-        new TorreUI(this, 80, 100, 'torre', 50, Torre);
-        new TorreUI(this, 240, 100, 'torre', 50, RataSilicona);
-        //this.crearBotones();
+        new TorreUI(this, 80, 100, 'torre', 50, RataSilicona);
+        new TorreUI(this, 240, 100, 'torre', 50, RataJeringa);
+        new TorreUI(this, 400, 100, 'torre', 50, RataGorda);
+        new TorreUI(this, 560, 100, 'torre', 50, RataManguera);
+        new TorreUI(this, 880, 100, 'torre', 50, RataChef);
+        new TorreUI(this, 1040, 100, 'torre', 50, RatSniper);
+
+        //UI DE TROPAS
+        new TropaUI(this, 720, 100, 'torre', 20, 5, RataComecables);
+        new TropaUI(this, 560, 200, 'torre', 20, 5, RataCoche);
+        new TropaUI(this, 1200, 100, 'torre', 20, 5, RataRodadero);
+        */
+
+        //CREACION UI
+
+
+        console.log(this.playerInfo);
+        let xOrder = 500;
+        for (let i = 0; i < this.playerInfo.A.length; i++) {
+            if (this.playerInfo.A[i].Desbloqueado) {
+                if (this.playerInfo.A[i].Tipo == "Torre") {
+                    new TorreUI(this, xOrder, 100, this.playerInfo.A[i].Sprite, 50, this.listaClases[i]).setScale(0.5)
+                }
+                else {
+                    new TropaUI(this, xOrder, 100, this.playerInfo.A[i].Sprite, 20, 5, this.listaClases[i]).setScale(0.5)
+                }
+                xOrder += 80;
+            }
+
+        }
+
+        //COLISIONES
         this.checkColisions();
 
         this.timedEvent = this.time.addEvent({
-
-            delay: Math.floor(Math.random() * 3000 + 2000),
+            delay: Phaser.Math.Between(this.enemiesMinInterval, this.enemiesMaxInterval),
             loop: true,
-            callback: this.crearEnemigos,
+            callback: () => {
+                if (this.enemiesTillMiddleWave > 0 && (this.enemyCount - this.enemySpawnNum) == this.enemiesTillMiddleWave) {
+                    this.enemiesTillMiddleWave = -1; //ESTO SIGNIFICA QUE YA HA SIDO INVOCADA
+                    this.time.addEvent({
+                        delay: this.enemiesMinInterval / 2,
+                        repeat: this.enemiesInMiddleWave,
+                        callback: () => {
+                            this.crearEnemigos();
+                        },
+                        callbackScope: this
+                    });
+                }
+                else if (this.enemiesTillFinalWave > 0 && (this.enemyCount - this.enemySpawnNum) == this.enemiesTillFinalWave) {
+                    this.enemiesTillFinalWave = -1; //ESTO SIGNIFICA QUE YA HA SIDO INVOCADA
+                    this.time.addEvent({
+                        delay: this.enemiesMinInterval / 3,
+                        repeat: this.enemiesInFinalWave,
+                        callback: () => {
+                            this.crearEnemigos();
+                        },
+                        callbackScope: this
+                    });
+                }
+                else this.crearEnemigos();
+            },
             callbackScope: this
         })
     }
@@ -85,47 +479,49 @@ export default class Level1 extends Phaser.Scene {
         const bg = this.add.image(0, 0, 'background').setOrigin(0, 0).setScale(2);
         bg.displayHeight = this.scale.height;
         bg.displayWidth = this.scale.width;
-
+        this.camino = this.add.image(0, 0, 'caminolvl1').setOrigin(0, 0);;
+        this.camino.destroy();
+        if (this.playerInfo.CurrentLevel == 0) {
+            this.camino = this.add.image(0, 0, 'caminolvl1').setOrigin(0, 0);
+        }
+        else if (this.playerInfo.CurrentLevel == 1) {
+            this.camino = this.add.image(0, 0, 'caminolvl2').setOrigin(0, 0);
+        }
+        else if (this.playerInfo.CurrentLevel == 2) {
+            this.camino = this.add.image(0, 0, 'caminolvl3').setOrigin(0, 0);
+        }
+        this.camino.displayHeight = this.scale.height;
+        this.camino.displayWidth = this.scale.width;
     }
 
     crearCamino() {
-        this.path = new Phaser.Curves.Path(-50, 600);
-        this.path.lineTo(300, 600);
-        this.path.lineTo(300, 200);
-        this.path.lineTo(700, 200);
-        this.path.lineTo(700, 600);
-        this.path.lineTo(1000, 600);
-        this.path.lineTo(1000, 300);
-        this.path.lineTo(1300, 300);
 
-        this.graphics = this.add.graphics();
-        this.graphics.lineStyle(2, 0xffffff, 1);
-        this.path.draw(this.graphics);
+        this.path = new Phaser.Curves.Path(this.jsonDataArray[0].x, this.jsonDataArray[0].y)
+        for (var a = 1; a < this.jsonDataArray.length; a++) {
+            this.path.lineTo(this.jsonDataArray[a].x, this.jsonDataArray[a].y)
+        }
     }
 
     crearEnemigos() {
 
         if (this.enemySpawnNum > 0) {
 
-            this.randomnum = Math.floor(Math.random() * 3)
+            this.randomnum = Math.floor(Math.random() * 5)
             console.log(this.randomnum)
 
             let loro;
-
-            if (this.randomnum == 0) {
-                loro = new Loro(this, this.path, -50, 600, 10, 10, 100, 10, 'basicLoro', 'loro', 0);
+            if (this.randomnum <= 1) {
+                loro = new loroCanonero(this, this.path, this.jsonDataArray[0].x, this.jsonDataArray[0].y, 'loroCan')
             }
-            else if (this.randomnum == 1) {
-                loro = new loroCanonero(this, this.path, -50, 600, 'loroCan')
+            else if (this.randomnum <= 2) {
+                loro = new loroGrumete(this, this.path, this.jsonDataArray[0].x, this.jsonDataArray[0].y, 'loroGrum')
             }
-            else if (this.randomnum == 2) {
-                loro = new loroGrumete(this, this.path, -50, 600, 'loroGrum')
+            else if (this.randomnum <= 3) {
+                loro = new loroBarril(this, this.path, this.jsonDataArray[0].x, this.jsonDataArray[0].y, 'loroBarr');
             }
-            else if (this.randomnum == 3) {
-                loro = new loroBarril(this, this.path, -50, 600, 'loroBarr');
+            else if (this.randomnum <= 4) {
+                loro = new loroPrinceso(this, this.path, this.jsonDataArray[0].x, this.jsonDataArray[0].y, 'loroBarr');
             }
-
-
 
             this.enemies.add(loro);
             loro.startFollowing();
@@ -134,104 +530,161 @@ export default class Level1 extends Phaser.Scene {
     }
 
     crearTorres() {
-        this.torres = this.physics.add.group();
-        //let torreBase = new Torre(this, 500, 200, 0, 10, "basictorre", "torre");
-        //this.torres.add(torreBase);
+        this.torresGrupo = this.physics.add.group();
+        this.torresArray = [];
 
         this.bullets = this.physics.add.group();
         this.Bullet = Bullet;
     }
 
+    crearTropas() {
+        this.tropas = this.physics.add.group();
+    }
+
+    //HUECOS DONDE SE COLOCAL LAS TORRES
     crearHuecos() {
-        this.huecosTorre = [
-            new HuecoTorre(this, 400, 600, 'torre'),
-            new HuecoTorre(this, 800, 100, 'torre'),
-            new HuecoTorre(this, 900, 470, 'torre')
-        ];
+        console.log(this.jsonTowerData);
+        this.huecosTorre = [];
+        for (let i = 0; i < this.jsonTowerData.length; i++) {
+            this.huecosTorre[i] = new HuecoTorre(this, this.jsonTowerData[i].x, this.jsonTowerData[i].y, 'torre');
+        }
     }
-
-    //Habría que hacer un bucle con todas las disponibles y que se vayan colocando: (UI TORREs)
-    //new TorreUI(this, 80, 100, 'torre', 50, TorreClase);
-
-
-
-    //BOTONES
-    //Seleccion de niveles
-    /*
-    crearBotones() {
-        const selectBtn = this.add.sprite(this.sys.game.canvas.width * 0.25, this.sys.game.canvas.height * 0.7, 'selectButton').setInteractive({ useHandCursor: true });
-        selectBtn.on('pointerdown', () => {
-            this.scene.start('SelectScene');
-        });
-        selectBtn.on('pointerover', () => selectBtn.setScale(1.1));
-        selectBtn.on('pointerout', () => selectBtn.setScale(1.0));
-
-        const shopBtn = this.add.sprite(this.sys.game.canvas.width * 0.8, this.sys.game.canvas.height * 0.7, 'shopButton').setInteractive({ useHandCursor: true });
-        shopBtn.on('pointerdown', () => {
-            this.scene.start('Shop');
-        });
-        shopBtn.on('pointerover', () => shopBtn.setScale(1.1));
-        shopBtn.on('pointerout', () => shopBtn.setScale(1.0));
-
-        this.text = this.add.text(30,30)
-        this.timedEvent = this.time.addEvent({
-
-            delay: 5000,
-            loop: true,
-            callback: this.spawnEnemy,
-            callbackScope: this
-        })
-    }
-        */
-
 
     checkColisions() {
-        //estas colisiones fueron las que hice cuando simplemente estaba la torre ahi puesta
-        //por eso tanto rollo.
-        //Disparo desde torre
-        /* this.torres.children.iterate(torre => {
-            if(!torre) return; 
-
-            this.physics.add.overlap(torre, this.enemies, (range, enemy) => {
-            if (!enemy.isBeingTarget) {
-                enemy.isBeingTarget = true;
-                const bullet = torre.shoot(enemy); // ahora sí existe la variable
-                console.log(`${enemy.nombre} esta siendo atacado`);
-            }
-        }); 
- 
-        
-        //Deteccion enemigo con rango torre
-        this.physics.add.overlap(torre.rangeCircle, this.enemies, (range, enemy) => {
-            const torre = range.parentTorre;
-            if (!torre.currentTarget && enemy.active) {
-                torre.currentTarget = enemy;
-                console.log(`${enemy.nombre} ha entrado en el rango de ${torre.nombre}`);
-            }
-        });
-        
-        }) */
-
-        //colision bala con loro
-        /* this.physics.add.overlap(this.bullets, this.enemies, (bullet, enemy) => {
-            if (!bullet.active || !enemy.active) return;
-
-            enemy.getDamaged(bullet.damage);
-            enemy.checkAlive();
-
-            if (!bullet.piercing) bullet.destroy();
-        });
- */
-        //colisioni original bala con loro
+        //COLISION DE LAS BALAS CON LOS LOROS
         this.physics.add.overlap(this.bullets, this.enemies, (bullet, enemy) => {
-            if (bullet.teamRat && enemy instanceof Loro) {
+            if (bullet.teamRat && bullet.damage != 0 && enemy instanceof Loro) {
                 bullet.effectCollision(enemy);
             }
         });
-    }
+        this.physics.add.overlap(this.bullets, this.tropas, (bullet, tropa) => {
+            if (bullet.teamRat && bullet.damage == 0 && tropa instanceof Tropa) {
+                bullet.heal(tropa);
+            }
+        });
 
-    endLevel() {
-        this.scene.start('Shop', { shopMoney: this.shopMoney });
+        //Colisiones tropas con loros
+        this.physics.add.overlap(this.tropas, this.enemies, (tropa, loro) => {
+
+            //Si uno ya no existe/destruye, ignorar
+            if (!tropa || !loro) return;
+            if (!tropa.active || !loro.active) return;
+
+            //Si ya se están pegando con otro, ignorar
+            if (tropa.isFighting && tropa.currentEnemy !== loro) return;
+            if (loro.isFighting && loro.currentEnemy !== tropa) return;
+
+            //caso rataCoche
+            if (tropa instanceof RataCoche) {
+                tropa.onCollision(loro);
+                if (!loro.lastAttackTime) loro.lastAttackTime = 0;
+
+
+                //al ser un caso apartado se declara de nuevo el comportamiento del ataque de los loros, porque no llega a la logica donde se realiza para el caso generico
+                const now = this.time.now;
+                const cooldown = 300; // milisegundos entre ataques
+
+                if (now - loro.lastAttackTime >= cooldown) {
+                    tropa.getDamaged(loro.damage, loro.type); // el loro ataca a la tropa
+                    loro.lastAttackTime = now;
+                }
+                return;
+            }
+
+            //caso rataComecables
+            if (tropa instanceof RataComecables) {
+                //resultado de batalla (tropa)
+                if (!loro.active || loro.hasDied) {
+                    tropa.isFighting = false;
+                    tropa.currentEnemy = null;
+                    tropa.startWalking();
+                }
+
+                //Hago que se marque que están peleando la comecables y el loro
+                tropa.isFighting = true;
+                tropa.currentEnemy = loro;
+                loro.isFighting = true;
+                loro.currentEnemy = tropa;
+
+                tropa.stopWalking();
+                loro.stopWalking();
+
+                tropa.onCollision(loro);
+
+                //Si están vivos, ataca de nuevo
+                tropa.isFighting = true;
+
+                //Resultado de la batalla (loro)
+                if (!tropa.active || tropa.hasDied) {
+                    loro.isFighting = false;
+                    loro.currentEnemy = null;
+                    loro.startWalking();
+                }
+
+                //comprobacion antifreeze
+                const t = tropa;
+                const e = loro;
+
+                this.time.delayedCall(50, () => {
+
+                    if (!this.physics.overlap(t, e)) {
+                        if (t.startWalking) t.startWalking();
+                        if (e.startWalking) e.startWalking();
+                    }
+                });
+
+                //Comprobación antifreeze comecables
+                this.time.delayedCall(50, () => {
+
+                    if (!this.physics.overlap(t, e)) {
+                        if (t.startWalking) t.startWalking();
+                        if (e.startWalking) e.startWalking();
+                    }
+                });
+
+                return;
+            }
+
+
+            //inicia combate
+            tropa.isFighting = true;
+            loro.isFighting = true;
+
+            tropa.currentEnemy = loro;
+            loro.currentEnemy = tropa;
+
+            //Machetazos
+            tropa.stopWalking();
+            loro.stopWalking();
+
+            const now = this.time.now;
+            const cooldown = 300;
+
+
+            if (!tropa.lastAttackTime) tropa.lastAttackTime = 0;
+            if (!loro.lastAttackTime) loro.lastAttackTime = 0;
+
+            if (now - tropa.lastAttackTime >= cooldown) {
+                tropa.getDamaged(loro.damage, loro.type);
+                loro.getDamaged(tropa.damage, tropa.type);
+
+                tropa.lastAttackTime = now;
+                loro.lastAttackTime = now;
+            }
+
+            //resultado de batalla (movimiento)
+            if (!tropa.active || tropa.hasDied) {
+                loro.isFighting = false;
+                loro.currentEnemy = null;
+                loro.startWalking();
+            }
+            if (!loro.active || loro.hasDied) {
+                tropa.isFighting = false;
+                tropa.currentEnemy = null;
+                tropa.startWalking();
+            }
+        })
+
     }
 
     update(time, delta) {
@@ -239,11 +692,18 @@ export default class Level1 extends Phaser.Scene {
             if (bullet) bullet.update(time, delta);
         });
         // añado el update de torre
-        this.torres.children.iterate(torre => {
+        this.torresGrupo.children.iterate(torre => {
             if (torre) torre.update(time);
         });
         if (this.enemySpawnNum <= 0 && this.enemies.countActive() == 0) {
-            this.scene.start('Win');
+
+            if (this.playerInfo.CurrentLevel < 2) {
+                this.playerInfo.CurrentLevel++;
+                this.scene.start('Shop', { shopMoney: this.shopMoney, playerInfo: this.playerInfo });
+            }
+            else {
+                this.scene.start('Win', { shopMoney: this.shopMoney, playerInfo: this.playerInfo });
+            }
         }
         if (this.playerHealth <= 0) {
             this.scene.start('GameOverScene');
@@ -262,5 +722,9 @@ export default class Level1 extends Phaser.Scene {
 
     writeLevelMoney() {
         console.log("Dinero del nivel: " + this.levelMoney);
+    }
+
+    addMoney() {
+        this.levelMoney += 100;
     }
 }

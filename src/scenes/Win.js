@@ -1,18 +1,22 @@
 export default class Win extends Phaser.Scene {
-    constructor(){
-        super({key:"Win"});
-    }
-    
-    preload(){
-        this.load.image('btnStart', 'assets/start.png');
+    constructor() {
+        super({ key: "Win" });
     }
 
-    preUpdate(t, dt){
+    preload() {
+        this.load.image('btnStart', 'assets/UI/start.png');
+    }
+
+    preUpdate(t, dt) {
         super.preUpdate(t, dt);
     }
 
-    create(){
-        this.add.text(350, 250,"VICTORY!", {
+    create() {
+        const bg = this.add.image(0, 0, 'backgroundMainMenu').setOrigin(0, 0).setScale(2);
+        bg.displayHeight = this.scale.height;
+        bg.displayWidth = this.scale.width;
+
+        this.add.text(350, 250, "VICTORY!", {
             fontSize: '100px',
             fontFamily: 'Arial Black'
         });
@@ -27,7 +31,7 @@ export default class Win extends Phaser.Scene {
         btnStart.on('pointerout', () => btnStart.setScale(1.0));
     }
 
-    endLevel(){
-        this.scene.start('Shop', {shopMoney: this.shopMoney}, { levelNum: this.levelNum });
+    endLevel() {
+        this.scene.start('MainMenu');
     }
 }

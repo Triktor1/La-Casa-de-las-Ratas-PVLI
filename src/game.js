@@ -1,17 +1,13 @@
 import MainMenu from './scenes/MainMenu.js';
-import TutorialLevel from './scenes/TutorialLevel.js';
 import Level1 from './scenes/Level1.js';
-import Level2 from './scenes/Level2.js';
-import Level3 from './scenes/Level3.js';
 import Shop from './scenes/Shop.js';
-import SelectScene from './scenes/SelectScene.js';
 import GameOverScene from './scenes/GameOverScene.js';
-import TestEnemyScene from './scenes/TestEnemyScene.js';
-import LevelClassTest from './scenes/LevelClassTest.js';
 import Win from './scenes/Win.js';
+import GalleryImages from './scenes/GalleryImages.js';
+import GalleryGrid from './scenes/GalleryGrid.js';
 
 let config = {
-  type: Phaser.CANVAS,
+  type: Phaser.WEBGL,
   canvas: document.getElementById('gameCanvas'),
   width: 1280,
   height: 720,
@@ -30,7 +26,7 @@ let config = {
     },
     zoom: 1
   },
-  scene: [MainMenu, Level1, Level2, Level3, Shop, SelectScene, GameOverScene, Win, TutorialLevel , LevelClassTest],
+  scene: [MainMenu, Level1, Shop, GameOverScene, Win, GalleryImages,  GalleryGrid],
 
       physics: {  
         default: 'arcade', 

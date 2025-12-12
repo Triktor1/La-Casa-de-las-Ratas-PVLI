@@ -1,0 +1,95 @@
+{
+
+    "tropas" :
+    [
+        {
+            "Nombre" : "Rata Sniper",
+            "Precio" : 8,
+            "NivelDesbloqueo" : 0,
+            "Desbloqueado" : true,
+            "Descripcion" : "Esta es la rata sniper",
+            "Tipo" : "Torre",
+            "Sprite" : "sniperIdle1"
+        }
+        ,
+        {
+            "Nombre" : "Rata Comecables",
+            "Precio" : 8,
+            "NivelDesbloqueo" : 0,
+            "Desbloqueado" : true,
+            "Descripcion" : "Con cables en boca, esta rata hace daño en área mientras va por el camino.\n(¿No le dolera a ella misma también?)",
+            "Tipo" : "Tropa",
+            "Sprite" : "sniperIdle1"
+        }
+        ,
+        {
+            "Nombre" : "Rata Camarera",
+            "Precio" : 8,
+            "NivelDesbloqueo" : 0,
+            "Desbloqueado" : true,
+            "Descripcion" : "Este especimen cocinará platos que ayudaran a las tropas que estén de paso.",
+            "Tipo" : "Torre",
+            "Sprite" : "chefIdle1"
+        }
+        ,
+        {   
+            "Nombre" : "Rata Gorda",
+            "Precio" : 8,
+            "NivelDesbloqueo" : 1,
+            "Desbloqueado" : false,
+            "Descripcion" : "Esta rata es tan gorda que ni se mueve.\nAl menos pega fuerte...",
+            "Tipo" : "Torre",
+            "Sprite" : "bombasticIdle1"
+        }
+        ,
+        {
+            "Nombre" : "Rata Rodadora",
+            "Precio" : 8,
+            "NivelDesbloqueo" : 1,
+            "Desbloqueado" : false,
+            "Descripcion" : "Irá rodando hasta encontrarse a un pajarraco.\nTiene bastante vida, así que aguantará bastante.",
+            "Tipo" : "Tropa",
+            "Sprite" : "rodaderoAnim"
+        }
+        ,
+        {
+            "Nombre" : "Rata Manguera",
+            "Precio" : 8,
+            "NivelDesbloqueo" : 1,
+            "Desbloqueado" : false,
+            "Descripcion" : "¡No subestimes el agua a presión, cortante y rapida!\nCon una manguera equipada, esta rata perfora y acribilla.",
+            "Tipo" : "Torre",
+            "Sprite" : "mangueraIdle1"
+        }
+        ,
+        {
+            "Nombre" : "Rata Silicona",
+            "Precio" : 8,
+            "NivelDesbloqueo" : 2,
+            "Desbloqueado" : false,
+            "Descripcion" : "Esta rata pegará pegotes de silicona\na las patitas de esos pajaros.\n¡No sabes lo que cuesta quitarselo de encima!",
+            "Tipo" : "Torre",
+            "Sprite" : "siliconeIdle1"
+        }
+        ,
+        {
+            "Nombre" : "Rata Coche",
+            "Precio" : 8,
+            "NivelDesbloqueo" : 2,
+            "Desbloqueado" : false,
+            "Descripcion" : "No se si es consciente de lo que hace o esta borracha..\nEsta ratilla no se detiene ante nada,\natropellando por el camino a todo.",
+            "Tipo" : "Tropa",
+            "Sprite" : "cocheAnim"
+        }
+        ,
+        {
+            "Nombre" : "Rata Jeringa",
+            "Precio" : 8,
+            "NivelDesbloqueo" : 2,
+            "Desbloqueado" : false,
+            "Descripcion" : "Me preocupa mucho lo que tengan estas jeringas...\nPero sea lo que sea, envenena a los loros,\n¡asi que ni te lo cuestiones!",
+            "Tipo" : "Torre",
+            "Sprite" : "jeringaIdle1"
+        }
+    ]
+}
