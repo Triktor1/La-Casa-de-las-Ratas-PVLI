@@ -361,7 +361,7 @@ export default class Level1 extends Phaser.Scene {
             this.addMoney();
         });
         this.input.keyboard.on("keydown-ESC", () => {
-            if(this.playerInfo.CurrentLevel < 2){
+            if (this.playerInfo.CurrentLevel < 2) {
                 this.playerInfo.CurrentLevel++;
                 this.scene.start('Shop', { shopMoney: this.shopMoney, playerInfo: this.playerInfo });
             }
@@ -479,11 +479,19 @@ export default class Level1 extends Phaser.Scene {
         const bg = this.add.image(0, 0, 'background').setOrigin(0, 0).setScale(2);
         bg.displayHeight = this.scale.height;
         bg.displayWidth = this.scale.width;
-
-        const caminostr = 'caminolvl' + this.levelNum;
-        const camino = this.add.image(0, 0, caminostr).setOrigin(0, 0);
-        camino.displayHeight = this.scale.height;
-        camino.displayWidth = this.scale.width;
+        this.camino = this.add.image(0, 0, 'caminolvl1').setOrigin(0, 0);;
+        this.camino.destroy();
+        if (this.playerInfo.CurrentLevel == 0) {
+            this.camino = this.add.image(0, 0, 'caminolvl1').setOrigin(0, 0);
+        }
+        else if (this.playerInfo.CurrentLevel == 1) {
+            this.camino = this.add.image(0, 0, 'caminolvl2').setOrigin(0, 0);
+        }
+        else if (this.playerInfo.CurrentLevel == 2) {
+            this.camino = this.add.image(0, 0, 'caminolvl3').setOrigin(0, 0);
+        }
+        this.camino.displayHeight = this.scale.height;
+        this.camino.displayWidth = this.scale.width;
     }
 
     crearCamino() {
