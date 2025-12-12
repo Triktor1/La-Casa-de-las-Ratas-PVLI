@@ -16,7 +16,7 @@
             "Precio" : 8,
             "NivelDesbloqueo" : 0,
             "Desbloqueado" : true,
-            "Descripcion" : "Esta es la rata comecables",
+            "Descripcion" : "Con cables en boca, esta rata hace daño en área mientras va por el camino.\n(¿No le dolera a ella misma también?)",
             "Tipo" : "Tropa"
         }
         ,
@@ -25,7 +25,7 @@
             "Precio" : 8,
             "NivelDesbloqueo" : 0,
             "Desbloqueado" : true,
-            "Descripcion" : "Esta es la rata camarera",
+            "Descripcion" : "Este especimen cocinará platos que ayudaran a las tropas que estén de paso.",
             "Tipo" : "Torre"
         }
         ,
@@ -34,7 +34,7 @@
             "Precio" : 8,
             "NivelDesbloqueo" : 1,
             "Desbloqueado" : false,
-            "Descripcion" : "Esta es la rata gorda",
+            "Descripcion" : "Esta rata es tan gorda que ni se mueve.\nAl menos pega fuerte...",
             "Tipo" : "Torre"
         }
         ,
@@ -43,7 +43,7 @@
             "Precio" : 8,
             "NivelDesbloqueo" : 1,
             "Desbloqueado" : false,
-            "Descripcion" : "Esta es la rata rodadora",
+            "Descripcion" : "Irá rodando hasta encontrarse a un pajarraco.\nTiene bastante vida, así que aguantará bastante.",
             "Tipo" : "Tropa"
         }
         ,
@@ -52,7 +52,7 @@
             "Precio" : 8,
             "NivelDesbloqueo" : 1,
             "Desbloqueado" : false,
-            "Descripcion" : "Esta es la rata manguera",
+            "Descripcion" : "¡No subestimes el agua a presión, cortante y rapida!\nCon una manguera equipada, esta rata perfora y acribilla.",
             "Tipo" : "Torre"
         }
         ,
@@ -61,7 +61,7 @@
             "Precio" : 8,
             "NivelDesbloqueo" : 2,
             "Desbloqueado" : false,
-            "Descripcion" : "Esta es la rata silicona",
+            "Descripcion" : "Esta rata pegará pegotes de silicona\na las patitas de esos pajaros.\n¡No sabes lo que cuesta quitarselo de encima!",
             "Tipo" : "Torre"
         }
         ,
@@ -70,7 +70,7 @@
             "Precio" : 8,
             "NivelDesbloqueo" : 2,
             "Desbloqueado" : true,
-            "Descripcion" : "Esta es la rata coche",
+            "Descripcion" : "No se si es consciente de lo que hace o esta borracha..\nEsta ratilla no se detiene ante nada,\natropellando por el camino a todo.",
             "Tipo" : "Tropa"
         }
         ,
@@ -79,7 +79,7 @@
             "Precio" : 8,
             "NivelDesbloqueo" : 2,
             "Desbloqueado" : false,
-            "Descripcion" : "Esta es la rata jeringas",
+            "Descripcion" : "Me preocupa mucho lo que tengan estas jeringas...\nPero sea lo que sea, envenena a los loros,\n¡asi que ni te lo cuestiones!",
             "Tipo" : "Torre"
         }
     ]

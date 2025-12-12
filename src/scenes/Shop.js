@@ -34,7 +34,7 @@ export default class Shop extends Phaser.Scene {
         this.randomnum = Math.floor(Math.random() * 3)
         //TEXTO
         this.add.text(20,20,"Shop");
-        this.descText = this.add.text(800 , 500 , this.frasesNavi.FrasesNavi[this.randomnum].Frase)
+        this.descText = this.add.text(700 , 500 , this.frasesNavi.FrasesNavi[this.randomnum].Frase)
         this.dineroTienda = this.add.text(20 , 50 , "Plumas: " + this.shopMoney)
 
         //BOTONES
