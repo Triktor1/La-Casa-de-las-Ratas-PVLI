@@ -18,7 +18,7 @@ export default class Shop extends Phaser.Scene {
     preload(){
 
         this.load.spritesheet('VaterRata' , 'assets/Tienda/rataTienda-Sheet.png',{ frameWidth: 250, frameHeight: 250 });
-        this.load.spritesheet('Navi' , 'assets/Tienda/navi-Sheet.png',{ frameWidth: 250, frameHeight: 250 });
+        this.load.spritesheet('Navi' , 'assets/Tienda/navi-Sheet.png',{ frameWidth: 275, frameHeight: 128 });
 
         this.load.image('backgroundTienda' , 'assets/Fondos/Tienda.png')
         this.load.image('textboxNavi' , 'assets/Tienda/TextBoxNavi.png')
@@ -52,16 +52,18 @@ export default class Shop extends Phaser.Scene {
             repeat: -1
         })
 
-
-        
-
-
         const bg = this.add.image(0, 0, 'backgroundTienda').setOrigin(0, 0).setScale(2);
         bg.displayHeight = this.scale.height;
         bg.displayWidth = this.scale.width;
 
 
-        this.add.sprite(this, 500,300,'VaterRata')
+        let rataVater = this.add.sprite(900,400,'VaterRata');
+        let navi = this.add.sprite(1150, 250, 'Navi');
+
+        rataVater.setScale(2.5);
+
+        rataVater.play('VaterIdle');
+        navi.play('NaviIdle');
         
         //Frases navi
         this.frasesNavi = this.cache.json.get('frasesNavi');
