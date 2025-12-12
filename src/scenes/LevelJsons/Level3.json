@@ -1,7 +1,13 @@
 {
-    "Name" : "Soy el Level 3",
-    "enemySpawnNum" : 1,
-    "path" : [
+    "Name": "Soy el Level 3",
+    "enemySpawnNum": 80,
+    "enemiesTillMiddleWave": 30,
+    "enemiesTillFinalWave": 65,
+    "enemiesMinInterval": 2100,
+    "enemiesMaxInterval": 2900,
+    "enemiesInMiddleWave": 10,
+    "enemiesInFinalWave": 15,
+    "path": [
         {
             "x": -50,
             "y": 600
@@ -34,27 +40,25 @@
             "x": 1100,
             "y": -50
         }
-        
+
     ],
 
-    "towers" : [
+    "towers": [
         {
             "x": 500,
             "y": 600
-        }
-        ,
+        },
         {
-            "x":  1200,
+            "x": 1200,
             "y": 200
-        }
-        ,
+        },
         {
             "x": 600,
-            "y" : 300
+            "y": 300
         }
     ],
 
 
-    "playerHealth" : 100 ,
-    "levelMoney" : 3000
+    "playerHealth": 100,
+    "levelMoney": 3000
 }

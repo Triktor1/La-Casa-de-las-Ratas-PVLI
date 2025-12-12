@@ -1,7 +1,13 @@
 {
-    "Name" : "Soy el Level 2",
-    "enemySpawnNum" : 1,
-    "path" : [
+    "Name": "Soy el Level 2",
+    "enemySpawnNum": 70,
+    "enemiesTillMiddleWave": 24,
+    "enemiesTillFinalWave": 58,
+    "enemiesMinInterval": 2250,
+    "enemiesMaxInterval": 3200,
+    "enemiesInMiddleWave": 7,
+    "enemiesInFinalWave": 10,
+    "path": [
         {
             "x": -50,
             "y": 200
@@ -34,27 +40,25 @@
             "x": -50,
             "y": 600
         }
-        
+
     ],
 
-    "towers" : [
+    "towers": [
         {
             "x": 400,
             "y": 600
-        }
-        ,
+        },
         {
-            "x":  400,
+            "x": 400,
             "y": 300
-        }
-        ,
+        },
         {
             "x": 900,
-            "y" : 470
+            "y": 470
         }
     ],
 
 
-    "playerHealth" : 100 ,
-    "levelMoney" : 2000
+    "playerHealth": 100,
+    "levelMoney": 2000
 }
