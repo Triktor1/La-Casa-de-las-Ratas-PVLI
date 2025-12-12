@@ -275,6 +275,7 @@ export default class Level1 extends Phaser.Scene {
         console.log(this.playerInfo.CurrentLevel);
         this.jsonDataName = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).Name;
         this.jsonDataArray = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).path;
+        this.jsonTowerData = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).towers;
         this.levelMoney = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).levelMoney;
         this.enemySpawnNum = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).enemySpawnNum;
         this.enemiesTillMiddleWave = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).enemySpawnNum;
@@ -427,11 +428,12 @@ export default class Level1 extends Phaser.Scene {
 
     //HUECOS DONDE SE COLOCAL LAS TORRES
     crearHuecos() {
-        this.huecosTorre = [
-            new HuecoTorre(this, 400, 600, 'torre'),
-            new HuecoTorre(this, 800, 100, 'torre'),
-            new HuecoTorre(this, 900, 470, 'torre'),
-        ];
+        console.log(this.jsonTowerData);
+        this.huecosTorre = [];
+        for(let i = 0 ; i < this.jsonTowerData.length ; i++)
+        {
+           this.huecosTorre[i]= new HuecoTorre(this, this.jsonTowerData[i].x , this.jsonTowerData[i].y, 'torre');
+        }
     }
 
     checkColisions() {
