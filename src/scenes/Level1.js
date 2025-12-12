@@ -501,7 +501,7 @@ export default class Level1 extends Phaser.Scene {
 
         if (this.enemySpawnNum > 0) {
 
-            this.randomnum = Math.floor(Math.random() * 4)
+            this.randomnum = Math.floor(Math.random() * 5)
             console.log(this.randomnum)
 
             let loro;
