@@ -12,6 +12,10 @@ export default class GameOverScene extends Phaser.Scene {
     }
 
     create() {
+        const bg = this.add.image(0, 0, 'backgroundMainMenu').setOrigin(0, 0).setScale(2);
+        bg.displayHeight = this.scale.height;
+        bg.displayWidth = this.scale.width;
+
         this.add.text(350, 250, "GameOver", {
             fontSize: '100px',
             fontFamily: 'Arial Black'
@@ -41,6 +45,6 @@ export default class GameOverScene extends Phaser.Scene {
     }
 
     endLevel() {
-        this.scene.start('Shop', { shopMoney: this.shopMoney }, { levelNum: this.levelNum });
+        this.scene.start('MainMenu');
     }
 }

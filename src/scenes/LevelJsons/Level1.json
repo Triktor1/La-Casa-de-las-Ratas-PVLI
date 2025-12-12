@@ -1,8 +1,8 @@
 {
     "Name" : "Soy el Level 1",
-    "enemySpawnNum": 1,
-    "enemiesTillMiddleWave": 1,
-    "enemiesTillFinalWave": 2,
+    "enemySpawnNum": 50,
+    "enemiesTillMiddleWave": 10,
+    "enemiesTillFinalWave": 30,
     "enemiesMinInterval": 300,
     "enemiesMaxInterval": 500,
     "enemiesInMiddleWave": 5,
