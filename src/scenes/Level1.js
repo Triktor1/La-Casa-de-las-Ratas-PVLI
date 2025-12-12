@@ -71,11 +71,11 @@ export default class Level1 extends Phaser.Scene {
         this.load.image('torre', 'assets/Ratas/torre.png');
 
         //SPRITES DE RATA SILICONA
-        this.load.image('rataSilicona', 'assets/Ratas/siliconeRat.png');
+        this.load.spritesheet('rataSilicona', 'assets/Ratas/siliconeRat.png', { frameWidth: 250, frameHeight: 250 });
         this.load.image('siliconeBullet', 'assets/Ratas/siliconeBullet.png');
 
         //SPRITES DE RATA CHEF
-        this.load.image('rataChef', 'assets/Ratas/RataChef.png');
+        this.load.spritesheet('rataChef', 'assets/Ratas/RataChef.png', { frameWidth: 250, frameHeight: 250 });
         this.load.image('gourmetBullet', 'assets/Ratas/Gourmet.png');
 
         //SPRITES DE RATA GORDA

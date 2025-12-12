@@ -3,7 +3,7 @@ import SiliconeBullet from "../bullets/siliconeBullet.js";
 
 export default class RataSilicona extends Torre{
     constructor(scene, x, y) {
-        super(scene, x, y, 1500, 5, "rataSilicona", "rataSilicona", 0, 0.5);
+        super(scene, x, y, 1500, 5, "rataSilicona", "rataSilicona", 0, 0.8);
 
         this.slowAmount = 0.5; //multiplicador del efecto slow
         this.duration = 1800; //Duracion del slow

@@ -3,7 +3,7 @@ import NormalBullet from "../bullets/normalBullet.js";
 
 export default class RataChef extends Torre{
     constructor(scene, x, y) {
-        super(scene, x, y, 1500, 5, "rataChef", "rataChef", 0, 0.3);
+        super(scene, x, y, 1500, 5, "rataChef", "rataChef", 0, 0.8);
 
         this.heal = true;
         this.healAmount = 15;
