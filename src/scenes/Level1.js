@@ -360,6 +360,12 @@ export default class Level1 extends Phaser.Scene {
         this.input.keyboard.on("keydown-SPACE", () => {
             this.addMoney();
         });
+        this.input.keyboard.on("keydown-ESC", () => {
+            if(this.playerInfo.CurrentLevel < 2){
+                this.playerInfo.CurrentLevel++;
+                this.scene.start('Shop', { shopMoney: this.shopMoney, playerInfo: this.playerInfo });
+            }
+        });
 
         this.listaClases = [RatSniper, RataComecables, RataChef, RataGorda, RataRodadero, RataManguera, RataSilicona, RataCoche, RataJeringa]
 
@@ -477,7 +483,7 @@ export default class Level1 extends Phaser.Scene {
         bg.displayHeight = this.scale.height;
         bg.displayWidth = this.scale.width;
 
-        const caminostr = 'caminolvl'+this.levelNum;
+        const caminostr = 'caminolvl' + this.levelNum;
         const camino = this.add.image(0, 0, caminostr).setOrigin(0, 0);
         camino.displayHeight = this.scale.height;
         camino.displayWidth = this.scale.width;
