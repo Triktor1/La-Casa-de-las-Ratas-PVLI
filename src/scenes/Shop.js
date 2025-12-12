@@ -16,6 +16,10 @@ export default class Shop extends Phaser.Scene {
     }
     
     preload(){
+
+        this.load.spritesheet('VaterRata' , 'assets/Tienda/rataTienda-Sheet.png',{ frameWidth: 250, frameHeight: 250 });
+        this.load.spritesheet('Navi' , 'assets/Tienda/navi-Sheet.png',{ frameWidth: 250, frameHeight: 250 });
+
         this.load.image('backgroundTienda' , 'assets/Fondos/Tienda.png')
         this.load.image('textboxNavi' , 'assets/Tienda/TextBoxNavi.png')
         this.load.image('botonVolver', 'assets/UI/backbuttonTienda.png');
@@ -29,10 +33,36 @@ export default class Shop extends Phaser.Scene {
     }
 
     create(){
+
+
+
+        //ANIMACIONES
+
+        this.anims.create({
+            key: 'NaviIdle',
+            frames: this.anims.generateFrameNumbers("Navi", { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'VaterIdle',
+            frames: this.anims.generateFrameNumbers("VaterRata", { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        })
+
+
+        
+
+
         const bg = this.add.image(0, 0, 'backgroundTienda').setOrigin(0, 0).setScale(2);
         bg.displayHeight = this.scale.height;
         bg.displayWidth = this.scale.width;
 
+
+        this.add.sprite(this, 500,300,'VaterRata')
+        
         //Frases navi
         this.frasesNavi = this.cache.json.get('frasesNavi');
         this.randomnum = Math.floor(Math.random() * 3)

@@ -8,8 +8,9 @@ export default class TorreUI extends Phaser.GameObjects.Sprite {
         this.increase = 10;          //lo que sube el precio por cada compra
         this.TorreClase = TorreClase;//Clase que se va a colocar, se tendrá que importar con el js
         this.anims.play(texture);
+        
         //Texto del precio
-        this.priceText = scene.add.text(this.x, this.y + 100, `Precio: ${this.cost}`, { fontSize: '20px', color: '#ffffff', fontFamily: 'Arial Black' }).setOrigin(0.5);
+        this.priceText = scene.add.text(this.x, this.y + 100, `Precio: ${this.cost}`, { fontSize: '20px', color: '#ffffff', fontFamily: 'Arial Black' }).setOrigin(0.5).setScale(0.8);
 
 
         this.setInteractive({ draggable: true });

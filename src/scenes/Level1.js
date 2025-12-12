@@ -102,9 +102,10 @@ export default class Level1 extends Phaser.Scene {
         //SPRITES DE TROPAS RATA
         this.load.spritesheet('rataCoche', 'assets/Ratas/rataCoche.png', { frameWidth: 250, frameHeight: 250 });
         this.load.spritesheet('rataRodadero', 'assets/Ratas/RataRodadero.png', { frameWidth: 250, frameHeight: 250 });
+        this.load.spritesheet('rataComecables', 'assets/Ratas/rataComecables.png',{ frameWidth: 250, frameHeight: 250 });
         this.load.image('explosion', 'assets/Ratas/explosion.png');
-        this.load.image('rataComecables', 'assets/Ratas/rataComecables.png');
-        this.load.image('comecablesBullet', 'assets/Ratas/comecablesBullet.png');
+        
+        this.load.spritesheet('comecablesBullet', 'assets/Ratas/comecablesBullet.png',{ frameWidth: 250, frameHeight: 250 });
 
         //Carga de sonido
         this.load.audio('Critico', 'assets/sonidos/SonidoOriginalParaDañoCriticoNoRobado.mp3');
@@ -335,6 +336,18 @@ export default class Level1 extends Phaser.Scene {
             frameRate: 5,
             repeat: -1
         });
+        this.anims.create({
+            key: 'comecablesAnim',
+            frames: this.anims.generateFrameNumbers("rataComecables", { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'comecablesRayo',
+            frames: this.anims.generateFrameNumbers("comecablesBullet", { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        });
         //ENEMIGOS
         this.anims.create({
             key: 'grumeteIdle',
@@ -435,7 +448,7 @@ export default class Level1 extends Phaser.Scene {
                 else {
                     new TropaUI(this, xOrder, 100, this.playerInfo.A[i].Sprite, 20, 5, this.listaClases[i]).setScale(0.5)
                 }
-                xOrder += 80;
+                xOrder += 110;
             }
 
         }

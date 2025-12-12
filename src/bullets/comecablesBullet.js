@@ -5,6 +5,8 @@ export default class ComecablesBullet extends Bullet {
         super(scene, x, y, texture, 0, damage, new Phaser.Math.Vector2(0, 0), timeToLive, piercing, teamRat, healValue, type, scale, frame);
         this.radio = radio;
         this.hasAttacked = false;
+
+        this.anims.play('comecablesRayo');
     }
 
     effectCollision() {

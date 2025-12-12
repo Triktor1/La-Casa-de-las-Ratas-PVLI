@@ -2,13 +2,14 @@ import Tropa from "./TropaBase.js";
 import BalaComecables from "../bullets/comecablesBullet.js"
 
 export default class RataComecables extends Tropa {
-    constructor(scene, path, x, y, damage, attackCooldown = 1200, texture = "rataComecables", bulletTexture = "comecablesBullet") {
+    constructor(scene, path, x, y, damage, attackCooldown = 1200, texture = "rataComecables", bulletTexture = "comecablesRayo") {
         super(scene, path, x, y, 5, 0, 50, "G", "rataComecables", "rataComecables", 0, 0.3);
 
         this.texture = texture;
         this.bulletTexture = bulletTexture;
         this.damage = damage;
 
+        
         this.attackCooldown = attackCooldown;
         this.lastAttack = 0;
     }
