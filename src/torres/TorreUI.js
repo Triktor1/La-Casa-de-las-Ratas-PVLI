@@ -1,4 +1,4 @@
-export default class TorreUI extends Phaser.GameObjects.Image {
+export default class TorreUI extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, texture, cost, TorreClase) {
         super(scene, x, y, texture);
         scene.add.existing(this);
