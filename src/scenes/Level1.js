@@ -17,6 +17,7 @@ import TorreUI from "../torres/TorreUI.js";
 import loroGrumete from "../enemies/loroGrumete.js";
 import loroBarril from "../enemies/loroBarril.js";
 import loroCanonero from "../enemies/loroCanonero.js";
+import loroPrinceso from "../enemies/loroPrinceso.js";
 import RataComecables from "../tropas/RataComecables.js";
 import PlayerData from "../PlayerData/PlayerData.js";
 import RataCoche from "../tropas/RataCoche.js";
@@ -38,8 +39,8 @@ export default class Level1 extends Phaser.Scene {
         this.enemiesMinInterval = 2000;
         this.enemiesMaxInterval = 5000;
         //NUMERO DE ENEMIGOS EN PRIMERA Y ULTIMA OLEADA
-        this.enemiesInMiddleWave= 5;
-        this.enemiesInFinalWave= 8;
+        this.enemiesInMiddleWave = 5;
+        this.enemiesInFinalWave = 8;
     }
 
 
@@ -89,10 +90,10 @@ export default class Level1 extends Phaser.Scene {
         this.load.image('bullet', 'assets/Ratas/bullet.png');
 
         //SPRITES DE RATA JERINGA
-        this.load.spritesheet('rataJeringa','/assets/Ratas/rataJeringa-Sheet.png', {frameWidth: 250, frameHeight: 250 });
+        this.load.spritesheet('rataJeringa', '/assets/Ratas/rataJeringa-Sheet.png', { frameWidth: 250, frameHeight: 250 });
         this.load.image('jeringaBullet', 'assets/Ratas/Jeringa.png');
 
-        
+
 
         //SPRITES DE TROPAS LORO
         this.load.spritesheet('loroGrum', 'assets/Loros/LoroGrumete-Sheet.png', { frameWidth: 250, frameHeight: 250 });
@@ -114,7 +115,7 @@ export default class Level1 extends Phaser.Scene {
         //ANIMACIONES
 
         //RATA CHEF
-         this.anims.create({
+        this.anims.create({
             key: 'chefIdle1',
             frames: this.anims.generateFrameNumbers("rataChef", { start: 0, end: 2 }),
             frameRate: 5,
@@ -152,7 +153,7 @@ export default class Level1 extends Phaser.Scene {
         });
 
         //RATA SILICONA
-+        this.anims.create({
+        +        this.anims.create({
             key: 'siliconeIdle1',
             frames: this.anims.generateFrameNumbers("rataSilicona", { start: 0, end: 2 }),
             frameRate: 5,
@@ -190,7 +191,7 @@ export default class Level1 extends Phaser.Scene {
         });
 
         //RATA JERINGA
-       this.anims.create({
+        this.anims.create({
             key: 'jeringaIdle1',
             frames: this.anims.generateFrameNumbers("rataJeringa", { start: 0, end: 2 }),
             frameRate: 5,
@@ -372,8 +373,8 @@ export default class Level1 extends Phaser.Scene {
         this.enemiesTillFinalWave = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).enemySpawnNum;
         this.enemiesMinInterval = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).enemiesMinInterval;
         this.enemiesMaxInterval = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).enemiesMaxInterval;
-        this.enemiesInMiddleWave= this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).enemiesInMiddleWave;
-        this.enemiesInFinalWave= this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).enemiesInFinalWave;
+        this.enemiesInMiddleWave = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).enemiesInMiddleWave;
+        this.enemiesInFinalWave = this.cache.json.get(this.levelArray[this.playerInfo.CurrentLevel]).enemiesInFinalWave;
         this.enemyCount = this.enemySpawnNum;
 
         //console.log(this.test);
@@ -429,7 +430,7 @@ export default class Level1 extends Phaser.Scene {
                 }
                 else {
                     new TropaUI(this, xOrder, 100, 'torre', 20, 5, this.listaClases[i])
-                                xOrder += 160;
+                    xOrder += 160;
 
                 }
             }
@@ -442,7 +443,7 @@ export default class Level1 extends Phaser.Scene {
         this.timedEvent = this.time.addEvent({
             delay: Phaser.Math.Between(this.enemiesMinInterval, this.enemiesMaxInterval),
             loop: true,
-            callback:() => {
+            callback: () => {
                 if (this.enemiesTillMiddleWave > 0 && (this.enemyCount - this.enemySpawnNum) == this.enemiesTillMiddleWave) {
                     this.enemiesTillMiddleWave = -1; //ESTO SIGNIFICA QUE YA HA SIDO INVOCADA
                     this.time.addEvent({
@@ -494,7 +495,7 @@ export default class Level1 extends Phaser.Scene {
 
         if (this.enemySpawnNum > 0) {
 
-            this.randomnum = Math.floor(Math.random() * 3)
+            this.randomnum = Math.floor(Math.random() * 4)
             console.log(this.randomnum)
 
             let loro;
@@ -510,6 +511,9 @@ export default class Level1 extends Phaser.Scene {
             }
             else if (this.randomnum == 3) {
                 loro = new loroBarril(this, this.path, this.jsonDataArray[0].x, this.jsonDataArray[0].y, 'loroBarr');
+            }
+            else if (this.randomnum == 4) {
+                loro = new loroPrinceso(this, this.path, this.jsonDataArray[0].x, this.jsonDataArray[0].y, 'loroBarr');
             }
 
             this.enemies.add(loro);
@@ -534,9 +538,8 @@ export default class Level1 extends Phaser.Scene {
     crearHuecos() {
         console.log(this.jsonTowerData);
         this.huecosTorre = [];
-        for(let i = 0 ; i < this.jsonTowerData.length ; i++)
-        {
-           this.huecosTorre[i]= new HuecoTorre(this, this.jsonTowerData[i].x , this.jsonTowerData[i].y, 'torre');
+        for (let i = 0; i < this.jsonTowerData.length; i++) {
+            this.huecosTorre[i] = new HuecoTorre(this, this.jsonTowerData[i].x, this.jsonTowerData[i].y, 'torre');
         }
     }
 

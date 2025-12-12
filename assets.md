@@ -2,10 +2,9 @@
 
 Profile: Assets que se usan en la web para representar a los alumnos trabajadores del proyecto
 
-Logo del juego, pluma: Arte propio creado por Victor Castro (© 2025. This work is openly licensed via CC BY 4.0)
+Todos los sprites han sido creados por el equipo de desarrollo, con licencia CC BY 4.0 para todo su uso fuera de este proyecto.
 
-El resto de assets se tratan de placeholders que no se usarán en el juego final. Se sustituiran por arte propio cuando se realice
-
-Se utiliza la siguiente paleta de colores para la página web: https://lospec.com/palette-list/mulfok32 
+Se utiliza la siguiente paleta de colores para la página web y gran parte del juego: https://lospec.com/palette-list/mulfok32 
 
 Se han utilizado sonidos de Pixabay de "squeak" y de carta girando para elementos interactuables en la web
+El resto de sonidos, los que se usan en el juego, son grabados por nosotros.
