@@ -11,6 +11,7 @@ export default class MainMenu extends Phaser.Scene {
     }
 
     preload() {
+        this.load.image('backgroundMainMenu' , 'assets/Fondos/Menu.png')
         this.load.image('startButton', 'assets/UI/start.png'); // Botón de start
         this.load.image('galleryButton', 'assets/UI/gallery.png'); // Botón de galería (placeholder)
         this.load.image('tutorialButton', 'assets/UI/tutorial.png') //Botón de tutorial
@@ -24,7 +25,11 @@ export default class MainMenu extends Phaser.Scene {
     }
 
     create() {
-        this.cameras.main.setBackgroundColor(0x967194);
+        //this.cameras.main.setBackgroundColor(0x967194);
+        
+        const bg = this.add.image(0, 0, 'backgroundMainMenu').setOrigin(0, 0).setScale(2);
+        bg.displayHeight = this.scale.height;
+        bg.displayWidth = this.scale.width;
 
         this.arrayCosas = this.cache.json.get('TropeDefaultData').tropas;
 

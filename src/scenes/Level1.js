@@ -65,6 +65,7 @@ export default class Level1 extends Phaser.Scene {
         this.levelArray = ['L1Data', 'L2Data', 'L3Data'];
 
         //Carga de imágenes
+        this.load.image('background', 'assets/Fondos/Nivel.png');
         this.load.image('loro', 'assets/Loros/ParrotPlaceholder.png');
         this.load.image('selectButton', 'assets/UI/lvlselectboton.png');
         this.load.image('shopButton', 'assets/UI/shop.png');
@@ -96,7 +97,7 @@ export default class Level1 extends Phaser.Scene {
         this.load.spritesheet('rataJeringa','/assets/Ratas/rataJeringa-Sheet.png', {frameWidth: 250, frameHeight: 250 });
         this.load.image('jeringaBullet', 'assets/Ratas/Jeringa.png');
 
-        this.load.image('background', 'assets/bg.png');
+        
 
         //SPRITES DE TROPAS LORO
         this.load.image('loroGrum', 'assets/Loros/GrumetePH.png');
