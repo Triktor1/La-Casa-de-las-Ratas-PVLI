@@ -151,7 +151,7 @@ export default class Level1 extends Phaser.Scene {
         });
 
         //RATA SILICONA
-        +        this.anims.create({
+        this.anims.create({
             key: 'siliconeIdle1',
             frames: this.anims.generateFrameNumbers("rataSilicona", { start: 0, end: 2 }),
             frameRate: 5,
@@ -388,15 +388,15 @@ export default class Level1 extends Phaser.Scene {
         this.crearTropas();
         this.crearHuecos();
         //UI
-        this.dineroText = this.add.text(200, 10, "Dinero: " + this.levelMoney, {
+        this.dineroText = this.add.text(10, 10, "Dinero: " + this.levelMoney, {
             fontFamily: 'Arial Black',
             fontSize: '25px'
         });
-        this.vidaText = this.add.text(450 + 20, 10, "Vida: " + this.playerHealth, {
+        this.vidaText = this.add.text(260 + 20, 10, "Vida: " + this.playerHealth, {
             fontFamily: 'Arial Black',
             fontSize: '25px'
         })
-        this.jsonTextLevel = this.add.text(700, 10, "Nivel: " + this.jsonDataName + " Puntos: " + this.jsonDataArray.length);
+        //this.jsonTextLevel = this.add.text(700, 10, "Nivel: " + this.jsonDataName + " Puntos: " + this.jsonDataArray.length);
 
 
         /*
@@ -418,19 +418,16 @@ export default class Level1 extends Phaser.Scene {
 
 
         console.log(this.playerInfo);
-        let xOrder = 80;
+        let xOrder = 500;
         for (let i = 0; i < this.playerInfo.A.length; i++) {
             if (this.playerInfo.A[i].Desbloqueado) {
                 if (this.playerInfo.A[i].Tipo == "Torre") {
-                    new TorreUI(this, xOrder, 100, 'torre', 50, this.listaClases[i])
-                    xOrder += 160;
-
+                    new TorreUI(this, xOrder, 100, this.playerInfo.A[i].Sprite, 50, this.listaClases[i]).setScale(0.5)
                 }
                 else {
-                    new TropaUI(this, xOrder, 100, 'torre', 20, 5, this.listaClases[i])
-                    xOrder += 160;
-
+                    new TropaUI(this, xOrder, 100, this.playerInfo.A[i].Sprite, 20, 5, this.listaClases[i]).setScale(0.5)
                 }
+                xOrder += 80;
             }
 
         }
