@@ -24,6 +24,7 @@ export default class MainMenu extends Phaser.Scene {
     }
 
     create() {
+        this.cameras.main.setBackgroundColor(0x967194);
 
         this.arrayCosas = this.cache.json.get('TropeDefaultData').tropas;
 
