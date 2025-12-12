@@ -95,9 +95,9 @@ export default class Level1 extends Phaser.Scene {
         
 
         //SPRITES DE TROPAS LORO
-        this.load.image('loroGrum', 'assets/Loros/GrumetePH.png');
-        this.load.image('loroCan', 'assets/Loros/CanonPH.png');
-        this.load.image('loroBarr', 'assets/Loros/BarrilPH.png');
+        this.load.spritesheet('loroGrum', 'assets/Loros/LoroGrumete-Sheet.png', { frameWidth: 250, frameHeight: 250 });
+        this.load.spritesheet('loroCan', 'assets/Loros/LoroCañon.png', { frameWidth: 250, frameHeight: 250 });
+        this.load.spritesheet('loroBarr', 'assets/Loros/LoroBarril-Sheet.png', { frameWidth: 250, frameHeight: 250 });
         //SPRITES DE TROPAS RATA
         this.load.spritesheet('rataCoche', 'assets/Ratas/rataCoche.png', { frameWidth: 250, frameHeight: 250 });
         this.load.spritesheet('rataRodadero', 'assets/Ratas/RataRodadero.png', { frameWidth: 250, frameHeight: 250 });
@@ -331,6 +331,25 @@ export default class Level1 extends Phaser.Scene {
         this.anims.create({
             key: 'cocheAnim',
             frames: this.anims.generateFrameNumbers("rataCoche", { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        //ENEMIGOS
+        this.anims.create({
+            key: 'grumeteIdle',
+            frames: this.anims.generateFrameNumbers("loroGrum", { start: 0, end: 3 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'canonIdle',
+            frames: this.anims.generateFrameNumbers("loroCan", { start: 0, end: 3 }),   
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'barrilIdle',  
+            frames: this.anims.generateFrameNumbers("loroBarr", { start: 0, end: 3 }),
             frameRate: 5,
             repeat: -1
         });
