@@ -8,13 +8,16 @@ export default class GalleryGrid extends Phaser.Scene {
     }
 
     preload() {
+        this.load.image('backgroundMainMenu' , 'assets/Fondos/Menu.png')
         this.load.json('galeria', 'assets/Gallery/gallery.json');
         this.load.image('flecha', 'assets/UI/FlechaGaleria.png');
         this.load.image('backButton', 'assets/UI/backbutton.png');
     }
 
     create() {
-        this.cameras.main.setBackgroundColor(0x967194);
+        const bg = this.add.image(0, 0, 'backgroundMainMenu').setOrigin(0, 0).setScale(2);
+        bg.displayHeight = this.scale.height;
+        bg.displayWidth = this.scale.width;
 
         this.gallery = this.cache.json.get('galeria').imagenes;
         this.gallery.forEach(item => this.load.image(item.id, `assets/Gallery/${item.archivo}`));

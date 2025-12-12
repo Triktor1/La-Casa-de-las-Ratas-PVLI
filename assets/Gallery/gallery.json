@@ -1,4 +1,4 @@
-{
+es {
     "imagenes": [
         {
             "id": "img1",
@@ -46,7 +46,7 @@
             "nombre": "Loros cañoneros",
             "autor": "La Casa de las Ratas",
             "grupo": "",
-            "descripcion": "S"
+            "descripcion": "Bocetos iniciales de tutorial de cuando queriamos aprender todos a hacer el mismo estilo para los loros."
         },
         {
             "id": "img7",
@@ -54,7 +54,7 @@
             "nombre": "Loro vagabundo",
             "autor": "La Casa de las Ratas",
             "grupo": "",
-            "descripcion": "Loro pidiendo "
+            "descripcion": "Loro pidiendo dinero tras haberse gastado todo su oro en napolitanas de chocolate de la facultad."
         },
         {
             "id": "img8",
@@ -78,7 +78,7 @@
             "nombre": "Rey Ratoncio I",
             "autor": "Liling Chen",
             "grupo": "Canibalismo Galletil",
-            "descripcion": "EL REY DE LAS RATASH? Pues ya no, "
+            "descripcion": "QUE ES ESTO?? EL IMPOSTOR DE LAS RATAS?? O ACASO HAY MAS MONARCAS ROEDORES QUE DESCONOCIAMOS??"
         },
         {
             "id": "img11",
@@ -86,7 +86,7 @@
             "nombre": "Enemies to lovers II",
             "autor": "Lumei",
             "grupo": "Canibalismo Galletil",
-            "descripcion": "EL REY DE LAS RATASH? Pues ya no, "
+            "descripcion": "No hay palabras que expresen la belleza absoluta que desborda este grandioso cuadro, en que ratas y loros dejan a un lado sus diferencias y disfrutan de un maravilloso momento"
         },
         {
             "id": "img12",
@@ -94,7 +94,7 @@
             "nombre": "Rata Cubo",
             "autor": "Manio",
             "grupo": "",
-            "descripcion": "EL REY DE LAS RATASH? Pues ya no, "
+            "descripcion": "Increible rata cubo, me pregunto si su trabajo consiste en el mantenimiento de estructura del castillo..."
         },
         {
             "id": "img13",
