@@ -78,7 +78,7 @@
             "Nombre" : "Rata Jeringa",
             "Precio" : 8,
             "NivelDesbloqueo" : 2,
-            "Desbloqueado" : false,
+            "Desbloqueado" : true,
             "Descripcion" : "Me preocupa mucho lo que tengan estas jeringas...\nPero sea lo que sea, envenena a los loros,\n¡asi que ni te lo cuestiones!",
             "Tipo" : "Torre"
         }

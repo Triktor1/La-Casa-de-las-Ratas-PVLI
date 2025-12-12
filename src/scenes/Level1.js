@@ -93,9 +93,7 @@ export default class Level1 extends Phaser.Scene {
         this.load.image('bullet', 'assets/Ratas/bullet.png');
 
         //SPRITES DE RATA JERINGA
-        this.load.image('rataJeringa', 'assets/Ratas/RataJeringa.png');
-        this.load.image('rataJeringa2', 'assets/Ratas/RataJeringa2.png');
-        this.load.image('rataJeringa3', 'assets/Ratas/RataJeringa3.png');
+        this.load.spritesheet('rataJeringa','/assets/Ratas/rataJeringa-Sheet.png', {frameWidth: 250, frameHeight: 250 });
         this.load.image('jeringaBullet', 'assets/Ratas/Jeringa.png');
 
         this.load.image('background', 'assets/bg.png');
@@ -118,6 +116,44 @@ export default class Level1 extends Phaser.Scene {
 
     create() {
         //ANIMACIONES
+
+        //RATA JERINGA
+       this.anims.create({
+            key: 'jeringaIdle1',
+            frames: this.anims.generateFrameNumbers("rataJeringa", { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'jeringaAttack1',
+            frames: this.anims.generateFrameNumbers("rataJeringa", { start: 3, end: 3 }),
+            frameRate: 5,
+            repeat: 0
+        });
+        this.anims.create({
+            key: 'jeringaIdle2',
+            frames: this.anims.generateFrameNumbers("rataJeringa", { start: 4, end: 6 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'jeringaAttack2',
+            frames: this.anims.generateFrameNumbers("rataJeringa", { start: 7, end: 7 }),
+            frameRate: 5,
+            repeat: 0
+        });
+        this.anims.create({
+            key: 'jeringaIdle3',
+            frames: this.anims.generateFrameNumbers("rataJeringa", { start: 8, end: 10 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'jeringaAttack3',
+            frames: this.anims.generateFrameNumbers("rataJeringa", { start: 11, end: 11 }),
+            frameRate: 5,
+            repeat: 0
+        });
 
         //RATA GORDA
         this.anims.create({

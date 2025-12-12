@@ -16,6 +16,13 @@ export default class RataJeringa extends Torre{
         this.tickUpgrade = 1;
         this.intervalUpgrade = 125;
 
+        this.play('jeringaIdle1');
+        this.on('animationcomplete', (anim) => {
+            if (anim.key === 'jeringaAttack' + this.upgradeLevel) {
+                this.play('jeringaIdle' + this.upgradeLevel);
+            }
+        });
+
         this.setUpgradeText("Siguiente nivel: \ndaño + " + this.damageBoost + "\ngolpes + " + this.tickUpgrade + "\nintervalo veneno - " + this.intervalUpgrade, 24, 3);
     }
 
@@ -23,6 +30,7 @@ export default class RataJeringa extends Torre{
         const dir = new Phaser.Math.Vector2(enemy.x - this.x, enemy.y - this.y).normalize();
         const bullet = new JeringaBullet(this.scene, this.x, this.y, 'jeringaBullet', this.bulletSpeed, this.damage, dir, 750, false, true, 0, "G", 0.2, 0, this.tick, this.interval);
         this.scene.bullets.add(bullet);
+        this.play('jeringaAttack'+this.upgradeLevel)
         return bullet;
     }
 
@@ -30,12 +38,6 @@ export default class RataJeringa extends Torre{
         this.damage += this.damageBoost;
         this.tick += this.tickUpgrade;
         this.interval -= this.intervalUpgrade;
-
-        if (this.upgradeLevel == 2){
-            this.setTexture("rataJeringa2");
-        }
-        else if (this.upgradeLevel == 3){
-            this.setTexture("rataJeringa3");
-        }
+        this.play('jeringaIdle' + this.upgradeLevel);
     }
 }
