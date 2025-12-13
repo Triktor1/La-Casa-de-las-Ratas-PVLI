@@ -13,7 +13,7 @@ export default class RataChef extends Torre{
         this.firerateBoost = 0.1;
         this.play('chefIdle1');
         this.on('animationcomplete', (anim) => {
-            if (anim.key === 'bombasticAttack' + this.upgradeLevel) {
+            if (anim.key === 'chefAttack' + this.upgradeLevel) {
                 this.play('chefIdle' + this.upgradeLevel);
             }
         });
