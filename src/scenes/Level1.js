@@ -95,7 +95,7 @@ export default class Level1 extends Phaser.Scene {
         this.load.image('bullet', 'assets/Ratas/Bullet.png');
 
         //SPRITES DE RATA JERINGA
-        this.load.spritesheet('rataJeringa', '/assets/Ratas/RataJeringa-Sheet.png', { frameWidth: 250, frameHeight: 250 });
+        this.load.spritesheet('rataJeringa', 'assets/Ratas/RataJeringa-Sheet.png', { frameWidth: 250, frameHeight: 250 });
         this.load.image('jeringaBullet', 'assets/Ratas/Jeringa.png');
 
 
