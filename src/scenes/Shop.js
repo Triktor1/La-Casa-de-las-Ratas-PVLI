@@ -5,6 +5,7 @@ export default class Shop extends Phaser.Scene {
     levelNum;
     playerInfo;
     descText;
+    nombre;
     constructor() {
         super({ key: "Shop" });
     }
@@ -19,6 +20,7 @@ export default class Shop extends Phaser.Scene {
 
         this.load.spritesheet('VaterRata', 'assets/Tienda/rataTienda-Sheet.png', { frameWidth: 250, frameHeight: 250 });
         this.load.spritesheet('Navi', 'assets/Tienda/navi-Sheet.png', { frameWidth: 275, frameHeight: 128 });
+        this.load.image('pluma', 'assets/UI/loroPluma.png');
 
         this.load.image('backgroundTienda', 'assets/Fondos/Tienda.png')
         this.load.image('textboxNavi', 'assets/Tienda/TextBoxNavi.png')
@@ -51,7 +53,7 @@ export default class Shop extends Phaser.Scene {
             frameRate: 5,
             repeat: -1
         })
-
+        //Imagenes
         const bg = this.add.image(0, 0, 'backgroundTienda').setOrigin(0, 0).setScale(2);
         bg.displayHeight = this.scale.height;
         bg.displayWidth = this.scale.width;
@@ -62,6 +64,7 @@ export default class Shop extends Phaser.Scene {
 
         rataVater.setScale(2.5);
 
+        //Funcionamiento animaciones
         rataVater.play('VaterIdle');
         navi.play('NaviIdle');
 
@@ -80,13 +83,19 @@ export default class Shop extends Phaser.Scene {
         this.randomnum = Math.floor(Math.random() * 3)
 
         //TEXTO
-
-        this.add.text(20, 20, "Shop");
-
+        //Escena
+        this.add.text(20, 20, "Shop", { fontSize: '20px', color: '#ffffff', fontFamily: 'Arial Black' });
+        //Descripcion/Navi
         this.add.image(650, 500, 'textboxNavi').setOrigin(0, 0).setScale(2.1);
-        this.descText = this.add.text(700, 550, this.frasesNavi.FrasesNavi[this.randomnum].Frase)
-
-        this.dineroTienda = this.add.text(20, 50, "Plumas: " + this.shopMoney)
+        this.descText = this.add.text(700, 550, this.frasesNavi.FrasesNavi[this.randomnum].Frase, { fontSize: '18px', color: '#ffffff', fontFamily: 'Arial Black' });
+        //Dinero
+        this.dineroTienda = this.add.text(20, 50, "Plumas: " + this.shopMoney, { fontSize: '20px', color: '#ffffff', fontFamily: 'Arial Black' })
+        //Tipo de tropa
+        this.tipoText = this.add.text(this.descText.x+this.descText.width, 550, "", {
+        fontSize: '20px',
+        fontFamily: 'Arial Black'});
+        // ICONO PLUMA
+        this.plumaIcon = this.add.image(this.dineroTienda.x + this.dineroTienda.width +10, this.dineroTienda.y +10, 'pluma').setScale(0.3);
 
         //BOTONES
         const btnBack = this.add.sprite(this.scale.width - 220, 0, 'botonVolver').setOrigin(0, 0).setInteractive({ useHandCursor: true }).setScale(4);
@@ -106,9 +115,7 @@ export default class Shop extends Phaser.Scene {
         for (let i = 0; i < this.playerInfo.A.length; i++) {
             if (this.playerInfo.A[i].NivelDesbloqueo <= this.playerInfo.CurrentLevel && this.playerInfo.A[i].NivelDesbloqueo > 0) {
 
-
-
-                this.buttonArray[a] = new TropeButton(this, this.buttonPos[a].x, this.buttonPos[a].y, this.playerInfo.A[i].Sprite, this.playerInfo.A[i].Precio, this.playerInfo.A[i].Desbloqueado, this.playerInfo.A[i].Descripcion);
+                this.buttonArray[a] = new TropeButton(this, this.buttonPos[a].x, this.buttonPos[a].y, this.playerInfo.A[i].Sprite, this.playerInfo.A[i].Precio, this.playerInfo.A[i].Desbloqueado, this.playerInfo.A[i].Descripcion, this.playerInfo.A[i].Nombre, this.playerInfo.A[i].color);
                 this.buttonArray[a].setScale(0.5)
                 this.buttonArray[a].setInteractive({ useHandCursor: true });
 
@@ -126,14 +133,16 @@ export default class Shop extends Phaser.Scene {
             this.buttonArray[i].on("pointerover", () => {
                 console.log(this.buttonArray[i].desc);
                 this.buttonArray[i].setScale(0.6);
+                this.descText.text = this.buttonArray[i].Nombre + "\n\n" +this.buttonArray[i].desc;
+                this.tipoText.setText(`${this.buttonArray[i].color}`).setColor(this.getTipoColor(this.buttonArray[i].color));
 
-                this.descText.text = this.buttonArray[i].desc;
             })
 
             this.buttonArray[i].on("pointerout", () => {
                 this.buttonArray[i].setScale(0.5);
                 this.randomnum = Math.floor(Math.random() * 3)
                 this.descText.text = this.frasesNavi.FrasesNavi[this.randomnum].Frase
+                this.tipoText.setText("");
             })
 
             this.buttonArray[i].on("pointerdown", () => {
@@ -147,7 +156,6 @@ export default class Shop extends Phaser.Scene {
                         }
                     }
                     this.dineroTienda.text = "Plumas: " + this.shopMoney;
-
                     console.log(this.playerInfo);
                 }
                 else {
@@ -163,7 +171,14 @@ export default class Shop extends Phaser.Scene {
     update() {
 
     }
-
+    getTipoColor(color) {
+    switch (color) {
+        case "Ataque": return "#ff4444"; // rojo
+        case "Proyectil": return "#44ff44"; // verde
+        case "Defensa": return "#4488ff"; // azul
+        default: return "#ffffff";
+    }
+}
     endShop() {
         let levelID = 'Level' + this.levelNum;
         this.scene.start(levelID, { playerInfo: this.playerInfo, dummy: 2 });

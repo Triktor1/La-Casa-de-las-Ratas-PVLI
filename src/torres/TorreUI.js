@@ -10,9 +10,12 @@ export default class TorreUI extends Phaser.GameObjects.Sprite {
         this.anims.play(texture);
         
         //Texto del precio
-        this.priceText = scene.add.text(this.x, this.y + 100, `Precio: ${this.cost}`, { fontSize: '20px', color: '#ffffff', fontFamily: 'Arial Black' }).setOrigin(0.5).setScale(0.8);
+        this.priceText = scene.add.text(this.x -5, this.y - 65, `${this.cost}`, { fontSize: '20px', color: '#ffffff', fontFamily: 'Arial Black' }).setOrigin(0.5).setScale(0.8);
 
-
+        //moneda
+        this.coinIcon = scene.add.sprite(this.priceText.x + this.priceText.width -10, this.priceText.y, 'coin').setScale(0.4).setOrigin(0, 0.5);
+        this.coinIcon.anims.play('coinAnim');
+        
         this.setInteractive({ draggable: true });
         scene.input.setDraggable(this);
 
@@ -49,14 +52,14 @@ export default class TorreUI extends Phaser.GameObjects.Sprite {
                     hueco.ocupar();
                     this.scene.levelMoney -= this.cost;
                     this.cost += this.increase;
-                    this.priceText.setText(`Precio: ${this.cost}`);
+                    this.priceText.setText(`${this.cost}`);
                 }
                 if (miClase instanceof this.TorreClase && miClase.checkLevelUp()) {
                     console.log('Mejorando torre:', miClase);
                     miClase.upgrade();
                     this.scene.levelMoney -= this.cost;
                     this.cost += this.increase;
-                     this.priceText.setText(`Precio: ${this.cost}`);
+                     this.priceText.setText(`${this.cost}`);
                 }
             }
             this.resetPosition();

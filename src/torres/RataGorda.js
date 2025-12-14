@@ -24,7 +24,7 @@ export default class RataGorda extends Torre{
 
     shoot(enemy) {
         const dir = new Phaser.Math.Vector2(enemy.x - this.x, enemy.y - this.y).normalize();
-        const bullet = new NormalBullet(this.scene, this.x, this.y, 'FatBullet', 1200, this.damage, dir, this.bulletDuration, true, true, 0, "R", 0.2, 0);
+        const bullet = new NormalBullet(this.scene, this.x, this.y, 'FatBullet', 1200, this.damage, dir, this.bulletDuration, true, true, 0, "R", 0.8, 0);
         this.scene.bullets.add(bullet);
         this.play('bombasticAttack' + this.upgradeLevel);
         return bullet;
