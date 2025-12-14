@@ -8,11 +8,11 @@
 
 ## **1. Resumen**
 ### 1.1 Descripción
-El jugador, como el rey de las ratas, debe detener la invasión de los loros piratas para no perder todos los doblones de oro de sus aposentos.
+La Casa de las Ratas tiene que parar la invasión a su reino de los loros pirata, y por ello el Rey de las Ratas deberá diseñar una estrategia defensiva en la última línea de defensa antes de que los loros lleguen a los portones del reino y lo saqueen.
 ### 1.2 Género
-Tower defense
+Tower Defense
 ### 1.3 Setting
-Desarrollado en las cloacas de la casa de las ratas, los loros intentan invadir a través de las tuberías. La tienda se ubica en el baño
+Desarrollado en las cloacas de La Casa de las Ratas, los loros intentan invadir a través de las tuberías. La tienda se ubica en el baño.
 ### 1.4 Características principales
 - Gestiona tropas, torres y mejorarlas
 - Adquiere tropas nuevas al completar niveles
@@ -21,19 +21,15 @@ Desarrollado en las cloacas de la casa de las ratas, los loros intentan invadir 
 ## **2. Gameplay**
 ### 2.1 Objetivo del juego
 **Corto plazo:**
-
 - Derrotar a los enemigos que van de camino a la base
 - Poner torres y tropas para mejorar el poder ofensivo
 - Aguantar hasta acabar con todas las oleadas próximas
 
 **Medio plazo:**
-
 - Mejorar las torres.
-- Mejorar las tropas terrestres.
-- Adquirir tropas nuevas en la tienda
+- Adquirir tropas nuevas en la tienda.
 
 **Largo plazo:**
-
 - Frenar la invasión de los loros piratas en el territorio de las ratas.
 
 ### 2.2 Core loops
@@ -47,7 +43,7 @@ Al matar enemigos (loros) consigues “doblones de oro”, con el cual puedes me
 
 Las tropas estáticas y las movibles tienen uno de tres tipos: **Ataque, Defensa y Proyectil**. La relación entre tipos es un piedra, papel y tijeras: **Ataque** gana a **Proyectil**, **Proyectil** gana a **Defensa** y **Defensa** gana a **Ataque**. 
 
-<img width="704" height="392" alt="image" src="https://github.com/user-attachments/assets/a3cb9a64-264e-4b2f-a9f2-816a50e2523d" />
+![DiagramaTipos](https://github.com/user-attachments/assets/17e2a3c9-4daa-417e-8f24-5d4b30796605)
 
 Cuando una tropa ataca a otra y su tipo tiene ventaja, hace el doble de daño que haría normalmente. Si el tipo es el mismo, el daño no se ve afectado.
 No tienes que elegir que tropas llevar al nivel. Todas las tropas desbloqueadas están disponibles a la vez en el nivel.
@@ -56,10 +52,9 @@ Parámetros
 
 - Gestión de recursos y espacio al elegir tropas del tipo correcto para contrarrestar a las tropas que atacan.
 
-
 ### 3.2 Monedas
 Hay dos tipos de moneda, los doblones y las plumas
-Las monedas se utilizan en plena invasión, para colocar tropas o mejorarlas. Se consiguen al derrotar loros enemigos.
+Los doblones se utilizan en plena invasión, para colocar tropas o mejorarlas. Se consiguen al derrotar loros enemigos.
 Las plumas se obtienen en cantidad predefinida fija al acabar niveles. Se utiliza para comprar tropas nuevas en la tienda que aparecerán al acabar niveles.
 
 Parámetros
@@ -68,41 +63,52 @@ Parámetros
 
 ## 4. Interfaz
 ### 4.1 Controles
-El juego se controlará completamente con el ratón, que se usará para colocar, mejorar y tropas. También se podrá usar para comprar tropas nuevas en la tienda e interactuar con todos los botones.
+El juego se controlará completamente con el ratón, que se usará para colocar, quitar y mejorar torres, y tropas. También se podrá usar para comprar ratas nuevas en la tienda e interactuar con todos los botones.
 
 ### 4.2 Menús
 Menú principal:
 
-<img width="612" height="382" alt="image" src="https://github.com/user-attachments/assets/7a57d5ef-ed53-4286-9ce5-1dc3977abb41" />
-
-Opciones:
-
-<img width="860" height="305" alt="image" src="https://github.com/user-attachments/assets/9595095d-e9a7-48aa-aef0-b305e91a88e4" />
+<img width="1190" height="667" alt="image" src="https://github.com/user-attachments/assets/ca1494f6-3c03-458a-a0ee-5ea11b52d41a" />
 
 Nivel:
 
-<img width="857" height="440" alt="image" src="https://github.com/user-attachments/assets/9ab5749e-393b-4eb0-914f-be72b54350aa" />
+<img width="1192" height="669" alt="image" src="https://github.com/user-attachments/assets/7420db75-8f03-49ec-8df4-97ed8eb7b4c8" />
 
 Tienda:
 
-<img width="705" height="484" alt="image" src="https://github.com/user-attachments/assets/3741ec10-ab55-4fda-af0e-4e6a7b221372" />
+<img width="1196" height="673" alt="image" src="https://github.com/user-attachments/assets/ab70a49c-9d36-4be4-a68a-caefb56d3f2c" />
 
 ### 4.3 Personajes
 Ratas:
 
 - **Rata de tienda y Navi**: Este dúo ofrece tropas al reino de las ratas para fortalecer sus líneas de defensa y ataque.
-- Ratas de combate:
-  - **Ratas torres**
-    - Rata gorda [ATAQUE]: Esta rata al ser tan gorda no se puede mover, por lo que se quedará esperando a los enemigos en un lugar determinado.
-    - Ratas comecables [ATAQUE]: Las ratas comecables se conectan entre sí, formando barreras eléctricas que dañan a los loros al pasar.
-    - Rata silicona [DEFENSA]: Esta rata disparará silicona a los enemigos que se acerquen a ella, causando que ataquen y avancen más lento.
-    - Rata camarera [DEFENSA]: Esta rata estacionaria aumenta la vida de las ratas que pasan por delante de ella (con cooldown)
-    - Rata bomba queso [PROYECTIL] (daño de área): Esta rata lanza bombas fétidas de queso, las cuales al impactar crean un área explosiva.
-    - Rata jeringa [PROYECTIL]:  Esta rata lanza sus agujas y envenena temporalmente a sus víctimas
-  - Ratas tropas
-    - Rata berserker [ATAQUE]
-    - Rata en lata [DEFENSA]:
-    - Rata científica [PROYECTIL]
+- Ratas torres:
+  - Rata gorda [ATAQUE]: Esta rata al ser tan gorda no se puede mover, por lo que se quedará esperando a los enemigos en un lugar determinado.
+    - Daño ataque
+  - Rata sniper[ATAQUE]: Rata que inflige daño devastador desde la distancia
+    - Daño ataque
+  - Rata silicona [DEFENSA]: Esta rata disparará silicona a los enemigos que se acerquen a ella, causando que ataquen y avancen más lento.
+    - OBJETO SILICONA
+      - Duración de la ralentización en el enemigo
+      - Porcentaje de ralentización de enemigos
+  - Rata camarera [DEFENSA]: Esta rata estacionaria aumenta la vida de las ratas que pasan por delante de ella (con cooldown)
+    - Cantidad de curación por rata
+  - Rata manguera [PROYECTIL]: Rata que ataca muy rapidamente con chorros de agua perforantes
+    - Daño
+  - Rata jeringa [PROYECTIL]:  Esta rata lanza sus agujas y envenena temporalmente a sus víctimas
+    - Daño
+    - Duracion del veneno
+    - Cantidad de ticks del veneno
+
+- Ratas tropas
+  - Atributos generales de ratas tropas
+    - Nombre
+    - Posición
+    - Velocidad de movimiento 
+    - Daño
+  - Rata coche  [ATAQUE]: Esta rata arrolla a los enemigos por el camino sin frenar, si el daño es crítico, elimina al loro.
+  - Rata rodadora [DEFENSA]: Rata que avanza por el camino hasta toparse con un enemigo, es muy lenta y tiene mucha vida.
+  - Rata comecables [PROYECTIL]: Esta rata avanza por el camino hasta encontrarse con un enemigo, entonces golpeará en área.
 
 **Loros piratas**:
 - Loro grumete 
@@ -111,10 +117,10 @@ Ratas:
 - Loro cañonero 
 
 ### 4.4 Niveles
-Una progresión de niveles de un camino bloqueado que se irá desbloqueando a medida que vas superándolos, interrumpidos entre ellos por una fase de tienda donde podrás adquirir más tropas en tu arsenal de guerra antes de irte a la próxima batalla.
+Se va avanzando por los niveles de forma lineal, interrumpidos por una etapa de tienda entre cada nivel. Si se pierde, se vuelve a empezar desde el principio.
 
 ## 5. Experiencia de juego
-El nivel se te presenta con una fase preparatoria donde podrás plantear una defensa inicial antes de la llegada de los enemigos. Donde tienes que pensar bien que desplegar ya que este movimiento inicial,  se ve limitado debido al coste existente en monedas para poder defender haciendo que que comiences con un número limitado de opciones donde cada una de ellas implica un early game distinto. 
+El nivel empieza con el inicio de la primera oleada. El jugador tendrá que colocar torres y tropas a tiempo real, teniendo en cuenta sus fondos restantes.
 A medida que va progresando el nivel, las tropas enemigas que derrotes, te darán doblones de oro, que podrás gastar en las acciones de cambiar o poner más tropas/torres que te ayuden en la defensa. 
 Finalmente al superar el nivel serás recompensado con plumas, “moneda” que podrás canjear en la tienda.
 
@@ -125,7 +131,7 @@ Todos los personajes tendrán voces o sonidos que dirán en medio del combate. G
 
 **Lore**:
 
-*Nos ambientamos en la hermosa casa de las ratas, o solo el lugar donde estos adorables roedores han vivido en completa armonía durante cientos de años, sino también hogar de la más grande acumulación de riquezas jamás vista
+*Nos ambientamos en la hermosa Casa de las Ratas, o solo el lugar donde estos adorables roedores han vivido en completa armonía durante cientos de años, sino también hogar de la más grande acumulación de riquezas jamás vista.
 Una Paz y armonía que es desolada por el ataque inesperado de una de las especies más codiciosa de todas, los loros piratas, que han conseguido acceder a las tuberías de su casa y que si avanzan más de lo debido, sembrarán el caos y conseguirán hacerse con el tesoro. Por ello, el rey de las ratas, porque toda casa tiene un rey, tendrá que desenvolverse como estratega del reino para poner un final, al tormento de los loros.*
 
 ## 7. Referencias
