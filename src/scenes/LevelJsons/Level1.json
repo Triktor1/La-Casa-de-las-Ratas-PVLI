@@ -3,8 +3,8 @@
     "enemySpawnNum": 50,
     "enemiesTillMiddleWave": 10,
     "enemiesTillFinalWave": 30,
-    "enemiesMinInterval": 1500,
-    "enemiesMaxInterval": 2700,
+    "enemiesMinInterval": 1400,
+    "enemiesMaxInterval": 2300,
     "enemiesInMiddleWave": 5,
     "enemiesInFinalWave":  8,
     "path" : [
