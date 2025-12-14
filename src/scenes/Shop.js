@@ -173,9 +173,9 @@ export default class Shop extends Phaser.Scene {
     }
     getTipoColor(color) {
     switch (color) {
-        case "Ataque": return "#ff4444"; // rojo
-        case "Proyectil": return "#44ff44"; // verde
-        case "Defensa": return "#4488ff"; // azul
+        case "Ataque": return "#ea6262"; // rojo
+        case "Proyectil": return "#6bc96c"; // verde
+        case "Defensa": return "#6d80fa"; // azul
         default: return "#ffffff";
     }
 }
