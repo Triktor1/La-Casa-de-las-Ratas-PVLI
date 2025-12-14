@@ -22,7 +22,7 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
         this.scene.sound.add('lorohit2', { volume: 0.8 }));
 
         // Audio de daño crítico 
-        this.audiosCrit.push(this.scene.sound.add('lorocritic', { volume: 0.8}));
+        this.audiosCrit.push(this.scene.sound.add('lorocritic', { volume: 0.4}));
 
         //cosas combate loro
         this.isFighting = false; 
@@ -30,7 +30,7 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
 
         this.setScale(0.5);
 
-        this.criticoSonido = this.scene.sound.add('lorocritic', { volume: 0.5 });
+        this.criticoSonido = this.scene.sound.add('lorocritic', { volume: 0.4 });
         // this.stopMovement = () => this.pauseFollow();
         // this.resumeMovement = () => this.resumeFollow();
 
