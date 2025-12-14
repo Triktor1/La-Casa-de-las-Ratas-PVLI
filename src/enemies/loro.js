@@ -17,13 +17,20 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
         this.audiosCrit = [];
         this.audioChance = 2;
 
+        this.audiosHit.push(
+        this.scene.sound.add('lorohit', { volume: 0.8 }),
+        this.scene.sound.add('lorohit2', { volume: 0.8 }));
+
+        // Audio de daño crítico 
+        this.audiosCrit.push(this.scene.sound.add('lorocritic', { volume: 0.8}));
+
         //cosas combate loro
         this.isFighting = false; 
         this.currentEnemy = null; 
 
         this.setScale(0.5);
 
-        this.criticoSonido = this.scene.sound.add('Critico', { volume: 0.5 });
+        this.criticoSonido = this.scene.sound.add('lorocritic', { volume: 0.5 });
         // this.stopMovement = () => this.pauseFollow();
         // this.resumeMovement = () => this.resumeFollow();
 

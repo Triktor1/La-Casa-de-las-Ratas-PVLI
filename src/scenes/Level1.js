@@ -115,7 +115,15 @@ export default class Level1 extends Phaser.Scene {
 
         //Carga de sonido
         this.load.audio('Critico', 'assets/sonidos/SonidoOriginalParaDanoCriticoNoRobado.mp3');
-        this.load.audio('Boom', 'asse   s/sonidos/Boom.mp3');
+        this.load.audio('Boom', 'assets/sonidos/Boom.mp3');
+        this.load.audio('ratacritic', 'assets/sonidos/ratacritic.mp3');
+        this.load.audio('ratanhit', 'assets/sonidos/ratanormal.mp3');
+        this.load.audio('ratahit2', 'assets/sonidos/ratanormal2.mp3');
+        this.load.audio('lorocritic', 'assets/sonidos/lorocritic.mp3');
+        this.load.audio('lorohit', 'assets/sonidos/loronormal.mp3');
+        this.load.audio('lorohit2', 'assets/sonidos/loronormal2.mp3');
+        this.load.audio('torreshoot', 'assets/sonidos/torrehit.mp3');
+
     }
 
     create() {
