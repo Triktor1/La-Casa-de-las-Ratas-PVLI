@@ -1,6 +1,6 @@
 A continuación se encuentra un diagrama de la arquitectura de Filthy Feathers:
 
-![[PVLI-CasaDeLasRatas-Arquitectura.png]]
+![PVLI-CasaDeLasRatas-Arquitectura](https://github.com/user-attachments/assets/ec72267f-7cbe-4029-9e6f-5148dab796c8)
 
 Level1 es la escena principal de gameplay del juego. Cuando entras, se lee un JSON correspondiente al nivel actual y se crean los huecos de torre, enemigos y UI con las torres y tropas disponibles según lo disponible al jugador en el momento. Entre niveles, hay una tienda que guarda las compras y se las da al nivel a través de su propio JSON para desbloquearlas al jugador.
 
