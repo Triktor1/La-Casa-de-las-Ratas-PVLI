@@ -7,7 +7,7 @@ export default class HuecoTorre extends Phaser.GameObjects.Image {
         this.setScrollFactor(0);
         //Atributos
         this.ocupado = false;  //Booleana que indicia si hay torre encima o no 
-        this.setAlpha(0.4);
+        this.setAlpha(0.8);
     }
 
     ocupar() {
@@ -17,6 +17,6 @@ export default class HuecoTorre extends Phaser.GameObjects.Image {
 
     desocupar(){
         this.ocupado = false;
-        this.setAlpha(0.4);
+        this.setAlpha(0.8);
     }
 }
