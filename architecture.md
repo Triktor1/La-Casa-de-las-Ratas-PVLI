@@ -8,3 +8,10 @@ Las torres y tropas que utilizan balas, las instancian en su método shoot en ca
 
 Hay clases base Bala, Torre y Tropa de las que heredan todas las subclases con su propia funcionalidad. Las escenas de galería se pasan información para mantener su correcto funcionamiento, y el tutorial manda a tutorial.html.
 Cuando ganas o pierdes hay un botón que te lleva al menú principal.
+
+CHEATS
+Para activar los cheats, pulsa F2
+Una vez activados, puedes:
+- Pulsar ESPACIO para añadir 100 monedas
+- Pulsar ESC para saltarte el nivel
+Pulsa F2 de nuevo para desactivar los cheats
