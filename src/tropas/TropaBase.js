@@ -12,9 +12,9 @@ export default class Tropa extends Phaser.GameObjects.PathFollower {
         this.vida = vida;
         this.type = type; // ESTE ES EL TIPO DE LORO, SERA CLASIFICADO COMO R,B,G.   R critico a G, G critico a B, B critico a R
         //combate tropas
-        this.isFighting = false; 
+        this.isFighting = false;
         this.hasDied = false;
-        this.currentEnemy = null; 
+        this.currentEnemy = null;
         this.texture = texture
         this.setScale(scale);
         this.audiosHit = [];
@@ -24,13 +24,15 @@ export default class Tropa extends Phaser.GameObjects.PathFollower {
         this.criticoSonido = this.scene.sound.add('ratacritic', { volume: 0.5 });
         //Audio de daño normal
         this.audiosHit.push(
-        this.scene.sound.add('ratanhit', { volume: 0.8 }),
-        this.scene.sound.add('ratahit2', { volume: 0.8 }));
+            this.scene.sound.add('ratanhit', { volume: 0.8 }),
+            this.scene.sound.add('ratahit2', { volume: 0.8 }),
+            this.scene.sound.add('ratahit3', { volume: 0.8 }),
+            this.scene.sound.add('ratahit4', { volume: 0.8 }));
 
         // Audio de daño crítico 
         //this.audiosCrit.push(this.scene.sound.add('ratacritic', { volume: 0.8}));
         this.startFollowingReversed();
-        
+
         //this.stopMovement = () => this.pauseFollow();
         //this.resumeMovement = () => this.resumeFollow();
     }
@@ -80,12 +82,12 @@ export default class Tropa extends Phaser.GameObjects.PathFollower {
                     if (this.audiosHit[index]) this.audiosHit[index].play();
                 }
             }
-            
+
             if (this.active) { //ESTO ES PARA DEVOLVER AL LORO SU TINTE NORMAL
                 this.scene.time.addEvent({
                     delay: 200,
                     callback: () => {
-                       if (this.active) this.clearTint();
+                        if (this.active) this.clearTint();
                     }
                 })
             }
@@ -94,8 +96,8 @@ export default class Tropa extends Phaser.GameObjects.PathFollower {
         }
     }
 
-    getHealed(heal){
-        this.vida+=heal;
+    getHealed(heal) {
+        this.vida += heal;
         console.log("Me he curado");
     }
     checkAlive(reachedEnd = false) {
