@@ -20,7 +20,7 @@ export default class RatSniper extends Torre {
 
     shoot(enemy) {
         const dir = new Phaser.Math.Vector2(enemy.x - this.x, enemy.y - this.y).normalize();
-        const bullet = new Bullet(this.scene, this.x, this.y, 'bullet', this.bulletSpeed, this.damage, dir, this.bulletDuration, false, true, 0, "R", 0.1, 0);
+        const bullet = new Bullet(this.scene, this.x, this.y, 'bullet', this.bulletSpeed, this.damage, dir, this.bulletDuration, false, true, 0, "R", 0.8, 0);
         this.scene.bullets.add(bullet);
         return bullet;
     }

@@ -8,14 +8,14 @@ export default class TorreUI extends Phaser.GameObjects.Sprite {
         this.increase = 10;          //lo que sube el precio por cada compra
         this.TorreClase = TorreClase;//Clase que se va a colocar, se tendrá que importar con el js
         this.anims.play(texture);
-        
+
         //Texto del precio
-        this.priceText = scene.add.text(this.x -5, this.y - 65, `${this.cost}`, { fontSize: '20px', color: '#ffffff', fontFamily: 'Arial Black' }).setOrigin(0.5).setScale(0.8);
+        this.priceText = scene.add.text(this.x - 5, this.y - 65, `${this.cost}`, { fontSize: '20px', color: '#ffffff', fontFamily: 'Arial Black' }).setOrigin(0.5).setScale(0.8);
 
         //moneda
-        this.coinIcon = scene.add.sprite(this.priceText.x + this.priceText.width -10, this.priceText.y, 'coin').setScale(0.4).setOrigin(0, 0.5);
+        this.coinIcon = scene.add.sprite(this.priceText.x + this.priceText.width - 10, this.priceText.y, 'coin').setScale(0.4).setOrigin(0, 0.5);
         this.coinIcon.anims.play('coinAnim');
-        
+
         this.setInteractive({ draggable: true });
         scene.input.setDraggable(this);
 
@@ -32,20 +32,23 @@ export default class TorreUI extends Phaser.GameObjects.Sprite {
                 if (hueco) {
                     //crear torre y añadir al grupo 
                     const nuevaTorre = new this.TorreClase(this.scene, hueco.x, hueco.y);
+                    nuevaTorre.hueco = hueco;
                     this.scene.torresGrupo.add(nuevaTorre);
                     this.scene.torresArray.push(nuevaTorre);
                     //activar colisiones rango enemigo
-                    if (!nuevaTorre.heal){
+                    if (!nuevaTorre.heal) {
                         this.scene.physics.add.overlap(nuevaTorre.rangeCircle, this.scene.enemies, (range, enemy) => {
                             const torre = range.parentTorre;
                             if (!torre.currentTarget && enemy.active) {
-                            torre.currentTarget = enemy;}
+                                torre.currentTarget = enemy;
+                            }
                         });
-                    } else{
+                    } else {
                         this.scene.physics.add.overlap(nuevaTorre.rangeCircle, this.scene.tropas, (range, tropa) => {
                             const torre = range.parentTorre;
                             if (!torre.currentTarget && tropa.active) {
-                            torre.currentTarget = tropa;}
+                                torre.currentTarget = tropa;
+                            }
                         });
 
                     }
@@ -59,7 +62,7 @@ export default class TorreUI extends Phaser.GameObjects.Sprite {
                     miClase.upgrade();
                     this.scene.levelMoney -= this.cost;
                     this.cost += this.increase;
-                     this.priceText.setText(`${this.cost}`);
+                    this.priceText.setText(`${this.cost}`);
                 }
             }
             this.resetPosition();

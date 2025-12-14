@@ -72,8 +72,8 @@ export default class Level1 extends Phaser.Scene {
         this.load.image('huecoTorre', 'assets/Ratas/HuecoTorre.png');
 
         //UI
-        this.load.spritesheet('vida', 'assets/UI/vida-Sheet.png', { frameWidth: 64, frameHeight: 64});
-        this.load.spritesheet('coin', 'assets/UI/coin-Sheet.png', { frameWidth: 64, frameHeight: 64});
+        this.load.spritesheet('vida', 'assets/UI/vida-Sheet.png', { frameWidth: 64, frameHeight: 64 });
+        this.load.spritesheet('coin', 'assets/UI/coin-Sheet.png', { frameWidth: 64, frameHeight: 64 });
         //SPRITES DE RATA SILICONA
         this.load.spritesheet('rataSilicona', 'assets/Ratas/SiliconeRat.png', { frameWidth: 250, frameHeight: 250 });
         this.load.image('siliconeBullet', 'assets/Ratas/SiliconeBullet.png');
@@ -114,11 +114,26 @@ export default class Level1 extends Phaser.Scene {
         this.load.spritesheet('comecablesBullet', 'assets/Ratas/comecablesBullet.png', { frameWidth: 250, frameHeight: 250 });
 
         //Carga de sonido
-        this.load.audio('Critico', 'assets/sonidos/SonidoOriginalParaDanoCriticoNoRobado.mp3');
-        this.load.audio('Boom', 'asse   s/sonidos/Boom.mp3');
+        this.load.audio('Boom', 'assets/sonidos/Boom.mp3');
+        this.load.audio('ratacritic', 'assets/sonidos/ratacritic.mp3');
+        this.load.audio('ratacritic2', 'assets/sonidos/ratacritic2.mp3');
+        this.load.audio('ratahit', 'assets/sonidos/ratanormal.mp3');
+        this.load.audio('ratahit2', 'assets/sonidos/ratanormal2.mp3');
+        this.load.audio('ratahit3', 'assets/sonidos/ratanormal3.mp3');
+        this.load.audio('ratahit4', 'assets/sonidos/ratanormal4.mp3');
+        this.load.audio('lorocritic', 'assets/sonidos/lorocritic.mp3');
+        this.load.audio('lorocritic2', 'assets/sonidos/lorocritic2.mp3');
+        this.load.audio('lorohit', 'assets/sonidos/loronormal.mp3');
+        this.load.audio('lorohit2', 'assets/sonidos/loronormal2.mp3');
+        this.load.audio('lorohit3', 'assets/sonidos/loronormal3.mp3');
+        this.load.audio('lorohit4', 'assets/sonidos/loronormal4.mp3');
+        this.load.audio('torreshoot', 'assets/sonidos/torrehit.mp3');
+        this.load.audio('torreshoot2', 'assets/sonidos/torrehit2.mp3');
+
     }
 
     create() {
+        this.input.mouse.disableContextMenu();
         //ANIMACIONES
         //UI VIDA
         this.anims.create({
@@ -436,18 +451,18 @@ export default class Level1 extends Phaser.Scene {
         this.crearTropas();
         this.crearHuecos();
         //UI
-        this.dineroText = this.add.text(10, 10, ": "+ this.levelMoney, {
+        this.dineroText = this.add.text(10, 10, ": " + this.levelMoney, {
             fontFamily: 'Arial Black',
             fontSize: '25px'
         });
-        this.coinIcon = this.add.sprite(this.dineroText.x + this.dineroText.width + 10, 22,'coin').setScale(0.7);
+        this.coinIcon = this.add.sprite(this.dineroText.x + this.dineroText.width + 10, 22, 'coin').setScale(0.7);
         this.coinIcon.anims.play('coinAnim');
 
-        this.vidaText = this.add.text(160 + 20, 10, ": "+ this.playerHealth, {
+        this.vidaText = this.add.text(160 + 20, 10, ": " + this.playerHealth, {
             fontFamily: 'Arial Black',
             fontSize: '25px'
         })
-        this.vidaIcon= this.add.sprite(this.vidaText.x + this.vidaText.width + 5, 22, 'vida').setScale(0.7);
+        this.vidaIcon = this.add.sprite(this.vidaText.x + this.vidaText.width + 5, 22, 'vida').setScale(0.7);
         this.vidaIcon.anims.play('vidaAnim');
 
         //CREACION UI
@@ -733,8 +748,8 @@ export default class Level1 extends Phaser.Scene {
         if (this.playerHealth <= 0) {
             this.scene.start('GameOverScene');
         }
-        this.dineroText.text =  this.levelMoney;
-        this.vidaText.text =  this.playerHealth;
+        this.dineroText.text = this.levelMoney;
+        this.vidaText.text = this.playerHealth;
     }
 
     changePlayerHealth(amount) {
