@@ -24,7 +24,7 @@ export default class Tropa extends Phaser.GameObjects.PathFollower {
         this.criticoSonido = this.scene.sound.add('ratacritic', { volume: 0.5 });
         //Audio de daño normal
         this.audiosHit.push(
-            this.scene.sound.add('ratanhit', { volume: 0.8 }),
+            this.scene.sound.add('ratahit', { volume: 0.8 }),
             this.scene.sound.add('ratahit2', { volume: 0.8 }),
             this.scene.sound.add('ratahit3', { volume: 0.8 }),
             this.scene.sound.add('ratahit4', { volume: 0.8 }));
