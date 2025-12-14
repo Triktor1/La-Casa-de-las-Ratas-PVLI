@@ -10,7 +10,9 @@ export default class TropaUI extends Phaser.GameObjects.Sprite {
         this.TropaClase = TropaClase; //Clase que se va a colocar, se tendrá que importar con el js
 
         //Texto del precio
-        this.priceText = scene.add.text(this.x, this.y + 100, `Precio: ${this.cost}`, { fontSize: '20px', color: '#ffffff', fontFamily: 'Arial Black' }).setOrigin(0.5).setScale(0.8);
+        this.priceText = scene.add.text(this.x-5, this.y-65, `${this.cost}`, { fontSize: '20px', color: '#ffffff', fontFamily: 'Arial Black' }).setOrigin(0.5).setScale(0.8);
+        this.coinIcon = scene.add.sprite(this.priceText.x + this.priceText.width-10, this.priceText.y, 'coin').setScale(0.4).setOrigin(0, 0.5);
+        this.coinIcon.anims.play('coinAnim');
 
         this.setInteractive();
 
@@ -24,7 +26,7 @@ export default class TropaUI extends Phaser.GameObjects.Sprite {
                 this.scene.levelMoney -= this.cost;
                 console.log("Dinero actual", this.scene.levelMoney);
                 this.cost += this.increase;
-                this.priceText.setText(`Precio: ${this.cost}`);
+                this.priceText.setText(`${this.cost}`);
             }
         });
     }

@@ -66,12 +66,15 @@ export default class Level1 extends Phaser.Scene {
         //Carga de imágenes
         this.load.image('background', 'assets/Fondos/Nivel.png');
         this.load.image('shopButton', 'assets/UI/Shop.png');
-        this.load.image('torre', 'assets/Ratas/Torre.png');
+        this.load.image('torre', 'assets/Ratas/torre.png');
         this.load.image('caminolvl1', 'assets/Nivel/caminolvl1.png');
         this.load.image('caminolvl2', 'assets/Nivel/caminolvl2.png');
         this.load.image('caminolvl3', 'assets/Nivel/caminolvl3.png');
         this.load.image('huecoTorre', 'assets/Ratas/HuecoTorre.png');
 
+        //UI
+        this.load.spritesheet('vida', 'assets/UI/vida-Sheet.png', { frameWidth: 64, frameHeight: 64});
+        this.load.spritesheet('coin', 'assets/UI/coin-Sheet.png', { frameWidth: 64, frameHeight: 64});
         //SPRITES DE RATA SILICONA
         this.load.spritesheet('rataSilicona', 'assets/Ratas/SiliconeRat.png', { frameWidth: 250, frameHeight: 250 });
         this.load.image('siliconeBullet', 'assets/Ratas/SiliconeBullet.png');
@@ -118,6 +121,21 @@ export default class Level1 extends Phaser.Scene {
 
     create() {
         //ANIMACIONES
+        //UI VIDA
+        this.anims.create({
+            key: 'vidaAnim',
+            frames: this.anims.generateFrameNumbers("vida", { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        });
+
+        //UI DINERO
+        this.anims.create({
+            key: 'coinAnim',
+            frames: this.anims.generateFrameNumbers("coin", { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        });
 
         //RATA CHEF
         this.anims.create({
@@ -419,14 +437,20 @@ export default class Level1 extends Phaser.Scene {
         this.crearTropas();
         this.crearHuecos();
         //UI
-        this.dineroText = this.add.text(10, 10, "Dinero: " + this.levelMoney, {
+        this.dineroText = this.add.text(10, 10, ": "+ this.levelMoney, {
             fontFamily: 'Arial Black',
             fontSize: '25px'
         });
-        this.vidaText = this.add.text(260 + 20, 10, "Vida: " + this.playerHealth, {
+        this.coinIcon = this.add.sprite(this.dineroText.x + this.dineroText.width + 10, 22,'coin').setScale(0.7);
+        this.coinIcon.anims.play('coinAnim');
+
+        this.vidaText = this.add.text(160 + 20, 10, ": "+ this.playerHealth, {
             fontFamily: 'Arial Black',
             fontSize: '25px'
         })
+        this.vidaIcon= this.add.sprite(this.vidaText.x + this.vidaText.width + 5, 22, 'vida').setScale(0.7);
+        this.vidaIcon.anims.play('vidaAnim');
+
         //this.jsonTextLevel = this.add.text(700, 10, "Nivel: " + this.jsonDataName + " Puntos: " + this.jsonDataArray.length);
 
 
@@ -449,7 +473,7 @@ export default class Level1 extends Phaser.Scene {
 
 
         console.log(this.playerInfo);
-        let xOrder = 500;
+        let xOrder = 300;
         for (let i = 0; i < this.playerInfo.A.length; i++) {
             if (this.playerInfo.A[i].Desbloqueado) {
                 if (this.playerInfo.A[i].Tipo == "Torre") {
@@ -526,7 +550,6 @@ export default class Level1 extends Phaser.Scene {
     }
 
     crearEnemigos() {
-
         if (this.enemySpawnNum > 0) {
 
             this.randomnum = Math.floor(Math.random() * 5)
@@ -731,8 +754,8 @@ export default class Level1 extends Phaser.Scene {
         if (this.playerHealth <= 0) {
             this.scene.start('GameOverScene');
         }
-        this.dineroText.text = "Dinero: " + this.levelMoney;
-        this.vidaText.text = "Vida: " + this.playerHealth;
+        this.dineroText.text =  this.levelMoney;
+        this.vidaText.text =  this.playerHealth;
     }
 
     changePlayerHealth(amount) {
