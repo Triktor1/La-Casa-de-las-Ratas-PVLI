@@ -66,7 +66,6 @@ export default class Level1 extends Phaser.Scene {
         //Carga de imágenes
         this.load.image('background', 'assets/Fondos/Nivel.png');
         this.load.image('shopButton', 'assets/UI/Shop.png');
-        this.load.image('torre', 'assets/Ratas/torre.png');
         this.load.image('caminolvl1', 'assets/Nivel/caminolvl1.png');
         this.load.image('caminolvl2', 'assets/Nivel/caminolvl2.png');
         this.load.image('caminolvl3', 'assets/Nivel/caminolvl3.png');
@@ -451,27 +450,7 @@ export default class Level1 extends Phaser.Scene {
         this.vidaIcon= this.add.sprite(this.vidaText.x + this.vidaText.width + 5, 22, 'vida').setScale(0.7);
         this.vidaIcon.anims.play('vidaAnim');
 
-        //this.jsonTextLevel = this.add.text(700, 10, "Nivel: " + this.jsonDataName + " Puntos: " + this.jsonDataArray.length);
-
-
-        /*
-        // UI DE TORRES
-        new TorreUI(this, 80, 100, 'torre', 50, RataSilicona);
-        new TorreUI(this, 240, 100, 'torre', 50, RataJeringa);
-        new TorreUI(this, 400, 100, 'torre', 50, RataGorda);
-        new TorreUI(this, 560, 100, 'torre', 50, RataManguera);
-        new TorreUI(this, 880, 100, 'torre', 50, RataChef);
-        new TorreUI(this, 1040, 100, 'torre', 50, RatSniper);
-
-        //UI DE TROPAS
-        new TropaUI(this, 720, 100, 'torre', 20, 5, RataComecables);
-        new TropaUI(this, 560, 200, 'torre', 20, 5, RataCoche);
-        new TropaUI(this, 1200, 100, 'torre', 20, 5, RataRodadero);
-        */
-
         //CREACION UI
-
-
         console.log(this.playerInfo);
         let xOrder = 300;
         for (let i = 0; i < this.playerInfo.A.length; i++) {
