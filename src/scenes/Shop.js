@@ -14,10 +14,14 @@ export default class Shop extends Phaser.Scene {
         this.shopMoney = data.shopMoney || 10;
         this.levelNum = data.levelNum || 1;
     }
-    
-    preload(){
-        this.load.image('backgroundTienda' , 'assets/Fondos/Tienda.png')
-        this.load.image('textboxNavi' , 'assets/Tienda/TextBoxNavi.png')
+
+    preload() {
+
+        this.load.spritesheet('VaterRata', 'assets/Tienda/rataTienda-Sheet.png', { frameWidth: 250, frameHeight: 250 });
+        this.load.spritesheet('Navi', 'assets/Tienda/navi-Sheet.png', { frameWidth: 275, frameHeight: 128 });
+
+        this.load.image('backgroundTienda', 'assets/Fondos/Tienda.png')
+        this.load.image('textboxNavi', 'assets/Tienda/TextBoxNavi.png')
         this.load.image('botonVolver', 'assets/UI/backbuttonTienda.png');
         this.load.image('botonPlaceholder', 'assets/WebSprites/Rick.png')
         this.load.json('coordsBotones', 'src/scenes/ShopDataManagement/ShopGapsCoords.json')
@@ -28,26 +32,64 @@ export default class Shop extends Phaser.Scene {
         super.preUpdate(t, dt);
     }
 
-    create(){
+    create() {
+
+
+
+        //ANIMACIONES
+
+        this.anims.create({
+            key: 'NaviIdle',
+            frames: this.anims.generateFrameNumbers("Navi", { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'VaterIdle',
+            frames: this.anims.generateFrameNumbers("VaterRata", { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        })
+
         const bg = this.add.image(0, 0, 'backgroundTienda').setOrigin(0, 0).setScale(2);
         bg.displayHeight = this.scale.height;
         bg.displayWidth = this.scale.width;
+
+
+        let rataVater = this.add.sprite(900, 400, 'VaterRata');
+        let navi = this.add.sprite(1150, 250, 'Navi');
+
+        rataVater.setScale(2.5);
+
+        rataVater.play('VaterIdle');
+        navi.play('NaviIdle');
+
+        const tween = this.tweens.add({
+            targets: navi,
+            x: () => navi.x + Phaser.Math.Between(-5, 5),
+            y: () => navi.y + Phaser.Math.Between(-30, 0),
+            duration: 1200,
+            ease: 'Sine.easeInOut',
+            repeat: -1,
+            yoyo: true
+        });
 
         //Frases navi
         this.frasesNavi = this.cache.json.get('frasesNavi');
         this.randomnum = Math.floor(Math.random() * 3)
 
         //TEXTO
-        
-        this.add.text(20,20,"Shop");
-        
-        this.add.image(650 , 500 , 'textboxNavi').setOrigin(0,0).setScale(2.1);
-        this.descText = this.add.text(700 , 550 , this.frasesNavi.FrasesNavi[this.randomnum].Frase)
-        
-        this.dineroTienda = this.add.text(20 , 50 , "Plumas: " + this.shopMoney)
+
+        this.add.text(20, 20, "Shop");
+
+        this.add.image(650, 500, 'textboxNavi').setOrigin(0, 0).setScale(2.1);
+        this.descText = this.add.text(700, 550, this.frasesNavi.FrasesNavi[this.randomnum].Frase)
+
+        this.dineroTienda = this.add.text(20, 50, "Plumas: " + this.shopMoney)
 
         //BOTONES
-        const btnBack = this.add.sprite(this.scale.width - 220, 0, 'botonVolver').setOrigin(0,0).setInteractive({ useHandCursor: true }).setScale(4);
+        const btnBack = this.add.sprite(this.scale.width - 220, 0, 'botonVolver').setOrigin(0, 0).setInteractive({ useHandCursor: true }).setScale(4);
         btnBack.on('pointerdown', () => {
             this.endShop();
         });
@@ -63,10 +105,10 @@ export default class Shop extends Phaser.Scene {
         let a = 0;
         for (let i = 0; i < this.playerInfo.A.length; i++) {
             if (this.playerInfo.A[i].NivelDesbloqueo <= this.playerInfo.CurrentLevel && this.playerInfo.A[i].NivelDesbloqueo > 0) {
-                
 
 
-                this.buttonArray[a] = new TropeButton(this, this.buttonPos[a].x, this.buttonPos[a].y, this.playerInfo.A[i].Sprite , this.playerInfo.A[i].Precio, this.playerInfo.A[i].Desbloqueado, this.playerInfo.A[i].Descripcion);
+
+                this.buttonArray[a] = new TropeButton(this, this.buttonPos[a].x, this.buttonPos[a].y, this.playerInfo.A[i].Sprite, this.playerInfo.A[i].Precio, this.playerInfo.A[i].Desbloqueado, this.playerInfo.A[i].Descripcion);
                 this.buttonArray[a].setScale(0.5)
                 this.buttonArray[a].setInteractive({ useHandCursor: true });
 
@@ -124,6 +166,6 @@ export default class Shop extends Phaser.Scene {
 
     endShop() {
         let levelID = 'Level' + this.levelNum;
-        this.scene.start(levelID, { playerInfo: this.playerInfo, dummy: 2 });   
+        this.scene.start(levelID, { playerInfo: this.playerInfo, dummy: 2 });
     }
 }

@@ -19,7 +19,7 @@
             "Desbloqueado" : true,
             "Descripcion" : "Con cables en boca, esta rata hace daño en área mientras va por el camino.\n(¿No le dolera a ella misma también?)",
             "Tipo" : "Tropa",
-            "Sprite" : "sniperIdle1"
+            "Sprite" : "comecablesAnim"
         }
         ,
         {
