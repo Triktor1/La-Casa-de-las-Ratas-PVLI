@@ -163,7 +163,8 @@ export default class Loro extends Phaser.GameObjects.PathFollower {
         this.startFollow({
             duration: 40000 / this.speed,
             repeat: 0,
-            rotateToPath: false,
+            rotateToPath: true,
+            rotationOffset: -90,
             onComplete: () => {
                 this.checkAlive(true);
                 console.log(`${this.nombre} ha llegado al final del path!`);

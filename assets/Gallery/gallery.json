@@ -112,13 +112,5 @@
             "grupo": "",
             "descripcion": "Representación visual de uno de los túneles que conforman el sistema subterráneo de La Casa de las Ratas. Normalmente es un sitio muy concurrido, fue difícil dibujarlo durante tanto tiempo sin que pasara nadie."
         }
-        {
-            "id": "img14",
-            "archivo": "SinUsar.jpg",
-            "nombre": "Fondo Alcantarillico",
-            "autor": "Oscar Daniel",
-            "grupo": "La Casa de las Ratas",
-            "descripcion": "Fondo no usado para la tienda, que iba a estar en las alcantarillas"
-        }
     ]
 }

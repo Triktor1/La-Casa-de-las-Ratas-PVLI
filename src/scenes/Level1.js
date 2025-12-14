@@ -355,19 +355,25 @@ export default class Level1 extends Phaser.Scene {
         //ENEMIGOS
         this.anims.create({
             key: 'grumeteIdle',
-            frames: this.anims.generateFrameNumbers("loroGrum", { start: 0, end: 3 }),
+            frames: this.anims.generateFrameNumbers("loroGrum", { start: 0, end: 2 }),
             frameRate: 5,
             repeat: -1
         });
         this.anims.create({
-            key: 'canonIdle',
-            frames: this.anims.generateFrameNumbers("loroCan", { start: 0, end: 3 }),
+            key: 'canoneroIdle',
+            frames: this.anims.generateFrameNumbers("loroCan", { start: 0, end: 2 }),
             frameRate: 5,
             repeat: -1
         });
         this.anims.create({
             key: 'barrilIdle',
-            frames: this.anims.generateFrameNumbers("loroBarr", { start: 0, end: 3 }),
+            frames: this.anims.generateFrameNumbers("loroBarr", { start: 0, end: 2 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'princesoIdle',
+            frames: this.anims.generateFrameNumbers("loroPrin", { start: 0, end: 2 }),
             frameRate: 5,
             repeat: -1
         });
