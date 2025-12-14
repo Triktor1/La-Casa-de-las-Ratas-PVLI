@@ -114,8 +114,8 @@ export default class Level1 extends Phaser.Scene {
         this.load.spritesheet('comecablesBullet', 'assets/Ratas/comecablesBullet.png', { frameWidth: 250, frameHeight: 250 });
 
         //Carga de sonido
-        this.load.audio('Critico', 'assets/sonidos/SonidoOriginalParaDañoCriticoNoRobado.mp3');
-        this.load.audio('Boom', 'assets/sonidos/Boom.mp3');
+        this.load.audio('Critico', 'assets/sonidos/SonidoOriginalParaDanoCriticoNoRobado.mp3');
+        this.load.audio('Boom', 'asse   s/sonidos/Boom.mp3');
     }
 
     create() {
