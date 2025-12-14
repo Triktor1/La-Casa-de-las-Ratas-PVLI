@@ -20,7 +20,7 @@ export default class Torre extends Phaser.GameObjects.Sprite {
         this.upgradeText = "C";
         this.upgradeLevel = 1;
         this.maxLevel = 3;
-        
+
         // Collider circular invisible (rango)
         this.rangeCircle = this.scene.add.circle(this.x, this.y, this.rangeValue, 0x00ff00, 0.15);
         this.scene.physics.add.existing(this.rangeCircle);
@@ -32,7 +32,7 @@ export default class Torre extends Phaser.GameObjects.Sprite {
         this.rangeGraphics = this.scene.add.graphics();
         this.rangeGraphics.lineStyle(2, 0x00ff00, 0.4);
         this.rangeGraphics.strokeCircle(x, y, this.rangeValue);
-                
+
         this.upgradeText = this.scene.add.text(this.x, this.y, this.upgradeText, { fontSize: '16px', color: '#ffffffff', fontFamily: 'Arial Black' }).setOrigin(0.5);
         this.scene.physics.add.existing(this.upgradeText);
         this.upgradeGraphics = this.scene.add.graphics();
@@ -60,6 +60,12 @@ export default class Torre extends Phaser.GameObjects.Sprite {
             this.upgradeGraphics.setVisible(false);
         });
 
+        this.on('pointerdown', (pointer) => {
+            if (pointer.rightButtonDown()) {
+                this.eliminarTorre();
+            }
+        });
+
         // Mantiene el rango asociado a la torre
         this.rangeCircle.parentTorre = this;
 
@@ -71,8 +77,8 @@ export default class Torre extends Phaser.GameObjects.Sprite {
         if (this.rangeCircle) {
             this.rangeCircle.x = this.x;
             this.rangeCircle.y = this.y;
-        }6
-        
+        }
+
         // Control de disparo automático
         if (this.currentTarget && time - this.lastShotTime > this.fireRate) {
             this.shoot(this.currentTarget);
@@ -80,8 +86,8 @@ export default class Torre extends Phaser.GameObjects.Sprite {
         }
 
         // Si el objetivo ya ha muerto o salido del rango, deja de apuntar
-        if (this.currentTarget && (!this.currentTarget.active || this.currentTarget.vida <= 0 
-            || Phaser.Math.Distance.Between(this.x, this.y, this.currentTarget.x, this.currentTarget.y)> this.rangeValue) ) {
+        if (this.currentTarget && (!this.currentTarget.active || this.currentTarget.vida <= 0
+            || Phaser.Math.Distance.Between(this.x, this.y, this.currentTarget.x, this.currentTarget.y) > this.rangeValue)) {
             this.currentTarget = null;
         }
 
@@ -99,11 +105,11 @@ export default class Torre extends Phaser.GameObjects.Sprite {
         return bullet;
     }
 
-    upgrade(){
+    upgrade() {
         //Individual para cada torre, usando override
     }
 
-    setUpgradeText(text, difY , lineas) {
+    setUpgradeText(text, difY, lineas) {
         this.upgradeText.setText(text);
 
         const width = this.upgradeText.width + 12;
@@ -111,10 +117,10 @@ export default class Torre extends Phaser.GameObjects.Sprite {
 
         this.upgradeGraphics.clear();
         this.upgradeGraphics.fillStyle(0x000000, 0.5);
-        this.upgradeGraphics.fillRect(this.x - width / 2, this.y - difY * (lineas-1), width, height);
+        this.upgradeGraphics.fillRect(this.x - width / 2, this.y - difY * (lineas - 1), width, height);
     }
 
-    checkLevelUp(){
+    checkLevelUp() {
         if (this.upgradeLevel < this.maxLevel) {
             this.upgradeLevel += 1;
             return true;
@@ -122,7 +128,7 @@ export default class Torre extends Phaser.GameObjects.Sprite {
         else return false;
     }
     //ESTE METODO ES PARA LAS TORRES QUE MEJORAN SU RANGO CON EL METODO UPGRADE
-    resetRange(){
+    resetRange() {
         if (this.rangeCircle) {
             this.rangeCircle.destroy();
             this.rangeGraphics.clear();
@@ -138,8 +144,31 @@ export default class Torre extends Phaser.GameObjects.Sprite {
         this.rangeGraphics.lineStyle(2, 0x00ff00, 0.4);
         this.rangeGraphics.strokeCircle(this.x, this.y, this.rangeValue);
 
-        this.scene.physics.add.overlap(this.rangeCircle, this.scene.enemies, (range, enemy) => {this.currentTarget = enemy;});
+        this.scene.physics.add.overlap(this.rangeCircle, this.scene.enemies, (range, enemy) => { this.currentTarget = enemy; });
     }
 
-    
+    eliminarTorre() {
+        if (this.hueco) {
+            this.hueco.desocupar();
+            this.hueco = null;
+        }
+        const index = this.scene.torresArray.indexOf(this);
+        if (index !== -1) {
+            this.scene.torresArray.splice(index, 1);
+        }
+        if (this.rangeGraphics) {
+            this.rangeGraphics.destroy();
+            this.rangeGraphics = null;
+        }
+        if (this.upgradeGraphics) {
+            this.upgradeGraphics.destroy();
+            this.upgradeGraphics = null;
+        }
+        if (this.upgradeText) {
+            this.upgradeText.destroy();
+            this.upgradeText = null;
+        }
+        this.destroy();
+    }
+
 }

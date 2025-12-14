@@ -119,6 +119,7 @@ export default class Level1 extends Phaser.Scene {
     }
 
     create() {
+         this.input.mouse.disableContextMenu();
         //ANIMACIONES
         //UI VIDA
         this.anims.create({

@@ -14,5 +14,9 @@ export default class HuecoTorre extends Phaser.GameObjects.Image {
         this.ocupado = true;
         this.setAlpha(0);//Quitar silueta
     }
+
+    desocupar(){
+        this.ocupado = false;
+        this.setAlpha(0.4);
+    }
 }
-//n bjuyhhhhhhhhhhhhhhhhhhh
