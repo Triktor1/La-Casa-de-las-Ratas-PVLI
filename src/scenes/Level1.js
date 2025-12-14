@@ -412,11 +412,18 @@ export default class Level1 extends Phaser.Scene {
 
         //Cheats
         this.cursorKeys = this.input.keyboard.createCursorKeys();
+        this.f2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F2);
+        this.f2.on('down', () => {
+            this.cheatsActive = !this.cheatsActive;
+        });
+
         this.input.keyboard.on("keydown-SPACE", () => {
-            this.addMoney();
+            if (this.cheatsActive) {
+                this.addMoney();
+            }
         });
         this.input.keyboard.on("keydown-ESC", () => {
-            if (this.playerInfo.CurrentLevel < 2) {
+            if (this.cheatsActive && this.playerInfo.CurrentLevel < 2) {
                 this.playerInfo.CurrentLevel++;
                 this.scene.start('Shop', { shopMoney: this.shopMoney, playerInfo: this.playerInfo });
             }
