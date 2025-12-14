@@ -70,6 +70,7 @@ export default class Level1 extends Phaser.Scene {
         this.load.image('caminolvl1', 'assets/Nivel/caminolvl1.png');
         this.load.image('caminolvl2', 'assets/Nivel/caminolvl2.png');
         this.load.image('caminolvl3', 'assets/Nivel/caminolvl3.png');
+        this.load.image('huecoTorre', 'assets/Ratas/HuecoTorre.png');
 
         //SPRITES DE RATA SILICONA
         this.load.spritesheet('rataSilicona', 'assets/Ratas/SiliconeRat.png', { frameWidth: 250, frameHeight: 250 });
@@ -562,7 +563,7 @@ export default class Level1 extends Phaser.Scene {
         console.log(this.jsonTowerData);
         this.huecosTorre = [];
         for (let i = 0; i < this.jsonTowerData.length; i++) {
-            this.huecosTorre[i] = new HuecoTorre(this, this.jsonTowerData[i].x, this.jsonTowerData[i].y, 'torre');
+            this.huecosTorre[i] = new HuecoTorre(this, this.jsonTowerData[i].x, this.jsonTowerData[i].y, 'huecoTorre');
         }
     }
 
